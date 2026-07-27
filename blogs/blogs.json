@@ -1,0 +1,21 @@
+{
+  "repo": "freewheel-media",
+  "feeds": [
+    {
+      "source": "https://www.freewheel.com/feed",
+      "feed_url": "https://www.freewheel.com/feed",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.freewheel.com/support",
+      "feed_url": "https://www.freewheel.com/feed",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-07-25T15:00:33Z"
+}

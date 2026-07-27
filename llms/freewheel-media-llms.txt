@@ -1,0 +1,24 @@
+# FreeWheel Media
+
+> FreeWheel, a Comcast company, is an advertising technology platform for the streaming and premium video television marketplace, connecting advertisers, agencies, publishers, and programmers across linear and digital channels. Programmatic and operational access is delivered to partners through gated Publisher (MRM) and Marketer (SFX/Strata) platforms rather than a public self-service developer portal.
+
+## Products
+- [Advertiser Suite](https://www.freewheel.com/advertisersuite): Media buying, planning, and campaign management for the buy side.
+- [Publisher Suite](https://www.freewheel.com/publishersuite): Ad decisioning, forecasting, and yield optimization for the sell side.
+- [Strata](https://www.freewheel.com/strata): Agency media buying and workflow.
+
+## Platforms
+- [Partner Portal](https://partners.freewheel.com/): Partner resources and access.
+- [Marketer Login (SFX)](https://sfx.freewheel.tv/auth/login): Gated marketer/buyer platform.
+- [Publisher Login (MRM)](https://mrm.freewheel.tv/system/account/login): Gated publisher platform.
+
+## Company
+- [Insights & Blog](https://www.freewheel.com/insights): Research, thought leadership, and industry councils.
+- [Support](https://www.freewheel.com/support): Customer support.
+- [GitHub](https://github.com/freewheel): FreeWheel open-source organization (tooling; no ad-platform API SDKs).
+- [News](https://www.freewheel.com/news): Press and announcements.
+
+## Legal
+- [Privacy Policy](https://www.freewheel.com/privacy-policy)
+- [Master Services Agreement](https://www.freewheel.com/legal/master-services-agreement)
+- [Legal Center](https://www.freewheel.com/legal)

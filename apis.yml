@@ -1,8 +1,31 @@
 aid: freewheel-media
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/freewheel-media.png
 name: FreeWheel Media
-description: FreeWheel Media is a company surfaced as a portfolio company of battery-ventures and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  FreeWheel, a Comcast company, is an advertising technology platform for the
+  streaming and premium video television marketplace. It gives advertisers,
+  agencies, and media buyers direct connections to premium streaming TV
+  inventory while helping publishers and programmers monetize their video
+  content across linear and digital channels. Its product suites include the
+  Advertiser Suite (media buying, planning, and campaign management via Strata),
+  the Publisher Suite (ad decisioning, forecasting, and yield optimization for
+  sellers), and a Marketplace connecting supply and demand. FreeWheel's platform
+  emphasizes AI-driven optimization, real-time insights, identity, and
+  cross-screen measurement for the converged TV ecosystem. Programmatic and
+  operational access is delivered to partners through gated Publisher (MRM) and
+  Marketer (SFX/Strata) platforms rather than a public self-service developer
+  portal.
 url: https://raw.githubusercontent.com/api-evangelist/freewheel-media/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,12 +35,46 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
+- Advertising
+- AdTech
+- Streaming TV
+- Video Advertising
+- Programmatic
+- Media
+- Publisher Monetization
+- Comcast
 apis: []
+common:
+- type: DomainSecurity
+  url: security/freewheel-media-domain-security.yml
+- type: Website
+  url: https://www.freewheel.com
+- type: Portal
+  url: https://partners.freewheel.com/
+- type: GitHubOrganization
+  url: https://github.com/freewheel
+- type: Support
+  url: https://www.freewheel.com/support
+- type: Blog
+  url: https://www.freewheel.com/insights
+- type: PrivacyPolicy
+  url: https://www.freewheel.com/privacy-policy
+- type: TermsOfService
+  url: https://www.freewheel.com/legal/master-services-agreement
+- type: Login
+  url: https://sfx.freewheel.tv/auth/login
+- type: LLMsTxt
+  url: llms/freewheel-media-llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
