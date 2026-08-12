@@ -1,4 +1,4 @@
-generated: '2026-07-19'
+generated: '2026-08-12'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -14,8 +14,20 @@ hosts:
   cert_expires: Sep 23 02:16:46 2026 GMT
   hsts: true
   hsts_max_age: 63072000
+- host: api-docs.freewheel.tv
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  4 06:58:51 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
 domains:
 - domain: freewheel.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: freewheel.tv
   dnssec: false
   caa: []
   spf: true

@@ -1,0 +1,91 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  FreeWheel's published documentation and changelog at api-docs.freewheel.tv,
+  the MRM Release Guides on hub.freewheel.tv, plus live probes of the status
+  surfaces.
+versioning:
+- family: FreeWheel Advertiser (Buzz) API
+  scheme: resource-series
+  current: '2.0'
+  legacy: '0.5'
+  detail: >-
+    The harvested spec self-reports info.version 0.5. A 2.0 resource series runs
+    alongside it, with 2.0 authentication usable against both 0.5 and 2.0
+    resources. The 0.5 reporting resources were deprecated.
+  docs: https://api-docs.freewheel.tv/advertiser/docs/upcoming-changes-to-the-buzz-api
+- family: FreeWheel Demand / Partner APIs
+  scheme: uri-path
+  current: v1
+  detail: >-
+    Deal Sync and Creative Management are on /demand/v1. Audience Management
+    serves /v1 lookup resources and /v2 audience resources from the same base.
+- family: FreeWheel Publisher (MRM) APIs
+  scheme: uri-path
+  current: v4
+  legacy: v3
+  detail: >-
+    V3 resources are XML; V4 resources are JSON with XML supported on select
+    endpoints. Base path /services/v4/services.
+  docs: https://api-docs.freewheel.tv/publisher/docs/getting-started
+deprecation:
+  policy_url: null
+  sunset_header: false
+  detail: >-
+    FreeWheel announces deprecations as dated changelog entries and MRM Release
+    Guides, but publishes no deprecation POLICY — no notice period, no support
+    window, no RFC 8594 Sunset/Deprecation header support, and no `deprecated:
+    true` flag on any of the 171 harvested operations. Because there is no
+    published policy page, no Deprecation pointer is wired in apis.yml.
+  announced_deprecations:
+  - name: 0.5 Reporting APIs Deprecated
+    url: https://api-docs.freewheel.tv/advertiser/changelog/05-reporting-apis-deprecated
+    approximate_age: about 5 years
+  - name: TLS 1.0 and 1.1 deprecation update
+    url: https://api-docs.freewheel.tv/advertiser/changelog/tls-10-and-11-deprecation-update
+    approximate_age: over 4 years
+  - name: Upcoming Changes to the Buzz API
+    url: https://api-docs.freewheel.tv/advertiser/docs/upcoming-changes-to-the-buzz-api
+deprecated_operations: []
+status_page:
+  url: null
+  detail: >-
+    A Statuspage tenant exists at https://freewheel.statuspage.io/ but it is
+    deactivated: the page returns HTTP 200 with the title "Freewheel NOC
+    Dashboard Status - Page Inactive", and its summary API returns 401 "Your page
+    is inactive." status.freewheel.com and status.freewheel.tv do not resolve. No
+    StatusPage pointer is wired in apis.yml, because there is no working status
+    page to point at.
+  evidence:
+  - url: https://freewheel.statuspage.io/
+    status: 200
+    body_title: Freewheel NOC Dashboard Status - Page Inactive
+  - url: https://freewheel.statuspage.io/api/v2/summary.json
+    status: 401
+  - url: https://status.freewheel.com/
+    status: 000
+    note: DNS does not resolve
+  - url: https://status.freewheel.tv/
+    status: 000
+    note: DNS does not resolve
+sla:
+  url: null
+  uptime_target: null
+  detail: >-
+    No public SLA. Service levels are contracted through the Master Services
+    Agreement at https://www.freewheel.com/legal/master-services-agreement.
+release_notes:
+- name: Advertiser (Buzz) changelog
+  url: https://api-docs.freewheel.tv/advertiser/changelog
+  detail: >-
+    25 dated entries, but the most recent is approximately four years old — see
+    changelog/freewheel-media-changelog.yml.
+- name: MRM Release Guides
+  url: https://hub.freewheel.tv/display/hub/MRM+Release+Guides
+  detail: Where FreeWheel says Publisher API changes are announced.
+support:
+  url: https://www.freewheel.com/support
+  detail: >-
+    Support is account-team based; the documentation repeatedly directs
+    developers to "contact your FreeWheel account team" rather than to a public
+    channel.

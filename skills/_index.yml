@@ -1,0 +1,63 @@
+generated: '2026-08-12'
+method: generated
+source: >-
+  Grounded in the four OpenAPI documents in openapi/ (every operationId below was
+  grepped out of the spec, never invented) plus FreeWheel's published
+  documentation at api-docs.freewheel.tv.
+note: >-
+  No provider-published Agent Skills or AGENTS.md exists on any FreeWheel host;
+  these are generated packaged skills. They deliberately carry the two runtime
+  facts an agent will otherwise get wrong on this estate: the Buzz API answers
+  HTTP 200 for partially-failed bulk writes, and no FreeWheel API offers an
+  idempotency key.
+skills:
+- file: freewheel-media-sync-programmatic-deals.md
+  name: Sync FreeWheel programmatic deals
+  api: openapi/freewheel-media-demand-deal-sync-openapi-original.json
+  operations: [RetrieveDeals, RetrieveSingleDeal, UpdateBuyerStatusForDeals]
+- file: freewheel-media-onboard-creative-to-deal.md
+  name: Onboard a creative and assign it to a FreeWheel deal
+  api: openapi/freewheel-media-demand-creative-management-openapi-original.json
+  operations:
+  - CreateACreative
+  - RetrieveAllCreatives
+  - RetrieveAllCreativesWithoutAccountId
+  - UpdateACreative
+  - RetrieveUnderlyingCreatives
+  - AssignACreativeToADeal
+  - RetrieveADealAssignmentForACreative
+  - DeleteACreativeDealAssignments
+- file: freewheel-media-build-audience-from-segments.md
+  name: Build a FreeWheel audience from third-party segments
+  api: openapi/freewheel-media-demand-audience-management-openapi-original.json
+  operations:
+  - list-industries-1
+  - retrieve-data-providers-1
+  - retrieve-segments-by-data-provider
+  - filter-segment-searches
+  - create-temporary-audience-definition
+  - retrieve-audience-definitions
+  - modify-audience-definitions
+- file: freewheel-media-launch-buzz-campaign.md
+  name: Launch a campaign on the FreeWheel Advertiser (Buzz) API
+  api: openapi/freewheel-media-advertiser-buzz-openapi-original.json
+  operations:
+  - authenticate-post
+  - advertiser-post
+  - advertiser-get
+  - campaign-post
+  - targeting_template-post
+  - line_item-post
+  - creative-post
+  - creativeasset-post
+  - creativelineitem-post
+  - line_item_flight-post
+- file: freewheel-media-run-buzz-report.md
+  name: Run and collect a FreeWheel Buzz report
+  api: openapi/freewheel-media-advertiser-buzz-openapi-original.json
+  operations:
+  - authenticate-post
+  - report_save-post
+  - report_save-get
+  - report_queue-post
+  - report_queue-get

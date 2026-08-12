@@ -1,15 +1,22 @@
 aid: freewheel-media
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: enterprise
+  onboarding: sales-gated
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  label: Enterprise / contract only
+  confidence: high
+  source:
+  - https://www.freewheel.com/pricing
+  - https://api-docs.freewheel.tv/demand/docs/demand-api-authentication
+  - https://www.freewheel.com/legal/master-services-agreement
+  generated: '2026-08-12'
+  method: searched
+  note: >-
+    No pricing page (404), no plan tiers, no trial and no self-service signup;
+    credentials are issued by FreeWheel to contracted partners. See
+    plans/freewheel-media-plans-pricing.yml.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/freewheel-media.png
 name: FreeWheel Media
 description: >-
@@ -31,11 +38,13 @@ x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - battery-ventures
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: >-
+  Four OpenAPI documents (171 operations) harvested from FreeWheel's own
+  developer portal; full artifact set derived.
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-08-12'
 tags:
 - Company
 - Advertising
@@ -46,8 +55,134 @@ tags:
 - Media
 - Publisher Monetization
 - Comcast
-apis: []
+apis:
+- aid: freewheel-media-advertiser-buzz-api
+  name: FreeWheel Advertiser (Buzz) API
+  description: >-
+    The REST API behind FreeWheel's Advertiser Suite / Beeswax DSP ("Buzz"). It
+    exposes the full buy-side object model — accounts, advertisers, campaigns,
+    line items, creatives and creative assets, targeting templates, bidding
+    strategies and bid models, segments and custom lists, reporting queues,
+    users and roles — over a JSON REST interface. Authentication is a session
+    cookie obtained by POSTing credentials to /authenticate; the base host is
+    per-customer (the Buzz key), which is why the published server is templated.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Advertising
+  - AdTech
+  - Programmatic
+  - DSP
+  - Campaign Management
+  - Creatives
+  - Targeting
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-advertiser-buzz-openapi-original.json
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: Overlay
+    url: overlays/freewheel-media-advertiser-buzz-overlay.yaml
+- aid: freewheel-media-demand-audience-management-api
+  name: FreeWheel Demand Audience Management API
+  description: >-
+    Audience and segment management for FreeWheel demand partners. Lists data
+    providers by ad-industry category, searches and filters third-party
+    segments, and creates, retrieves and modifies audience definitions used to
+    target FreeWheel supply. HTTP basic authentication, with an
+    X-Freewheel-Ad-Industry header scoping requests to an ad industry.
+  humanURL: https://api-docs.freewheel.tv/demand/reference/retrieve-audience-definitions
+  baseURL: https://api.freewheel.tv/demand
+  tags:
+  - Advertising
+  - Audiences
+  - Segments
+  - Data Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-demand-audience-management-openapi-original.json
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+  - type: Overlay
+    url: overlays/freewheel-media-demand-audience-management-overlay.yaml
+- aid: freewheel-media-demand-deal-sync-api
+  name: FreeWheel Demand Deal Sync API
+  description: >-
+    Deal synchronization for FreeWheel demand partners. Retrieves programmatic
+    deals available to a buyer seat (filterable by seller status, start/end date
+    and last-updated timestamp), retrieves a single deal, and updates the buyer
+    status on a deal so buy-side systems stay in sync with FreeWheel supply.
+  humanURL: https://api-docs.freewheel.tv/demand/reference/retrieve-deals
+  baseURL: https://api.freewheel.tv/demand/v1
+  tags:
+  - Advertising
+  - Programmatic
+  - Deals
+  - Marketplace
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-demand-deal-sync-openapi-original.json
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+  - type: Overlay
+    url: overlays/freewheel-media-demand-deal-sync-overlay.yaml
+- aid: freewheel-media-demand-creative-management-api
+  name: FreeWheel Demand Creative Management API
+  description: >-
+    Creative management for FreeWheel demand partners. Creates, retrieves and
+    updates creatives (ads) on an account, lists the underlying creatives of a
+    composite ad, and assigns or removes creatives from programmatic deals so a
+    buyer's creatives are approved against the deals they will serve on.
+  humanURL: https://api-docs.freewheel.tv/demand/reference/retrieve-all-creatives
+  baseURL: https://api.freewheel.tv/demand/v1
+  tags:
+  - Advertising
+  - Creatives
+  - Programmatic
+  - Deals
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-demand-creative-management-openapi-original.json
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+  - type: Overlay
+    url: overlays/freewheel-media-demand-creative-management-overlay.yaml
+- aid: freewheel-media-publisher-api
+  name: FreeWheel Publisher (MRM) API
+  description: >-
+    FreeWheel's sell-side APIs for publishers and programmers running on MRM —
+    advertiser and agency management, insertion orders and campaigns, placement
+    operations, forecasting, analytics and reporting. V3 resources are XML, V4
+    resources are JSON with XML on select endpoints, and access is authenticated
+    with OAuth 2.0 access tokens. No machine-readable specification is published
+    at a public URL and the reference documentation is disallowed in the docs
+    host robots.txt, so no OpenAPI has been harvested for this entry.
+  humanURL: https://api-docs.freewheel.tv/publisher
+  baseURL: https://api.freewheel.tv/services/v4/services
+  tags:
+  - Advertising
+  - Publisher Monetization
+  - Ad Decisioning
+  - Forecasting
+  - Reporting
+  properties:
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/publisher
+  - type: ChangeLog
+    url: https://hub.freewheel.tv/display/hub/MRM+Release+Guides
 common:
+- type: AgenticAccess
+  url: agentic-access/freewheel-media-agentic-access.yml
+- type: Authentication
+  url: authentication/freewheel-media-authentication.yml
 - type: DomainSecurity
   url: security/freewheel-media-domain-security.yml
 - type: Website
@@ -65,16 +200,76 @@ common:
 - type: TermsOfService
   url: https://www.freewheel.com/legal/master-services-agreement
 - type: Login
-  url: https://sfx.freewheel.tv/auth/login
+  url: https://mrm.freewheel.tv/system/account/login
 - type: LLMsTxt
   url: llms/freewheel-media-llms.txt
+- type: DeveloperPortal
+  url: https://api-docs.freewheel.tv/
+- type: Documentation
+  url: https://api-docs.freewheel.tv/advertiser/docs
+- type: APIReference
+  url: https://api-docs.freewheel.tv/advertiser/reference
+- type: GettingStarted
+  url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+- type: ChangeLog
+  url: changelog/freewheel-media-changelog.yml
+- type: Lifecycle
+  url: lifecycle/freewheel-media-lifecycle.yml
+- type: Conventions
+  url: conventions/freewheel-media-conventions.yml
+- type: ErrorCatalog
+  url: errors/freewheel-media-problem-types.yml
+- type: RateLimits
+  url: rate-limits/freewheel-media-rate-limits.yml
+- type: Plans
+  url: plans/freewheel-media-plans-pricing.yml
+- type: Sandbox
+  url: sandbox/freewheel-media-sandbox.yml
+- type: Conformance
+  url: conformance/freewheel-media-conformance.yml
+- type: DataModel
+  url: data-model/freewheel-media-data-model.yml
+- type: Packages
+  url: packages/freewheel-media-packages.yml
+- type: WellKnown
+  url: well-known/freewheel-media-well-known.yml
+- type: MCPServer
+  url: mcp/freewheel-media-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/freewheel-media-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 30
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Contract discovery beat the docs host: FreeWheel's published "OpenAPI
+    Specifications" download links resolve to the ReadMe single-page-app shell,
+    but the real specifications are embedded verbatim in the server-rendered
+    props of the API reference pages. Four documents, 171 operations, harvested
+    and saved.
+x-coverage:
+  state: covered
+  detail: >-
+    Four OpenAPI documents harvested from FreeWheel's own developer portal.
+    Two doc projects — /publisher (416 reference pages) and /strata (75) — are
+    Disallowed in https://api-docs.freewheel.tv/robots.txt and were not crawled,
+    so the Publisher (MRM) and Strata API entries carry documented facts only and
+    no harvested specification.
+  evidence:
+  - url: https://api-docs.freewheel.tv/robots.txt
+    status: 200
+  - url: https://api-docs.freewheel.tv/advertiser/reference/account-get
+    status: 200
+  - url: https://api-docs.freewheel.tv/.well-known/api-catalog
+    status: 200
+  - url: https://api-docs.freewheel.tv/advertiser/openapi/5f4d569286cd6f002cdaf0c8
+    status: 200
+  checked: '2026-08-12'

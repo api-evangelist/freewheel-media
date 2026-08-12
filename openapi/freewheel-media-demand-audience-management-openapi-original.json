@@ -1,0 +1,1237 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "audience-management-api",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.freewheel.tv/demand"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "sec0": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "sec0": []
+    }
+  ],
+  "paths": {
+    "/v1/services/v4/ds/v1/permissions/ad-industries": {
+      "get": {
+        "summary": "List Advertiser Industry Categories",
+        "description": "This method employs GET to retrieve a list of all advertiser Industries used in Data Suite to apply data usage/restrction rules to given categories in accordance with your business needs.  \n\nIt is the legal responsibility of each advertiser (or publisher/agency entity acting on behalf of an advertiser) to accurately identify their advertiser's industry, so that any applicable data usage restrictions can be applied. \n\nSelect the industry category (and associated numeric ID) that best matches your company. \n\nYou will need to pass this in subsequent calls using the X-Freewheel-Ad-Industry header.",
+        "operationId": "list-industries-1",
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Sample Response": {
+                    "value": "{\n  \"page\": 1,\n  \"per_page\": 287,\n  \"total_page\": 1,\n  \"total_count\": 287,\n  \"items\": [\n    {\n      \"id\": 1,\n      \"name\": \"Agriculture Crop Production\",\n      \"restrictions\": null\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Agriculture Livestock Production\",\n      \"restrictions\": null\n    },\n    // ...,\n    {\n      \"id\": 27,\n      \"name\": \"Tobacco Manufacture\",\n      \"restrictions\": [\n        2\n      ]\n    },\n    // ...,\n    {\n      \"id\": 193,\n      \"name\": \"Automobile Dealers - Luxury\",\n      \"restrictions\": [\n        3\n      ]\n    },\n    // ...,\n    {\n      \"id\": 389,\n      \"name\": \"Retail and General Merchandise\",\n      \"restrictions\": null\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "page": {
+                      "type": "integer",
+                      "example": 1,
+                      "default": 0
+                    },
+                    "per_page": {
+                      "type": "integer",
+                      "example": 287,
+                      "default": 0
+                    },
+                    "total_page": {
+                      "type": "integer",
+                      "example": 1,
+                      "default": 0
+                    },
+                    "total_count": {
+                      "type": "integer",
+                      "example": 287,
+                      "default": 0
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1,
+                            "default": 0
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Agriculture Crop Production"
+                          },
+                          "restrictions": {}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "curl",
+              "code": "curl -H \"Authorization: Bearer $auth_token\" \\ $DS/v1/permissions/ad-industries",
+              "name": "Sample Request"
+            }
+          ],
+          "samples-languages": [
+            "curl"
+          ]
+        }
+      }
+    },
+    "/v1/providers": {
+      "get": {
+        "summary": "List Data Providers by Industry Category",
+        "description": "",
+        "operationId": "retrieve-data-providers-1",
+        "parameters": [
+          {
+            "name": "X-Freewheel-Ad-Industry",
+            "in": "header",
+            "description": "Industry category ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "Bearer $auth_token"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Sample Response": {
+                    "value": "//The \"restrictions\" field indicates an industry category ID\n//that the data provider may have restricted from using its data.\n{\n  \"page\": 1,\n  \"per_page\": 5,\n  \"total_page\": 1,\n  \"total_count\": 5,\n  \"items\": [\n    {\n      \"id\": \"Experian\",\n      \"label\": \"Experian\",\n      \"restrictions\": [\n        2\n      ],\n      \"visibility\": []\n    },\n    {\n      \"id\": \"Factual\",\n      \"label\": \"Factual\",\n      \"restrictions\": [\n        2\n      ],\n      \"visibility\": []\n    },\n    {\n      \"id\": \"FreeWheel: Comcast \\u0026 Vizio\",\n      \"label\": \"FreeWheel: Comcast \\u0026 Vizio\",\n      \"restrictions\": [\n        2,\n        3,\n        4\n      ],\n      \"visibility\": []\n    },\n    {\n      \"id\": \"Numerator\",\n      \"label\": \"Numerator\",\n      \"restrictions\": [\n        2\n      ],\n      \"visibility\": []\n    },\n    {\n      \"id\": \"Polk Audience Solutions by IHS Markit\",\n      \"label\": \"Polk Audience Solutions by IHS Markit\",\n      \"restrictions\": [\n        2\n      ],\n      \"visibility\": []\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "page": {
+                      "type": "integer",
+                      "example": 1,
+                      "default": 0
+                    },
+                    "per_page": {
+                      "type": "integer",
+                      "example": 5,
+                      "default": 0
+                    },
+                    "total_page": {
+                      "type": "integer",
+                      "example": 1,
+                      "default": 0
+                    },
+                    "total_count": {
+                      "type": "integer",
+                      "example": 5,
+                      "default": 0
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "Experian"
+                          },
+                          "label": {
+                            "type": "string",
+                            "example": "Experian"
+                          },
+                          "restrictions": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer",
+                              "example": 2,
+                              "default": 0
+                            }
+                          },
+                          "visibility": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {}
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "curl",
+              "code": "curl \\\n --url 'https://api.freewheel.tv/demand/v1/providers' \\\n -H \"X-Freewheel-Ad-Industry: 1\" \\\n -H \"Authorization: Bearer $auth_token\"",
+              "name": "Sample Request"
+            }
+          ],
+          "samples-languages": [
+            "curl"
+          ]
+        }
+      }
+    },
+    "/v1/segments": {
+      "get": {
+        "summary": "List Segments by Data Provider",
+        "description": "",
+        "operationId": "retrieve-segments-by-data-provider",
+        "parameters": [
+          {
+            "name": "keywords",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Freewheel-Ad-Industry",
+            "in": "header",
+            "description": "Industry category ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Sample Response": {
+                    "value": "{\n  \"page\": 1,\n  \"per_page\": 4,\n  \"total_page\": 1,\n  \"total_count\": 4,\n  \"items\": [\n    {\n      \"id\": \"9fe904831f\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Buying:By Internet \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 4682435.99,\n      \"provider_segment_id\": \"7209\"\n    },\n    {\n      \"id\": \"9f2354c276\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Cat \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 589627.27,\n      \"provider_segment_id\": \"7200\"\n    },\n    {\n      \"id\": \"9f118921ef\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Dog \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 843059.81,\n      \"provider_segment_id\": \"7203\"\n    },\n    {\n      \"id\": \"9fbd48f59a\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Pet \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 480629.14,\n      \"provider_segment_id\": \"7206\"\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "page": {
+                      "type": "integer",
+                      "example": 1,
+                      "default": 0
+                    },
+                    "per_page": {
+                      "type": "integer",
+                      "example": 4,
+                      "default": 0
+                    },
+                    "total_page": {
+                      "type": "integer",
+                      "example": 1,
+                      "default": 0
+                    },
+                    "total_count": {
+                      "type": "integer",
+                      "example": 4,
+                      "default": 0
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "9fe904831f"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Experian > Lifestyle > SRVY:HH Lifestyl:Buying:By Internet > Y"
+                          },
+                          "audience_partner": {
+                            "type": "string",
+                            "example": "experian"
+                          },
+                          "data_provider_id": {
+                            "type": "string",
+                            "example": "Experian"
+                          },
+                          "data_source_id": {
+                            "type": "string",
+                            "example": "Experian"
+                          },
+                          "client_id": {
+                            "type": "string",
+                            "example": "-1"
+                          },
+                          "level": {
+                            "type": "integer",
+                            "example": 0,
+                            "default": 0
+                          },
+                          "parent_id": {
+                            "type": "string",
+                            "example": "0"
+                          },
+                          "cpm": {
+                            "type": "number",
+                            "example": 0.6,
+                            "default": 0
+                          },
+                          "count": {
+                            "type": "number",
+                            "example": 4682435.99,
+                            "default": 0
+                          },
+                          "provider_segment_id": {
+                            "type": "string",
+                            "example": "7209"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "curl",
+              "code": "curl \\\n --url 'https://api.freewheel.tv/demand/v1/segments?keywords=123'\n --header \"Authorization: Bearer $auth_token\" \\\n --header \"X-Freewheel-Ad-Industry: 1\" \\",
+              "name": "Sample Request"
+            }
+          ],
+          "samples-languages": [
+            "curl"
+          ]
+        }
+      }
+    },
+    "/v1/segments?": {
+      "get": {
+        "summary": "Filter Segment Searches",
+        "description": "",
+        "operationId": "filter-segment-searches",
+        "parameters": [
+          {
+            "name": "keywords",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "providers",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "$providers"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Sample Response": {
+                    "value": "{\n  \"page\": 1,\n  \"per_page\": 13,\n  \"total_page\": 1,\n  \"total_count\": 13,\n  \"items\": [\n    {\n      \"id\": \"c84e174f9f\",\n      \"name\": \"InfoScout  \\u003e  Pet Food \\u0026 Treats  \\u003e  Cat Food \\u0026 Treats  \\u003e  Purina Cat Chow\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Numerator\",\n      \"data_source_id\": \"Numerator\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.25,\n      \"count\": 4701159.12,\n      \"provider_segment_id\": \"1001160499\"\n    },\n    {\n      \"id\": \"c89eb332ac\",\n      \"name\": \"InfoScout  \\u003e  Pet Supplies  \\u003e  Cat Supplies  \\u003e  Purina Tidy Cats\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Numerator\",\n      \"data_source_id\": \"Numerator\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.25,\n      \"count\": 5091676.75,\n      \"provider_segment_id\": \"1001160509\"\n    },\n    {\n      \"id\": \"9fb17446af\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Buying:By Catalog \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 4703315.12,\n      \"provider_segment_id\": \"7215\"\n    },\n    {\n      \"id\": \"9f2354c276\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Cat \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 589627.27,\n      \"provider_segment_id\": \"7200\"\n    },\n    {\n      \"id\": \"823d7497cb\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Social \\u003e Entertainment\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 5387421.42,\n      \"provider_segment_id\": \"1001385839\"\n    },\n    {\n      \"id\": \"828c83d14d\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Transportation \\u003e Transport Hubs\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 834616.19,\n      \"provider_segment_id\": \"1001386739\"\n    },\n    {\n      \"id\": \"9f30a1388a\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e BehaviorBank: Cat Enthusiasts \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 613624.79,\n      \"provider_segment_id\": \"8154468\"\n    },\n    {\n      \"id\": \"8286bd6e29\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Social \\u003e Food and Dining \\u003e Restaurants\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 13775862.56,\n      \"provider_segment_id\": \"1001386159\"\n    },\n    {\n      \"id\": \"c87ad80fa4\",\n      \"name\": \"InfoScout  \\u003e  All Departments  \\u003e  Non-Beer Categories  \\u003e  All Brands\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Numerator\",\n      \"data_source_id\": \"Numerator\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.25,\n      \"count\": 11938639.5,\n      \"provider_segment_id\": \"1004155179\"\n    },\n    {\n      \"id\": \"82c96b4399\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Retail \\u003e Tobacco\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 6930145.5,\n      \"provider_segment_id\": \"1001385939\"\n    },\n    {\n      \"id\": \"9fec5decca\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e Act/Int: Cat Owners \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 4431723.79,\n      \"provider_segment_id\": \"127\"\n    },\n    {\n      \"id\": \"827f6b8e08\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Social \\u003e Food and Dining\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 6263618.79,\n      \"provider_segment_id\": \"1001386059\"\n    },\n    {\n      \"id\": \"82870850c9\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Retail \\u003e Food and Beverage\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 7540409,\n      \"provider_segment_id\": \"1001385549\"\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "page": {
+                      "type": "integer",
+                      "example": 1,
+                      "default": 0
+                    },
+                    "per_page": {
+                      "type": "integer",
+                      "example": 13,
+                      "default": 0
+                    },
+                    "total_page": {
+                      "type": "integer",
+                      "example": 1,
+                      "default": 0
+                    },
+                    "total_count": {
+                      "type": "integer",
+                      "example": 13,
+                      "default": 0
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "c84e174f9f"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "InfoScout  >  Pet Food & Treats  >  Cat Food & Treats  >  Purina Cat Chow"
+                          },
+                          "audience_partner": {
+                            "type": "string",
+                            "example": "liveramp"
+                          },
+                          "data_provider_id": {
+                            "type": "string",
+                            "example": "Numerator"
+                          },
+                          "data_source_id": {
+                            "type": "string",
+                            "example": "Numerator"
+                          },
+                          "client_id": {
+                            "type": "string",
+                            "example": "-1"
+                          },
+                          "level": {
+                            "type": "integer",
+                            "example": 0,
+                            "default": 0
+                          },
+                          "parent_id": {
+                            "type": "string",
+                            "example": "0"
+                          },
+                          "cpm": {
+                            "type": "number",
+                            "example": 1.25,
+                            "default": 0
+                          },
+                          "count": {
+                            "type": "number",
+                            "example": 4701159.12,
+                            "default": 0
+                          },
+                          "provider_segment_id": {
+                            "type": "string",
+                            "example": "1001160499"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "curl",
+              "code": "//Get a list of all providers\nproviders=$(curl \\\n  -H \"Authorization: Bearer $auth_token\" \\\n  -H \"X-Freewheel-Ad-Industry: 1\" \\\n\"$DS/v1/providers\" | jq -r '.items | map(.id) | @uri')\n \n// Pass it into the API request\ncurl -s -S \\\n -H \"Authorization: Bearer $auth_token\" \\\n -H \"X-Freewheel-Ad-Industry: 1\" \\\n --url 'https://api.freewheel.tv/demand/v1/segments?keywords=cat&providers=$providers'",
+              "name": "Sample Requests"
+            }
+          ],
+          "samples-languages": [
+            "curl"
+          ]
+        }
+      }
+    },
+    "/v2/audiences": {
+      "post": {
+        "summary": "Create Audience Definitions",
+        "description": "",
+        "operationId": "create-temporary-audience-definition",
+        "parameters": [
+          {
+            "name": "temporary",
+            "in": "query",
+            "description": "Marks the Audience Definition as temporary.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Freewheel-Ad-Industry",
+            "in": "header",
+            "description": "Industry category ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "Bearer $auth_token"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "targets": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Sample Response: Temporary Audience Definition": {
+                    "value": "{\n  \"id\": 3346,\n  \"name\": \"test audience 1\",\n  \"description\": \"A testing audience\",\n  \"metadata\": {\n    \"segments\": [\n      {\n        \"id\": \"9f118921ef\",\n        \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Dog \\u003e Y\",\n        \"client_id\": \"-1\",\n        \"provider_name\": \"Experian\",\n        \"provider_id\": \"Experian\",\n        \"data_source\": \"Experian\",\n        \"audience_partner\": \"experian\",\n        \"restrictions\": [\n          2\n        ],\n        \"cpm\": 0.6,\n        \"provider_segment_id\": \"7203\"\n      },\n      {\n        \"id\": \"9fbd48f59a\",\n        \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Pet \\u003e Y\",\n        \"client_id\": \"-1\",\n        \"provider_name\": \"Experian\",\n        \"provider_id\": \"Experian\",\n        \"data_source\": \"Experian\",\n        \"audience_partner\": \"experian\",\n        \"restrictions\": [\n          2\n        ],\n        \"cpm\": 0.6,\n        \"provider_segment_id\": \"7206\"\n      },\n      {\n        \"id\": \"9fe904831f\",\n        \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Buying:By Internet \\u003e Y\",\n        \"client_id\": \"-1\",\n        \"provider_name\": \"Experian\",\n        \"provider_id\": \"Experian\",\n        \"data_source\": \"Experian\",\n        \"audience_partner\": \"experian\",\n        \"restrictions\": [\n          2\n        ],\n        \"cpm\": 0.6,\n        \"provider_segment_id\": \"7209\"\n      },\n      {\n        \"id\": \"9f2354c276\",\n        \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Cat \\u003e Y\",\n        \"client_id\": \"-1\",\n        \"provider_name\": \"Experian\",\n        \"provider_id\": \"Experian\",\n        \"data_source\": \"Experian\",\n        \"audience_partner\": \"experian\",\n        \"restrictions\": [\n          2\n        ],\n        \"cpm\": 0.6,\n        \"provider_segment_id\": \"7200\"\n      }\n    ],\n    \"cpm\": 0.6\n  },\n  \"industry_restrictions\": [\n    2\n  ],\n  \"targets\": [\n    {\n      \"kind\": \"include\",\n      \"type\": \"segments\",\n      \"target_ids\": [\n        \"9f118921ef\",\n        \"9fbd48f59a\"\n      ]\n    },\n    {\n      \"kind\": \"include\",\n      \"type\": \"segments\",\n      \"target_ids\": [\n        \"9fe904831f\"\n      ]\n    },\n    {\n      \"kind\": \"exclude\",\n      \"type\": \"segments\",\n      \"target_ids\": [\n        \"9f2354c276\"\n      ]\n    }\n  ],\n  \"estimates\": [\n    {\n      \"std_dev\": 77773,\n      \"estimate\": 1808790,\n      \"alias_type\": \"iid\",\n      \"lower_bound\": 1734207,\n      \"upper_bound\": 1886563\n    },\n    {\n      \"std_dev\": 28446,\n      \"estimate\": 674758,\n      \"alias_type\": \"hid\",\n      \"lower_bound\": 647456,\n      \"upper_bound\": 703204\n    },\n    {\n      \"std_dev\": 358478,\n      \"estimate\": 8387339,\n      \"alias_type\": \"cookie\",\n      \"lower_bound\": 8043482,\n      \"upper_bound\": 8745817\n    },\n    {\n      \"std_dev\": 23618,\n      \"estimate\": 543465,\n      \"alias_type\": \"ctv\",\n      \"lower_bound\": 520826,\n      \"upper_bound\": 567083\n    },\n    {\n      \"std_dev\": 102132,\n      \"estimate\": 2369042,\n      \"alias_type\": \"maid\",\n      \"lower_bound\": 2271110,\n      \"upper_bound\": 2471174\n    }\n  ],\n  \"created_at\": \"2021-10-26T18:55:34.206244722Z\",\n  \"updated_at\": \"2021-10-26T18:55:34.206244722Z\",\n  \"properties\": {}\n}\n"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 3346,
+                      "default": 0
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "test audience 1"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "A testing audience"
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "segments": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "example": "9f118921ef"
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Experian > Lifestyle > SRVY:HH Lifestyl:Pets:Own A Dog > Y"
+                              },
+                              "client_id": {
+                                "type": "string",
+                                "example": "-1"
+                              },
+                              "provider_name": {
+                                "type": "string",
+                                "example": "Experian"
+                              },
+                              "provider_id": {
+                                "type": "string",
+                                "example": "Experian"
+                              },
+                              "data_source": {
+                                "type": "string",
+                                "example": "Experian"
+                              },
+                              "audience_partner": {
+                                "type": "string",
+                                "example": "experian"
+                              },
+                              "restrictions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer",
+                                  "example": 2,
+                                  "default": 0
+                                }
+                              },
+                              "cpm": {
+                                "type": "number",
+                                "example": 0.6,
+                                "default": 0
+                              },
+                              "provider_segment_id": {
+                                "type": "string",
+                                "example": "7203"
+                              }
+                            }
+                          }
+                        },
+                        "cpm": {
+                          "type": "number",
+                          "example": 0.6,
+                          "default": 0
+                        }
+                      }
+                    },
+                    "industry_restrictions": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "example": 2,
+                        "default": 0
+                      }
+                    },
+                    "targets": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "kind": {
+                            "type": "string",
+                            "example": "include"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "segments"
+                          },
+                          "target_ids": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "9f118921ef"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "estimates": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "std_dev": {
+                            "type": "integer",
+                            "example": 77773,
+                            "default": 0
+                          },
+                          "estimate": {
+                            "type": "integer",
+                            "example": 1808790,
+                            "default": 0
+                          },
+                          "alias_type": {
+                            "type": "string",
+                            "example": "iid"
+                          },
+                          "lower_bound": {
+                            "type": "integer",
+                            "example": 1734207,
+                            "default": 0
+                          },
+                          "upper_bound": {
+                            "type": "integer",
+                            "example": 1886563,
+                            "default": 0
+                          }
+                        }
+                      }
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2021-10-26T18:55:34.206244722Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2021-10-26T18:55:34.206244722Z"
+                    },
+                    "properties": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "curl",
+              "code": "curl \\\n -X POST \\\n -H \"Authorization: Bearer $auth_token\" \\\n -H \"X-Freewheel-Ad-Industry: 1\" \\\n --url 'https://api.freewheel.tv/demand/v2/audiences?temporary' \\\n -d '\n{\n  \"name\":\"test audience 1\",\n  \"description\":\"A testing audience\",\n  \"targets\":[\n    {\n      \"type\":\"segments\",\n      \"kind\":\"include\",\n      \"target_ids\":[\"9f118921ef\",\"9fbd48f59a\"]\n    },\n    {\n      \"type\": \"segments\",\n      \"kind\": \"include\",\n      \"target_ids\":[\"9fe904831f\"]\n    },\n    {\n      \"type\": \"segments\",\n      \"kind\": \"exclude\",\n      \"target_ids\":[\"9f2354c276\"]\n    }\n  ]\n}'",
+              "name": "Create Temporary Audience Definition"
+            },
+            {
+              "language": "curl",
+              "code": "//Do not use the `?temporary` parameter.\ncurl \\\n -X PATCH \\\n -H \"Authorization: Bearer $auth_token\" \\\n -H \"X-Freewheel-Ad-Industry: 1\" \\\n \"$DS/v2/audiences/3346\" \\\n -d '\n{\n  \"targets\":[\n    {\n      \"type\":\"segments\",\n      \"kind\":\"include\",\n      \"target_ids\":[\"9fbd48f59a\",\"9fbd48f59a\",\"9fe904831f\"]\n    },\n    {\n      \"type\": \"segments\",\n      \"kind\": \"exclude\",\n      \"target_ids\":[\"9f2354c276\"]\n    }\n  ]\n}'",
+              "name": "Create Permanent Audience Definition"
+            }
+          ],
+          "samples-languages": [
+            "curl"
+          ]
+        }
+      },
+      "get": {
+        "summary": "Retrieve Audience Definitions",
+        "description": "",
+        "operationId": "retrieve-audience-definitions",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Pagination=URI_ESCAPE({\"per_page\":n,\"page\":m}).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Pagination=URI_ESCAPE({\"per_page\":n,\"page\":m}).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "eq",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "neq",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "match",
+            "in": "query",
+            "description": "Use the percent sign (%) for wildcard.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gt",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lt",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gte",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lte",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Sample Response": {
+                    "value": "{\n  \"page\": 5,\n  \"per_page\": 2,\n  \"total_page\": 28,\n  \"total_count\": 56,\n  \"items\": [\n    {\n      \"id\": 2858,\n      \"name\": \"small export test\",\n      \"description\": \"\",\n      \"metadata\": {\n        \"segments\": [\n          {\n            \"id\": \"9f2ea1202a\",\n            \"name\": \"Experian \\u003e Lifestyle \\u003e BehaviorBank: Kitchen aids/small appliances \\u003e Y\",\n            \"client_id\": \"-1\",\n            \"provider_name\": \"Experian\",\n            \"provider_id\": \"Experian\",\n            \"data_source\": \"Experian\",\n            \"audience_partner\": \"experian\",\n            \"restrictions\": [\n              2\n            ],\n            \"cpm\": 0.6,\n            \"provider_segment_id\": \"6695\"\n          },\n          {\n            \"id\": \"c89eb332ac\",\n            \"name\": \"InfoScout  \\u003e  Pet Supplies  \\u003e  Cat Supplies  \\u003e  Purina Tidy Cats\",\n            \"client_id\": \"-1\",\n            \"provider_name\": \"Numerator\",\n            \"provider_id\": \"Numerator\",\n            \"data_source\": \"Numerator\",\n            \"audience_partner\": \"liveramp\",\n            \"restrictions\": [\n              2\n            ],\n            \"cpm\": 1.25,\n            \"provider_segment_id\": \"1001160509\"\n          },\n          {\n            \"id\": \"82c96b4399\",\n            \"name\": \"Factual \\u003e Place Category Visitors \\u003e Retail \\u003e Tobacco\",\n            \"client_id\": \"-1\",\n            \"provider_name\": \"Factual\",\n            \"provider_id\": \"Factual\",\n            \"data_source\": \"Factual\",\n            \"audience_partner\": \"liveramp\",\n            \"restrictions\": [\n              2\n            ],\n            \"cpm\": 1.5,\n            \"provider_segment_id\": \"1001385939\"\n          }\n        ],\n        \"cpm\": 2.1\n      },\n      \"industry_restrictions\": [\n        2\n      ],\n      \"targets\": [\n        {\n          \"kind\": \"include\",\n          \"type\": \"segments\",\n          \"target_ids\": [\n            \"9f2ea1202a\"\n          ]\n        },\n        {\n          \"kind\": \"include\",\n          \"type\": \"segments\",\n          \"target_ids\": [\n            \"c89eb332ac\",\n            \"82c96b4399\"\n          ]\n        },\n        {\n          \"kind\": \"exclude\",\n          \"type\": \"segments\"\n        }\n      ],\n      \"estimates\": [\n        {\n          \"std_dev\": 50931,\n          \"estimate\": 495594,\n          \"alias_type\": \"iid\",\n          \"lower_bound\": 449359,\n          \"upper_bound\": 546525\n        },\n        {\n          \"std_dev\": 20682,\n          \"estimate\": 227565,\n          \"alias_type\": \"hid\",\n          \"lower_bound\": 208589,\n          \"upper_bound\": 248247\n        },\n        {\n          \"std_dev\": 250918,\n          \"estimate\": 2482866,\n          \"alias_type\": \"cookie\",\n          \"lower_bound\": 2254732,\n          \"upper_bound\": 2733784\n        },\n        {\n          \"std_dev\": 13355,\n          \"estimate\": 138438,\n          \"alias_type\": \"ctv\",\n          \"lower_bound\": 126246,\n          \"upper_bound\": 151793\n        },\n        {\n          \"std_dev\": 63109,\n          \"estimate\": 750130,\n          \"alias_type\": \"maid\",\n          \"lower_bound\": 691873,\n          \"upper_bound\": 813239\n        }\n      ],\n      \"created_at\": \"2021-07-06T23:05:17Z\",\n      \"updated_at\": \"2021-08-01T00:00:28Z\",\n      \"properties\": {\n        \"locked\": true\n      }\n    },\n    {\n      \"id\": 2304,\n      \"name\": \"cat_lmd_audience1\",\n      \"description\": \"test audience created in campaign planner by yhdong\",\n      \"metadata\": {\n        \"segments\": [\n          {\n            \"id\": \"c84e174f9f\",\n            \"name\": \"InfoScout  \\u003e  Pet Food \\u0026 Treats  \\u003e  Cat Food \\u0026 Treats  \\u003e  Purina Cat Chow\",\n            \"client_id\": \"-1\",\n            \"provider_name\": \"Numerator\",\n            \"provider_id\": \"Numerator\",\n            \"data_source\": \"Numerator\",\n            \"audience_partner\": \"liveramp\",\n            \"restrictions\": [\n              2\n            ],\n            \"cpm\": 1.25,\n            \"provider_segment_id\": \"1001160499\"\n          },\n          {\n            \"id\": \"c89eb332ac\",\n            \"name\": \"InfoScout  \\u003e  Pet Supplies  \\u003e  Cat Supplies  \\u003e  Purina Tidy Cats\",\n            \"client_id\": \"-1\",\n            \"provider_name\": \"Numerator\",\n            \"provider_id\": \"Numerator\",\n            \"data_source\": \"Numerator\",\n            \"audience_partner\": \"liveramp\",\n            \"restrictions\": [\n              2\n            ],\n            \"cpm\": 1.25,\n            \"provider_segment_id\": \"1001160509\"\n          }\n        ],\n        \"cpm\": 1.25\n      },\n      \"industry_restrictions\": [\n        2\n      ],\n      \"targets\": [\n        {\n          \"kind\": \"include\",\n          \"type\": \"segments\",\n          \"target_ids\": [\n            \"c84e174f9f\",\n            \"c89eb332ac\"\n          ]\n        },\n        {\n          \"kind\": \"include\",\n          \"type\": \"segments\"\n        },\n        {\n          \"kind\": \"exclude\",\n          \"type\": \"segments\"\n        }\n      ],\n      \"estimates\": [\n        {\n          \"std_dev\": 259568,\n          \"estimate\": 19336345,\n          \"alias_type\": \"iid\",\n          \"lower_bound\": 19080211,\n          \"upper_bound\": 19595913\n        },\n        {\n          \"std_dev\": 93553,\n          \"estimate\": 6946360,\n          \"alias_type\": \"hid\",\n          \"lower_bound\": 6854048,\n          \"upper_bound\": 7039913\n        },\n        {\n          \"std_dev\": 1105891,\n          \"estimate\": 81969413,\n          \"alias_type\": \"cookie\",\n          \"lower_bound\": 80878220,\n          \"upper_bound\": 83075304\n        },\n        {\n          \"std_dev\": 48614,\n          \"estimate\": 3630756,\n          \"alias_type\": \"ctv\",\n          \"lower_bound\": 3582783,\n          \"upper_bound\": 3679370\n        },\n        {\n          \"std_dev\": 242120,\n          \"estimate\": 17961679,\n          \"alias_type\": \"maid\",\n          \"lower_bound\": 17722775,\n          \"upper_bound\": 18203799\n        }\n      ],\n      \"created_at\": \"2021-04-15T08:02:51Z\",\n      \"updated_at\": \"2021-07-01T00:00:31Z\",\n      \"properties\": {\n        \"locked\": true\n      }\n    }\n  ]\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "page": {
+                      "type": "integer",
+                      "example": 5,
+                      "default": 0
+                    },
+                    "per_page": {
+                      "type": "integer",
+                      "example": 2,
+                      "default": 0
+                    },
+                    "total_page": {
+                      "type": "integer",
+                      "example": 28,
+                      "default": 0
+                    },
+                    "total_count": {
+                      "type": "integer",
+                      "example": 56,
+                      "default": 0
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 2858,
+                            "default": 0
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "small export test"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": ""
+                          },
+                          "metadata": {
+                            "type": "object",
+                            "properties": {
+                              "segments": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "example": "9f2ea1202a"
+                                    },
+                                    "name": {
+                                      "type": "string",
+                                      "example": "Experian > Lifestyle > BehaviorBank: Kitchen aids/small appliances > Y"
+                                    },
+                                    "client_id": {
+                                      "type": "string",
+                                      "example": "-1"
+                                    },
+                                    "provider_name": {
+                                      "type": "string",
+                                      "example": "Experian"
+                                    },
+                                    "provider_id": {
+                                      "type": "string",
+                                      "example": "Experian"
+                                    },
+                                    "data_source": {
+                                      "type": "string",
+                                      "example": "Experian"
+                                    },
+                                    "audience_partner": {
+                                      "type": "string",
+                                      "example": "experian"
+                                    },
+                                    "restrictions": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "integer",
+                                        "example": 2,
+                                        "default": 0
+                                      }
+                                    },
+                                    "cpm": {
+                                      "type": "number",
+                                      "example": 0.6,
+                                      "default": 0
+                                    },
+                                    "provider_segment_id": {
+                                      "type": "string",
+                                      "example": "6695"
+                                    }
+                                  }
+                                }
+                              },
+                              "cpm": {
+                                "type": "number",
+                                "example": 2.1,
+                                "default": 0
+                              }
+                            }
+                          },
+                          "industry_restrictions": {
+                            "type": "array",
+                            "items": {
+                              "type": "integer",
+                              "example": 2,
+                              "default": 0
+                            }
+                          },
+                          "targets": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "kind": {
+                                  "type": "string",
+                                  "example": "include"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "example": "segments"
+                                },
+                                "target_ids": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "example": "9f2ea1202a"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "estimates": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "std_dev": {
+                                  "type": "integer",
+                                  "example": 50931,
+                                  "default": 0
+                                },
+                                "estimate": {
+                                  "type": "integer",
+                                  "example": 495594,
+                                  "default": 0
+                                },
+                                "alias_type": {
+                                  "type": "string",
+                                  "example": "iid"
+                                },
+                                "lower_bound": {
+                                  "type": "integer",
+                                  "example": 449359,
+                                  "default": 0
+                                },
+                                "upper_bound": {
+                                  "type": "integer",
+                                  "example": 546525,
+                                  "default": 0
+                                }
+                              }
+                            }
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "example": "2021-07-06T23:05:17Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "example": "2021-08-01T00:00:28Z"
+                          },
+                          "properties": {
+                            "type": "object",
+                            "properties": {
+                              "locked": {
+                                "type": "boolean",
+                                "example": true,
+                                "default": true
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "curl",
+              "code": "# Define your filter\nexport filter=$(jq -r @uri <<< '[{\"key\":\"metadata.segments[*].name\",\"op\":\"match\",\"value\":\"%cat%\"}]')\n \n# Pass into the API request\ncurl \\\n -H \"Authorization: Bearer $auth_token\" \\\n -H \"X-Freewheel-Ad-Industry: 1\" \\\n--url 'https://api.freewheel.tv/demand/v2/audiences?page=2&per_page=5&filter=$filter'",
+              "name": "Sample Request"
+            }
+          ],
+          "samples-languages": [
+            "curl"
+          ]
+        }
+      }
+    },
+    "/v2/audiences/{audience_id}": {
+      "patch": {
+        "summary": "Modify Audience Definitions",
+        "description": "",
+        "operationId": "modify-audience-definitions",
+        "parameters": [
+          {
+            "name": "X-Freewheel-Ad-Industry",
+            "in": "header",
+            "description": "Industry category ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "Bearer $auth_token"
+            }
+          },
+          {
+            "name": "audience_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Sample Response": {
+                    "value": "{\n  \"id\": 3346,\n  \"name\": \"test audience 1\",\n  \"description\": \"A testing audience\",\n  \"metadata\": {\n    \"segments\": [\n      {\n        \"id\": \"9fbd48f59a\",\n        \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Pet \\u003e Y\",\n        \"client_id\": \"-1\",\n        \"provider_name\": \"Experian\",\n        \"provider_id\": \"Experian\",\n        \"data_source\": \"Experian\",\n        \"audience_partner\": \"experian\",\n        \"restrictions\": [\n          2\n        ],\n        \"cpm\": 0.6,\n        \"provider_segment_id\": \"7206\"\n      },\n      {\n        \"id\": \"9fe904831f\",\n        \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Buying:By Internet \\u003e Y\",\n        \"client_id\": \"-1\",\n        \"provider_name\": \"Experian\",\n        \"provider_id\": \"Experian\",\n        \"data_source\": \"Experian\",\n        \"audience_partner\": \"experian\",\n        \"restrictions\": [\n          2\n        ],\n        \"cpm\": 0.6,\n        \"provider_segment_id\": \"7209\"\n      },\n      {\n        \"id\": \"9f2354c276\",\n        \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Cat \\u003e Y\",\n        \"client_id\": \"-1\",\n        \"provider_name\": \"Experian\",\n        \"provider_id\": \"Experian\",\n        \"data_source\": \"Experian\",\n        \"audience_partner\": \"experian\",\n        \"restrictions\": [\n          2\n        ],\n        \"cpm\": 0.6,\n        \"provider_segment_id\": \"7200\"\n      }\n    ],\n    \"cpm\": 0.6\n  },\n  \"industry_restrictions\": [\n    2\n  ],\n  \"targets\": [\n    {\n      \"kind\": \"include\",\n      \"type\": \"segments\",\n      \"target_ids\": [\n        \"9fbd48f59a\",\n        \"9fbd48f59a\",\n        \"9fe904831f\"\n      ]\n    },\n    {\n      \"kind\": \"exclude\",\n      \"type\": \"segments\",\n      \"target_ids\": [\n        \"9f2354c276\"\n      ]\n    }\n  ],\n  \"estimates\": [\n    {\n      \"std_dev\": 192676,\n      \"estimate\": 11457259,\n      \"alias_type\": \"iid\",\n      \"lower_bound\": 11267763,\n      \"upper_bound\": 11649935\n    },\n    {\n      \"std_dev\": 69294,\n      \"estimate\": 4128283,\n      \"alias_type\": \"hid\",\n      \"lower_bound\": 4060131,\n      \"upper_bound\": 4197577\n    },\n    {\n      \"std_dev\": 882788,\n      \"estimate\": 52477245,\n      \"alias_type\": \"cookie\",\n      \"lower_bound\": 51609031,\n      \"upper_bound\": 53360033\n    },\n    {\n      \"std_dev\": 59395,\n      \"estimate\": 3549628,\n      \"alias_type\": \"ctv\",\n      \"lower_bound\": 3491209,\n      \"upper_bound\": 3609023\n    },\n    {\n      \"std_dev\": 253384,\n      \"estimate\": 15050631,\n      \"alias_type\": \"maid\",\n      \"lower_bound\": 14801434,\n      \"upper_bound\": 15304015\n    }\n  ],\n  \"created_at\": \"2021-10-26T18:55:34Z\",\n  \"updated_at\": \"2021-10-26T18:58:18.470675056Z\",\n  \"properties\": {}\n}"
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 3346,
+                      "default": 0
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "test audience 1"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "A testing audience"
+                    },
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "segments": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "example": "9fbd48f59a"
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Experian > Lifestyle > SRVY:HH Lifestyl:Pets:Own A Pet > Y"
+                              },
+                              "client_id": {
+                                "type": "string",
+                                "example": "-1"
+                              },
+                              "provider_name": {
+                                "type": "string",
+                                "example": "Experian"
+                              },
+                              "provider_id": {
+                                "type": "string",
+                                "example": "Experian"
+                              },
+                              "data_source": {
+                                "type": "string",
+                                "example": "Experian"
+                              },
+                              "audience_partner": {
+                                "type": "string",
+                                "example": "experian"
+                              },
+                              "restrictions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer",
+                                  "example": 2,
+                                  "default": 0
+                                }
+                              },
+                              "cpm": {
+                                "type": "number",
+                                "example": 0.6,
+                                "default": 0
+                              },
+                              "provider_segment_id": {
+                                "type": "string",
+                                "example": "7206"
+                              }
+                            }
+                          }
+                        },
+                        "cpm": {
+                          "type": "number",
+                          "example": 0.6,
+                          "default": 0
+                        }
+                      }
+                    },
+                    "industry_restrictions": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "example": 2,
+                        "default": 0
+                      }
+                    },
+                    "targets": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "kind": {
+                            "type": "string",
+                            "example": "include"
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "segments"
+                          },
+                          "target_ids": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "9fbd48f59a"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "estimates": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "std_dev": {
+                            "type": "integer",
+                            "example": 192676,
+                            "default": 0
+                          },
+                          "estimate": {
+                            "type": "integer",
+                            "example": 11457259,
+                            "default": 0
+                          },
+                          "alias_type": {
+                            "type": "string",
+                            "example": "iid"
+                          },
+                          "lower_bound": {
+                            "type": "integer",
+                            "example": 11267763,
+                            "default": 0
+                          },
+                          "upper_bound": {
+                            "type": "integer",
+                            "example": 11649935,
+                            "default": 0
+                          }
+                        }
+                      }
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "example": "2021-10-26T18:55:34Z"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "example": "2021-10-26T18:58:18.470675056Z"
+                    },
+                    "properties": {
+                      "type": "object",
+                      "properties": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [],
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "curl",
+              "code": "curl \\\n -X PATCH \\\n -H \"Authorization: Bearer $auth_token\" \\\n -H \"X-Freewheel-Ad-Industry: 1\" \\\n--url 'https://api.freewheel.tv/demandS/v2/audiences/3346' \\\n -d '\n{\n  \"targets\":[\n    {\n      \"type\":\"segments\",\n      \"kind\":\"include\",\n      \"target_ids\":[\"9fbd48f59a\",\"9fbd48f59a\",\"9fe904831f\"]\n    },\n    {\n      \"type\": \"segments\",\n      \"kind\": \"exclude\",\n      \"target_ids\":[\"9f2354c276\"]\n    }\n  ]\n}'",
+              "name": "Sample Request"
+            }
+          ],
+          "samples-languages": [
+            "curl"
+          ]
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  },
+  "x-readme-fauxas": true
+}

@@ -1,0 +1,106 @@
+generated: '2026-08-12'
+method: derived
+status: candidate
+source: >-
+  openapi/freewheel-media-demand-deal-sync-openapi-original.json,
+  openapi/freewheel-media-demand-creative-management-openapi-original.json,
+  openapi/freewheel-media-demand-audience-management-openapi-original.json,
+  openapi/freewheel-media-advertiser-buzz-openapi-original.json
+search_result:
+  official_hosted_server: none
+  probes:
+  - url: https://mcp.freewheel.com/mcp
+    method: POST tools/list
+    status: '000'
+    note: host does not resolve
+  - url: https://mcp.freewheel.tv/mcp
+    method: POST tools/list
+    status: '000'
+    note: host does not resolve
+  - url: https://api.freewheel.tv/mcp
+    method: POST tools/list
+    status: '503'
+  - url: https://www.freewheel.com/mcp
+    method: POST tools/list
+    status: '404'
+  - url: https://api-docs.freewheel.tv/mcp
+    method: POST tools/list
+    status: '401'
+    body: '{"jsonrpc":"2.0","error":{"code":-32001,"message":"Authorization required"},"id":null}'
+    note: >-
+      This is a live, spec-compliant MCP endpoint, but it is the documentation
+      platform's built-in server (ReadMe), not a FreeWheel product API server —
+      it would expose the docs, not the Buzz/Demand/Publisher APIs. FreeWheel has
+      the platform's AI features switched off (the hub reports aiConfig.enabled =
+      false) and advertises no MCP endpoint anywhere in its documentation. It is
+      recorded here for completeness and is NOT treated as a FreeWheel-published
+      MCP server.
+  finding: >-
+    FreeWheel publishes no MCP server. The tool list below is a CANDIDATE derived
+    from the operations FreeWheel does publish, so that an agent builder has a
+    starting shape; it is not something FreeWheel operates.
+server:
+  name: freewheel-media
+  transport: http
+  url: null
+tool_count: 18
+tools:
+- name: list_deals
+  description: Retrieve programmatic deals available to a buyer seat.
+  source_operation: openapi/freewheel-media-demand-deal-sync-openapi-original.json#RetrieveDeals
+- name: get_deal
+  description: Retrieve a single deal by id.
+  source_operation: openapi/freewheel-media-demand-deal-sync-openapi-original.json#RetrieveSingleDeal
+- name: update_deal_buyer_status
+  description: Update the buyer status on a deal.
+  source_operation: openapi/freewheel-media-demand-deal-sync-openapi-original.json#UpdateBuyerStatusForDeals
+- name: list_creatives
+  description: Retrieve all creatives on a demand account.
+  source_operation: openapi/freewheel-media-demand-creative-management-openapi-original.json#RetrieveAllCreatives
+- name: create_creative
+  description: Create a creative on a demand account.
+  source_operation: openapi/freewheel-media-demand-creative-management-openapi-original.json#CreateACreative
+- name: update_creative
+  description: Update an existing creative.
+  source_operation: openapi/freewheel-media-demand-creative-management-openapi-original.json#UpdateACreative
+- name: list_underlying_creatives
+  description: Retrieve the underlying creatives of a composite ad.
+  source_operation: openapi/freewheel-media-demand-creative-management-openapi-original.json#RetrieveUnderlyingCreatives
+- name: assign_creative_to_deal
+  description: Assign a creative to a programmatic deal.
+  source_operation: openapi/freewheel-media-demand-creative-management-openapi-original.json#AssignACreativeToADeal
+- name: get_creative_deal_assignment
+  description: Retrieve a creative's deal assignments.
+  source_operation: openapi/freewheel-media-demand-creative-management-openapi-original.json#RetrieveADealAssignmentForACreative
+- name: delete_creative_deal_assignments
+  description: Remove a creative's deal assignments.
+  source_operation: openapi/freewheel-media-demand-creative-management-openapi-original.json#DeleteACreativeDealAssignments
+- name: list_ad_industries
+  description: List advertiser industry categories.
+  source_operation: openapi/freewheel-media-demand-audience-management-openapi-original.json#list-industries-1
+- name: list_data_providers
+  description: List data providers for an ad-industry category.
+  source_operation: openapi/freewheel-media-demand-audience-management-openapi-original.json#retrieve-data-providers-1
+- name: list_segments
+  description: List segments by data provider.
+  source_operation: openapi/freewheel-media-demand-audience-management-openapi-original.json#retrieve-segments-by-data-provider
+- name: search_segments
+  description: Filter segment searches by keyword and provider.
+  source_operation: openapi/freewheel-media-demand-audience-management-openapi-original.json#filter-segment-searches
+- name: create_audience
+  description: Create an audience definition.
+  source_operation: openapi/freewheel-media-demand-audience-management-openapi-original.json#create-temporary-audience-definition
+- name: list_audiences
+  description: Retrieve audience definitions.
+  source_operation: openapi/freewheel-media-demand-audience-management-openapi-original.json#retrieve-audience-definitions
+- name: update_audience
+  description: Modify an audience definition.
+  source_operation: openapi/freewheel-media-demand-audience-management-openapi-original.json#modify-audience-definitions
+- name: buzz_request
+  description: >-
+    Generic Buzz resource accessor. The Advertiser (Buzz) API is 153 operations
+    across 59 resources with a uniform GET/POST/PUT/DELETE shape per resource, so
+    a per-operation tool set would be unusable; a single resource-parameterised
+    tool is the sane derivation.
+  source_operation: openapi/freewheel-media-advertiser-buzz-openapi-original.json
+  note: Covers all 153 Buzz operations; see mcp/freewheel-media-tool-crosswalk.yml.

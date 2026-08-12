@@ -1,0 +1,148 @@
+generated: '2026-08-12'
+method: probed
+source: live GET probes of /.well-known/* on every FreeWheel host in apis.yml
+note: >-
+  One real document was returned across the whole estate: an RFC 9727
+  api-catalog linkset served by the developer documentation host,
+  api-docs.freewheel.tv, which anchors the Advertiser and Demand API projects.
+  Everything else 404s, or — on api-docs.freewheel.tv and www.freewheel.com —
+  answers 200 with the single-page-app HTML shell, which is not a document and
+  is recorded as a miss. api.freewheel.tv answers 403 to every anonymous request
+  including /.well-known/*, so nothing there could be read.
+hosts:
+- host: api-docs.freewheel.tv
+  documents:
+  - path: /.well-known/api-catalog
+    status: 200
+    content_type: application/linkset+json
+    file: freewheel-media-api-catalog.json
+    real_document: true
+  - path: /.well-known/security.txt
+    status: 200
+    content_type: text/html
+    real_document: false
+    note: SPA HTML shell, not an RFC 9116 document — treated as a miss.
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    content_type: text/html
+    real_document: false
+    note: SPA HTML shell — treated as a miss.
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: text/html
+    real_document: false
+    note: SPA HTML shell — treated as a miss.
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: text/html
+    real_document: false
+    note: SPA HTML shell — treated as a miss.
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /advertiser/.well-known/api-catalog
+    status: 404
+    note: >-
+      The root linkset advertises this child catalog as a service-desc link, but
+      the URL 404s.
+  - path: /demand/.well-known/api-catalog
+    status: 404
+    note: Advertised by the root linkset; 404s.
+- host: api.freewheel.tv
+  note: >-
+    Every anonymous request to this host returns 403 "Sorry, You are not
+    authorized to view this page", including all /.well-known/* paths.
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+- host: www.freewheel.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: freewheel.tv
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: mrm.freewheel.tv
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: partners.freewheel.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+security_txt: false
+agent_card: false

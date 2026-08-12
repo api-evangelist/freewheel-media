@@ -1,0 +1,154 @@
+generated: '2026-08-12'
+method: derived
+source: mcp/freewheel-media-mcp.yml + openapi/ (4 specs, 171 operations)
+note: >-
+  FreeWheel operates no MCP server and no GraphQL endpoint, so this crosswalk
+  binds the CANDIDATE tool set in mcp/freewheel-media-mcp.yml to the real
+  operations it was derived from. Confidence is high throughout because every row
+  was derived from a specific operationId rather than matched by name — the only
+  low-confidence row is the generic Buzz accessor, which fans out to 153
+  operations. There are no mcp_only rows: nothing can be MCP-only when no MCP
+  server exists.
+surfaces:
+  openapi:
+  - file: openapi/freewheel-media-advertiser-buzz-openapi-original.json
+    operations: 153
+    server: https://buzz-key.api.beeswax.com/rest/
+    gated: >-
+      Templated per-customer host; requires a provisioned Buzz tenant and a
+      session cookie.
+  - file: openapi/freewheel-media-demand-deal-sync-openapi-original.json
+    operations: 3
+    server: https://api.freewheel.tv/demand/v1
+    gated: OAuth 2.0 password grant with FreeWheel-issued credentials.
+  - file: openapi/freewheel-media-demand-creative-management-openapi-original.json
+    operations: 8
+    server: https://api.freewheel.tv/demand/v1
+    gated: OAuth 2.0 password grant with FreeWheel-issued credentials.
+  - file: openapi/freewheel-media-demand-audience-management-openapi-original.json
+    operations: 7
+    server: https://api.freewheel.tv/demand
+    gated: HTTP basic / bearer, FreeWheel-issued credentials.
+  graphql: null
+  mcp:
+    url: null
+    tools_list: not-available
+    note: >-
+      The only live MCP endpoint on a FreeWheel host is the documentation
+      platform's built-in server at https://api-docs.freewheel.tv/mcp, which
+      returns JSON-RPC error -32001 "Authorization required" and does not front
+      the product APIs.
+crosswalk:
+- tool: list_deals
+  category: deals
+  rest: [RetrieveDeals]
+  binding: rest
+  confidence: high
+- tool: get_deal
+  category: deals
+  rest: [RetrieveSingleDeal]
+  binding: rest
+  confidence: high
+- tool: update_deal_buyer_status
+  category: deals
+  rest: [UpdateBuyerStatusForDeals]
+  binding: rest
+  confidence: high
+- tool: list_creatives
+  category: creatives
+  rest: [RetrieveAllCreatives, RetrieveAllCreativesWithoutAccountId]
+  binding: rest
+  confidence: high
+  note: Two operations — account-scoped and unscoped listing.
+- tool: create_creative
+  category: creatives
+  rest: [CreateACreative]
+  binding: rest
+  confidence: high
+- tool: update_creative
+  category: creatives
+  rest: [UpdateACreative]
+  binding: rest
+  confidence: high
+- tool: list_underlying_creatives
+  category: creatives
+  rest: [RetrieveUnderlyingCreatives]
+  binding: rest
+  confidence: high
+- tool: assign_creative_to_deal
+  category: creatives
+  rest: [AssignACreativeToADeal]
+  binding: rest
+  confidence: high
+- tool: get_creative_deal_assignment
+  category: creatives
+  rest: [RetrieveADealAssignmentForACreative]
+  binding: rest
+  confidence: high
+- tool: delete_creative_deal_assignments
+  category: creatives
+  rest: [DeleteACreativeDealAssignments]
+  binding: rest
+  confidence: high
+- tool: list_ad_industries
+  category: audiences
+  rest: [list-industries-1]
+  binding: rest
+  confidence: high
+- tool: list_data_providers
+  category: audiences
+  rest: [retrieve-data-providers-1]
+  binding: rest
+  confidence: high
+- tool: list_segments
+  category: audiences
+  rest: [retrieve-segments-by-data-provider]
+  binding: rest
+  confidence: high
+- tool: search_segments
+  category: audiences
+  rest: [filter-segment-searches]
+  binding: rest
+  confidence: high
+- tool: create_audience
+  category: audiences
+  rest: [create-temporary-audience-definition]
+  binding: rest
+  confidence: high
+- tool: list_audiences
+  category: audiences
+  rest: [retrieve-audience-definitions]
+  binding: rest
+  confidence: high
+- tool: update_audience
+  category: audiences
+  rest: [modify-audience-definitions]
+  binding: rest
+  confidence: high
+- tool: buzz_request
+  category: advertiser-buzz
+  rest: [advertiser-get, campaign-get, line_item-get, creative-get, segment-get, targeting_template-get, report_queue-post]
+  binding: rest
+  confidence: low
+  note: >-
+    Representative operations only. This tool fans out to all 153 Buzz
+    operations, which share one uniform resource shape; a real MCP server would
+    split it per resource family.
+mcp_only: []
+rest_only:
+- capability: Advertiser (Buzz) full object model
+  operations: 146
+  note: >-
+    All Buzz operations other than the seven named on buzz_request have no
+    dedicated candidate tool — accounts, users, roles, alerts, bid models, bid
+    and delivery modifiers, custom lists, list items, events and event tags,
+    creative assets/addons/templates/approval queues, native offers, segment
+    categories and sharing, vendors and vendor fees, activity log, search and
+    views.
+coverage:
+  tools_named: 18
+  tools_bound: 18
+  mcp_only: 0
+  rest_operations_total: 171
+  rest_operations_with_a_tool: 24
+  rest_operations_covered_by_generic_tool: 153

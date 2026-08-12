@@ -1,0 +1,118 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  Derived from the 4xx/5xx responses declared in openapi/, then enriched from
+  FreeWheel's published Validations/Error Codes reference and the Buzz
+  request/response documentation.
+docs:
+- https://api-docs.freewheel.tv/demand/reference/validationserror-codes-copy
+- https://api-docs.freewheel.tv/advertiser/docs/api-requests-and-responses
+format: http-status
+rfc9457: false
+note: >-
+  FreeWheel does not use RFC 9457 problem+json anywhere. The Demand/Partner APIs
+  return a bare HTTP status with a plain-text message; the Advertiser (Buzz) API
+  wraps everything in its own success/payload/message/error envelope and can
+  return HTTP 200 for a partially-failed bulk write, with per-object error_code
+  values inside the payload. The harvested specs are thin on error responses —
+  of 171 operations only five declare any non-2xx response at all (406 on the
+  Buzz file-upload operations) — so the catalog below is taken mainly from the
+  documented error reference rather than from the contract.
+spec_coverage:
+  operations_total: 171
+  operations_declaring_4xx_or_5xx: 5
+  declared_codes:
+  - status: 406
+    count: 5
+    source: openapi/freewheel-media-advertiser-buzz-openapi-original.json
+    note: >-
+      Declared on advertiser-put, account_alert-put, alert-post, alert-get and
+      alert-put — and nowhere else. There is no pattern to it; the other 148
+      operations declare only 200.
+problems:
+- status: 200
+  title: OK
+  detail: Returned on a successful GET, PUT or DELETE.
+  family: FreeWheel Demand / Partner APIs
+- status: 201
+  title: Created
+  detail: Returned on a successful POST.
+  family: FreeWheel Demand / Partner APIs
+- status: 401
+  title: Unauthorized
+  detail: Incorrect, missing, or invalid access credentials.
+  remediation: >-
+    Re-issue a token at https://api.freewheel.tv/auth/token; bearer tokens are
+    case sensitive and expire after 604800 seconds.
+  family: FreeWheel Demand / Partner APIs
+- status: 404
+  title: Not Found
+  detail: The requested resource is not available.
+  family: FreeWheel Demand / Partner APIs
+- status: 405
+  title: Method Not Allowed
+  detail: >-
+    The request method is not supported by that resource — for example using GET
+    on a method that requires POST, or PUT on a read-only resource.
+  family: FreeWheel Demand / Partner APIs
+- status: 406
+  title: Not Acceptable
+  detail: >-
+    The only non-2xx response declared anywhere in the Buzz contract, on five
+    operations across the advertiser and alert resources.
+  family: FreeWheel Advertiser (Buzz) API
+  source_operations:
+  - advertiser-put
+  - account_alert-put
+  - alert-post
+  - alert-get
+  - alert-put
+- status: 408
+  title: Request Timeout
+  detail: >-
+    Timeout while processing the request, usually caused by concurrent requests
+    needing exclusive access to a resource.
+  remediation: Retry the request.
+  family: FreeWheel Demand / Partner APIs
+- status: 422
+  title: Unprocessable Entity
+  detail: >-
+    Invalid resource — the request body is invalid, or the created/updated
+    resource is invalid.
+  family: FreeWheel Demand / Partner APIs
+- status: 429
+  title: Too Many Requests
+  detail: >-
+    Returned by the Buzz /authenticate endpoint when its security rate limit is
+    exceeded, and by the Partner APIs above 20 requests/second.
+  family: all
+- status: 500
+  title: Internal Server Error
+  detail: API system error.
+  remediation: Contact your FreeWheel account team.
+  family: FreeWheel Demand / Partner APIs
+operation_errors:
+- operation: UpdateBuyerStatusForDeals
+  status: 404
+  message: FreeWheel SSP (SFX) deals are not supported.
+  scenario: A buyer tries to update the status of an SFX deal.
+- operation: UpdateBuyerStatusForDeals
+  status: 404
+  message: >-
+    The Deal ID doesn't exist in the seller network or the Deal is part of a
+    Shared External Deal ID.
+  scenario: >-
+    A buyer submits the External Deal ID for a deal that has Shared External Deal
+    ID enabled instead of the FreeWheel Deal ID.
+- operation: UpdateBuyerStatusForDeals
+  status: 422
+  message: Deal has been archived and is no longer relevant.
+  scenario: The seller status is ARCHIVE, so the buyer status cannot be changed.
+envelope_error_codes:
+- code: AD_BAD_VALIDATION
+  family: FreeWheel Advertiser (Buzz) API
+  detail: >-
+    Field-level validation failure returned inside a per-object element of a bulk
+    PUT/DELETE payload, alongside a human-readable message. The HTTP status on
+    the overall response is still 200.
+  source: https://api-docs.freewheel.tv/advertiser/docs/api-requests-and-responses

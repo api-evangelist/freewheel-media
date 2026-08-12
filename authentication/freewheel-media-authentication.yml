@@ -1,0 +1,90 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  Derived from the four harvested OpenAPI documents, then upgraded from
+  FreeWheel's own published authentication documentation.
+docs:
+- https://api-docs.freewheel.tv/demand/docs/demand-api-authentication
+- https://api-docs.freewheel.tv/advertiser/docs/authentication
+- https://api-docs.freewheel.tv/advertiser/docs/users-passwords-and-the-api
+note: >-
+  FreeWheel runs three different authentication models across its API estate and
+  they do not share credentials. The Partner/Demand APIs and the Publisher (MRM)
+  APIs use OAuth 2.0 with the resource-owner password grant against
+  https://api.freewheel.tv/auth/token; the Advertiser (Buzz/Beeswax) API uses a
+  session cookie obtained by POSTing credentials to /authenticate on the
+  per-customer Buzz host. No API-key model and no OAuth scopes are published, so
+  no scopes/ artifact is emitted.
+summary:
+  types:
+  - oauth2
+  - http
+  - apiKey
+  api_key_in:
+  - header
+  oauth2_flows:
+  - password
+schemes:
+- name: freewheel-oauth2-password
+  type: oauth2
+  flow: password
+  token_url: https://api.freewheel.tv/auth/token
+  token_info_url: https://api.freewheel.tv/auth/token/info
+  token_type: Bearer
+  header: 'authorization: Bearer <access_token>'
+  expires_in_seconds: 604800
+  scopes: []
+  applies_to:
+  - FreeWheel Demand / Partner APIs
+  - FreeWheel Publisher (MRM) APIs
+  source: https://api-docs.freewheel.tv/demand/docs/demand-api-authentication
+  notes:
+  - Bearer tokens are case sensitive.
+  - >-
+    Credentials are issued by FreeWheel to partners; there is no self-service
+    signup and no client-credentials flow is documented.
+  - >-
+    Password rotation is enforced on the account behind the token: 180 days for
+    users with Streaming Hub + API access, 365 days for API-only users.
+- name: bearer
+  type: apiKey
+  in: header
+  parameter: Authorization
+  note: >-
+    How the OAuth bearer token is declared in the Demand specs — the OpenAPI
+    models it as an apiKey header rather than as an oauth2 scheme.
+  sources:
+  - openapi/freewheel-media-demand-creative-management-openapi-original.json
+  - openapi/freewheel-media-demand-deal-sync-openapi-original.json
+- name: sec0
+  type: http
+  scheme: basic
+  note: >-
+    HTTP basic auth as declared in the Audience Management spec; the same
+    endpoints also accept an Authorization header parameter.
+  sources:
+  - openapi/freewheel-media-demand-audience-management-openapi-original.json
+- name: buzz-session-cookie
+  type: cookie
+  parameter: <buzz_key>_buzz_cookie
+  login_operation: authenticate-post
+  login_path: POST /authenticate
+  applies_to:
+  - FreeWheel Advertiser (Buzz) API
+  source: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  notes:
+  - >-
+    Session expiry is an environment setting and defaults to 100 hours; sending
+    "keep_logged_in": true sets a second cookie with a 30-day expiration.
+  - >-
+    HTTP Basic authentication is not enabled by default but can be turned on for
+    custom Buzz installations.
+  - The /authenticate endpoint is rate limited and returns 429 when exceeded.
+additional_headers:
+- name: X-Freewheel-Ad-Industry
+  required: true
+  applies_to: FreeWheel Demand Audience Management API
+  description: >-
+    Scopes audience and segment requests to an advertiser industry category
+    returned by the list-industries-1 operation.
+  source: openapi/freewheel-media-demand-audience-management-openapi-original.json

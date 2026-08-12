@@ -1,0 +1,41 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for FreeWheel Demand Audience Management API
+  version: 1.0.0
+extends: openapi/freewheel-media-demand-audience-management-openapi-original.json
+x-provenance:
+  generated: '2026-08-12'
+  method: generated
+  source: >-
+    Enhancements captured by the API Evangelist enrichment pipeline over the
+    verbatim specification FreeWheel embeds in its own developer documentation at
+    api-docs.freewheel.tv. The original file is never mutated.
+  harvested_from: https://api-docs.freewheel.tv
+  operations: 7
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: freewheel-media
+    x-apievangelist-api: demand-audience-management
+    x-apievangelist-harvest: >-
+      Extracted verbatim from the OpenAPI document FreeWheel embeds in the
+      server-rendered props of its ReadMe-hosted API reference. FreeWheel's
+      published "OpenAPI Specifications" download links resolve to the docs
+      single-page-app shell rather than to a specification file.
+    x-apievangelist-artifacts:
+      authentication: authentication/freewheel-media-authentication.yml
+      conventions: conventions/freewheel-media-conventions.yml
+      errors: errors/freewheel-media-problem-types.yml
+      lifecycle: lifecycle/freewheel-media-lifecycle.yml
+      rate_limits: rate-limits/freewheel-media-rate-limits.yml
+      data_model: data-model/freewheel-media-data-model.yml
+      conformance: conformance/freewheel-media-conformance.yml
+    x-apievangelist-gaps:
+      idempotency: >-
+        No idempotency key is offered on any write operation.
+      error_responses: >-
+        Non-2xx responses are almost entirely undeclared in the contract; the
+        documented error catalog lives only in prose.
+      rate_limit_headers: >-
+        A 20 requests/second ceiling is documented but no RateLimit-* response
+        headers are returned.

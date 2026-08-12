@@ -1,0 +1,615 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Demand Creative Management API V1",
+    "contact": {},
+    "version": "1.0"
+  },
+  "paths": {
+    "/accounts/{account_id}/ads": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method uses GET to retrieve all creatives that are part of an account (seat id) belonging to the requesting DSP.\nNote: The response code samples below include sellerid. However, there is a use case in which the sellerid is not returned.\nA response code that does not include sellerid receives approval on behalf of the seller from the global approvals network. So, the seller network is still the ultimate approver.\nOnly one network ID providing approval is included in any response's audit status object.",
+        "tags": [
+          "Demand Creative Management API V1"
+        ],
+        "summary": "Retrieve All Creatives",
+        "operationId": "RetrieveAllCreatives",
+        "parameters": [
+          {
+            "description": "When you retrieve any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL.",
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/model.GetDemandAdReply"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method POST to create a creative.\n**Notes:**\n* FreeWheel currently supports a maximum of 30 creative renditions per VAST creative at one query per second for both POST and PUT methods. To improve performance, if possible, keep creative renditions to fewer than ten.",
+        "tags": [
+          "Demand Creative Management API V1"
+        ],
+        "summary": "Create a Creative",
+        "operationId": "CreateACreative",
+        "parameters": [
+          {
+            "description": "When you create any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL.",
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/model.DemandAdList"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/model.DemandAdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/ads/{ad_id}/underlying_creatives": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method uses GET to retrieve underlying creatives that belongs a demand ad.",
+        "tags": [
+          "Demand Creative Management API V1"
+        ],
+        "summary": "Retrieve Underlying Creatives",
+        "operationId": "RetrieveUnderlyingCreatives",
+        "parameters": [
+          {
+            "description": "When you retrieve underlying creatives of an ad, you must specify accountid (your seatid) in the request URL.",
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "When you retrieve underlying creatives of an ad, you must specify ad_id in the request URL.",
+            "name": "ad_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "offset",
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "count",
+            "name": "count",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/model.GetDemandAdUnderlyingCreativeReply"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/ads/{id}": {
+      "put": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method PUT to update a creative.\n**Notes:**\n* When you update your creative, its creative approval status is reset to pending if the seller requires creative review. It is recommended that you only update creatives when absolutely necessary and that you inform the seller prior to doing so.\n* FreeWheel currently supports a maximum of 30 creative renditions per VAST creative at one query per second for both POST and PUT methods. To improve performance, if possible, keep creative renditions to fewer than ten.",
+        "tags": [
+          "Demand Creative Management API V1"
+        ],
+        "summary": "Update a Creative",
+        "operationId": "UpdateACreative",
+        "parameters": [
+          {
+            "description": "When you update any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL.",
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "id",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/model.DemandAdList"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/model.DemandAdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/deal_assignments": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method uses GET to retrieve a deal assignment for a particular creative for a given Deal ID and Ad ID.",
+        "tags": [
+          "Demand Creative Management API V1"
+        ],
+        "summary": "Retrieve a Deal Assignment for a Creative",
+        "operationId": "RetrieveADealAssignmentForACreative",
+        "parameters": [
+          {
+            "description": "When you retrieve any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL.",
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "dealid",
+            "name": "dealid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "adid",
+            "name": "adid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/model.DemandAdAssignmentReply"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method uses POST to assign a creative to a deal ID. You can assign the same creative to multiple deal IDs through this endpoint.\n**Note: You do not need to assign new creative IDs when you are extending a campaign. For example, if you extend an end date or add another flight schedule on the same campaign, you do not need new creative IDs. Creative IDs can be reused across programmatic deals.**",
+        "tags": [
+          "Demand Creative Management API V1"
+        ],
+        "summary": "Assign a Creative to a Deal",
+        "operationId": "AssignACreativeToADeal",
+        "parameters": [
+          {
+            "description": "accountid",
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/model.DemandAdAssignment"
+              }
+            }
+          },
+          "description": "Ad Assignment",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/model.DemandAdAssignmentReply"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method uses DELETE to remove a creative’s deal assignments for a given Deal ID and ad ID. This does not DELETE the actual creative from our system, but rather the association between deal ID and ad ID.",
+        "tags": [
+          "Demand Creative Management API V1"
+        ],
+        "summary": "Delete a Creative’s Deal Assignments",
+        "operationId": "DeleteACreativeDealAssignments",
+        "parameters": [
+          {
+            "description": "When you delete any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL.",
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "dealid",
+            "name": "dealid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "adid",
+            "name": "adid",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ads": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method uses GET to retrieve all creatives belonging to the requesting DSP.",
+        "tags": [
+          "Demand Creative Management API V1"
+        ],
+        "summary": "Retrieve All Creatives Without Account Id",
+        "operationId": "RetrieveAllCreativesWithoutAccountId",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/model.GetDemandAdReply"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.freewheel.tv/demand/v1"
+    }
+  ],
+  "components": {
+    "requestBodies": {
+      "model.DemandAdList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/model.DemandAdList"
+            }
+          }
+        },
+        "description": "Ad List",
+        "required": true
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "model.AssignmentDeal": {
+        "type": "object",
+        "properties": {
+          "approvaltype": {
+            "type": "integer"
+          },
+          "clearancelevel": {
+            "type": "integer"
+          },
+          "dealid": {
+            "type": "string"
+          },
+          "sellerid": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "model.DemandAd": {
+        "type": "object",
+        "properties": {
+          "accountid": {
+            "type": "string"
+          },
+          "audit": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model.DemandAdAudit"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "init": {
+            "type": "string"
+          },
+          "lastmod": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "video": {
+            "$ref": "#/components/schemas/model.DemandAdCreativeVideo"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "model.DemandAdAssignment": {
+        "type": "object",
+        "properties": {
+          "adid": {
+            "type": "string"
+          },
+          "dealid": {
+            "type": "string"
+          }
+        }
+      },
+      "model.DemandAdAssignmentReply": {
+        "type": "object",
+        "properties": {
+          "adid": {
+            "type": "string"
+          },
+          "deal": {
+            "$ref": "#/components/schemas/model.AssignmentDeal"
+          },
+          "dealid": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          }
+        }
+      },
+      "model.DemandAdAudit": {
+        "type": "object",
+        "properties": {
+          "feedback": {
+            "type": "string"
+          },
+          "init": {
+            "type": "string"
+          },
+          "lastmod": {
+            "type": "string"
+          },
+          "sellerid": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer"
+          },
+          "statusispartial": {
+            "type": "integer"
+          }
+        }
+      },
+      "model.DemandAdCreativeVideo": {
+        "type": "object",
+        "properties": {
+          "ctype": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "curl": {
+            "type": "string"
+          }
+        }
+      },
+      "model.DemandAdList": {
+        "type": "object",
+        "properties": {
+          "ads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model.DemandAd"
+            }
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      },
+      "model.DemandAdResponse": {
+        "type": "object",
+        "properties": {
+          "ads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model.DemandAd"
+            }
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      },
+      "model.GetDemandAdReply": {
+        "type": "object",
+        "properties": {
+          "ads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model.DemandAd"
+            }
+          },
+          "count": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
+          }
+        }
+      },
+      "model.GetDemandAdUnderlyingCreativeReply": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
+          },
+          "underlyingcreatives": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model.UnderlyingCreative"
+            }
+          }
+        }
+      },
+      "model.UnderlyingCreative": {
+        "type": "object",
+        "properties": {
+          "audit": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model.DemandAdAudit"
+            }
+          },
+          "externalcreativeid": {
+            "type": "string"
+          },
+          "vastcontenturl": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}

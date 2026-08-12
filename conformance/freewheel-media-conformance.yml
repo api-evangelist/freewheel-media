@@ -1,0 +1,100 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/ (4 harvested specs, 171 operations) plus FreeWheel's published
+  developer documentation at api-docs.freewheel.tv
+note: >-
+  Derived posture only. FreeWheel publishes no compliance program, no trust
+  center, and no certification list of its own — its parent, Comcast, runs the
+  corporate security and disclosure programs — so no Compliance pointer is wired
+  in apis.yml. What is asserted below is read from the contracts and the docs.
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: >-
+    freewheel-media-advertiser-buzz-openapi-original.json and
+    freewheel-media-demand-audience-management-openapi-original.json declare
+    openapi 3.1.0.
+- id: openapi-3.0
+  conforms: true
+  evidence: >-
+    freewheel-media-demand-deal-sync-openapi-original.json and
+    freewheel-media-demand-creative-management-openapi-original.json declare
+    openapi 3.0.0.
+- id: oauth2
+  conforms: true
+  evidence: >-
+    OAuth 2.0 resource-owner password grant documented at
+    https://api.freewheel.tv/auth/token, returning token_type Bearer with
+    expires_in 604800.
+- id: oauth2-scopes
+  conforms: false
+  evidence: No scopes are published or declared in any spec; tokens are all-or-nothing.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration 404s or 403s on every FreeWheel host.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No application/problem+json response is declared anywhere; errors are bare
+    HTTP statuses or the Buzz success/payload/message/error envelope.
+- id: rfc9727-api-catalog
+  conforms: true
+  evidence: >-
+    https://api-docs.freewheel.tv/.well-known/api-catalog returns 200 with
+    application/linkset+json anchoring the Advertiser and Demand projects.
+    Note the two child catalogs it advertises both 404.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: No /.well-known/security.txt on any FreeWheel host.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support is documented.
+- id: rfc9238-ratelimit-headers
+  conforms: false
+  evidence: >-
+    A 20 requests/second ceiling is published in prose; no RateLimit-* or
+    X-RateLimit-* response headers are documented.
+- id: idempotency-key
+  conforms: false
+  evidence: No idempotency key header or parameter in any of the 171 operations.
+- id: pagination
+  conforms: true
+  evidence: >-
+    offset/count on the Demand APIs (max count 50, default 10), page/per_page on
+    Audience Management and on the Publisher APIs.
+- id: json-api
+  conforms: false
+  evidence: Responses are bespoke JSON, not JSON:API documents.
+- id: openrtb
+  conforms: partial
+  evidence: >-
+    FreeWheel operates OpenRTB programmatic supply and demand integrations as a
+    marketplace, but no OpenRTB endpoint or specification is published on the
+    public developer surface; the RTB integration is contracted, not documented
+    here.
+- id: skadnetwork
+  conforms: true
+  evidence: >-
+    SKAdNetwork support and a target_skad targeting field are announced in the
+    Advertiser changelog.
+- id: tls-1.2-minimum
+  conforms: true
+  evidence: >-
+    TLS 1.0/1.1 deprecation announced in the Advertiser changelog; live probes
+    negotiate TLSv1.3 on www.freewheel.com, partners.freewheel.com and
+    api-docs.freewheel.tv.
+- id: hsts
+  conforms: true
+  evidence: >-
+    HSTS present on all three reachable hosts (max-age 63072000 on the
+    freewheel.com hosts, 31536000 on api-docs.freewheel.tv).
+- id: dnssec
+  conforms: false
+  evidence: DNSSEC not enabled on freewheel.com or freewheel.tv.
+- id: caa
+  conforms: false
+  evidence: No CAA records on freewheel.com or freewheel.tv.
+- id: dmarc
+  conforms: true
+  evidence: DMARC published with p=reject on both freewheel.com and freewheel.tv.

@@ -1,0 +1,144 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  FreeWheel's published developer documentation at api-docs.freewheel.tv, plus
+  derivation from the four harvested OpenAPI documents in openapi/
+docs:
+- https://api-docs.freewheel.tv/advertiser/docs/api-requests-and-responses
+- https://api-docs.freewheel.tv/advertiser/docs/getting-started
+- https://api-docs.freewheel.tv/demand/docs
+- https://api-docs.freewheel.tv/demand/docs/pagination-1
+note: >-
+  FreeWheel's estate is three separately-designed API families that share almost
+  no cross-cutting conventions. The Advertiser (Buzz) API has its own envelope,
+  its own cookie session and its own pagination; the Demand/Partner APIs use
+  bearer tokens, offset/count pagination and bare JSON bodies; the Publisher
+  (MRM) APIs use page/per_page and split V3 XML from V4 JSON. Anything an agent
+  learns on one family has to be relearned on the next.
+authentication:
+  style: mixed
+  detail: See authentication/freewheel-media-authentication.yml
+  families:
+    advertiser_buzz: session cookie from POST /authenticate
+    demand_partner: OAuth 2.0 password grant, Authorization Bearer header
+    publisher_mrm: OAuth 2.0 access token
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    No Idempotency-Key header, no idempotency parameter and no retry-safety
+    guidance appears in any of the 171 harvested operations or in any published
+    documentation page. Writes are plain POST/PUT/PATCH/DELETE. No Idempotency
+    pointer is wired in apis.yml.
+pagination:
+- family: FreeWheel Demand / Partner APIs
+  style: offset
+  params:
+    offset:
+      description: Starting record position; 0 is the first record.
+      default: 0
+    count:
+      description: Number of records to return.
+      default: 10
+      maximum: 50
+  source: https://api-docs.freewheel.tv/demand/docs/pagination-1
+- family: FreeWheel Demand Audience Management API
+  style: page-number
+  params:
+    page:
+      description: Page number for segment search results.
+    per_page:
+      description: Records per page.
+  source: openapi/freewheel-media-demand-audience-management-openapi-original.json
+- family: FreeWheel Publisher (MRM) APIs
+  style: page-number
+  params:
+    page: Page number.
+    per_page: Records per page.
+  default_page_size: 50
+  source: https://api-docs.freewheel.tv/publisher/docs/getting-started
+filtering:
+- family: FreeWheel Demand Audience Management API
+  operators:
+  - eq
+  - neq
+  - match
+  - gt
+  - lt
+  - gte
+  - lte
+  note: Comparison operators are passed as query parameters on segment search.
+  source: openapi/freewheel-media-demand-audience-management-openapi-original.json
+- family: FreeWheel Advertiser (Buzz) API
+  note: >-
+    Every GET takes the object's own fields as query filters, plus create_date /
+    update_date range filters and an `active` flag. There is no generic filter
+    grammar; the filterable set is per-object.
+  source: openapi/freewheel-media-advertiser-buzz-openapi-original.json
+- family: FreeWheel Demand Deal Sync API
+  params:
+  - seatid
+  - sellerstatus
+  - startdate
+  - enddate
+  - updatedat
+  - preingestpermissions
+  source: openapi/freewheel-media-demand-deal-sync-openapi-original.json
+response_envelope:
+- family: FreeWheel Advertiser (Buzz) API
+  shape:
+    success: Boolean; true on success, false on failure. Always present.
+    payload: >-
+      Result of the request. On GET it holds the requested data; on POST/PUT it
+      holds a message; on PUT/DELETE it holds a per-object result list.
+    message: Plain-text description of the result.
+    error: JSON element carrying error messages or warnings.
+    id: ID of the newly created object on POST.
+  partial_failure: >-
+    Bulk PUT/DELETE returns HTTP 200 with a per-object payload array where each
+    element carries its own success flag, error_code (for example
+    AD_BAD_VALIDATION) and message, plus a top-level errors array. A 200 does
+    NOT mean every object succeeded — clients must inspect each element.
+  source: https://api-docs.freewheel.tv/advertiser/docs/api-requests-and-responses
+- family: FreeWheel Demand / Partner APIs
+  shape: >-
+    Bare JSON resource or resource list; no success/payload wrapper. Errors are
+    returned as an HTTP status with a plain error message.
+  source: openapi/freewheel-media-demand-deal-sync-openapi-original.json
+content_negotiation:
+  default: application/json
+  alternatives:
+  - text/plain
+  - text/csv
+  - application/vnd.ms-excel
+  note: >-
+    The Buzz API can return CSV and Excel for reporting responses (added to the
+    changelog in the 2.0 series); the Publisher V3 resources are XML while V4 is
+    JSON with XML on select endpoints.
+  source: https://api-docs.freewheel.tv/advertiser/changelog/support-csv-and-excel-api-responses
+request_tracing:
+  request_id_header: null
+  evidence: >-
+    No correlation/request-id header is documented or present in any harvested
+    operation. The Buzz API exposes an /activity_log resource (activitylog-get)
+    for after-the-fact auditing, which is the closest available substitute.
+versioning:
+  detail: See lifecycle/freewheel-media-lifecycle.yml
+  advertiser_buzz: Spec self-reports version 0.5; a 2.0 resource series exists alongside it.
+  demand_partner: URI path (/v1, /v2)
+  publisher_mrm: URI path (/services/v3, /services/v4)
+rate_limit_signalling:
+  detail: See rate-limits/freewheel-media-rate-limits.yml
+  documented_limit: 20 requests/second
+  exhaustion_status: 429
+  response_headers: none published
+errors:
+  detail: See errors/freewheel-media-problem-types.yml
+  rfc9457: false
+metadata_fields:
+  alternative_id: >-
+    Most Buzz objects accept an alternative_id, which is the supported way to
+    carry a caller's own identifier onto a FreeWheel object.
+  notes: >-
+    There is no generic key/value metadata bag; alternative_id plus per-object
+    fields are all that is available.

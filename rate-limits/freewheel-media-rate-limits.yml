@@ -1,0 +1,57 @@
+generated: '2026-08-12'
+method: searched
+source: https://api-docs.freewheel.tv/demand/docs
+docs:
+- https://api-docs.freewheel.tv/demand/docs
+- https://api-docs.freewheel.tv/publisher/docs/getting-started
+- https://api-docs.freewheel.tv/advertiser/docs/authentication
+limit_count: 2
+headers_published: false
+note: >-
+  FreeWheel publishes a hard throughput ceiling in prose but no runtime signal:
+  there are no X-RateLimit-* or RFC 9238 RateLimit-* response headers, no
+  Retry-After guidance, and no documented quota introspection endpoint. An agent
+  therefore cannot discover how much budget it has left — it can only stay under
+  20 requests/second and handle a 429 reactively. The same 20 req/s figure is
+  published on both the Partner/Demand and Publisher getting-started pages.
+rate_limits:
+- name: Global request throttle
+  scope: per-client
+  limit: 20
+  unit: requests
+  window: 1s
+  burst: null
+  applies_to:
+  - FreeWheel Demand / Partner APIs
+  - FreeWheel Publisher (MRM) APIs
+  exhaustion_status: 429
+  detail: >-
+    "When designing plug-ins to the Freewheel APIs, utilize the cache and limit
+    request frequency to 20 requests/second. Exceeding the throttling rate of
+    twenty requests per second will result in failed calls."
+  source: https://api-docs.freewheel.tv/demand/docs
+- name: Authentication endpoint throttle
+  scope: per-endpoint
+  endpoint: POST /authenticate
+  limit: null
+  window: null
+  applies_to:
+  - FreeWheel Advertiser (Buzz) API
+  exhaustion_status: 429
+  detail: >-
+    "the `authenticate` API endpoint is rate limited for security reasons. If you
+    exceed the rate limit the API will respond with a `429` error." The numeric
+    limit is not published.
+  source: https://api-docs.freewheel.tv/advertiser/docs/authentication
+response_headers: []
+retry_guidance:
+  documented: partial
+  detail: >-
+    The Validations/Error Codes reference recommends retrying on HTTP 408
+    (request timeout caused by concurrent access to an exclusive resource). No
+    backoff schedule and no Retry-After header are published for 429.
+  source: https://api-docs.freewheel.tv/demand/reference/validationserror-codes-copy
+caching_guidance:
+  detail: >-
+    FreeWheel explicitly asks integrators to cache — "utilize the cache and limit
+    request frequency" — which is the only quota-management advice published.

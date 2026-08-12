@@ -1,0 +1,121 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  registry.npmjs.org search + package metadata, pypi.org, api.github.com/orgs/freewheel,
+  and the FreeWheel developer documentation at api-docs.freewheel.tv
+finding: >-
+  FreeWheel publishes NO first-party client library for any of its APIs. Every
+  package below is genuinely first-party — published from the github.com/freewheel
+  organization or under the @freewheel npm scope — but all of it is front-end
+  application tooling (a state-management framework, an ESLint plugin, a webpack
+  plugin, a live-coding playground, a local task runner, a Python LP solver
+  interface). None of it wraps the Buzz, Demand or Publisher APIs. FreeWheel's own
+  Getting Started pages teach the API with raw cURL and say so explicitly: "You can
+  access the REST API on the command line using cURL or through a client built in
+  whichever language you prefer." Because no official API client exists, no SDKs
+  pointer is wired into apis.yml.
+sdk_count: 0
+package_count: 6
+packages:
+- language: javascript
+  registry: npm
+  name: '@freewheel/modulajs'
+  url: https://www.npmjs.com/package/@freewheel/modulajs
+  install: npm install @freewheel/modulajs
+  official: true
+  api_client: false
+  category: developer-tooling
+  version: 1.2.1
+  published: '2023-03-20'
+  repository: https://github.com/freewheel/modulajs
+  note: >-
+    Front-end modularization framework for managing application state with an
+    immutable model. Not an API client. Last release over three years old.
+- language: javascript
+  registry: npm
+  name: '@freewheel/eslint-plugin-modulajs'
+  url: https://www.npmjs.com/package/@freewheel/eslint-plugin-modulajs
+  install: npm install @freewheel/eslint-plugin-modulajs
+  official: true
+  api_client: false
+  category: developer-tooling
+  version: 1.2.0
+  published: '2023-03-17'
+  repository: https://github.com/freewheel/eslint-plugin-modulajs
+  note: ESLint rules for modulajs. Not an API client.
+- language: javascript
+  registry: npm
+  name: '@freewheel/modulajs-router'
+  url: https://www.npmjs.com/package/@freewheel/modulajs-router
+  install: npm install @freewheel/modulajs-router
+  official: true
+  api_client: false
+  category: developer-tooling
+  version: 1.0.0
+  published: '2023-03-20'
+  repository: https://github.com/Comcast/modulajs-router
+  note: Router state for modulajs. Not an API client.
+- language: javascript
+  registry: npm
+  name: '@freewheel/external-requires-webpack-plugin'
+  url: https://www.npmjs.com/package/@freewheel/external-requires-webpack-plugin
+  install: npm install @freewheel/external-requires-webpack-plugin
+  official: true
+  api_client: false
+  category: developer-tooling
+  version: 1.1.0
+  published: '2023-03-20'
+  repository: https://github.com/Comcast/external-requires-webpack-plugin
+  note: Webpack plugin. Not an API client.
+- language: javascript
+  registry: npm
+  name: code-kitchen
+  url: https://www.npmjs.com/package/code-kitchen
+  install: npm install code-kitchen
+  official: true
+  api_client: false
+  category: developer-tooling
+  version: 1.2.8
+  published: '2024-02-26'
+  repository: https://github.com/freewheel/code-kitchen
+  note: >-
+    Static React live-coding playground. Not an API client; the source repository
+    is archived.
+- language: javascript
+  registry: npm
+  name: dashflow
+  url: https://www.npmjs.com/package/dashflow
+  install: npm install dashflow
+  official: true
+  api_client: false
+  category: developer-tooling
+  version: 1.4.0
+  published: '2019-09-06'
+  repository: https://github.com/freewheel/dashflow
+  note: Local development task runner. Not an API client.
+absent:
+- registry: pypi
+  query: freewheel
+  status: 404
+  note: No FreeWheel-published Python package.
+- registry: pypi
+  query: beeswax
+  status: 404
+  note: >-
+    No FreeWheel/Beeswax-published Python package. flipy (a Python linear
+    programming interface) is published from the freewheel GitHub org but is a
+    solver wrapper, not an API client.
+- registry: npm
+  query: beeswax
+  status: 200
+  note: >-
+    Every beeswax-named npm package is third-party (community DSP wrappers and
+    unrelated projects); none is published by FreeWheel or Comcast.
+github_org:
+  url: https://github.com/freewheel
+  name: FreeWheel, a Comcast Company
+  public_repos: 6
+  note: >-
+    Six public repositories, none of them an API client: flipy, code-kitchen
+    (archived), presto (fork), dashflow, eslint-plugin-modulajs (archived),
+    modulajs (archived).

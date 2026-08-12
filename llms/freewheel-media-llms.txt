@@ -1,21 +1,56 @@
 # FreeWheel Media
 
-> FreeWheel, a Comcast company, is an advertising technology platform for the streaming and premium video television marketplace, connecting advertisers, agencies, publishers, and programmers across linear and digital channels. Programmatic and operational access is delivered to partners through gated Publisher (MRM) and Marketer (SFX/Strata) platforms rather than a public self-service developer portal.
+> FreeWheel, a Comcast company, is an advertising technology platform for the streaming and premium video television marketplace, connecting advertisers, agencies, publishers, and programmers across linear and digital channels. FreeWheel publishes four API families on a ReadMe-hosted developer portal at api-docs.freewheel.tv — Advertiser (Buzz/Beeswax), Partner/Demand, Publisher (MRM) and Strata — all of them credential-gated: FreeWheel issues credentials to contracted partners and there is no self-service signup, no public pricing and no sandbox other than a Publisher staging host.
 
-## Products
-- [Advertiser Suite](https://www.freewheel.com/advertisersuite): Media buying, planning, and campaign management for the buy side.
-- [Publisher Suite](https://www.freewheel.com/publishersuite): Ad decisioning, forecasting, and yield optimization for the sell side.
-- [Strata](https://www.freewheel.com/strata): Agency media buying and workflow.
+## APIs
+- [FreeWheel Advertiser (Buzz) API](https://api-docs.freewheel.tv/advertiser): The Beeswax DSP buy-side object model — advertisers, campaigns, line items, creatives, targeting templates, bidding strategies, segments, reporting, users and roles. 153 operations across 59 resources. Base URL is per-customer: `https://<buzz_key>.api.beeswax.com/rest/`. Session-cookie auth via `POST /authenticate`.
+- [FreeWheel Demand Deal Sync API](https://api-docs.freewheel.tv/demand/reference): Retrieve programmatic deals for a buyer seat and update buyer status. Base `https://api.freewheel.tv/demand/v1`.
+- [FreeWheel Demand Creative Management API](https://api-docs.freewheel.tv/demand/reference): Create and update creatives and pre-ingest them against deals. Base `https://api.freewheel.tv/demand/v1`.
+- [FreeWheel Demand Audience Management API](https://api-docs.freewheel.tv/demand/reference): Ad-industry categories, data providers, segment search and audience definitions. Base `https://api.freewheel.tv/demand`.
+- [FreeWheel Publisher (MRM) API](https://api-docs.freewheel.tv/publisher): Sell-side advertiser/agency management, insertion orders, placements, forecasting and reporting. V3 is XML, V4 is JSON. Base `https://api.freewheel.tv/services/v4/services`, staging `https://api.stg.freewheel.tv/services/v4/services`. No machine-readable specification is published and the reference is disallowed in the docs robots.txt.
+
+## Specs
+- [Advertiser (Buzz) OpenAPI 3.1.0](openapi/freewheel-media-advertiser-buzz-openapi-original.json): 59 paths, 153 operations.
+- [Demand Audience Management OpenAPI 3.1.0](openapi/freewheel-media-demand-audience-management-openapi-original.json): 6 paths, 7 operations.
+- [Demand Creative Management OpenAPI 3.0.0](openapi/freewheel-media-demand-creative-management-openapi-original.json): 5 paths, 8 operations.
+- [Demand Deal Sync OpenAPI 3.0.0](openapi/freewheel-media-demand-deal-sync-openapi-original.json): 2 paths, 3 operations.
+
+## Runtime semantics
+- [Authentication](authentication/freewheel-media-authentication.yml): Three unrelated models — OAuth 2.0 password grant at `https://api.freewheel.tv/auth/token` (Demand + Publisher, 7-day bearer tokens, no scopes), a Buzz session cookie, and an `X-Freewheel-Ad-Industry` header on audience calls.
+- [Conventions](conventions/freewheel-media-conventions.yml): No idempotency key anywhere. Three different pagination styles. The Buzz envelope returns HTTP 200 for partially-failed bulk writes.
+- [Errors](errors/freewheel-media-problem-types.yml): No RFC 9457. Only 5 of 171 operations declare any non-2xx response.
+- [Rate limits](rate-limits/freewheel-media-rate-limits.yml): 20 requests/second, 429 on exhaustion, no rate-limit response headers.
+- [Lifecycle](lifecycle/freewheel-media-lifecycle.yml): No deprecation policy, no Sunset headers, no working status page.
+- [Data model](data-model/freewheel-media-data-model.yml): Buy-side and demand-side object graphs, and the seam between them.
+- [Conformance](conformance/freewheel-media-conformance.yml)
+- [Sandbox](sandbox/freewheel-media-sandbox.yml): Publisher staging only.
+- [Plans and pricing](plans/freewheel-media-plans-pricing.yml): None published; enterprise contract only.
+- [Packages](packages/freewheel-media-packages.yml): No first-party API client library in any language.
+- [Changelog](changelog/freewheel-media-changelog.yml): 25 typed entries, newest over four years old.
+
+## Agent surface
+- [Agent Skills](skills/_index.yml): Five packaged skills grounded in real operationIds.
+- [MCP candidate](mcp/freewheel-media-mcp.yml): FreeWheel operates no MCP server; this is a derived candidate tool list.
+- [Tool crosswalk](mcp/freewheel-media-tool-crosswalk.yml)
+- [Well-known](well-known/freewheel-media-well-known.yml): One real document across the estate — an RFC 9727 api-catalog on the docs host. No security.txt, no agent card.
+
+## Docs
+- [Developer portal](https://api-docs.freewheel.tv/)
+- [Advertiser getting started](https://api-docs.freewheel.tv/advertiser/docs/getting-started)
+- [Advertiser API reference](https://api-docs.freewheel.tv/advertiser/reference)
+- [Advertiser changelog](https://api-docs.freewheel.tv/advertiser/changelog)
+- [Partner API getting started](https://api-docs.freewheel.tv/demand/docs)
+- [Demand API reference](https://api-docs.freewheel.tv/demand/reference)
+- [MRM Release Guides](https://hub.freewheel.tv/display/hub/MRM+Release+Guides)
 
 ## Platforms
 - [Partner Portal](https://partners.freewheel.com/): Partner resources and access.
-- [Marketer Login (SFX)](https://sfx.freewheel.tv/auth/login): Gated marketer/buyer platform.
 - [Publisher Login (MRM)](https://mrm.freewheel.tv/system/account/login): Gated publisher platform.
 
 ## Company
 - [Insights & Blog](https://www.freewheel.com/insights): Research, thought leadership, and industry councils.
 - [Support](https://www.freewheel.com/support): Customer support.
-- [GitHub](https://github.com/freewheel): FreeWheel open-source organization (tooling; no ad-platform API SDKs).
+- [GitHub](https://github.com/freewheel): FreeWheel open-source organization (front-end tooling; no API SDKs).
 - [News](https://www.freewheel.com/news): Press and announcements.
 
 ## Legal

@@ -1,0 +1,114 @@
+generated: '2026-08-12'
+method: searched
+source: https://api-docs.freewheel.tv/advertiser/changelog
+scheme: dated-entries-with-type
+current_version: '2.0'
+entry_count: 25
+pages: 3
+finding: >-
+  FreeWheel keeps a real, typed changelog for the Advertiser (Buzz) API — every
+  entry is tagged added / improved / deprecated — but it has gone quiet. The
+  newest entry is roughly four years old and the next nine are roughly five years
+  old, so the changelog documents the Beeswax 2.0 build-out and then stops. The
+  Publisher (MRM) side is announced separately in the MRM Release Guides on
+  hub.freewheel.tv rather than here. Dates on the entries are rendered as
+  relative ages ("over 4 years ago") by the docs platform and no absolute
+  timestamp is exposed in the page data, so the ages below are recorded as
+  published rather than as ISO dates.
+staleness:
+  newest_entry_age: over 4 years
+  note: >-
+    Recorded because a first-party changelog that has not moved in four years is
+    a decay signal for the API it documents.
+url: https://api-docs.freewheel.tv/advertiser/changelog
+entries:
+- title: TLS 1.0 and 1.1 deprecation update
+  type: none
+  age: over 4 years ago
+  url: https://api-docs.freewheel.tv/advertiser/changelog/tls-10-and-11-deprecation-update
+- title: Google Docs Moved to GitHub
+  type: none
+  age: almost 5 years ago
+  url: https://api-docs.freewheel.tv/advertiser/changelog/google-docs-moved-to-github
+- title: 0.5 Reporting APIs Deprecated
+  type: deprecated
+  breaking: true
+  age: about 5 years ago
+  url: https://api-docs.freewheel.tv/advertiser/changelog/05-reporting-apis-deprecated
+- title: Bid Modifier and Delivery Modifier 2.0 APIs
+  type: improved
+  age: about 5 years ago
+  url: https://api-docs.freewheel.tv/advertiser/changelog/bid-modifier-and-delivery-modifier-20-apis
+- title: target_skad Field
+  type: added
+  age: about 5 years ago
+  url: https://api-docs.freewheel.tv/advertiser/changelog/target_skad-field
+- title: Bulk Edit Targeting
+  type: added
+  age: over 5 years ago
+  url: https://api-docs.freewheel.tv/advertiser/changelog/bulk-edit-targeting
+- title: Frequency Cap Vendors
+  type: added
+  age: over 5 years ago
+  url: https://api-docs.freewheel.tv/advertiser/changelog/frequency-cap-vendors
+- title: Multi-Account Reporting
+  type: added
+  age: over 5 years ago
+  url: https://api-docs.freewheel.tv/advertiser/changelog/multi-account-reporting
+- title: New Users, Authentication, and Change Password APIs
+  type: added
+  age: over 5 years ago
+  url: https://api-docs.freewheel.tv/advertiser/changelog/new-users-authentication-and-change-password-apis
+- title: Support CSV and Excel API Responses
+  type: added
+  age: over 5 years ago
+  url: https://api-docs.freewheel.tv/advertiser/changelog/support-csv-and-excel-api-responses
+- title: 2.0 Segment Lookup Resources
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/20-segment-lookup-resources
+- title: Dashboard API Access
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/dashboard-api-access
+- title: New Roles API
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/new-roles-api
+- title: Control Aggressiveness of Bid Shading
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/control-aggressiveness-of-bid-shading
+- title: SKAdNetwork Support
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/skadnetwork-support
+- title: 2.0 Reporting API Available
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/20-reporting-api-available
+- title: 2.0 APIs Available
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/20-apis-available
+- title: New Log Fields
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/new-log-fields
+- title: Added bid_shading Field to Bidding JSON
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/added-bid_shading-field-to-bidding-json
+- title: Antenna Docs Added
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/antenna-docs-added
+- title: Upcoming Changes to the API
+  type: none
+  url: https://api-docs.freewheel.tv/advertiser/changelog/upcoming-changes-to-the-api
+- title: New Macros
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/new-macros
+- title: frequency_cap_type Field Added
+  type: added
+  url: https://api-docs.freewheel.tv/advertiser/changelog/frequency_cap_type-field-added
+- title: New docs.beeswax.com
+  type: none
+  url: https://api-docs.freewheel.tv/advertiser/changelog/new-docsbeeswaxcom
+- title: budget_type Not Required Field
+  type: improved
+  url: https://api-docs.freewheel.tv/advertiser/changelog/budget_type-not-required-field
+other_channels:
+- name: MRM Release Guides
+  url: https://hub.freewheel.tv/display/hub/MRM+Release+Guides
+  scope: FreeWheel Publisher (MRM) API changes

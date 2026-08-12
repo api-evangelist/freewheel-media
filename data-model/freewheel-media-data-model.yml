@@ -1,0 +1,215 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/freewheel-media-advertiser-buzz-openapi-original.json,
+  openapi/freewheel-media-demand-deal-sync-openapi-original.json,
+  openapi/freewheel-media-demand-creative-management-openapi-original.json,
+  openapi/freewheel-media-demand-audience-management-openapi-original.json
+note: >-
+  The entity graph is derived from id-reference fields in request bodies and
+  query parameters (the Buzz spec carries no components.schemas at all — 59
+  resources and zero reusable schemas — so $ref traversal is not available for
+  that family) and from components.schemas on the two Demand v1 specs. Primary
+  keys follow a strict <object>_id convention, with a parallel <object>_key
+  natural key on the segment family and an alternative_id on most objects for
+  carrying a caller's own identifier.
+id_convention:
+  primary_key: <object>_id
+  natural_key: <object>_key
+  caller_key: alternative_id
+  abbreviations:
+    account_setting: as_id
+    creative_line_item: cli_id
+    creative_bulk_upload: cbu_id
+    event_assignment: ea_id / ead_id
+domains:
+- name: Advertiser (Buzz) — buy-side object model
+  api: FreeWheel Advertiser (Buzz) API
+  entity_count: 44
+- name: Demand / Partner — deals, creatives, audiences
+  api: FreeWheel Demand APIs
+  entity_count: 8
+entities:
+- name: account
+  domain: Advertiser (Buzz)
+  key: account_id
+  relationships:
+  - {type: has_many, target: user, via: account_id}
+  - {type: has_many, target: advertiser, via: account_id}
+  - {type: belongs_to, target: currency, via: currency_id}
+- name: advertiser
+  domain: Advertiser (Buzz)
+  key: advertiser_id
+  relationships:
+  - {type: has_many, target: campaign, via: advertiser_id}
+  - {type: has_many, target: creative, via: advertiser_id}
+  - {type: has_many, target: segment, via: advertiser_id}
+  - {type: has_many, target: event, via: advertiser_id}
+  - {type: has_one, target: campaign_preset, via: default_campaign_preset_id}
+  - {type: has_one, target: line_item_preset, via: default_line_item_preset_id}
+- name: campaign
+  domain: Advertiser (Buzz)
+  key: campaign_id
+  relationships:
+  - {type: belongs_to, target: advertiser, via: advertiser_id}
+  - {type: has_many, target: line_item, via: campaign_id}
+  - {type: has_one, target: bid_modifier, via: bid_modifier_id}
+  - {type: has_one, target: delivery_modifier, via: delivery_modifier_id}
+- name: line_item
+  domain: Advertiser (Buzz)
+  key: line_item_id
+  relationships:
+  - {type: belongs_to, target: campaign, via: campaign_id}
+  - {type: belongs_to, target: advertiser, via: advertiser_id}
+  - {type: has_one, target: targeting_template, via: targeting_template_id}
+  - {type: has_one, target: bid_modifier, via: bid_modifier_id}
+  - {type: has_one, target: delivery_modifier, via: delivery_modifier_id}
+  - {type: has_many, target: line_item_flight, via: line_item_id}
+  - {type: has_many, target: creative_line_item, via: line_item_id}
+  - {type: belongs_to, target: strategy, via: line_item_type_id}
+- name: creative
+  domain: Advertiser (Buzz)
+  key: creative_id
+  relationships:
+  - {type: belongs_to, target: advertiser, via: advertiser_id}
+  - {type: has_one, target: creative_template, via: creative_template_id}
+  - {type: has_many, target: creative_asset, via: creative_id}
+  - {type: has_many, target: creative_addon, via: creative_id}
+  - {type: has_many, target: creative_line_item, via: creative_id}
+  - {type: has_many, target: creative_approval_queue, via: creative_id}
+- name: creative_line_item
+  domain: Advertiser (Buzz)
+  key: cli_id
+  join_of: [creative, line_item]
+  relationships:
+  - {type: belongs_to, target: creative, via: creative_id}
+  - {type: belongs_to, target: line_item, via: line_item_id}
+- name: creative_approval_queue
+  domain: Advertiser (Buzz)
+  key: creative_approval_id
+  relationships:
+  - {type: belongs_to, target: creative, via: creative_id}
+  - {type: belongs_to, target: vendor, via: vendor_id}
+  - {type: has_many, target: creative_approval_queue_history, via: creative_approval_id}
+- name: targeting_template
+  domain: Advertiser (Buzz)
+  key: targeting_template_id
+  relationships:
+  - {type: belongs_to, target: strategy, via: strategy_id}
+- name: bid_model
+  domain: Advertiser (Buzz)
+  key: bid_model_id
+  relationships:
+  - {type: has_many, target: bid_model_version, via: bid_model_id}
+  - {type: has_many, target: bid_modifier, via: bid_model_id}
+- name: bid_modifier
+  domain: Advertiser (Buzz)
+  key: bid_modifier_id
+  relationships:
+  - {type: belongs_to, target: advertiser, via: advertiser_id}
+  - {type: belongs_to, target: bid_model, via: bid_model_id}
+- name: delivery_modifier
+  domain: Advertiser (Buzz)
+  key: delivery_modifier_id
+  relationships:
+  - {type: belongs_to, target: advertiser, via: advertiser_id}
+  - {type: belongs_to, target: delivery_model, via: delivery_model_id}
+- name: segment
+  domain: Advertiser (Buzz)
+  key: segment_id
+  natural_key: segment_key
+  relationships:
+  - {type: belongs_to, target: advertiser, via: advertiser_id}
+  - {type: has_many, target: segment_category_association, via: segment_key}
+  - {type: has_many, target: segment_sharing, via: segment_key}
+  - {type: has_many, target: segment_tag, via: segment_id}
+- name: segment_category
+  domain: Advertiser (Buzz)
+  key: segment_category_id
+  natural_key: segment_category_key
+  relationships:
+  - {type: belongs_to, target: segment_category, via: parent_category_key, note: self-referencing hierarchy}
+  - {type: has_many, target: segment_category_association, via: segment_category_key}
+  - {type: has_many, target: segment_category_sharing, via: segment_category_key}
+- name: custom_list
+  domain: Advertiser (Buzz)
+  key: list_id
+  relationships:
+  - {type: has_many, target: custom_list_item, via: list_id}
+  - {type: has_many, target: list_item, via: list_id}
+- name: event
+  domain: Advertiser (Buzz)
+  key: event_id
+  relationships:
+  - {type: belongs_to, target: advertiser, via: advertiser_id}
+  - {type: has_one, target: segment, via: segment_id}
+  - {type: has_many, target: event_assignment, via: event_id}
+  - {type: has_many, target: event_tag, via: event_id}
+- name: user
+  domain: Advertiser (Buzz)
+  key: user_id
+  relationships:
+  - {type: belongs_to, target: role, via: role_id}
+  - {type: has_many, target: report_save, via: user_id}
+- name: role
+  domain: Advertiser (Buzz)
+  key: role_id
+  relationships:
+  - {type: belongs_to, target: role, via: parent_role_id, note: self-referencing hierarchy}
+- name: report_save
+  domain: Advertiser (Buzz)
+  key: report_save_id
+  relationships:
+  - {type: belongs_to, target: user, via: user_id}
+  - {type: has_many, target: report_queue, via: report_id}
+- name: vendor
+  domain: Advertiser (Buzz)
+  key: vendor_id
+  relationships:
+  - {type: has_many, target: vendor_fee, via: vendor_id}
+- name: model.DemandDeal
+  domain: Demand
+  key: id
+  api: FreeWheel Demand Deal Sync API
+  relationships:
+  - {type: belongs_to, target: model.DemandSeat, via: seatid}
+  - {type: has_one, target: model.DemandBudget, via: budget}
+  - {type: has_one, target: model.DemandPacing, via: pacing}
+  - {type: has_one, target: model.DemandCustomPacing, via: custompacing}
+  - {type: has_one, target: model.DemandCurrency, via: currency}
+  - {type: has_one, target: model.BuyerStatus, via: buyerstatus}
+- name: model.DemandAd
+  domain: Demand
+  key: id
+  api: FreeWheel Demand Creative Management API
+  relationships:
+  - {type: belongs_to, target: account, via: account_id}
+  - {type: has_many, target: model.UnderlyingCreative, via: ad_id}
+  - {type: has_many, target: model.DemandAdAssignment, via: adid}
+  - {type: has_one, target: model.DemandAdCreativeVideo, via: video}
+  - {type: has_many, target: model.DemandAdAudit, via: ad_id}
+- name: model.DemandAdAssignment
+  domain: Demand
+  join_of: [model.DemandAd, model.AssignmentDeal]
+  relationships:
+  - {type: belongs_to, target: model.DemandAd, via: adid}
+  - {type: belongs_to, target: model.AssignmentDeal, via: dealid}
+- name: audience
+  domain: Demand
+  key: audience_id
+  api: FreeWheel Demand Audience Management API
+  relationships:
+  - {type: has_many, target: segment, via: segment ids in the audience definition}
+  - {type: belongs_to, target: data_provider, via: providers}
+- name: data_provider
+  domain: Demand
+  api: FreeWheel Demand Audience Management API
+  relationships:
+  - {type: has_many, target: segment, via: providers}
+  - {type: belongs_to, target: ad_industry, via: X-Freewheel-Ad-Industry}
+cross_domain_note: >-
+  The Advertiser (Buzz) segment/creative model and the Demand creative/audience
+  model are separate object graphs on separate hosts with separate credentials;
+  nothing in the published contracts joins a Buzz creative_id to a Demand ad id,
+  or a Buzz segment_key to a Demand segment. That seam is real and is the main
+  thing an integrator has to bridge themselves.

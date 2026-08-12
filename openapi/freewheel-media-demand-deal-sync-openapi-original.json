@@ -1,0 +1,389 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Deal Sync API",
+    "contact": {},
+    "version": "1.0"
+  },
+  "paths": {
+    "/deals": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method uses GET to retrieve active, inactive and pause deals.",
+        "tags": [
+          "Deal Sync API"
+        ],
+        "summary": "Retrieve Deals",
+        "operationId": "RetrieveDeals",
+        "parameters": [
+          {
+            "description": "seat id",
+            "name": "seatid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "seller status",
+            "name": "sellerstatus",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "start date",
+            "name": "startdate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "end date",
+            "name": "enddate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "updated at",
+            "name": "updatedat",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "pre ingest permissions",
+            "name": "preingestpermissions",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "offset",
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "count",
+            "name": "count",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/model.DemandDealList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deals/{id}": {
+      "get": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method uses GET to retrieve a single Deal.",
+        "tags": [
+          "Deal Sync API"
+        ],
+        "summary": "Retrieve Single Deal",
+        "operationId": "RetrieveSingleDeal",
+        "parameters": [
+          {
+            "description": "deal id",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/model.DemandDeal"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "This method uses PATCH to send deal status updates to sellers.",
+        "tags": [
+          "Deal Sync API"
+        ],
+        "summary": "Update Buyer Status for Deals",
+        "operationId": "UpdateBuyerStatusForDeals",
+        "parameters": [
+          {
+            "description": "deal id",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/model.PatchDeal"
+              }
+            }
+          },
+          "description": "status",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/model.DemandDeal"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.freewheel.tv/demand/v1"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "model.BuyerStatus": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "description": "A field within the **buyerstatus** object, it allows a seller to input their reasons for changing the buyer status. This can only be modified by a buyer.",
+            "type": "string"
+          },
+          "status": {
+            "description": "A field within the **buyerstatus** object, it provides the status of the deal on the buy side. This can only be modified by a buyer. Valid values:\n* INACTIVE\n* ACTIVE\n* PAUSE\n* COMPLETE",
+            "type": "string"
+          }
+        }
+      },
+      "model.DemandBudget": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "$ref": "#/components/schemas/model.DemandCurrency"
+          },
+          "impression": {
+            "type": "integer"
+          },
+          "type": {
+            "description": "A field within the **budget** object, it provides the type of the budget on the deal. Valid values:\n* IMPRESSION\n* CURRENCY",
+            "type": "string"
+          }
+        }
+      },
+      "model.DemandCurrency": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        }
+      },
+      "model.DemandCustomPacing": {
+        "type": "object",
+        "properties": {
+          "deliverpercentage": {
+            "type": "number"
+          },
+          "deliverydate": {
+            "type": "string"
+          }
+        }
+      },
+      "model.DemandDeal": {
+        "type": "object",
+        "properties": {
+          "approvaltype": {
+            "type": "integer"
+          },
+          "at": {
+            "type": "integer"
+          },
+          "budget": {
+            "$ref": "#/components/schemas/model.DemandBudget"
+          },
+          "buyerstatus": {
+            "$ref": "#/components/schemas/model.BuyerStatus"
+          },
+          "clearancelevel": {
+            "type": "integer"
+          },
+          "createdat": {
+            "type": "string"
+          },
+          "curator": {
+            "type": "string"
+          },
+          "dealid": {
+            "type": "string"
+          },
+          "enddate": {
+            "type": "string"
+          },
+          "flr": {
+            "type": "number"
+          },
+          "flrcur": {
+            "type": "string"
+          },
+          "guaranteed": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "origin": {
+            "type": "string"
+          },
+          "pacing": {
+            "$ref": "#/components/schemas/model.DemandPacing"
+          },
+          "preingestpermissions": {
+            "type": "integer"
+          },
+          "pubcount": {
+            "type": "integer"
+          },
+          "seats": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model.DemandSeat"
+            }
+          },
+          "sellerid": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sellerstatus": {
+            "type": "string"
+          },
+          "startdate": {
+            "type": "string"
+          },
+          "updatedat": {
+            "type": "string"
+          },
+          "volume": {
+            "type": "integer"
+          }
+        }
+      },
+      "model.DemandDealList": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model.DemandDeal"
+            }
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
+          }
+        }
+      },
+      "model.DemandPacing": {
+        "type": "object",
+        "properties": {
+          "custompacings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/model.DemandCustomPacing"
+            }
+          },
+          "type": {
+            "description": "A field within the **pacing** object, it provides the type of the pacing on the deal. Valid values:\n* SMOOTH_AS\n* FAST_AS\n* CUSTOM",
+            "type": "string"
+          }
+        }
+      },
+      "model.DemandSeat": {
+        "type": "object",
+        "properties": {
+          "seatid": {
+            "type": "string"
+          }
+        }
+      },
+      "model.PatchDeal": {
+        "type": "object",
+        "properties": {
+          "buyerstatus": {
+            "$ref": "#/components/schemas/model.BuyerStatus"
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}

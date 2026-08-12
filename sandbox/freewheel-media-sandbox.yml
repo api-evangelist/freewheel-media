@@ -1,0 +1,32 @@
+generated: '2026-08-12'
+method: searched
+source: https://api-docs.freewheel.tv/publisher/docs/getting-started
+docs:
+- https://api-docs.freewheel.tv/publisher/docs/getting-started
+note: >-
+  FreeWheel publishes a named staging environment for the Publisher (MRM) APIs
+  and nothing else. There is no test-mode key prefix, no magic test identifiers,
+  no fixture or trigger tooling, no time simulation, and no anonymous sandbox: a
+  partner reaches staging with FreeWheel-issued credentials exactly as they reach
+  production. Nothing below is invented — the staging base URL is published
+  verbatim in FreeWheel's own getting-started page.
+console: false
+anonymous_access: false
+test_mode_keys: false
+environments:
+- name: Production
+  base_url: https://api.freewheel.tv/services/v4/services
+  applies_to: FreeWheel Publisher (MRM) API
+- name: Staging
+  base_url: https://api.stg.freewheel.tv/services/v4/services
+  applies_to: FreeWheel Publisher (MRM) API
+  credentials: FreeWheel-issued; same OAuth 2.0 password grant as production.
+test_values: []
+gaps:
+- >-
+  No sandbox is published for the Advertiser (Buzz) API. Its base host is the
+  per-customer Buzz key (https://<buzz_key>.api.beeswax.com/rest/), so a
+  developer cannot reach any environment without a provisioned tenant.
+- >-
+  No sandbox is published for the Demand/Partner APIs; the documented base is
+  production only (https://api.freewheel.tv/demand).
