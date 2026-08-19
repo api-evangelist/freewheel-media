@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Deal Sync API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deal Sync API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freewheel.tv/demand/v1/deals",
+            "params": [
+              {
+                "name": "seatid",
+                "value": "",
+                "type": "query",
+                "description": "seat id"
+              },
+              {
+                "name": "sellerstatus",
+                "value": "",
+                "type": "query",
+                "description": "seller status"
+              },
+              {
+                "name": "startdate",
+                "value": "",
+                "type": "query",
+                "description": "start date"
+              },
+              {
+                "name": "enddate",
+                "value": "",
+                "type": "query",
+                "description": "end date"
+              },
+              {
+                "name": "updatedat",
+                "value": "",
+                "type": "query",
+                "description": "updated at"
+              },
+              {
+                "name": "preingestpermissions",
+                "value": "",
+                "type": "query",
+                "description": "pre ingest permissions"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "count"
+              }
+            ]
+          },
+          "docs": "This method uses GET to retrieve active, inactive and pause deals."
+        },
+        {
+          "info": {
+            "name": "Retrieve Single Deal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freewheel.tv/demand/v1/deals/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "deal id"
+              }
+            ]
+          },
+          "docs": "This method uses GET to retrieve a single Deal."
+        },
+        {
+          "info": {
+            "name": "Update Buyer Status for Deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.freewheel.tv/demand/v1/deals/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "deal id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method uses PATCH to send deal status updates to sellers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

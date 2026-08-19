@@ -1,0 +1,842 @@
+{
+  "item": [
+    {
+      "id": "b052ca2e-c85c-4b83-8dd0-a2824933a420",
+      "name": "List Advertiser Industry Categories",
+      "request": {
+        "name": "List Advertiser Industry Categories",
+        "description": {
+          "content": "This method employs GET to retrieve a list of all advertiser Industries used in Data Suite to apply data usage/restrction rules to given categories in accordance with your business needs.  \n\nIt is the legal responsibility of each advertiser (or publisher/agency entity acting on behalf of an advertiser) to accurately identify their advertiser's industry, so that any applicable data usage restrictions can be applied. \n\nSelect the industry category (and associated numeric ID) that best matches your company. \n\nYou will need to pass this in subsequent calls using the X-Freewheel-Ad-Industry header.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "v1",
+            "services",
+            "v4",
+            "ds",
+            "v1",
+            "permissions",
+            "ad-industries"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "4d293966-6438-4766-a419-efeb0c3a5a42",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v1",
+                "services",
+                "v4",
+                "ds",
+                "v1",
+                "permissions",
+                "ad-industries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"page\\\": 1,\\n  \\\"per_page\\\": 287,\\n  \\\"total_page\\\": 1,\\n  \\\"total_count\\\": 287,\\n  \\\"items\\\": [\\n    {\\n      \\\"id\\\": 1,\\n      \\\"name\\\": \\\"Agriculture Crop Production\\\",\\n      \\\"restrictions\\\": null\\n    },\\n    {\\n      \\\"id\\\": 2,\\n      \\\"name\\\": \\\"Agriculture Livestock Production\\\",\\n      \\\"restrictions\\\": null\\n    },\\n    // ...,\\n    {\\n      \\\"id\\\": 27,\\n      \\\"name\\\": \\\"Tobacco Manufacture\\\",\\n      \\\"restrictions\\\": [\\n        2\\n      ]\\n    },\\n    // ...,\\n    {\\n      \\\"id\\\": 193,\\n      \\\"name\\\": \\\"Automobile Dealers - Luxury\\\",\\n      \\\"restrictions\\\": [\\n        3\\n      ]\\n    },\\n    // ...,\\n    {\\n      \\\"id\\\": 389,\\n      \\\"name\\\": \\\"Retail and General Merchandise\\\",\\n      \\\"restrictions\\\": null\\n    }\\n  ]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "e73e4ceb-9947-438d-8c4d-ac501a6b9e42",
+      "name": "List Data Providers by Industry Category",
+      "request": {
+        "name": "List Data Providers by Industry Category",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "v1",
+            "providers"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "Industry category ID",
+            "key": "X-Freewheel-Ad-Industry",
+            "value": "<string>"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "1c48d861-128f-49fb-bb9f-0ddfa258f710",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v1",
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "disabled": false,
+                "description": "Industry category ID",
+                "key": "X-Freewheel-Ad-Industry",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "Authorization",
+                "value": "Bearer $auth_token",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"//The \\\"restrictions\\\" field indicates an industry category ID\\n//that the data provider may have restricted from using its data.\\n{\\n  \\\"page\\\": 1,\\n  \\\"per_page\\\": 5,\\n  \\\"total_page\\\": 1,\\n  \\\"total_count\\\": 5,\\n  \\\"items\\\": [\\n    {\\n      \\\"id\\\": \\\"Experian\\\",\\n      \\\"label\\\": \\\"Experian\\\",\\n      \\\"restrictions\\\": [\\n        2\\n      ],\\n      \\\"visibility\\\": []\\n    },\\n    {\\n      \\\"id\\\": \\\"Factual\\\",\\n      \\\"label\\\": \\\"Factual\\\",\\n      \\\"restrictions\\\": [\\n        2\\n      ],\\n      \\\"visibility\\\": []\\n    },\\n    {\\n      \\\"id\\\": \\\"FreeWheel: Comcast \\\\u0026 Vizio\\\",\\n      \\\"label\\\": \\\"FreeWheel: Comcast \\\\u0026 Vizio\\\",\\n      \\\"restrictions\\\": [\\n        2,\\n        3,\\n        4\\n      ],\\n      \\\"visibility\\\": []\\n    },\\n    {\\n      \\\"id\\\": \\\"Numerator\\\",\\n      \\\"label\\\": \\\"Numerator\\\",\\n      \\\"restrictions\\\": [\\n        2\\n      ],\\n      \\\"visibility\\\": []\\n    },\\n    {\\n      \\\"id\\\": \\\"Polk Audience Solutions by IHS Markit\\\",\\n      \\\"label\\\": \\\"Polk Audience Solutions by IHS Markit\\\",\\n      \\\"restrictions\\\": [\\n        2\\n      ],\\n      \\\"visibility\\\": []\\n    }\\n  ]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "c581e86f-02a9-415a-96e8-ace7b3c19aac",
+      "name": "List Segments by Data Provider",
+      "request": {
+        "name": "List Segments by Data Provider",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "v1",
+            "segments"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "keywords",
+              "value": "<string>"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "Industry category ID",
+            "key": "X-Freewheel-Ad-Industry",
+            "value": "<string>"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "c861bcb2-4bc7-4c3f-b2bd-3a71e8a915fa",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v1",
+                "segments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "keywords",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "disabled": false,
+                "description": "Industry category ID",
+                "key": "X-Freewheel-Ad-Industry",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"page\\\": 1,\\n  \\\"per_page\\\": 4,\\n  \\\"total_page\\\": 1,\\n  \\\"total_count\\\": 4,\\n  \\\"items\\\": [\\n    {\\n      \\\"id\\\": \\\"9fe904831f\\\",\\n      \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Buying:By Internet \\\\u003e Y\\\",\\n      \\\"audience_partner\\\": \\\"experian\\\",\\n      \\\"data_provider_id\\\": \\\"Experian\\\",\\n      \\\"data_source_id\\\": \\\"Experian\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 0.6,\\n      \\\"count\\\": 4682435.99,\\n      \\\"provider_segment_id\\\": \\\"7209\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"9f2354c276\\\",\\n      \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Pets:Own A Cat \\\\u003e Y\\\",\\n      \\\"audience_partner\\\": \\\"experian\\\",\\n      \\\"data_provider_id\\\": \\\"Experian\\\",\\n      \\\"data_source_id\\\": \\\"Experian\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 0.6,\\n      \\\"count\\\": 589627.27,\\n      \\\"provider_segment_id\\\": \\\"7200\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"9f118921ef\\\",\\n      \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Pets:Own A Dog \\\\u003e Y\\\",\\n      \\\"audience_partner\\\": \\\"experian\\\",\\n      \\\"data_provider_id\\\": \\\"Experian\\\",\\n      \\\"data_source_id\\\": \\\"Experian\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 0.6,\\n      \\\"count\\\": 843059.81,\\n      \\\"provider_segment_id\\\": \\\"7203\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"9fbd48f59a\\\",\\n      \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Pets:Own A Pet \\\\u003e Y\\\",\\n      \\\"audience_partner\\\": \\\"experian\\\",\\n      \\\"data_provider_id\\\": \\\"Experian\\\",\\n      \\\"data_source_id\\\": \\\"Experian\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 0.6,\\n      \\\"count\\\": 480629.14,\\n      \\\"provider_segment_id\\\": \\\"7206\\\"\\n    }\\n  ]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "eed2731c-114f-4a1b-8ece-bb71f5281aca",
+      "name": "Filter Segment Searches",
+      "request": {
+        "name": "Filter Segment Searches",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "v1",
+            "segments"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "null"
+            },
+            {
+              "disabled": false,
+              "key": "keywords",
+              "value": "<string>"
+            },
+            {
+              "disabled": false,
+              "key": "providers",
+              "value": "$providers"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "aefaaee5-ee3b-48f9-8f18-95d803d32a26",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v1",
+                "segments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "keywords",
+                  "value": "<string>"
+                },
+                {
+                  "key": "providers",
+                  "value": "$providers"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"page\\\": 1,\\n  \\\"per_page\\\": 13,\\n  \\\"total_page\\\": 1,\\n  \\\"total_count\\\": 13,\\n  \\\"items\\\": [\\n    {\\n      \\\"id\\\": \\\"c84e174f9f\\\",\\n      \\\"name\\\": \\\"InfoScout  \\\\u003e  Pet Food \\\\u0026 Treats  \\\\u003e  Cat Food \\\\u0026 Treats  \\\\u003e  Purina Cat Chow\\\",\\n      \\\"audience_partner\\\": \\\"liveramp\\\",\\n      \\\"data_provider_id\\\": \\\"Numerator\\\",\\n      \\\"data_source_id\\\": \\\"Numerator\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 1.25,\\n      \\\"count\\\": 4701159.12,\\n      \\\"provider_segment_id\\\": \\\"1001160499\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"c89eb332ac\\\",\\n      \\\"name\\\": \\\"InfoScout  \\\\u003e  Pet Supplies  \\\\u003e  Cat Supplies  \\\\u003e  Purina Tidy Cats\\\",\\n      \\\"audience_partner\\\": \\\"liveramp\\\",\\n      \\\"data_provider_id\\\": \\\"Numerator\\\",\\n      \\\"data_source_id\\\": \\\"Numerator\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 1.25,\\n      \\\"count\\\": 5091676.75,\\n      \\\"provider_segment_id\\\": \\\"1001160509\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"9fb17446af\\\",\\n      \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Buying:By Catalog \\\\u003e Y\\\",\\n      \\\"audience_partner\\\": \\\"experian\\\",\\n      \\\"data_provider_id\\\": \\\"Experian\\\",\\n      \\\"data_source_id\\\": \\\"Experian\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 0.6,\\n      \\\"count\\\": 4703315.12,\\n      \\\"provider_segment_id\\\": \\\"7215\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"9f2354c276\\\",\\n      \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Pets:Own A Cat \\\\u003e Y\\\",\\n      \\\"audience_partner\\\": \\\"experian\\\",\\n      \\\"data_provider_id\\\": \\\"Experian\\\",\\n      \\\"data_source_id\\\": \\\"Experian\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 0.6,\\n      \\\"count\\\": 589627.27,\\n      \\\"provider_segment_id\\\": \\\"7200\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"823d7497cb\\\",\\n      \\\"name\\\": \\\"Factual \\\\u003e Place Category Visitors \\\\u003e Social \\\\u003e Entertainment\\\",\\n      \\\"audience_partner\\\": \\\"liveramp\\\",\\n      \\\"data_provider_id\\\": \\\"Factual\\\",\\n      \\\"data_source_id\\\": \\\"Factual\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 1.5,\\n      \\\"count\\\": 5387421.42,\\n      \\\"provider_segment_id\\\": \\\"1001385839\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"828c83d14d\\\",\\n      \\\"name\\\": \\\"Factual \\\\u003e Place Category Visitors \\\\u003e Transportation \\\\u003e Transport Hubs\\\",\\n      \\\"audience_partner\\\": \\\"liveramp\\\",\\n      \\\"data_provider_id\\\": \\\"Factual\\\",\\n      \\\"data_source_id\\\": \\\"Factual\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 1.5,\\n      \\\"count\\\": 834616.19,\\n      \\\"provider_segment_id\\\": \\\"1001386739\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"9f30a1388a\\\",\\n      \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e BehaviorBank: Cat Enthusiasts \\\\u003e Y\\\",\\n      \\\"audience_partner\\\": \\\"experian\\\",\\n      \\\"data_provider_id\\\": \\\"Experian\\\",\\n      \\\"data_source_id\\\": \\\"Experian\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 0.6,\\n      \\\"count\\\": 613624.79,\\n      \\\"provider_segment_id\\\": \\\"8154468\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"8286bd6e29\\\",\\n      \\\"name\\\": \\\"Factual \\\\u003e Place Category Visitors \\\\u003e Social \\\\u003e Food and Dining \\\\u003e Restaurants\\\",\\n      \\\"audience_partner\\\": \\\"liveramp\\\",\\n      \\\"data_provider_id\\\": \\\"Factual\\\",\\n      \\\"data_source_id\\\": \\\"Factual\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 1.5,\\n      \\\"count\\\": 13775862.56,\\n      \\\"provider_segment_id\\\": \\\"1001386159\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"c87ad80fa4\\\",\\n      \\\"name\\\": \\\"InfoScout  \\\\u003e  All Departments  \\\\u003e  Non-Beer Categories  \\\\u003e  All Brands\\\",\\n      \\\"audience_partner\\\": \\\"liveramp\\\",\\n      \\\"data_provider_id\\\": \\\"Numerator\\\",\\n      \\\"data_source_id\\\": \\\"Numerator\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 1.25,\\n      \\\"count\\\": 11938639.5,\\n      \\\"provider_segment_id\\\": \\\"1004155179\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"82c96b4399\\\",\\n      \\\"name\\\": \\\"Factual \\\\u003e Place Category Visitors \\\\u003e Retail \\\\u003e Tobacco\\\",\\n      \\\"audience_partner\\\": \\\"liveramp\\\",\\n      \\\"data_provider_id\\\": \\\"Factual\\\",\\n      \\\"data_source_id\\\": \\\"Factual\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 1.5,\\n      \\\"count\\\": 6930145.5,\\n      \\\"provider_segment_id\\\": \\\"1001385939\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"9fec5decca\\\",\\n      \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e Act/Int: Cat Owners \\\\u003e Y\\\",\\n      \\\"audience_partner\\\": \\\"experian\\\",\\n      \\\"data_provider_id\\\": \\\"Experian\\\",\\n      \\\"data_source_id\\\": \\\"Experian\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 0.6,\\n      \\\"count\\\": 4431723.79,\\n      \\\"provider_segment_id\\\": \\\"127\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"827f6b8e08\\\",\\n      \\\"name\\\": \\\"Factual \\\\u003e Place Category Visitors \\\\u003e Social \\\\u003e Food and Dining\\\",\\n      \\\"audience_partner\\\": \\\"liveramp\\\",\\n      \\\"data_provider_id\\\": \\\"Factual\\\",\\n      \\\"data_source_id\\\": \\\"Factual\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 1.5,\\n      \\\"count\\\": 6263618.79,\\n      \\\"provider_segment_id\\\": \\\"1001386059\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"82870850c9\\\",\\n      \\\"name\\\": \\\"Factual \\\\u003e Place Category Visitors \\\\u003e Retail \\\\u003e Food and Beverage\\\",\\n      \\\"audience_partner\\\": \\\"liveramp\\\",\\n      \\\"data_provider_id\\\": \\\"Factual\\\",\\n      \\\"data_source_id\\\": \\\"Factual\\\",\\n      \\\"client_id\\\": \\\"-1\\\",\\n      \\\"level\\\": 0,\\n      \\\"parent_id\\\": \\\"0\\\",\\n      \\\"cpm\\\": 1.5,\\n      \\\"count\\\": 7540409,\\n      \\\"provider_segment_id\\\": \\\"1001385549\\\"\\n    }\\n  ]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "be7f2117-d61f-4150-bc35-b7b3609f0bc4",
+      "name": "Create Audience Definitions",
+      "request": {
+        "name": "Create Audience Definitions",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "v2",
+            "audiences"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "temporary",
+              "value": "<string>",
+              "description": "Marks the Audience Definition as temporary."
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "Industry category ID",
+            "key": "X-Freewheel-Ad-Industry",
+            "value": "<string>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targets\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "1729b81f-83a5-4593-8ab5-e97ac8b31389",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v2",
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "temporary",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "disabled": false,
+                "description": "Industry category ID",
+                "key": "X-Freewheel-Ad-Industry",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "Authorization",
+                "value": "Bearer $auth_token",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targets\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"id\\\": 3346,\\n  \\\"name\\\": \\\"test audience 1\\\",\\n  \\\"description\\\": \\\"A testing audience\\\",\\n  \\\"metadata\\\": {\\n    \\\"segments\\\": [\\n      {\\n        \\\"id\\\": \\\"9f118921ef\\\",\\n        \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Pets:Own A Dog \\\\u003e Y\\\",\\n        \\\"client_id\\\": \\\"-1\\\",\\n        \\\"provider_name\\\": \\\"Experian\\\",\\n        \\\"provider_id\\\": \\\"Experian\\\",\\n        \\\"data_source\\\": \\\"Experian\\\",\\n        \\\"audience_partner\\\": \\\"experian\\\",\\n        \\\"restrictions\\\": [\\n          2\\n        ],\\n        \\\"cpm\\\": 0.6,\\n        \\\"provider_segment_id\\\": \\\"7203\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"9fbd48f59a\\\",\\n        \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Pets:Own A Pet \\\\u003e Y\\\",\\n        \\\"client_id\\\": \\\"-1\\\",\\n        \\\"provider_name\\\": \\\"Experian\\\",\\n        \\\"provider_id\\\": \\\"Experian\\\",\\n        \\\"data_source\\\": \\\"Experian\\\",\\n        \\\"audience_partner\\\": \\\"experian\\\",\\n        \\\"restrictions\\\": [\\n          2\\n        ],\\n        \\\"cpm\\\": 0.6,\\n        \\\"provider_segment_id\\\": \\\"7206\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"9fe904831f\\\",\\n        \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Buying:By Internet \\\\u003e Y\\\",\\n        \\\"client_id\\\": \\\"-1\\\",\\n        \\\"provider_name\\\": \\\"Experian\\\",\\n        \\\"provider_id\\\": \\\"Experian\\\",\\n        \\\"data_source\\\": \\\"Experian\\\",\\n        \\\"audience_partner\\\": \\\"experian\\\",\\n        \\\"restrictions\\\": [\\n          2\\n        ],\\n        \\\"cpm\\\": 0.6,\\n        \\\"provider_segment_id\\\": \\\"7209\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"9f2354c276\\\",\\n        \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Pets:Own A Cat \\\\u003e Y\\\",\\n        \\\"client_id\\\": \\\"-1\\\",\\n        \\\"provider_name\\\": \\\"Experian\\\",\\n        \\\"provider_id\\\": \\\"Experian\\\",\\n        \\\"data_source\\\": \\\"Experian\\\",\\n        \\\"audience_partner\\\": \\\"experian\\\",\\n        \\\"restrictions\\\": [\\n          2\\n        ],\\n        \\\"cpm\\\": 0.6,\\n        \\\"provider_segment_id\\\": \\\"7200\\\"\\n      }\\n    ],\\n    \\\"cpm\\\": 0.6\\n  },\\n  \\\"industry_restrictions\\\": [\\n    2\\n  ],\\n  \\\"targets\\\": [\\n    {\\n      \\\"kind\\\": \\\"include\\\",\\n      \\\"type\\\": \\\"segments\\\",\\n      \\\"target_ids\\\": [\\n        \\\"9f118921ef\\\",\\n        \\\"9fbd48f59a\\\"\\n      ]\\n    },\\n    {\\n      \\\"kind\\\": \\\"include\\\",\\n      \\\"type\\\": \\\"segments\\\",\\n      \\\"target_ids\\\": [\\n        \\\"9fe904831f\\\"\\n      ]\\n    },\\n    {\\n      \\\"kind\\\": \\\"exclude\\\",\\n      \\\"type\\\": \\\"segments\\\",\\n      \\\"target_ids\\\": [\\n        \\\"9f2354c276\\\"\\n      ]\\n    }\\n  ],\\n  \\\"estimates\\\": [\\n    {\\n      \\\"std_dev\\\": 77773,\\n      \\\"estimate\\\": 1808790,\\n      \\\"alias_type\\\": \\\"iid\\\",\\n      \\\"lower_bound\\\": 1734207,\\n      \\\"upper_bound\\\": 1886563\\n    },\\n    {\\n      \\\"std_dev\\\": 28446,\\n      \\\"estimate\\\": 674758,\\n      \\\"alias_type\\\": \\\"hid\\\",\\n      \\\"lower_bound\\\": 647456,\\n      \\\"upper_bound\\\": 703204\\n    },\\n    {\\n      \\\"std_dev\\\": 358478,\\n      \\\"estimate\\\": 8387339,\\n      \\\"alias_type\\\": \\\"cookie\\\",\\n      \\\"lower_bound\\\": 8043482,\\n      \\\"upper_bound\\\": 8745817\\n    },\\n    {\\n      \\\"std_dev\\\": 23618,\\n      \\\"estimate\\\": 543465,\\n      \\\"alias_type\\\": \\\"ctv\\\",\\n      \\\"lower_bound\\\": 520826,\\n      \\\"upper_bound\\\": 567083\\n    },\\n    {\\n      \\\"std_dev\\\": 102132,\\n      \\\"estimate\\\": 2369042,\\n      \\\"alias_type\\\": \\\"maid\\\",\\n      \\\"lower_bound\\\": 2271110,\\n      \\\"upper_bound\\\": 2471174\\n    }\\n  ],\\n  \\\"created_at\\\": \\\"2021-10-26T18:55:34.206244722Z\\\",\\n  \\\"updated_at\\\": \\\"2021-10-26T18:55:34.206244722Z\\\",\\n  \\\"properties\\\": {}\\n}\\n\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "6b271123-9970-4480-80a3-336ad4ba2ec4",
+      "name": "Retrieve Audience Definitions",
+      "request": {
+        "name": "Retrieve Audience Definitions",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "v2",
+            "audiences"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "page",
+              "value": "<string>",
+              "description": "Pagination=URI_ESCAPE({\"per_page\":n,\"page\":m})."
+            },
+            {
+              "disabled": false,
+              "key": "per_page",
+              "value": "<string>",
+              "description": "Pagination=URI_ESCAPE({\"per_page\":n,\"page\":m})."
+            },
+            {
+              "disabled": false,
+              "key": "eq",
+              "value": "<string>"
+            },
+            {
+              "disabled": false,
+              "key": "neq",
+              "value": "<string>"
+            },
+            {
+              "disabled": false,
+              "key": "match",
+              "value": "<string>",
+              "description": "Use the percent sign (%) for wildcard."
+            },
+            {
+              "disabled": false,
+              "key": "gt",
+              "value": "<string>"
+            },
+            {
+              "disabled": false,
+              "key": "lt",
+              "value": "<string>"
+            },
+            {
+              "disabled": false,
+              "key": "gte",
+              "value": "<string>"
+            },
+            {
+              "disabled": false,
+              "key": "lte",
+              "value": "<string>"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "540f61d5-b17f-407a-9fbb-6f9f0860a1b4",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v2",
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "<string>"
+                },
+                {
+                  "key": "per_page",
+                  "value": "<string>"
+                },
+                {
+                  "key": "eq",
+                  "value": "<string>"
+                },
+                {
+                  "key": "neq",
+                  "value": "<string>"
+                },
+                {
+                  "key": "match",
+                  "value": "<string>"
+                },
+                {
+                  "key": "gt",
+                  "value": "<string>"
+                },
+                {
+                  "key": "lt",
+                  "value": "<string>"
+                },
+                {
+                  "key": "gte",
+                  "value": "<string>"
+                },
+                {
+                  "key": "lte",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"page\\\": 5,\\n  \\\"per_page\\\": 2,\\n  \\\"total_page\\\": 28,\\n  \\\"total_count\\\": 56,\\n  \\\"items\\\": [\\n    {\\n      \\\"id\\\": 2858,\\n      \\\"name\\\": \\\"small export test\\\",\\n      \\\"description\\\": \\\"\\\",\\n      \\\"metadata\\\": {\\n        \\\"segments\\\": [\\n          {\\n            \\\"id\\\": \\\"9f2ea1202a\\\",\\n            \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e BehaviorBank: Kitchen aids/small appliances \\\\u003e Y\\\",\\n            \\\"client_id\\\": \\\"-1\\\",\\n            \\\"provider_name\\\": \\\"Experian\\\",\\n            \\\"provider_id\\\": \\\"Experian\\\",\\n            \\\"data_source\\\": \\\"Experian\\\",\\n            \\\"audience_partner\\\": \\\"experian\\\",\\n            \\\"restrictions\\\": [\\n              2\\n            ],\\n            \\\"cpm\\\": 0.6,\\n            \\\"provider_segment_id\\\": \\\"6695\\\"\\n          },\\n          {\\n            \\\"id\\\": \\\"c89eb332ac\\\",\\n            \\\"name\\\": \\\"InfoScout  \\\\u003e  Pet Supplies  \\\\u003e  Cat Supplies  \\\\u003e  Purina Tidy Cats\\\",\\n            \\\"client_id\\\": \\\"-1\\\",\\n            \\\"provider_name\\\": \\\"Numerator\\\",\\n            \\\"provider_id\\\": \\\"Numerator\\\",\\n            \\\"data_source\\\": \\\"Numerator\\\",\\n            \\\"audience_partner\\\": \\\"liveramp\\\",\\n            \\\"restrictions\\\": [\\n              2\\n            ],\\n            \\\"cpm\\\": 1.25,\\n            \\\"provider_segment_id\\\": \\\"1001160509\\\"\\n          },\\n          {\\n            \\\"id\\\": \\\"82c96b4399\\\",\\n            \\\"name\\\": \\\"Factual \\\\u003e Place Category Visitors \\\\u003e Retail \\\\u003e Tobacco\\\",\\n            \\\"client_id\\\": \\\"-1\\\",\\n            \\\"provider_name\\\": \\\"Factual\\\",\\n            \\\"provider_id\\\": \\\"Factual\\\",\\n            \\\"data_source\\\": \\\"Factual\\\",\\n            \\\"audience_partner\\\": \\\"liveramp\\\",\\n            \\\"restrictions\\\": [\\n              2\\n            ],\\n            \\\"cpm\\\": 1.5,\\n            \\\"provider_segment_id\\\": \\\"1001385939\\\"\\n          }\\n        ],\\n        \\\"cpm\\\": 2.1\\n      },\\n      \\\"industry_restrictions\\\": [\\n        2\\n      ],\\n      \\\"targets\\\": [\\n        {\\n          \\\"kind\\\": \\\"include\\\",\\n          \\\"type\\\": \\\"segments\\\",\\n          \\\"target_ids\\\": [\\n            \\\"9f2ea1202a\\\"\\n          ]\\n        },\\n        {\\n          \\\"kind\\\": \\\"include\\\",\\n          \\\"type\\\": \\\"segments\\\",\\n          \\\"target_ids\\\": [\\n            \\\"c89eb332ac\\\",\\n            \\\"82c96b4399\\\"\\n          ]\\n        },\\n        {\\n          \\\"kind\\\": \\\"exclude\\\",\\n          \\\"type\\\": \\\"segments\\\"\\n        }\\n      ],\\n      \\\"estimates\\\": [\\n        {\\n          \\\"std_dev\\\": 50931,\\n          \\\"estimate\\\": 495594,\\n          \\\"alias_type\\\": \\\"iid\\\",\\n          \\\"lower_bound\\\": 449359,\\n          \\\"upper_bound\\\": 546525\\n        },\\n        {\\n          \\\"std_dev\\\": 20682,\\n          \\\"estimate\\\": 227565,\\n          \\\"alias_type\\\": \\\"hid\\\",\\n          \\\"lower_bound\\\": 208589,\\n          \\\"upper_bound\\\": 248247\\n        },\\n        {\\n          \\\"std_dev\\\": 250918,\\n          \\\"estimate\\\": 2482866,\\n          \\\"alias_type\\\": \\\"cookie\\\",\\n          \\\"lower_bound\\\": 2254732,\\n          \\\"upper_bound\\\": 2733784\\n        },\\n        {\\n          \\\"std_dev\\\": 13355,\\n          \\\"estimate\\\": 138438,\\n          \\\"alias_type\\\": \\\"ctv\\\",\\n          \\\"lower_bound\\\": 126246,\\n          \\\"upper_bound\\\": 151793\\n        },\\n        {\\n          \\\"std_dev\\\": 63109,\\n          \\\"estimate\\\": 750130,\\n          \\\"alias_type\\\": \\\"maid\\\",\\n          \\\"lower_bound\\\": 691873,\\n          \\\"upper_bound\\\": 813239\\n        }\\n      ],\\n      \\\"created_at\\\": \\\"2021-07-06T23:05:17Z\\\",\\n      \\\"updated_at\\\": \\\"2021-08-01T00:00:28Z\\\",\\n      \\\"properties\\\": {\\n        \\\"locked\\\": true\\n      }\\n    },\\n    {\\n      \\\"id\\\": 2304,\\n      \\\"name\\\": \\\"cat_lmd_audience1\\\",\\n      \\\"description\\\": \\\"test audience created in campaign planner by yhdong\\\",\\n      \\\"metadata\\\": {\\n        \\\"segments\\\": [\\n          {\\n            \\\"id\\\": \\\"c84e174f9f\\\",\\n            \\\"name\\\": \\\"InfoScout  \\\\u003e  Pet Food \\\\u0026 Treats  \\\\u003e  Cat Food \\\\u0026 Treats  \\\\u003e  Purina Cat Chow\\\",\\n            \\\"client_id\\\": \\\"-1\\\",\\n            \\\"provider_name\\\": \\\"Numerator\\\",\\n            \\\"provider_id\\\": \\\"Numerator\\\",\\n            \\\"data_source\\\": \\\"Numerator\\\",\\n            \\\"audience_partner\\\": \\\"liveramp\\\",\\n            \\\"restrictions\\\": [\\n              2\\n            ],\\n            \\\"cpm\\\": 1.25,\\n            \\\"provider_segment_id\\\": \\\"1001160499\\\"\\n          },\\n          {\\n            \\\"id\\\": \\\"c89eb332ac\\\",\\n            \\\"name\\\": \\\"InfoScout  \\\\u003e  Pet Supplies  \\\\u003e  Cat Supplies  \\\\u003e  Purina Tidy Cats\\\",\\n            \\\"client_id\\\": \\\"-1\\\",\\n            \\\"provider_name\\\": \\\"Numerator\\\",\\n            \\\"provider_id\\\": \\\"Numerator\\\",\\n            \\\"data_source\\\": \\\"Numerator\\\",\\n            \\\"audience_partner\\\": \\\"liveramp\\\",\\n            \\\"restrictions\\\": [\\n              2\\n            ],\\n            \\\"cpm\\\": 1.25,\\n            \\\"provider_segment_id\\\": \\\"1001160509\\\"\\n          }\\n        ],\\n        \\\"cpm\\\": 1.25\\n      },\\n      \\\"industry_restrictions\\\": [\\n        2\\n      ],\\n      \\\"targets\\\": [\\n        {\\n          \\\"kind\\\": \\\"include\\\",\\n          \\\"type\\\": \\\"segments\\\",\\n          \\\"target_ids\\\": [\\n            \\\"c84e174f9f\\\",\\n            \\\"c89eb332ac\\\"\\n          ]\\n        },\\n        {\\n          \\\"kind\\\": \\\"include\\\",\\n          \\\"type\\\": \\\"segments\\\"\\n        },\\n        {\\n          \\\"kind\\\": \\\"exclude\\\",\\n          \\\"type\\\": \\\"segments\\\"\\n        }\\n      ],\\n      \\\"estimates\\\": [\\n        {\\n          \\\"std_dev\\\": 259568,\\n          \\\"estimate\\\": 19336345,\\n          \\\"alias_type\\\": \\\"iid\\\",\\n          \\\"lower_bound\\\": 19080211,\\n          \\\"upper_bound\\\": 19595913\\n        },\\n        {\\n          \\\"std_dev\\\": 93553,\\n          \\\"estimate\\\": 6946360,\\n          \\\"alias_type\\\": \\\"hid\\\",\\n          \\\"lower_bound\\\": 6854048,\\n          \\\"upper_bound\\\": 7039913\\n        },\\n        {\\n          \\\"std_dev\\\": 1105891,\\n          \\\"estimate\\\": 81969413,\\n          \\\"alias_type\\\": \\\"cookie\\\",\\n          \\\"lower_bound\\\": 80878220,\\n          \\\"upper_bound\\\": 83075304\\n        },\\n        {\\n          \\\"std_dev\\\": 48614,\\n          \\\"estimate\\\": 3630756,\\n          \\\"alias_type\\\": \\\"ctv\\\",\\n          \\\"lower_bound\\\": 3582783,\\n          \\\"upper_bound\\\": 3679370\\n        },\\n        {\\n          \\\"std_dev\\\": 242120,\\n          \\\"estimate\\\": 17961679,\\n          \\\"alias_type\\\": \\\"maid\\\",\\n          \\\"lower_bound\\\": 17722775,\\n          \\\"upper_bound\\\": 18203799\\n        }\\n      ],\\n      \\\"created_at\\\": \\\"2021-04-15T08:02:51Z\\\",\\n      \\\"updated_at\\\": \\\"2021-07-01T00:00:31Z\\\",\\n      \\\"properties\\\": {\\n        \\\"locked\\\": true\\n      }\\n    }\\n  ]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "da14abbb-2b13-41da-a326-b593f79bf314",
+      "name": "Modify Audience Definitions",
+      "request": {
+        "name": "Modify Audience Definitions",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "v2",
+            "audiences",
+            ":audience_id"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "audience_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "Industry category ID",
+            "key": "X-Freewheel-Ad-Industry",
+            "value": "<string>"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "PATCH",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "eab4983f-65d6-4397-afbe-038b11cc9090",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "v2",
+                "audiences",
+                ":audience_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "audience_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: basic",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Basic <credentials>"
+              },
+              {
+                "disabled": false,
+                "description": "Industry category ID",
+                "key": "X-Freewheel-Ad-Industry",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "key": "Authorization",
+                "value": "Bearer $auth_token",
+                "description": ""
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"id\\\": 3346,\\n  \\\"name\\\": \\\"test audience 1\\\",\\n  \\\"description\\\": \\\"A testing audience\\\",\\n  \\\"metadata\\\": {\\n    \\\"segments\\\": [\\n      {\\n        \\\"id\\\": \\\"9fbd48f59a\\\",\\n        \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Pets:Own A Pet \\\\u003e Y\\\",\\n        \\\"client_id\\\": \\\"-1\\\",\\n        \\\"provider_name\\\": \\\"Experian\\\",\\n        \\\"provider_id\\\": \\\"Experian\\\",\\n        \\\"data_source\\\": \\\"Experian\\\",\\n        \\\"audience_partner\\\": \\\"experian\\\",\\n        \\\"restrictions\\\": [\\n          2\\n        ],\\n        \\\"cpm\\\": 0.6,\\n        \\\"provider_segment_id\\\": \\\"7206\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"9fe904831f\\\",\\n        \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Buying:By Internet \\\\u003e Y\\\",\\n        \\\"client_id\\\": \\\"-1\\\",\\n        \\\"provider_name\\\": \\\"Experian\\\",\\n        \\\"provider_id\\\": \\\"Experian\\\",\\n        \\\"data_source\\\": \\\"Experian\\\",\\n        \\\"audience_partner\\\": \\\"experian\\\",\\n        \\\"restrictions\\\": [\\n          2\\n        ],\\n        \\\"cpm\\\": 0.6,\\n        \\\"provider_segment_id\\\": \\\"7209\\\"\\n      },\\n      {\\n        \\\"id\\\": \\\"9f2354c276\\\",\\n        \\\"name\\\": \\\"Experian \\\\u003e Lifestyle \\\\u003e SRVY:HH Lifestyl:Pets:Own A Cat \\\\u003e Y\\\",\\n        \\\"client_id\\\": \\\"-1\\\",\\n        \\\"provider_name\\\": \\\"Experian\\\",\\n        \\\"provider_id\\\": \\\"Experian\\\",\\n        \\\"data_source\\\": \\\"Experian\\\",\\n        \\\"audience_partner\\\": \\\"experian\\\",\\n        \\\"restrictions\\\": [\\n          2\\n        ],\\n        \\\"cpm\\\": 0.6,\\n        \\\"provider_segment_id\\\": \\\"7200\\\"\\n      }\\n    ],\\n    \\\"cpm\\\": 0.6\\n  },\\n  \\\"industry_restrictions\\\": [\\n    2\\n  ],\\n  \\\"targets\\\": [\\n    {\\n      \\\"kind\\\": \\\"include\\\",\\n      \\\"type\\\": \\\"segments\\\",\\n      \\\"target_ids\\\": [\\n        \\\"9fbd48f59a\\\",\\n        \\\"9fbd48f59a\\\",\\n        \\\"9fe904831f\\\"\\n      ]\\n    },\\n    {\\n      \\\"kind\\\": \\\"exclude\\\",\\n      \\\"type\\\": \\\"segments\\\",\\n      \\\"target_ids\\\": [\\n        \\\"9f2354c276\\\"\\n      ]\\n    }\\n  ],\\n  \\\"estimates\\\": [\\n    {\\n      \\\"std_dev\\\": 192676,\\n      \\\"estimate\\\": 11457259,\\n      \\\"alias_type\\\": \\\"iid\\\",\\n      \\\"lower_bound\\\": 11267763,\\n      \\\"upper_bound\\\": 11649935\\n    },\\n    {\\n      \\\"std_dev\\\": 69294,\\n      \\\"estimate\\\": 4128283,\\n      \\\"alias_type\\\": \\\"hid\\\",\\n      \\\"lower_bound\\\": 4060131,\\n      \\\"upper_bound\\\": 4197577\\n    },\\n    {\\n      \\\"std_dev\\\": 882788,\\n      \\\"estimate\\\": 52477245,\\n      \\\"alias_type\\\": \\\"cookie\\\",\\n      \\\"lower_bound\\\": 51609031,\\n      \\\"upper_bound\\\": 53360033\\n    },\\n    {\\n      \\\"std_dev\\\": 59395,\\n      \\\"estimate\\\": 3549628,\\n      \\\"alias_type\\\": \\\"ctv\\\",\\n      \\\"lower_bound\\\": 3491209,\\n      \\\"upper_bound\\\": 3609023\\n    },\\n    {\\n      \\\"std_dev\\\": 253384,\\n      \\\"estimate\\\": 15050631,\\n      \\\"alias_type\\\": \\\"maid\\\",\\n      \\\"lower_bound\\\": 14801434,\\n      \\\"upper_bound\\\": 15304015\\n    }\\n  ],\\n  \\\"created_at\\\": \\\"2021-10-26T18:55:34Z\\\",\\n  \\\"updated_at\\\": \\\"2021-10-26T18:58:18.470675056Z\\\",\\n  \\\"properties\\\": {}\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.freewheel.tv/demand",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e04e1217-bb38-4469-a4e7-bc315d734c4d",
+    "name": "audience-management-api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

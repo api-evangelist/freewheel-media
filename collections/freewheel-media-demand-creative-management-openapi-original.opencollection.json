@@ -1,0 +1,222 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Demand Creative Management API V1",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Demand Creative Management API V1",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve All Creatives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freewheel.tv/demand/v1/accounts/:account_id/ads",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "When you retrieve any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+              }
+            ]
+          },
+          "docs": "This method uses GET to retrieve all creatives that are part of an account (seat id) belonging to the requesting DSP.\nNote: The response code samples below include sellerid. However, there is a use case in which the sellerid is not returned.\nA response code that does not include sellerid receives approval on behalf of the seller from the global approvals network. So, the seller network is still the ultimate approver.\nOnly one network ID providing approval is included in any response's audit stat"
+        },
+        {
+          "info": {
+            "name": "Create a Creative",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freewheel.tv/demand/v1/accounts/:account_id/ads",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "When you create any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method POST to create a creative.\n**Notes:**\n* FreeWheel currently supports a maximum of 30 creative renditions per VAST creative at one query per second for both POST and PUT methods. To improve performance, if possible, keep creative renditions to fewer than ten."
+        },
+        {
+          "info": {
+            "name": "Retrieve Underlying Creatives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freewheel.tv/demand/v1/accounts/:account_id/ads/:ad_id/underlying_creatives",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "When you retrieve underlying creatives of an ad, you must specify accountid (your seatid) in the request URL."
+              },
+              {
+                "name": "ad_id",
+                "value": "",
+                "type": "path",
+                "description": "When you retrieve underlying creatives of an ad, you must specify ad_id in the request URL."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset"
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "count"
+              }
+            ]
+          },
+          "docs": "This method uses GET to retrieve underlying creatives that belongs a demand ad."
+        },
+        {
+          "info": {
+            "name": "Update a Creative",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.freewheel.tv/demand/v1/accounts/:account_id/ads/:id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "When you update any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method PUT to update a creative.\n**Notes:**\n* When you update your creative, its creative approval status is reset to pending if the seller requires creative review. It is recommended that you only update creatives when absolutely necessary and that you inform the seller prior to doing so.\n* FreeWheel currently supports a maximum of 30 creative renditions per VAST creative at one query per second for both POST and PUT methods. To improve performance, if possible, keep creative renditions to"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Deal Assignment for a Creative",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freewheel.tv/demand/v1/accounts/:account_id/deal_assignments",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "When you retrieve any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+              },
+              {
+                "name": "dealid",
+                "value": "",
+                "type": "query",
+                "description": "dealid"
+              },
+              {
+                "name": "adid",
+                "value": "",
+                "type": "query",
+                "description": "adid"
+              }
+            ]
+          },
+          "docs": "This method uses GET to retrieve a deal assignment for a particular creative for a given Deal ID and Ad ID."
+        },
+        {
+          "info": {
+            "name": "Assign a Creative to a Deal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.freewheel.tv/demand/v1/accounts/:account_id/deal_assignments",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "accountid"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method uses POST to assign a creative to a deal ID. You can assign the same creative to multiple deal IDs through this endpoint.\n**Note: You do not need to assign new creative IDs when you are extending a campaign. For example, if you extend an end date or add another flight schedule on the same campaign, you do not need new creative IDs. Creative IDs can be reused across programmatic deals.**"
+        },
+        {
+          "info": {
+            "name": "Delete a Creative’s Deal Assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.freewheel.tv/demand/v1/accounts/:account_id/deal_assignments",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "When you delete any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+              },
+              {
+                "name": "dealid",
+                "value": "",
+                "type": "query",
+                "description": "dealid"
+              },
+              {
+                "name": "adid",
+                "value": "",
+                "type": "query",
+                "description": "adid"
+              }
+            ]
+          },
+          "docs": "This method uses DELETE to remove a creative’s deal assignments for a given Deal ID and ad ID. This does not DELETE the actual creative from our system, but rather the association between deal ID and ad ID."
+        },
+        {
+          "info": {
+            "name": "Retrieve All Creatives Without Account Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.freewheel.tv/demand/v1/ads"
+          },
+          "docs": "This method uses GET to retrieve all creatives belonging to the requesting DSP."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

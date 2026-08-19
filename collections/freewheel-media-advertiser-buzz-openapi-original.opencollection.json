@@ -1,0 +1,3634 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "buzz",
+    "version": "0.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "advertiser",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/advertiser",
+        "params": [
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the advertiser"
+          },
+          {
+            "name": "alternative_id",
+            "value": "",
+            "type": "query",
+            "description": "An alternative id to lookup the object, if desired"
+          },
+          {
+            "name": "advertiser_name",
+            "value": "",
+            "type": "query",
+            "description": "Unique name for the advertiser. Supports `%LIKE%` syntax"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "advertiser"
+    },
+    {
+      "info": {
+        "name": "advertiser",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/advertiser",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "advertiser"
+    },
+    {
+      "info": {
+        "name": "advertiser",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/advertiser",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "advertiser"
+    },
+    {
+      "info": {
+        "name": "advertiser",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/advertiser",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "advertiser"
+    },
+    {
+      "info": {
+        "name": "account_alert",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/account_alert",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "account_alert"
+    },
+    {
+      "info": {
+        "name": "account_alert",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/account_alert",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "account_alert"
+    },
+    {
+      "info": {
+        "name": "account_alert",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/account_alert",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "account_alert"
+    },
+    {
+      "info": {
+        "name": "account",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/account",
+        "params": [
+          {
+            "name": "account_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the account"
+          },
+          {
+            "name": "customer_id",
+            "value": "",
+            "type": "query",
+            "description": "Beeswax use only"
+          },
+          {
+            "name": "account_name",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "primary_account",
+            "value": "",
+            "type": "query",
+            "description": "Not currently used"
+          },
+          {
+            "name": "alternative_id",
+            "value": "",
+            "type": "query",
+            "description": "An alternative id to lookup the account, if desired"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is the Account active?"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "account"
+    },
+    {
+      "info": {
+        "name": "account",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/account",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "account"
+    },
+    {
+      "info": {
+        "name": "account",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/account",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "account"
+    },
+    {
+      "info": {
+        "name": "account_setting",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/account_setting",
+        "params": [
+          {
+            "name": "as_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the AccountSetting"
+          },
+          {
+            "name": "account_setting",
+            "value": "",
+            "type": "query",
+            "description": "The name of the setting to search for."
+          }
+        ]
+      },
+      "docs": "account_setting"
+    },
+    {
+      "info": {
+        "name": "account_setting",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/account_setting",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "account_setting"
+    },
+    {
+      "info": {
+        "name": "account_setting",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/account_setting",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "account_setting"
+    },
+    {
+      "info": {
+        "name": "account_setting",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/account_setting",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "account_setting"
+    },
+    {
+      "info": {
+        "name": "activity_log",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/activity_log",
+        "params": [
+          {
+            "name": "log_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique id of the log entry"
+          },
+          {
+            "name": "user_id",
+            "value": "",
+            "type": "query",
+            "description": "ID of the user that took the action that was logged"
+          },
+          {
+            "name": "object_id",
+            "value": "",
+            "type": "query",
+            "description": "The unique ID of the object that was affected. For example, if a User object was created, this ID will be the user_id of that User"
+          },
+          {
+            "name": "object_type",
+            "value": "",
+            "type": "query",
+            "description": "The type of object affected. e.g. `user` or `line_item`"
+          },
+          {
+            "name": "activity_date",
+            "value": "",
+            "type": "query",
+            "description": "The date the activity took place"
+          },
+          {
+            "name": "action",
+            "value": "",
+            "type": "query",
+            "description": "`CREATE`, `UPDATE`, or `DELETE`"
+          }
+        ]
+      },
+      "docs": "activity_log"
+    },
+    {
+      "info": {
+        "name": "alert",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/alert",
+        "params": [
+          {
+            "name": "alert_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the alert"
+          },
+          {
+            "name": "user_id",
+            "value": "",
+            "type": "query",
+            "description": "ID of the user receiving the alert"
+          },
+          {
+            "name": "subject",
+            "value": "",
+            "type": "query",
+            "description": "Subject of the alert, supports `%LIKE%` syntax"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is the alert unread (1) or read (0)"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "alert"
+    },
+    {
+      "info": {
+        "name": "alert",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/alert",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "alert"
+    },
+    {
+      "info": {
+        "name": "alert",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/alert",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "alert"
+    },
+    {
+      "info": {
+        "name": "alert",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/alert",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "alert"
+    },
+    {
+      "info": {
+        "name": "authenticate",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/authenticate",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Login"
+    },
+    {
+      "info": {
+        "name": "authenticate",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/authenticate",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Allows the user to change their password"
+    },
+    {
+      "info": {
+        "name": "authenticate",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/authenticate"
+      },
+      "docs": "Logout"
+    },
+    {
+      "info": {
+        "name": "bid_model",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_model",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_model"
+    },
+    {
+      "info": {
+        "name": "bid_model",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_model",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_model"
+    },
+    {
+      "info": {
+        "name": "bid_model",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_model",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_model"
+    },
+    {
+      "info": {
+        "name": "bid_model_version",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_model_version",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_model_version"
+    },
+    {
+      "info": {
+        "name": "bid_model_version",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_model_version",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_model_version"
+    },
+    {
+      "info": {
+        "name": "bid_model_version",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_model_version",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_model_version"
+    },
+    {
+      "info": {
+        "name": "bid_model_version",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_model_version",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_model_version"
+    },
+    {
+      "info": {
+        "name": "bid_modifier",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_modifier",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_modifier"
+    },
+    {
+      "info": {
+        "name": "bid_modifier",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_modifier",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_modifier"
+    },
+    {
+      "info": {
+        "name": "bid_modifier",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_modifier",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_modifier"
+    },
+    {
+      "info": {
+        "name": "bid_modifier",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/bid_modifier",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "bid_modifier"
+    },
+    {
+      "info": {
+        "name": "delivery_modifier",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/delivery_modifier",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "delivery_modifier"
+    },
+    {
+      "info": {
+        "name": "delivery_modifier",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/delivery_modifier",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "delivery_modifier"
+    },
+    {
+      "info": {
+        "name": "delivery_modifier",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/delivery_modifier",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "delivery_modifier"
+    },
+    {
+      "info": {
+        "name": "delivery_modifier",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/delivery_modifier",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "delivery_modifier"
+    },
+    {
+      "info": {
+        "name": "campaign",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/campaign",
+        "params": [
+          {
+            "name": "campaign_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the campaign"
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "campaign_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the campaign, e.g. \"Winter lead generation\""
+          },
+          {
+            "name": "bid_modifier_id",
+            "value": "",
+            "type": "query",
+            "description": "ID of the Bid Modifier associated with this Campaign"
+          },
+          {
+            "name": "delivery_modifier_id",
+            "value": "",
+            "type": "query",
+            "description": "ID of the Delivery Modifier associated with this Campaign"
+          },
+          {
+            "name": "alternative_id",
+            "value": "",
+            "type": "query",
+            "description": "An alternative id to lookup the campaign, if desired"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is it active?"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "campaign"
+    },
+    {
+      "info": {
+        "name": "campaign",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/campaign",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "campaign"
+    },
+    {
+      "info": {
+        "name": "campaign",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/campaign",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "campaign"
+    },
+    {
+      "info": {
+        "name": "campaign",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/campaign",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "campaign"
+    },
+    {
+      "info": {
+        "name": "campaign_experiment_assignment",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/campaign_experiment_assignment",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This method is used to assign a Campaign and all of its Line Items to an `Experiment` in one POST. Other methods (PUT, GET, DELETE) are not supported."
+    },
+    {
+      "info": {
+        "name": "change_password",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/change_password",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Sends an email to reset password"
+    },
+    {
+      "info": {
+        "name": "change_password",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/change_password",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Resets password from an email"
+    },
+    {
+      "info": {
+        "name": "creative",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative",
+        "params": [
+          {
+            "name": "creative_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Creative"
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "creative_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the Creative, e.g. \"Blue Banner Ad\""
+          },
+          {
+            "name": "creative_type",
+            "value": "",
+            "type": "query",
+            "description": "ID for the type of creative. 0=banner, 1=video, 2=native, etc."
+          },
+          {
+            "name": "creative_template_id",
+            "value": "",
+            "type": "query",
+            "description": "The ID of the Creative Template to use for this creative. Must be a valid and active Creative Template that either belongs to this Account, OR is marked as \"global\"."
+          },
+          {
+            "name": "alternative_id",
+            "value": "",
+            "type": "query",
+            "description": "An alternative id to lookup the creative, if desired"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is the Creative active?"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "creative"
+    },
+    {
+      "info": {
+        "name": "creative",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative"
+    },
+    {
+      "info": {
+        "name": "creative",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative"
+    },
+    {
+      "info": {
+        "name": "creative",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative"
+    },
+    {
+      "info": {
+        "name": "creative_addon",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_addon",
+        "params": [
+          {
+            "name": "creative_addon_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Creative AddOn"
+          },
+          {
+            "name": "creative_addon_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the Creative AddOn, e.g. \"MOAT Viewabiity\""
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query",
+            "description": "Advertiser the CreativeAddOn is associated with"
+          },
+          {
+            "name": "creative_type",
+            "value": "",
+            "type": "query",
+            "description": "0 = banner, 1 = video, 2 = native"
+          },
+          {
+            "name": "creative_addon_type",
+            "value": "",
+            "type": "query",
+            "description": "Must be either `PIXEL` or `SCRIPT`"
+          },
+          {
+            "name": "secure",
+            "value": "",
+            "type": "query",
+            "description": "Is the pixel secure (https)?"
+          },
+          {
+            "name": "global",
+            "value": "",
+            "type": "query",
+            "description": "Is this a global addon, available to all Buzz accounts?"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is it active?"
+          }
+        ]
+      },
+      "docs": "creative_addon"
+    },
+    {
+      "info": {
+        "name": "creative_addon",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_addon",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative_addon"
+    },
+    {
+      "info": {
+        "name": "creative_addon",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_addon",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative_addon"
+    },
+    {
+      "info": {
+        "name": "creative_addon",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_addon",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative_addon"
+    },
+    {
+      "info": {
+        "name": "creative_approval_queue",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_approval_queue",
+        "params": [
+          {
+            "name": "creative_approval_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique id of the creative_approval_queue entry"
+          },
+          {
+            "name": "creative_id",
+            "value": "",
+            "type": "query",
+            "description": "ID of the creative"
+          },
+          {
+            "name": "vendor_id",
+            "value": "",
+            "type": "query",
+            "description": "ID of the `vendor` such as Google"
+          },
+          {
+            "name": "action",
+            "value": "",
+            "type": "query",
+            "description": "The latest action that is required to be performed on this queue entry. Valid actions are `CREATE`, `PAUSE`, `RESUME`, and `DELETE`. Not all actions are relevant to all vendors."
+          },
+          {
+            "name": "request_date",
+            "value": "",
+            "type": "query",
+            "description": "Date the latest approval was submitted"
+          },
+          {
+            "name": "request_status",
+            "value": "",
+            "type": "query",
+            "description": "Status of the latest approval request. Note, this is not the same as the status of the Creative with this vendor."
+          },
+          {
+            "name": "approved",
+            "value": "",
+            "type": "query",
+            "description": "Whether this `creative_id` to `vendor_id` combination is currently in an approved state."
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query",
+            "description": "Date the queue entry was created or updated"
+          }
+        ]
+      },
+      "docs": "creative_approval_queue"
+    },
+    {
+      "info": {
+        "name": "creative_approval_queue_history",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_approval_queue_history",
+        "params": [
+          {
+            "name": "creative_approval_queue_history_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique id of the creative_approval_queue_history entry"
+          },
+          {
+            "name": "creative_approval_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique id of the creative_approval_queue entry"
+          },
+          {
+            "name": "creative_id",
+            "value": "",
+            "type": "query",
+            "description": "ID of the creative"
+          },
+          {
+            "name": "vendor_id",
+            "value": "",
+            "type": "query",
+            "description": "ID of the `vendor` such as Google"
+          },
+          {
+            "name": "action",
+            "value": "",
+            "type": "query",
+            "description": "The latest action that is required to be performed on this queue entry. Valid actions are `CREATE`, `PAUSE`, `RESUME`, and `DELETE`. Not all actions are relevant to all vendors."
+          },
+          {
+            "name": "request_date",
+            "value": "",
+            "type": "query",
+            "description": "Date the latest approval was submitted"
+          },
+          {
+            "name": "request_status",
+            "value": "",
+            "type": "query",
+            "description": "Status of the latest approval request. Note, this is not the same as the status of the Creative with this vendor."
+          },
+          {
+            "name": "approved",
+            "value": "",
+            "type": "query",
+            "description": "Whether this `creative_id` to `vendor_id` combination is currently in an approved state."
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query",
+            "description": "Date the queue entry was created or updated"
+          }
+        ]
+      },
+      "docs": "creative_approval_queue_history"
+    },
+    {
+      "info": {
+        "name": "creative_asset",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_asset",
+        "params": [
+          {
+            "name": "creative_asset_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the creative_asset"
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query",
+            "description": "Advertiser ID"
+          },
+          {
+            "name": "creative_asset_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the Creative Asset, e.g. \"Blue Banner Ad\""
+          },
+          {
+            "name": "asset_type",
+            "value": "",
+            "type": "query",
+            "description": "`SOURCE_VIDEO`, `IMAGE`, or `DESTINATION_VIDEO`"
+          },
+          {
+            "name": "mime_type",
+            "value": "",
+            "type": "query",
+            "description": "Auto-detected mime-type"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is it active?"
+          }
+        ]
+      },
+      "docs": "creative_asset"
+    },
+    {
+      "info": {
+        "name": "creative_asset",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_asset",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative_asset"
+    },
+    {
+      "info": {
+        "name": "html_asset",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/html_asset",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "html_asset"
+    },
+    {
+      "info": {
+        "name": "video_asset",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/video_asset",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "video_asset"
+    },
+    {
+      "info": {
+        "name": "creative_bulk_upload",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_bulk_upload",
+        "params": [
+          {
+            "name": "cbu_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the bulk upload"
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query",
+            "description": "Advertiser ID"
+          },
+          {
+            "name": "creative_template_id",
+            "value": "",
+            "type": "query",
+            "description": "The ID of the Creative Template"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "creative_bulk_upload"
+    },
+    {
+      "info": {
+        "name": "creative_bulk_upload",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_bulk_upload",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative_bulk_upload"
+    },
+    {
+      "info": {
+        "name": "creative_line_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_line_item",
+        "params": [
+          {
+            "name": "cli_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Creative Line Item association"
+          },
+          {
+            "name": "creative_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Creative."
+          },
+          {
+            "name": "line_item_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique D of the Line Item."
+          },
+          {
+            "name": "start_date",
+            "value": "",
+            "type": "query",
+            "description": "Start date for the Creative to serve within this Line Item. If either `start_date` or `end_date` is set, both values will override the Creative level dates, otherwise Creative level will be used."
+          },
+          {
+            "name": "end_date",
+            "value": "",
+            "type": "query",
+            "description": "End date for the Creative to serve within this Line Item. If either `start_date` or `end_date` is set, both values will override the Creative level dates, otherwise Creative level will be used."
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is it active?"
+          }
+        ]
+      },
+      "docs": "creative_line_item"
+    },
+    {
+      "info": {
+        "name": "creative_line_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_line_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative_line_item"
+    },
+    {
+      "info": {
+        "name": "creative_line_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_line_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative_line_item"
+    },
+    {
+      "info": {
+        "name": "creative_line_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_line_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "creative_line_item"
+    },
+    {
+      "info": {
+        "name": "creative_template",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/creative_template",
+        "params": [
+          {
+            "name": "creative_template_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Creative Template"
+          },
+          {
+            "name": "creative_template_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the Creative Template, e.g. \"JPEG Banner\""
+          },
+          {
+            "name": "creative_type",
+            "value": "",
+            "type": "query",
+            "description": "0 = banner, 1 = video, 2 = native"
+          },
+          {
+            "name": "is_video",
+            "value": "",
+            "type": "query",
+            "description": "Does the template include video assets. Note, this is slightly different from creative_type since a Native creative can also include video"
+          },
+          {
+            "name": "global",
+            "value": "",
+            "type": "query",
+            "description": "Is this a global template, available to all Buzz accounts?"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is the Creative Template active?"
+          }
+        ]
+      },
+      "docs": "creative_template"
+    },
+    {
+      "info": {
+        "name": "custom_list",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/custom_list",
+        "params": [
+          {
+            "name": "list_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Custom List"
+          },
+          {
+            "name": "list_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the Custom List"
+          },
+          {
+            "name": "list_type",
+            "value": "",
+            "type": "query",
+            "description": "Type of list"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "custom_list"
+    },
+    {
+      "info": {
+        "name": "custom_list",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/custom_list",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "custom_list"
+    },
+    {
+      "info": {
+        "name": "custom_list",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/custom_list",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "custom_list"
+    },
+    {
+      "info": {
+        "name": "custom_list",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/custom_list",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "custom_list"
+    },
+    {
+      "info": {
+        "name": "custom_list_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/custom_list_item",
+        "params": [
+          {
+            "name": "list_item_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the list and item combination"
+          },
+          {
+            "name": "list_id",
+            "value": "",
+            "type": "query",
+            "description": "The unique ID of the list. List must be active."
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "custom_list_item"
+    },
+    {
+      "info": {
+        "name": "custom_list_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/custom_list_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "custom_list_item"
+    },
+    {
+      "info": {
+        "name": "custom_list_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/custom_list_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "custom_list_item"
+    },
+    {
+      "info": {
+        "name": "custom_list_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/custom_list_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "custom_list_item"
+    },
+    {
+      "info": {
+        "name": "event",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/event",
+        "params": [
+          {
+            "name": "event_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the event"
+          },
+          {
+            "name": "event_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the event, <100 characters"
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query",
+            "description": "Advertiser ID"
+          },
+          {
+            "name": "event_type_id",
+            "value": "",
+            "type": "query",
+            "description": "Type of event"
+          },
+          {
+            "name": "segment_id",
+            "value": "",
+            "type": "query",
+            "description": "Segment associated with the event"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "attribution",
+            "value": "",
+            "type": "query",
+            "description": "Defines the line items that are eligible for this event. Possible values are `ALL` or `WHITELIST`"
+          }
+        ]
+      },
+      "docs": "event"
+    },
+    {
+      "info": {
+        "name": "event",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/event",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "event"
+    },
+    {
+      "info": {
+        "name": "event",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/event",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "event"
+    },
+    {
+      "info": {
+        "name": "event",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/event",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "event"
+    },
+    {
+      "info": {
+        "name": "event_assignment",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/event_assignment",
+        "params": [
+          {
+            "name": "ea_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the event_assignment to be updated"
+          },
+          {
+            "name": "event_id",
+            "value": "",
+            "type": "query",
+            "description": "The event object"
+          },
+          {
+            "name": "object_id",
+            "value": "",
+            "type": "query",
+            "description": "The object the event is associated with"
+          },
+          {
+            "name": "object_type",
+            "value": "",
+            "type": "query",
+            "description": "The object type, either `line_item` or `campaign`"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "event_assignment"
+    },
+    {
+      "info": {
+        "name": "event_assignment",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/event_assignment",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "event_assignment"
+    },
+    {
+      "info": {
+        "name": "event_assignment",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/event_assignment",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "event_assignment"
+    },
+    {
+      "info": {
+        "name": "event_tag",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/event_tag",
+        "params": [
+          {
+            "name": "event_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the event"
+          },
+          {
+            "name": "event_name",
+            "value": "",
+            "type": "query",
+            "description": "Name for the event"
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the advertiser"
+          },
+          {
+            "name": "event_type_id",
+            "value": "",
+            "type": "query",
+            "description": "Type of event, used for organizational purposes"
+          },
+          {
+            "name": "tag_type",
+            "value": "",
+            "type": "query",
+            "description": "The tag type to render, default is `js` for javascript tags."
+          },
+          {
+            "name": "format",
+            "value": "",
+            "type": "query",
+            "description": "The format to return the tags, default is `none`. Optional values can include `csv`, `xml`, `xls`, `xlsx` and `json` If not set or set to \"none\" the tags will be returned in the standard API response. If set, a file with the content will be streamed to the output."
+          }
+        ]
+      },
+      "docs": "The Event Tag object allows you to get rendered code for one or more Events to use on your website or application. This object only accepts GET requests."
+    },
+    {
+      "info": {
+        "name": "line_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/line_item",
+        "params": [
+          {
+            "name": "line_item_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Line Item"
+          },
+          {
+            "name": "campaign_id",
+            "value": "",
+            "type": "query",
+            "description": "Must be a valid and active Campaign"
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query",
+            "description": "Must belong to the same account as the Line Item and be active"
+          },
+          {
+            "name": "line_item_type_id",
+            "value": "",
+            "type": "query",
+            "description": "The type of the Line Item. 0=banner, 1=video."
+          },
+          {
+            "name": "line_item_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the  Line Item, e.g. \"Winter lead generation\""
+          },
+          {
+            "name": "bid_modifier_id",
+            "value": "",
+            "type": "query",
+            "description": "ID of the Bid Modifier associated with this Line Item"
+          },
+          {
+            "name": "delivery_modifier_id",
+            "value": "",
+            "type": "query",
+            "description": "ID of the Delivery Modifier associated with this Line Item"
+          },
+          {
+            "name": "start_date",
+            "value": "",
+            "type": "query",
+            "description": "Start date of the Line Item. No Line Items associated with the Campaign can have start dates prior to this date."
+          },
+          {
+            "name": "end_date",
+            "value": "",
+            "type": "query",
+            "description": "End date of the Line Item. No Line Items associated with the Campaign can have end dates after this date."
+          },
+          {
+            "name": "guaranteed",
+            "value": "",
+            "type": "query",
+            "description": "Whether the Line Item is Programmatic Guaranteed."
+          },
+          {
+            "name": "target_skad",
+            "value": "",
+            "type": "query",
+            "description": "Should the Line Item only target Apple SKAd-enabled inventory"
+          },
+          {
+            "name": "alternative_id",
+            "value": "",
+            "type": "query",
+            "description": "An alternative id to lookup the  Line Item, if desired"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "line_item"
+    },
+    {
+      "info": {
+        "name": "line_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/line_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "line_item"
+    },
+    {
+      "info": {
+        "name": "line_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/line_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "line_item"
+    },
+    {
+      "info": {
+        "name": "line_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/line_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "line_item"
+    },
+    {
+      "info": {
+        "name": "line_item_flight",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/line_item_flight",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "line_item_flight"
+    },
+    {
+      "info": {
+        "name": "line_item_flight",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/line_item_flight",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "line_item_flight"
+    },
+    {
+      "info": {
+        "name": "line_item_flight",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/line_item_flight",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "line_item_flight"
+    },
+    {
+      "info": {
+        "name": "line_item_flight",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/line_item_flight",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "line_item_flight"
+    },
+    {
+      "info": {
+        "name": "list_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/list_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "list_item"
+    },
+    {
+      "info": {
+        "name": "list_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/list_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "list_item"
+    },
+    {
+      "info": {
+        "name": "list_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/list_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "list_item"
+    },
+    {
+      "info": {
+        "name": "list_item",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/list_item",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "list_item"
+    },
+    {
+      "info": {
+        "name": "list_item (precise geography)",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/list_item(geo)",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "list_item (precise geography)"
+    },
+    {
+      "info": {
+        "name": "list_item_bulk",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/list_item_bulk",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "list_item_bulk"
+    },
+    {
+      "info": {
+        "name": "native_offer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/native_offer",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "native_offer"
+    },
+    {
+      "info": {
+        "name": "native_offer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/native_offer",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "native_offer"
+    },
+    {
+      "info": {
+        "name": "native_offer",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/native_offer",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "native_offer"
+    },
+    {
+      "info": {
+        "name": "push_queue",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/rest/push_queue",
+        "params": [
+          {
+            "name": "push_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique id of the Push Queue entry"
+          },
+          {
+            "name": "object_id",
+            "value": "",
+            "type": "query",
+            "description": "The unique ID of the object that was affected. For example, if a User object was created, this ID will be the user_id of that User"
+          },
+          {
+            "name": "object_type",
+            "value": "",
+            "type": "query",
+            "description": "The type of object affected. e.g. \"user\" or \"line_item\""
+          },
+          {
+            "name": "action",
+            "value": "",
+            "type": "query",
+            "description": "`CREATE`, `UPDATE`, `DELETE`, `PAUSE`"
+          },
+          {
+            "name": "push_request_date",
+            "value": "",
+            "type": "query",
+            "description": "The date the activity took place"
+          },
+          {
+            "name": "push_status",
+            "value": "",
+            "type": "query",
+            "description": "Whether the object has been pushed, `0`=not pushed, `1`=pushed. Note, not currently used by Buzz."
+          },
+          {
+            "name": "push_complete_date",
+            "value": "",
+            "type": "query",
+            "description": "The date the push was completed. Not currently used by Buzz."
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query",
+            "description": "Date last updated"
+          }
+        ]
+      },
+      "docs": "push_queue"
+    },
+    {
+      "info": {
+        "name": "report_queue",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/report_queue",
+        "params": [
+          {
+            "name": "report_queue_id",
+            "value": "",
+            "type": "query",
+            "description": "ID for the report"
+          }
+        ]
+      },
+      "docs": "report_queue"
+    },
+    {
+      "info": {
+        "name": "report_queue",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/report_queue",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "report_queue"
+    },
+    {
+      "info": {
+        "name": "report_save",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/report_save",
+        "params": [
+          {
+            "name": "report_save_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the saved report"
+          },
+          {
+            "name": "report_name",
+            "value": "",
+            "type": "query",
+            "description": "Name for the report."
+          },
+          {
+            "name": "report_id",
+            "value": "",
+            "type": "query",
+            "description": "ID for the report type"
+          },
+          {
+            "name": "user_id",
+            "value": "",
+            "type": "query",
+            "description": "The User that created this report."
+          },
+          {
+            "name": "frequency",
+            "value": "",
+            "type": "query",
+            "description": "Frequency that reports should be scheduled. Valid values include \"daily\", \"weekly\" and \"monthly\"."
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Whether saved report is still active. If a scheduled report is set to inactive it will no longer be sent."
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "report_save"
+    },
+    {
+      "info": {
+        "name": "report_save",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/report_save",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "report_save"
+    },
+    {
+      "info": {
+        "name": "report_save",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/report_save",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "report_save"
+    },
+    {
+      "info": {
+        "name": "report_save",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/report_save",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "report_save"
+    },
+    {
+      "info": {
+        "name": "role",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/role",
+        "params": [
+          {
+            "name": "role_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Role"
+          },
+          {
+            "name": "role_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the Role (e.g. \"Administrator\"). <100 chars"
+          },
+          {
+            "name": "global",
+            "value": "",
+            "type": "query",
+            "description": "Whether the Role is global, across Accounts."
+          },
+          {
+            "name": "parent_role_id",
+            "value": "",
+            "type": "query",
+            "description": "This Role inherits permissions from another Role."
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Whether Role is active."
+          }
+        ]
+      },
+      "docs": "role"
+    },
+    {
+      "info": {
+        "name": "role",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/role",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "role"
+    },
+    {
+      "info": {
+        "name": "role",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/role",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "role"
+    },
+    {
+      "info": {
+        "name": "role",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/role",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "role"
+    },
+    {
+      "info": {
+        "name": "search",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/search",
+        "params": [
+          {
+            "name": "object_id",
+            "value": "",
+            "type": "query",
+            "description": "The unique ID of the object that is being requested."
+          },
+          {
+            "name": "object_type",
+            "value": "",
+            "type": "query",
+            "description": "The type of object required. e.g. \"user\" or \"line_item\""
+          },
+          {
+            "name": "object_name",
+            "value": "",
+            "type": "query",
+            "description": "The string to be searched for. For non-exact matches surround the query with % signs."
+          }
+        ]
+      },
+      "docs": "search"
+    },
+    {
+      "info": {
+        "name": "segment",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment",
+        "params": [
+          {
+            "name": "segment_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Segment"
+          },
+          {
+            "name": "segment_key",
+            "value": "",
+            "type": "query",
+            "description": "An auto-generated key in the format `<BUZZ_KEY>-<segment_id>`. This key is used for sharing and targeting."
+          },
+          {
+            "name": "segment_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the Segment. <191 chars"
+          },
+          {
+            "name": "alternative_id",
+            "value": "",
+            "type": "query",
+            "description": "Alternative ID"
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query",
+            "description": "Segments may belong to the overall Account or to a single Advertiser."
+          },
+          {
+            "name": "segment_description",
+            "value": "",
+            "type": "query",
+            "description": "Longer description of the segment"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Indicates a segment’s archival status — when set to `true`, the segment remains active and is available for selection in targeting, whereas when set to `false`, it is archived and hidden from the options."
+          }
+        ]
+      },
+      "docs": "segment"
+    },
+    {
+      "info": {
+        "name": "segment",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment"
+    },
+    {
+      "info": {
+        "name": "segment",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment"
+    },
+    {
+      "info": {
+        "name": "segment_tag",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_tag",
+        "params": [
+          {
+            "name": "segment_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the segment"
+          },
+          {
+            "name": "segment_name",
+            "value": "",
+            "type": "query",
+            "description": "Name for the segment"
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the advertiser"
+          },
+          {
+            "name": "tag_type",
+            "value": "",
+            "type": "query",
+            "description": "The tag type to render, default is `js` for javascript tags."
+          },
+          {
+            "name": "format",
+            "value": "",
+            "type": "query",
+            "description": "The format to return the tags, default is `none`. Optional values can include `csv`, `xml`, `xls`, `xlsx` and `json` If not set or set to `none` the tags will be returned in the standard API response. If set, a file with the content will be streamed to the output."
+          }
+        ]
+      },
+      "docs": "The Segment Tag object allows you to get a tag to use on your website or application. This object only accepts GET requests."
+    },
+    {
+      "info": {
+        "name": "segment_category",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category",
+        "params": [
+          {
+            "name": "segment_category_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Segment Category"
+          },
+          {
+            "name": "alternative_id",
+            "value": "",
+            "type": "query",
+            "description": "Any text up to 80 characters"
+          },
+          {
+            "name": "segment_category_key",
+            "value": "",
+            "type": "query",
+            "description": "An auto-generated key in the format `<BUZZ_KEY>-<segment_category_id>`"
+          },
+          {
+            "name": "segment_category_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the Segment Category. <191 chars"
+          },
+          {
+            "name": "parent_category_key",
+            "value": "",
+            "type": "query",
+            "description": "Must be an active Segment Category. If omitted or set to NULL, this category will live at the top of the hierarchy."
+          },
+          {
+            "name": "advertiser_id",
+            "value": "",
+            "type": "query",
+            "description": "Segment Categories may belong to the overall Account or to a single Advertiser."
+          }
+        ]
+      },
+      "docs": "segment_category"
+    },
+    {
+      "info": {
+        "name": "segment_category",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_category"
+    },
+    {
+      "info": {
+        "name": "segment_category",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_category"
+    },
+    {
+      "info": {
+        "name": "segment_category",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_category"
+    },
+    {
+      "info": {
+        "name": "segment_category_association",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category_association",
+        "params": [
+          {
+            "name": "segment_category_association_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Segment Category association"
+          },
+          {
+            "name": "segment_category_key",
+            "value": "",
+            "type": "query",
+            "description": "The `segment_category_key` (not the `segment_category_id`!) from the Segment Category."
+          },
+          {
+            "name": "segment_key",
+            "value": "",
+            "type": "query",
+            "description": "The `segment_key` (not the 1segment_id`!) from the Segment to be categorized. Must either belong to the Account of the user, or be shared with that user's Account."
+          }
+        ]
+      },
+      "docs": "segment_category_association"
+    },
+    {
+      "info": {
+        "name": "segment_category_association",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category_association",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_category_association"
+    },
+    {
+      "info": {
+        "name": "segment_category_association",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category_association",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_category_association"
+    },
+    {
+      "info": {
+        "name": "segment_sharing",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_sharing",
+        "params": [
+          {
+            "name": "segment_sharing_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the segment sharing"
+          },
+          {
+            "name": "segment_key",
+            "value": "",
+            "type": "query",
+            "description": "The `segment_key` (not `segment_id`!) from the Segment to be categorized. Must either belong to the Account of the user, or be shared with that user's Account."
+          },
+          {
+            "name": "shared_account_id",
+            "value": "",
+            "type": "query",
+            "description": "The Account the Segment should be shared with"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is the sharing active?"
+          }
+        ]
+      },
+      "docs": "segment_sharing"
+    },
+    {
+      "info": {
+        "name": "segment_sharing",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_sharing",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_sharing"
+    },
+    {
+      "info": {
+        "name": "segment_sharing",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_sharing",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_sharing"
+    },
+    {
+      "info": {
+        "name": "segment_lookup",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_lookup",
+        "params": [
+          {
+            "name": "segment_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the segment"
+          },
+          {
+            "name": "segment_key",
+            "value": "",
+            "type": "query",
+            "description": "Compound unique key including the Buzz Key and the segment_id"
+          },
+          {
+            "name": "segment_name",
+            "value": "",
+            "type": "query",
+            "description": "Name for the segment"
+          },
+          {
+            "name": "source",
+            "value": "",
+            "type": "query",
+            "description": "Either `third-party` or `local`. See description below."
+          }
+        ]
+      },
+      "docs": "The Segment Lookup object allows you to get segments that are shared with your Account. For example Bluekai or Integral Ad Science segments. This object only accepts GET requests. See the Migration Note below."
+    },
+    {
+      "info": {
+        "name": "segment_category_sharing",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category_sharing",
+        "params": [
+          {
+            "name": "segment_category_sharing_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the segment_category_sharing"
+          },
+          {
+            "name": "segment_category_key",
+            "value": "",
+            "type": "query",
+            "description": "The `segment_category_key` (not `segment_category_id`!) from the SegmentCategory to be shared"
+          },
+          {
+            "name": "shared_account_id",
+            "value": "",
+            "type": "query",
+            "description": "The Account the SegmentCategory should be shared with"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is the sharing active?"
+          }
+        ]
+      },
+      "docs": "segment_category_sharing"
+    },
+    {
+      "info": {
+        "name": "segment_category_sharing",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category_sharing",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_category_sharing"
+    },
+    {
+      "info": {
+        "name": "segment_category_sharing",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category_sharing",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_category_sharing"
+    },
+    {
+      "info": {
+        "name": "segment_category_lookup",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_category_lookup",
+        "params": [
+          {
+            "name": "segment_category_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the segment category"
+          },
+          {
+            "name": "segment_category_key",
+            "value": "",
+            "type": "query",
+            "description": "Unique compound ID for the segment category, including both the Buzz Key and the ID"
+          },
+          {
+            "name": "segment_category_name",
+            "value": "",
+            "type": "query",
+            "description": "Name for the segment category"
+          },
+          {
+            "name": "source",
+            "value": "",
+            "type": "query",
+            "description": "Either `third-party` or `local`"
+          }
+        ]
+      },
+      "docs": "The Segment Category Lookup object allows you to get Segment Categories that are shared with your Account. For example Bluekai or Integral Ad Science segment Categories. This object only accepts GET requests."
+    },
+    {
+      "info": {
+        "name": "segment_upload",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_upload",
+        "params": [
+          {
+            "name": "segment_upload_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the segment_upload object"
+          },
+          {
+            "name": "file_name",
+            "value": "",
+            "type": "query",
+            "description": "The filename uploaded, including the extension."
+          },
+          {
+            "name": "upload_status",
+            "value": "",
+            "type": "query",
+            "description": "Status of the file upload. 0=No file uploaded; 1=File uploaded, pending process, 2= Processed, 3=Error, 4=In-progress."
+          },
+          {
+            "name": "upload_complete_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "partner_handle",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "segment_upload"
+    },
+    {
+      "info": {
+        "name": "segment_upload",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_upload",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_upload"
+    },
+    {
+      "info": {
+        "name": "segment_update",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/segment_update",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "segment_update"
+    },
+    {
+      "info": {
+        "name": "strategy",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/strategy",
+        "params": [
+          {
+            "name": "strategy_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique id of the Strategy"
+          },
+          {
+            "name": "line_item_type_id",
+            "value": "",
+            "type": "query",
+            "description": "Type of Line Item that uses this Strategy. (`0`=banner, `1`=video, `2`=native)"
+          },
+          {
+            "name": "strategy_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the Strategy"
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is the Strategy active?"
+          },
+          {
+            "name": "default_strategy",
+            "value": "",
+            "type": "query",
+            "description": "Is this the default Strategy to use for all new Targeting Templates for this Line Item Type?"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "strategy"
+    },
+    {
+      "info": {
+        "name": "targeting_template",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/targeting_template",
+        "params": [
+          {
+            "name": "targeting_template_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Targeting Template"
+          },
+          {
+            "name": "template_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the template. <100 chars"
+          },
+          {
+            "name": "alternative_id",
+            "value": "",
+            "type": "query",
+            "description": "The alternative_id"
+          },
+          {
+            "name": "strategy_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Strategy."
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "targeting_template"
+    },
+    {
+      "info": {
+        "name": "targeting_template",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/targeting_template",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "targeting_template"
+    },
+    {
+      "info": {
+        "name": "targeting_template",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/targeting_template",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "targeting_template"
+    },
+    {
+      "info": {
+        "name": "targeting_template",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/targeting_template",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "targeting_template"
+    },
+    {
+      "info": {
+        "name": "user",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/user",
+        "params": [
+          {
+            "name": "user_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the User"
+          },
+          {
+            "name": "email",
+            "value": "",
+            "type": "query",
+            "description": "Must be a valid email, and must be unique per Buzz instance"
+          },
+          {
+            "name": "first_name",
+            "value": "",
+            "type": "query",
+            "description": "<20 chars"
+          },
+          {
+            "name": "last_name",
+            "value": "",
+            "type": "query",
+            "description": "<20 chars"
+          },
+          {
+            "name": "role_id",
+            "value": "",
+            "type": "query",
+            "description": "Role be valid and Active."
+          },
+          {
+            "name": "active",
+            "value": "",
+            "type": "query",
+            "description": "Is the User active?"
+          }
+        ]
+      },
+      "docs": "user"
+    },
+    {
+      "info": {
+        "name": "user",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/user",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "user"
+    },
+    {
+      "info": {
+        "name": "user",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/user",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "user"
+    },
+    {
+      "info": {
+        "name": "user",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/user",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "user"
+    },
+    {
+      "info": {
+        "name": "resend_user_email",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/resend_user_email",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Re-sends the welcome email to a new user"
+    },
+    {
+      "info": {
+        "name": "user_lookup",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/user_lookup"
+      },
+      "docs": "Allows you to GET key data about the current User (e.g. the User making the request)."
+    },
+    {
+      "info": {
+        "name": "vendor",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/vendor",
+        "params": [
+          {
+            "name": "vendor_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the vendor"
+          },
+          {
+            "name": "vendor_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the vendors"
+          },
+          {
+            "name": "global",
+            "value": "",
+            "type": "query",
+            "description": "Is the Vendor global, meaning it is available to all Accounts on the system."
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "vendor"
+    },
+    {
+      "info": {
+        "name": "vendor",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/vendor",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "vendor"
+    },
+    {
+      "info": {
+        "name": "vendor",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/vendor",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "vendor"
+    },
+    {
+      "info": {
+        "name": "vendor",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/vendor",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "vendor"
+    },
+    {
+      "info": {
+        "name": "vendor_fee",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/vendor_fee",
+        "params": [
+          {
+            "name": "vendor_fee_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Vendor Fee"
+          },
+          {
+            "name": "vendor_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID of the Vendor"
+          },
+          {
+            "name": "vendor_fee_name",
+            "value": "",
+            "type": "query",
+            "description": "Name of the vendor fee, <100 characters"
+          },
+          {
+            "name": "object_id",
+            "value": "",
+            "type": "query",
+            "description": "Unique ID for the object to be associated with this fee"
+          },
+          {
+            "name": "object_type",
+            "value": "",
+            "type": "query",
+            "description": "String representation of the object to be associated. For example, \"campaign\""
+          },
+          {
+            "name": "create_date",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "update_date",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "vendor_fee"
+    },
+    {
+      "info": {
+        "name": "vendor_fee",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://buzz-key.api.beeswax.com/rest/vendor_fee",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "vendor_fee"
+    },
+    {
+      "info": {
+        "name": "vendor_fee",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://buzz-key.api.beeswax.com/rest/vendor_fee",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "vendor_fee"
+    },
+    {
+      "info": {
+        "name": "vendor_fee",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://buzz-key.api.beeswax.com/rest/vendor_fee",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "vendor_fee"
+    },
+    {
+      "info": {
+        "name": "view",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/view",
+        "params": [
+          {
+            "name": "view_name",
+            "value": "",
+            "type": "query",
+            "description": "The view name."
+          }
+        ]
+      },
+      "docs": "view"
+    },
+    {
+      "info": {
+        "name": "view_list",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://buzz-key.api.beeswax.com/rest/view_list",
+        "params": [
+          {
+            "name": "view_name",
+            "value": "",
+            "type": "query",
+            "description": "The view's name"
+          }
+        ]
+      },
+      "docs": "The View List API method allows you to GET metadata about how a View and the fields within that View should be displayed in a UI. There is no write API for this data, it must be manually populated in SQL by an administrator. The primary use case for this API call is to display the data from a view in a user interface. Only GET requests are supported."
+    }
+  ],
+  "bundled": true
+}

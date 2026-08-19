@@ -1,0 +1,378 @@
+{
+  "item": [
+    {
+      "id": "a4d4c311-3add-4def-b39c-34a68148618f",
+      "name": "Deal Sync API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "28b1a661-e269-4312-bf45-3ce3f92f65a6",
+          "name": "Retrieve Deals",
+          "request": {
+            "name": "Retrieve Deals",
+            "description": {
+              "content": "This method uses GET to retrieve active, inactive and pause deals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "deals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "seatid",
+                  "value": "<string>",
+                  "description": "seat id"
+                },
+                {
+                  "disabled": false,
+                  "key": "sellerstatus",
+                  "value": "<string>",
+                  "description": "seller status"
+                },
+                {
+                  "disabled": false,
+                  "key": "startdate",
+                  "value": "<string>",
+                  "description": "start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "enddate",
+                  "value": "<string>",
+                  "description": "end date"
+                },
+                {
+                  "disabled": false,
+                  "key": "updatedat",
+                  "value": "<string>",
+                  "description": "updated at"
+                },
+                {
+                  "disabled": false,
+                  "key": "preingestpermissions",
+                  "value": "<integer>",
+                  "description": "pre ingest permissions"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "count"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "25e56fc2-9ee2-46a6-bfed-ded253d83af3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "seatid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sellerstatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startdate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enddate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "preingestpermissions",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 5020,\n  \"items\": [\n    {\n      \"approvaltype\": 9761,\n      \"at\": 4214,\n      \"budget\": {\n        \"currency\": {\n          \"code\": \"string\",\n          \"value\": 6898.71493669838\n        },\n        \"impression\": 7987,\n        \"type\": \"string\"\n      },\n      \"buyerstatus\": {\n        \"comment\": \"string\",\n        \"status\": \"string\"\n      },\n      \"clearancelevel\": 5780,\n      \"createdat\": \"string\",\n      \"curator\": \"string\",\n      \"dealid\": \"string\",\n      \"enddate\": \"string\",\n      \"flr\": 1178.5935826848727,\n      \"flrcur\": \"string\",\n      \"guaranteed\": 4195,\n      \"name\": \"string\",\n      \"origin\": \"string\",\n      \"pacing\": {\n        \"custompacings\": [\n          {\n            \"deliverpercentage\": 2382.12694683031,\n            \"deliverydate\": \"string\"\n          },\n          {\n            \"deliverpercentage\": 8897.308259471853,\n            \"deliverydate\": \"string\"\n          }\n        ],\n        \"type\": \"string\"\n      },\n      \"preingestpermissions\": 2709,\n      \"pubcount\": 218,\n      \"seats\": [\n        {\n          \"seatid\": \"string\"\n        },\n        {\n          \"seatid\": \"string\"\n        }\n      ],\n      \"sellerid\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sellerstatus\": \"string\",\n      \"startdate\": \"string\",\n      \"updatedat\": \"string\",\n      \"volume\": 7874\n    },\n    {\n      \"approvaltype\": 4670,\n      \"at\": 5360,\n      \"budget\": {\n        \"currency\": {\n          \"code\": \"string\",\n          \"value\": 2461.3251882200316\n        },\n        \"impression\": 2608,\n        \"type\": \"string\"\n      },\n      \"buyerstatus\": {\n        \"comment\": \"string\",\n        \"status\": \"string\"\n      },\n      \"clearancelevel\": 768,\n      \"createdat\": \"string\",\n      \"curator\": \"string\",\n      \"dealid\": \"string\",\n      \"enddate\": \"string\",\n      \"flr\": 967.9260373208199,\n      \"flrcur\": \"string\",\n      \"guaranteed\": 4916,\n      \"name\": \"string\",\n      \"origin\": \"string\",\n      \"pacing\": {\n        \"custompacings\": [\n          {\n            \"deliverpercentage\": 9112.417543073872,\n            \"deliverydate\": \"string\"\n          },\n          {\n            \"deliverpercentage\": 6890.406183287368,\n            \"deliverydate\": \"string\"\n          }\n        ],\n        \"type\": \"string\"\n      },\n      \"preingestpermissions\": 4993,\n      \"pubcount\": 5403,\n      \"seats\": [\n        {\n          \"seatid\": \"string\"\n        },\n        {\n          \"seatid\": \"string\"\n        }\n      ],\n      \"sellerid\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sellerstatus\": \"string\",\n      \"startdate\": \"string\",\n      \"updatedat\": \"string\",\n      \"volume\": 1919\n    }\n  ],\n  \"offset\": 9198,\n  \"total\": 3477\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c45588bf-aa5c-4ab5-8c06-f87cae1f8830",
+          "name": "Retrieve Single Deal",
+          "request": {
+            "name": "Retrieve Single Deal",
+            "description": {
+              "content": "This method uses GET to retrieve a single Deal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "deals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) deal id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c76c7875-1d48-45f3-8856-3c6a17fcb707",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) deal id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"approvaltype\": 5170,\n  \"at\": 5571,\n  \"budget\": {\n    \"currency\": {\n      \"code\": \"string\",\n      \"value\": 7526.577148218207\n    },\n    \"impression\": 8008,\n    \"type\": \"string\"\n  },\n  \"buyerstatus\": {\n    \"comment\": \"string\",\n    \"status\": \"string\"\n  },\n  \"clearancelevel\": 5717,\n  \"createdat\": \"string\",\n  \"curator\": \"string\",\n  \"dealid\": \"string\",\n  \"enddate\": \"string\",\n  \"flr\": 9438.2748990861,\n  \"flrcur\": \"string\",\n  \"guaranteed\": 7371,\n  \"name\": \"string\",\n  \"origin\": \"string\",\n  \"pacing\": {\n    \"custompacings\": [\n      {\n        \"deliverpercentage\": 7222.1167905678185,\n        \"deliverydate\": \"string\"\n      },\n      {\n        \"deliverpercentage\": 9268.357283893294,\n        \"deliverydate\": \"string\"\n      }\n    ],\n    \"type\": \"string\"\n  },\n  \"preingestpermissions\": 7637,\n  \"pubcount\": 8517,\n  \"seats\": [\n    {\n      \"seatid\": \"string\"\n    },\n    {\n      \"seatid\": \"string\"\n    }\n  ],\n  \"sellerid\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sellerstatus\": \"string\",\n  \"startdate\": \"string\",\n  \"updatedat\": \"string\",\n  \"volume\": 3834\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "853e35c9-42cb-4417-940c-b48ffe1a2d91",
+          "name": "Update Buyer Status for Deals",
+          "request": {
+            "name": "Update Buyer Status for Deals",
+            "description": {
+              "content": "This method uses PATCH to send deal status updates to sellers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "deals",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) deal id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"buyerstatus\": {\n    \"comment\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b9d40c4e-46ab-40cf-8b65-7bb76f376ffd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deals",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) deal id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyerstatus\": {\n    \"comment\": \"<string>\",\n    \"status\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"approvaltype\": 9816,\n  \"at\": 9892,\n  \"budget\": {\n    \"currency\": {\n      \"code\": \"string\",\n      \"value\": 8425.361981522581\n    },\n    \"impression\": 8426,\n    \"type\": \"string\"\n  },\n  \"buyerstatus\": {\n    \"comment\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"clearancelevel\": 5350,\n  \"createdat\": \"string\",\n  \"curator\": \"string\",\n  \"dealid\": \"string\",\n  \"enddate\": \"string\",\n  \"flr\": 396.86261220537756,\n  \"flrcur\": \"string\",\n  \"guaranteed\": 5486,\n  \"name\": \"string\",\n  \"origin\": \"string\",\n  \"pacing\": {\n    \"custompacings\": [\n      {\n        \"deliverpercentage\": 7010.149118317474,\n        \"deliverydate\": \"string\"\n      },\n      {\n        \"deliverpercentage\": 4893.261456003754,\n        \"deliverydate\": \"string\"\n      }\n    ],\n    \"type\": \"string\"\n  },\n  \"preingestpermissions\": 3674,\n  \"pubcount\": 51,\n  \"seats\": [\n    {\n      \"seatid\": \"string\"\n    },\n    {\n      \"seatid\": \"string\"\n    }\n  ],\n  \"sellerid\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sellerstatus\": \"string\",\n  \"startdate\": \"string\",\n  \"updatedat\": \"string\",\n  \"volume\": 4124\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.freewheel.tv/demand/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c1bdb210-6d8c-4a39-976c-75199d945df2",
+    "name": "Deal Sync API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

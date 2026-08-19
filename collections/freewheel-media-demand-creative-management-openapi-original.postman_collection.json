@@ -1,0 +1,859 @@
+{
+  "item": [
+    {
+      "id": "adffb51c-7229-4a43-a7cd-c7a95d5000cb",
+      "name": "Demand Creative Management API V1",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dedfcfb4-1831-41d3-94d1-3c92ac6287b2",
+          "name": "Retrieve All Creatives",
+          "request": {
+            "name": "Retrieve All Creatives",
+            "description": {
+              "content": "This method uses GET to retrieve all creatives that are part of an account (seat id) belonging to the requesting DSP.\nNote: The response code samples below include sellerid. However, there is a use case in which the sellerid is not returned.\nA response code that does not include sellerid receives approval on behalf of the seller from the global approvals network. So, the seller network is still the ultimate approver.\nOnly one network ID providing approval is included in any response's audit status object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "ads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) When you retrieve any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "8cbb8ec1-3300-4d67-8eeb-7ef6f8182de9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) When you retrieve any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ads\": [\n    {\n      \"accountid\": \"string\",\n      \"audit\": [\n        {\n          \"feedback\": \"string\",\n          \"init\": \"string\",\n          \"lastmod\": \"string\",\n          \"sellerid\": \"string\",\n          \"status\": 5957,\n          \"statusispartial\": 919\n        },\n        {\n          \"feedback\": \"string\",\n          \"init\": \"string\",\n          \"lastmod\": \"string\",\n          \"sellerid\": \"string\",\n          \"status\": 4904,\n          \"statusispartial\": 9376\n        }\n      ],\n      \"id\": \"string\",\n      \"init\": \"string\",\n      \"lastmod\": \"string\",\n      \"name\": \"string\",\n      \"video\": {\n        \"ctype\": [\n          111,\n          6154\n        ],\n        \"curl\": \"string\"\n      },\n      \"warnings\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"accountid\": \"string\",\n      \"audit\": [\n        {\n          \"feedback\": \"string\",\n          \"init\": \"string\",\n          \"lastmod\": \"string\",\n          \"sellerid\": \"string\",\n          \"status\": 7655,\n          \"statusispartial\": 5616\n        },\n        {\n          \"feedback\": \"string\",\n          \"init\": \"string\",\n          \"lastmod\": \"string\",\n          \"sellerid\": \"string\",\n          \"status\": 9902,\n          \"statusispartial\": 4266\n        }\n      ],\n      \"id\": \"string\",\n      \"init\": \"string\",\n      \"lastmod\": \"string\",\n      \"name\": \"string\",\n      \"video\": {\n        \"ctype\": [\n          7588,\n          267\n        ],\n        \"curl\": \"string\"\n      },\n      \"warnings\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"count\": 3295,\n  \"offset\": 7914,\n  \"total\": 9390\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7297e883-2beb-4c98-991a-f68ec553f4a7",
+          "name": "Create a Creative",
+          "request": {
+            "name": "Create a Creative",
+            "description": {
+              "content": "This method POST to create a creative.\n**Notes:**\n* FreeWheel currently supports a maximum of 30 creative renditions per VAST creative at one query per second for both POST and PUT methods. To improve performance, if possible, keep creative renditions to fewer than ten.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "ads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) When you create any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ads\": [\n    {\n      \"accountid\": \"<string>\",\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"init\": \"<string>\",\n      \"lastmod\": \"<string>\",\n      \"name\": \"<string>\",\n      \"video\": {\n        \"ctype\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"curl\": \"<string>\"\n      },\n      \"warnings\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"accountid\": \"<string>\",\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"init\": \"<string>\",\n      \"lastmod\": \"<string>\",\n      \"name\": \"<string>\",\n      \"video\": {\n        \"ctype\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"curl\": \"<string>\"\n      },\n      \"warnings\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"count\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c8b4fc15-7be7-4b7f-8b4b-50de200fbc23",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) When you create any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"ads\": [\n    {\n      \"accountid\": \"<string>\",\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"init\": \"<string>\",\n      \"lastmod\": \"<string>\",\n      \"name\": \"<string>\",\n      \"video\": {\n        \"ctype\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"curl\": \"<string>\"\n      },\n      \"warnings\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"accountid\": \"<string>\",\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"init\": \"<string>\",\n      \"lastmod\": \"<string>\",\n      \"name\": \"<string>\",\n      \"video\": {\n        \"ctype\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"curl\": \"<string>\"\n      },\n      \"warnings\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"count\": 1531\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46a6e126-fe83-440c-ace9-f297f73c2850",
+          "name": "Retrieve Underlying Creatives",
+          "request": {
+            "name": "Retrieve Underlying Creatives",
+            "description": {
+              "content": "This method uses GET to retrieve underlying creatives that belongs a demand ad.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "ads",
+                ":ad_id",
+                "underlying_creatives"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "count"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) When you retrieve underlying creatives of an ad, you must specify accountid (your seatid) in the request URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ad_id",
+                  "description": "(Required) When you retrieve underlying creatives of an ad, you must specify ad_id in the request URL."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "8c9b94b5-9f34-4bc9-9ed5-0c25dd895dcb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "ads",
+                    ":ad_id",
+                    "underlying_creatives"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) When you retrieve underlying creatives of an ad, you must specify accountid (your seatid) in the request URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ad_id",
+                      "description": "(Required) When you retrieve underlying creatives of an ad, you must specify ad_id in the request URL."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 8967,\n  \"offset\": 1304,\n  \"total\": 6166,\n  \"underlyingcreatives\": [\n    {\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"externalcreativeid\": \"string\",\n      \"vastcontenturl\": \"string\"\n    },\n    {\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"externalcreativeid\": \"string\",\n      \"vastcontenturl\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a8f01a4-c203-4999-bae4-ce03687be631",
+          "name": "Update a Creative",
+          "request": {
+            "name": "Update a Creative",
+            "description": {
+              "content": "This method PUT to update a creative.\n**Notes:**\n* When you update your creative, its creative approval status is reset to pending if the seller requires creative review. It is recommended that you only update creatives when absolutely necessary and that you inform the seller prior to doing so.\n* FreeWheel currently supports a maximum of 30 creative renditions per VAST creative at one query per second for both POST and PUT methods. To improve performance, if possible, keep creative renditions to fewer than ten.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "ads",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) When you update any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ads\": [\n    {\n      \"accountid\": \"<string>\",\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"init\": \"<string>\",\n      \"lastmod\": \"<string>\",\n      \"name\": \"<string>\",\n      \"video\": {\n        \"ctype\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"curl\": \"<string>\"\n      },\n      \"warnings\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"accountid\": \"<string>\",\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"init\": \"<string>\",\n      \"lastmod\": \"<string>\",\n      \"name\": \"<string>\",\n      \"video\": {\n        \"ctype\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"curl\": \"<string>\"\n      },\n      \"warnings\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"count\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "173b7cde-c64c-4f0e-b582-3aaf14effeed",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "ads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) When you update any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ads\": [\n    {\n      \"accountid\": \"<string>\",\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"init\": \"<string>\",\n      \"lastmod\": \"<string>\",\n      \"name\": \"<string>\",\n      \"video\": {\n        \"ctype\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"curl\": \"<string>\"\n      },\n      \"warnings\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"accountid\": \"<string>\",\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"init\": \"<string>\",\n      \"lastmod\": \"<string>\",\n      \"name\": \"<string>\",\n      \"video\": {\n        \"ctype\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"curl\": \"<string>\"\n      },\n      \"warnings\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"count\": 6325\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cba95d69-b5bb-4008-9063-8f627e768e9b",
+          "name": "Retrieve a Deal Assignment for a Creative",
+          "request": {
+            "name": "Retrieve a Deal Assignment for a Creative",
+            "description": {
+              "content": "This method uses GET to retrieve a deal assignment for a particular creative for a given Deal ID and Ad ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "deal_assignments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dealid",
+                  "value": "<integer>",
+                  "description": "(Required) dealid"
+                },
+                {
+                  "disabled": false,
+                  "key": "adid",
+                  "value": "<integer>",
+                  "description": "(Required) adid"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) When you retrieve any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "e52b31eb-d44b-4d8a-9085-958263d43604",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "deal_assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dealid",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "adid",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) When you retrieve any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"adid\": \"string\",\n  \"deal\": {\n    \"approvaltype\": 5106,\n    \"clearancelevel\": 3373,\n    \"dealid\": \"string\",\n    \"sellerid\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"dealid\": \"string\",\n  \"id\": 4109\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "976229f3-7923-4c86-8178-24fc33db4ee4",
+          "name": "Assign a Creative to a Deal",
+          "request": {
+            "name": "Assign a Creative to a Deal",
+            "description": {
+              "content": "This method uses POST to assign a creative to a deal ID. You can assign the same creative to multiple deal IDs through this endpoint.\n**Note: You do not need to assign new creative IDs when you are extending a campaign. For example, if you extend an end date or add another flight schedule on the same campaign, you do not need new creative IDs. Creative IDs can be reused across programmatic deals.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "deal_assignments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) accountid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"adid\": \"<string>\",\n  \"dealid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7cca24b6-dd5c-47ea-8d35-b61420e00e70",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "deal_assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) accountid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"adid\": \"<string>\",\n  \"dealid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"adid\": \"string\",\n  \"deal\": {\n    \"approvaltype\": 5469,\n    \"clearancelevel\": 9857,\n    \"dealid\": \"string\",\n    \"sellerid\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"dealid\": \"string\",\n  \"id\": 2425\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36b5ac82-b10e-413b-87d3-2870e746f08e",
+          "name": "Delete a Creative’s Deal Assignments",
+          "request": {
+            "name": "Delete a Creative’s Deal Assignments",
+            "description": {
+              "content": "This method uses DELETE to remove a creative’s deal assignments for a given Deal ID and ad ID. This does not DELETE the actual creative from our system, but rather the association between deal ID and ad ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "deal_assignments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dealid",
+                  "value": "<integer>",
+                  "description": "(Required) dealid"
+                },
+                {
+                  "disabled": false,
+                  "key": "adid",
+                  "value": "<integer>",
+                  "description": "(Required) adid"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) When you delete any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "bfbea500-d1dc-4cef-8a75-0f7a20545641",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "deal_assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dealid",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "adid",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) When you delete any resource in the Demand Creative Management API, you must specify accountid (your seatid) in the request URL."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43220eeb-f362-4be3-88cb-846062ab382d",
+          "name": "Retrieve All Creatives Without Account Id",
+          "request": {
+            "name": "Retrieve All Creatives Without Account Id",
+            "description": {
+              "content": "This method uses GET to retrieve all creatives belonging to the requesting DSP.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ea0d0528-8638-4489-816c-8d67ca839ef9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ads\": [\n    {\n      \"accountid\": \"<string>\",\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"init\": \"<string>\",\n      \"lastmod\": \"<string>\",\n      \"name\": \"<string>\",\n      \"video\": {\n        \"ctype\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"curl\": \"<string>\"\n      },\n      \"warnings\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"accountid\": \"<string>\",\n      \"audit\": [\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        },\n        {\n          \"feedback\": \"<string>\",\n          \"init\": \"<string>\",\n          \"lastmod\": \"<string>\",\n          \"sellerid\": \"<string>\",\n          \"status\": \"<integer>\",\n          \"statusispartial\": \"<integer>\"\n        }\n      ],\n      \"id\": \"<string>\",\n      \"init\": \"<string>\",\n      \"lastmod\": \"<string>\",\n      \"name\": \"<string>\",\n      \"video\": {\n        \"ctype\": [\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        \"curl\": \"<string>\"\n      },\n      \"warnings\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"count\": 3774,\n  \"offset\": 7157,\n  \"total\": 4061\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.freewheel.tv/demand/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "38876af9-ae09-4985-8f35-49b5d82f499e",
+    "name": "Demand Creative Management API V1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

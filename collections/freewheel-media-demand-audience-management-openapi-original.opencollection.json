@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "audience-management-api",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "List Advertiser Industry Categories",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.freewheel.tv/demand/v1/services/v4/ds/v1/permissions/ad-industries"
+      },
+      "docs": "This method employs GET to retrieve a list of all advertiser Industries used in Data Suite to apply data usage/restrction rules to given categories in accordance with your business needs.  \n\nIt is the legal responsibility of each advertiser (or publisher/agency entity acting on behalf of an advertiser) to accurately identify their advertiser's industry, so that any applicable data usage restrictions can be applied. \n\nSelect the industry category (and associated numeric ID) that best matches your"
+    },
+    {
+      "info": {
+        "name": "List Data Providers by Industry Category",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.freewheel.tv/demand/v1/providers",
+        "headers": [
+          {
+            "name": "X-Freewheel-Ad-Industry",
+            "value": ""
+          },
+          {
+            "name": "Authorization",
+            "value": ""
+          }
+        ]
+      },
+      "docs": "List Data Providers by Industry Category"
+    },
+    {
+      "info": {
+        "name": "List Segments by Data Provider",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.freewheel.tv/demand/v1/segments",
+        "headers": [
+          {
+            "name": "X-Freewheel-Ad-Industry",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "keywords",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Segments by Data Provider"
+    },
+    {
+      "info": {
+        "name": "Filter Segment Searches",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.freewheel.tv/demand/v1/segments?",
+        "params": [
+          {
+            "name": "keywords",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "providers",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Filter Segment Searches"
+    },
+    {
+      "info": {
+        "name": "Retrieve Audience Definitions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.freewheel.tv/demand/v2/audiences",
+        "params": [
+          {
+            "name": "page",
+            "value": "",
+            "type": "query",
+            "description": "Pagination=URI_ESCAPE({\"per_page\":n,\"page\":m})."
+          },
+          {
+            "name": "per_page",
+            "value": "",
+            "type": "query",
+            "description": "Pagination=URI_ESCAPE({\"per_page\":n,\"page\":m})."
+          },
+          {
+            "name": "eq",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "neq",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "match",
+            "value": "",
+            "type": "query",
+            "description": "Use the percent sign (%) for wildcard."
+          },
+          {
+            "name": "gt",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "lt",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "gte",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "lte",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Retrieve Audience Definitions"
+    },
+    {
+      "info": {
+        "name": "Create Audience Definitions",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.freewheel.tv/demand/v2/audiences",
+        "headers": [
+          {
+            "name": "X-Freewheel-Ad-Industry",
+            "value": ""
+          },
+          {
+            "name": "Authorization",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "temporary",
+            "value": "",
+            "type": "query",
+            "description": "Marks the Audience Definition as temporary."
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create Audience Definitions"
+    },
+    {
+      "info": {
+        "name": "Modify Audience Definitions",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.freewheel.tv/demand/v2/audiences/:audience_id",
+        "headers": [
+          {
+            "name": "X-Freewheel-Ad-Industry",
+            "value": ""
+          },
+          {
+            "name": "Authorization",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "audience_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Modify Audience Definitions"
+    }
+  ],
+  "bundled": true
+}

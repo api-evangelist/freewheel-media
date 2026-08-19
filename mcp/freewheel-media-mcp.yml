@@ -1,11 +1,8 @@
 generated: '2026-08-12'
 method: derived
 status: candidate
-source: >-
-  openapi/freewheel-media-demand-deal-sync-openapi-original.json,
-  openapi/freewheel-media-demand-creative-management-openapi-original.json,
-  openapi/freewheel-media-demand-audience-management-openapi-original.json,
-  openapi/freewheel-media-advertiser-buzz-openapi-original.json
+source: openapi/freewheel-media-demand-deal-sync-openapi-original.json, openapi/freewheel-media-demand-creative-management-openapi-original.json,
+  openapi/freewheel-media-demand-audience-management-openapi-original.json, openapi/freewheel-media-advertiser-buzz-openapi-original.json
 search_result:
   official_hosted_server: none
   probes:
@@ -27,18 +24,14 @@ search_result:
     method: POST tools/list
     status: '401'
     body: '{"jsonrpc":"2.0","error":{"code":-32001,"message":"Authorization required"},"id":null}'
-    note: >-
-      This is a live, spec-compliant MCP endpoint, but it is the documentation
-      platform's built-in server (ReadMe), not a FreeWheel product API server —
-      it would expose the docs, not the Buzz/Demand/Publisher APIs. FreeWheel has
-      the platform's AI features switched off (the hub reports aiConfig.enabled =
-      false) and advertises no MCP endpoint anywhere in its documentation. It is
-      recorded here for completeness and is NOT treated as a FreeWheel-published
-      MCP server.
-  finding: >-
-    FreeWheel publishes no MCP server. The tool list below is a CANDIDATE derived
-    from the operations FreeWheel does publish, so that an agent builder has a
-    starting shape; it is not something FreeWheel operates.
+    note: This is a live, spec-compliant MCP endpoint, but it is the documentation platform's built-in
+      server (ReadMe), not a FreeWheel product API server — it would expose the docs, not the Buzz/Demand/Publisher
+      APIs. FreeWheel has the platform's AI features switched off (the hub reports aiConfig.enabled =
+      false) and advertises no MCP endpoint anywhere in its documentation. It is recorded here for completeness
+      and is NOT treated as a FreeWheel-published MCP server.
+  finding: FreeWheel publishes no MCP server. The tool list below is a CANDIDATE derived from the operations
+    FreeWheel does publish, so that an agent builder has a starting shape; it is not something FreeWheel
+    operates.
 server:
   name: freewheel-media
   transport: http
@@ -97,10 +90,14 @@ tools:
   description: Modify an audience definition.
   source_operation: openapi/freewheel-media-demand-audience-management-openapi-original.json#modify-audience-definitions
 - name: buzz_request
-  description: >-
-    Generic Buzz resource accessor. The Advertiser (Buzz) API is 153 operations
-    across 59 resources with a uniform GET/POST/PUT/DELETE shape per resource, so
-    a per-operation tool set would be unusable; a single resource-parameterised
-    tool is the sane derivation.
+  description: Generic Buzz resource accessor. The Advertiser (Buzz) API is 153 operations across 59 resources
+    with a uniform GET/POST/PUT/DELETE shape per resource, so a per-operation tool set would be unusable;
+    a single resource-parameterised tool is the sane derivation.
   source_operation: openapi/freewheel-media-advertiser-buzz-openapi-original.json
   note: Covers all 153 Buzz operations; see mcp/freewheel-media-tool-crosswalk.yml.
+deployment:
+  mode: none
+  verified: derived
+  tools: 18
+  checked: '2026-08-12'
+  source: catalog MCP census
