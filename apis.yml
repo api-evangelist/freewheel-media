@@ -56,115 +56,15 @@ tags:
 - Publisher Monetization
 - Comcast
 apis:
-- aid: freewheel-media-advertiser-buzz-api
-  name: FreeWheel Advertiser (Buzz) API
-  description: >-
-    The REST API behind FreeWheel's Advertiser Suite / Beeswax DSP ("Buzz"). It
-    exposes the full buy-side object model — accounts, advertisers, campaigns,
-    line items, creatives and creative assets, targeting templates, bidding
-    strategies and bid models, segments and custom lists, reporting queues,
-    users and roles — over a JSON REST interface. Authentication is a session
-    cookie obtained by POSTing credentials to /authenticate; the base host is
-    per-customer (the Buzz key), which is why the published server is templated.
-  humanURL: https://api-docs.freewheel.tv/advertiser
-  baseURL: https://buzz-key.api.beeswax.com/rest/
-  tags:
-  - Advertising
-  - AdTech
-  - Programmatic
-  - DSP
-  - Campaign Management
-  - Creatives
-  - Targeting
-  properties:
-  - type: OpenAPI
-    url: openapi/freewheel-media-advertiser-buzz-openapi-original.json
-  - type: Documentation
-    url: https://api-docs.freewheel.tv/advertiser/docs
-  - type: APIReference
-    url: https://api-docs.freewheel.tv/advertiser/reference
-  - type: GettingStarted
-    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
-  - type: Authentication
-    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
-  - type: ChangeLog
-    url: https://api-docs.freewheel.tv/advertiser/changelog
-  - type: Overlay
-    url: overlays/freewheel-media-advertiser-buzz-overlay.yaml
-- aid: freewheel-media-demand-audience-management-api
-  name: FreeWheel Demand Audience Management API
-  description: >-
-    Audience and segment management for FreeWheel demand partners. Lists data
-    providers by ad-industry category, searches and filters third-party
-    segments, and creates, retrieves and modifies audience definitions used to
-    target FreeWheel supply. HTTP basic authentication, with an
-    X-Freewheel-Ad-Industry header scoping requests to an ad industry.
-  humanURL: https://api-docs.freewheel.tv/demand/reference/retrieve-audience-definitions
-  baseURL: https://api.freewheel.tv/demand
-  tags:
-  - Advertising
-  - Audiences
-  - Segments
-  - Data Providers
-  properties:
-  - type: OpenAPI
-    url: openapi/freewheel-media-demand-audience-management-openapi-original.json
-  - type: APIReference
-    url: https://api-docs.freewheel.tv/demand/reference
-  - type: Overlay
-    url: overlays/freewheel-media-demand-audience-management-overlay.yaml
-- aid: freewheel-media-demand-deal-sync-api
-  name: FreeWheel Demand Deal Sync API
-  description: >-
-    Deal synchronization for FreeWheel demand partners. Retrieves programmatic
-    deals available to a buyer seat (filterable by seller status, start/end date
-    and last-updated timestamp), retrieves a single deal, and updates the buyer
-    status on a deal so buy-side systems stay in sync with FreeWheel supply.
-  humanURL: https://api-docs.freewheel.tv/demand/reference/retrieve-deals
-  baseURL: https://api.freewheel.tv/demand/v1
-  tags:
-  - Advertising
-  - Programmatic
-  - Deals
-  - Marketplace
-  properties:
-  - type: OpenAPI
-    url: openapi/freewheel-media-demand-deal-sync-openapi-original.json
-  - type: APIReference
-    url: https://api-docs.freewheel.tv/demand/reference
-  - type: Overlay
-    url: overlays/freewheel-media-demand-deal-sync-overlay.yaml
-- aid: freewheel-media-demand-creative-management-api
-  name: FreeWheel Demand Creative Management API
-  description: >-
-    Creative management for FreeWheel demand partners. Creates, retrieves and
-    updates creatives (ads) on an account, lists the underlying creatives of a
-    composite ad, and assigns or removes creatives from programmatic deals so a
-    buyer's creatives are approved against the deals they will serve on.
-  humanURL: https://api-docs.freewheel.tv/demand/reference/retrieve-all-creatives
-  baseURL: https://api.freewheel.tv/demand/v1
-  tags:
-  - Advertising
-  - Creatives
-  - Programmatic
-  - Deals
-  properties:
-  - type: OpenAPI
-    url: openapi/freewheel-media-demand-creative-management-openapi-original.json
-  - type: APIReference
-    url: https://api-docs.freewheel.tv/demand/reference
-  - type: Overlay
-    url: overlays/freewheel-media-demand-creative-management-overlay.yaml
 - aid: freewheel-media-publisher-api
   name: FreeWheel Publisher (MRM) API
   description: >-
-    FreeWheel's sell-side APIs for publishers and programmers running on MRM —
-    advertiser and agency management, insertion orders and campaigns, placement
-    operations, forecasting, analytics and reporting. V3 resources are XML, V4
-    resources are JSON with XML on select endpoints, and access is authenticated
-    with OAuth 2.0 access tokens. No machine-readable specification is published
-    at a public URL and the reference documentation is disallowed in the docs
-    host robots.txt, so no OpenAPI has been harvested for this entry.
+    FreeWheel's sell-side APIs for publishers and programmers running on MRM — advertiser and agency management,
+    insertion orders and campaigns, placement operations, forecasting, analytics and reporting. V3 resources
+    are XML, V4 resources are JSON with XML on select endpoints, and access is authenticated with OAuth
+    2.0 access tokens. No machine-readable specification is published at a public URL and the reference
+    documentation is disallowed in the docs host robots.txt, so no OpenAPI has been harvested for this
+    entry.
   humanURL: https://api-docs.freewheel.tv/publisher
   baseURL: https://api.freewheel.tv/services/v4/services
   tags:
@@ -178,7 +78,1456 @@ apis:
     url: https://api-docs.freewheel.tv/publisher
   - type: ChangeLog
     url: https://hub.freewheel.tv/display/hub/MRM+Release+Guides
+- aid: freewheel-media:freewheel-media-account-alert-api
+  name: FreeWheel Media Account Alert API
+  description: The Account Alert API from FreeWheel Media — 1 operation(s) for account alert.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Account Alert
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-account-alert-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-account-api
+  name: FreeWheel Media Account API
+  description: The Account API from FreeWheel Media — 1 operation(s) for account.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-account-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-account-setting-api
+  name: FreeWheel Media Account Setting API
+  description: The Account Setting API from FreeWheel Media — 1 operation(s) for account setting.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Account Setting
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-account-setting-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-activity-log-api
+  name: FreeWheel Media Activity Log API
+  description: The Activity Log API from FreeWheel Media — 1 operation(s) for activity log.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Activity Log
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-activity-log-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-advertiser-api
+  name: FreeWheel Media Advertiser API
+  description: The Advertiser API from FreeWheel Media — 1 operation(s) for advertiser.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Advertiser
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-advertiser-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-alert-api
+  name: FreeWheel Media Alert API
+  description: The Alert API from FreeWheel Media — 1 operation(s) for alert.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Alert
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-alert-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-audiences-api
+  name: FreeWheel Media Audiences API
+  description: The Audiences API from FreeWheel Media — 2 operation(s) for audiences.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Audiences
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-audiences-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-authenticate-api
+  name: FreeWheel Media Authenticate API
+  description: The Authenticate API from FreeWheel Media — 1 operation(s) for authenticate.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Authenticate
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-authenticate-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-bid-model-api
+  name: FreeWheel Media Bid Model API
+  description: The Bid Model API from FreeWheel Media — 1 operation(s) for bid model.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Bid Model
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-bid-model-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-bid-model-version-api
+  name: FreeWheel Media Bid Model Version API
+  description: The Bid Model Version API from FreeWheel Media — 1 operation(s) for bid model version.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Bid Model Version
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-bid-model-version-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-bid-modifier-api
+  name: FreeWheel Media Bid Modifier API
+  description: The Bid Modifier API from FreeWheel Media — 1 operation(s) for bid modifier.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Bid Modifier
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-bid-modifier-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-campaign-api
+  name: FreeWheel Media Campaign API
+  description: The Campaign API from FreeWheel Media — 1 operation(s) for campaign.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Campaign
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-campaign-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-campaign-experiment-assignment-api
+  name: FreeWheel Media Campaign Experiment Assignment API
+  description: >-
+    The Campaign Experiment Assignment API from FreeWheel Media — 1 operation(s) for campaign experiment
+    assignment.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Campaign Experiment Assignment
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-campaign-experiment-assignment-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-change-password-api
+  name: FreeWheel Media Change Password API
+  description: The Change Password API from FreeWheel Media — 1 operation(s) for change password.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Change Password
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-change-password-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-creative-addon-api
+  name: FreeWheel Media Creative Addon API
+  description: The Creative Addon API from FreeWheel Media — 1 operation(s) for creative addon.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Creative Addon
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-creative-addon-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-creative-api
+  name: FreeWheel Media Creative API
+  description: The Creative API from FreeWheel Media — 1 operation(s) for creative.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Creative
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-creative-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-creative-approval-queue-api
+  name: FreeWheel Media Creative Approval Queue API
+  description: >-
+    The Creative Approval Queue API from FreeWheel Media — 1 operation(s) for creative approval queue.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Creative Approval Queue
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-creative-approval-queue-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-creative-approval-queue-history-api
+  name: FreeWheel Media Creative Approval Queue History API
+  description: >-
+    The Creative Approval Queue History API from FreeWheel Media — 1 operation(s) for creative approval
+    queue history.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Creative Approval Queue History
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-creative-approval-queue-history-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-creative-asset-api
+  name: FreeWheel Media Creative Asset API
+  description: The Creative Asset API from FreeWheel Media — 1 operation(s) for creative asset.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Creative Asset
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-creative-asset-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-creative-bulk-upload-api
+  name: FreeWheel Media Creative Bulk Upload API
+  description: >-
+    The Creative Bulk Upload API from FreeWheel Media — 1 operation(s) for creative bulk upload.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Creative Bulk Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-creative-bulk-upload-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-creative-line-item-api
+  name: FreeWheel Media Creative Line Item API
+  description: The Creative Line Item API from FreeWheel Media — 1 operation(s) for creative line item.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Creative Line Item
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-creative-line-item-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-creative-template-api
+  name: FreeWheel Media Creative Template API
+  description: The Creative Template API from FreeWheel Media — 1 operation(s) for creative template.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Creative Template
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-creative-template-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-custom-list-api
+  name: FreeWheel Media Custom List API
+  description: The Custom List API from FreeWheel Media — 1 operation(s) for custom list.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Custom List
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-custom-list-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-custom-list-item-api
+  name: FreeWheel Media Custom List Item API
+  description: The Custom List Item API from FreeWheel Media — 1 operation(s) for custom list item.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Custom List Item
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-custom-list-item-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-deal-sync-api-api
+  name: FreeWheel Media Deal Sync API
+  description: The Deal Sync API API from FreeWheel Media — 2 operation(s) for deal sync api.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Deal Sync API
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-deal-sync-api-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-delivery-modifier-api
+  name: FreeWheel Media Delivery Modifier API
+  description: The Delivery Modifier API from FreeWheel Media — 1 operation(s) for delivery modifier.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Delivery Modifier
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-delivery-modifier-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-demand-creative-management-api-v1-api
+  name: FreeWheel Media Demand Creative Management API V1 API
+  description: >-
+    The Demand Creative Management API V1 API from FreeWheel Media — 5 operation(s) for demand creative
+    management api v1.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Demand Creative Management API V1
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-demand-creative-management-api-v1-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-event-api
+  name: FreeWheel Media Event API
+  description: The Event API from FreeWheel Media — 1 operation(s) for event.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Event
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-event-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-event-assignment-api
+  name: FreeWheel Media Event Assignment API
+  description: The Event Assignment API from FreeWheel Media — 1 operation(s) for event assignment.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Event Assignment
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-event-assignment-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-event-tag-api
+  name: FreeWheel Media Event Tag API
+  description: The Event Tag API from FreeWheel Media — 1 operation(s) for event tag.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Event Tag
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-event-tag-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-html-asset-api
+  name: FreeWheel Media Html Asset API
+  description: The Html Asset API from FreeWheel Media — 1 operation(s) for html asset.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Html Asset
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-html-asset-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-line-item-api
+  name: FreeWheel Media Line Item API
+  description: The Line Item API from FreeWheel Media — 1 operation(s) for line item.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Line Item
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-line-item-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-line-item-flight-api
+  name: FreeWheel Media Line Item Flight API
+  description: The Line Item Flight API from FreeWheel Media — 1 operation(s) for line item flight.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Line Item Flight
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-line-item-flight-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-list-item-api
+  name: FreeWheel Media List Item API
+  description: The List Item API from FreeWheel Media — 1 operation(s) for list item.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - List Item
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-list-item-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-list-item-bulk-api
+  name: FreeWheel Media List Item Bulk API
+  description: The List Item Bulk API from FreeWheel Media — 1 operation(s) for list item bulk.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - List Item Bulk
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-list-item-bulk-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-list-item-geo-api
+  name: FreeWheel Media List Item(geo) API
+  description: The List Item(geo) API from FreeWheel Media — 1 operation(s) for list item(geo).
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - List Item(geo)
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-list-item-geo-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-native-offer-api
+  name: FreeWheel Media Native Offer API
+  description: The Native Offer API from FreeWheel Media — 1 operation(s) for native offer.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Native Offer
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-native-offer-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-providers-api
+  name: FreeWheel Media Providers API
+  description: The Providers API from FreeWheel Media — 1 operation(s) for providers.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-providers-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-report-queue-api
+  name: FreeWheel Media Report Queue API
+  description: The Report Queue API from FreeWheel Media — 1 operation(s) for report queue.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Report Queue
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-report-queue-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-report-save-api
+  name: FreeWheel Media Report Save API
+  description: The Report Save API from FreeWheel Media — 1 operation(s) for report save.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Report Save
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-report-save-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-resend-user-email-api
+  name: FreeWheel Media Resend User Email API
+  description: The Resend User Email API from FreeWheel Media — 1 operation(s) for resend user email.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Resend User Email
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-resend-user-email-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-rest-api
+  name: FreeWheel Media Rest API
+  description: The Rest API from FreeWheel Media — 1 operation(s) for rest.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Rest
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-rest-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-role-api
+  name: FreeWheel Media Role API
+  description: The Role API from FreeWheel Media — 1 operation(s) for role.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Role
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-role-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-search-api
+  name: FreeWheel Media Search API
+  description: The Search API from FreeWheel Media — 1 operation(s) for search.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-search-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segment-api
+  name: FreeWheel Media Segment API
+  description: The Segment API from FreeWheel Media — 1 operation(s) for segment.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segment
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segment-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segment-category-api
+  name: FreeWheel Media Segment Category API
+  description: The Segment Category API from FreeWheel Media — 1 operation(s) for segment category.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segment Category
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segment-category-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segment-category-association-api
+  name: FreeWheel Media Segment Category Association API
+  description: >-
+    The Segment Category Association API from FreeWheel Media — 1 operation(s) for segment category association.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segment Category Association
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segment-category-association-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segment-category-lookup-api
+  name: FreeWheel Media Segment Category Lookup API
+  description: >-
+    The Segment Category Lookup API from FreeWheel Media — 1 operation(s) for segment category lookup.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segment Category Lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segment-category-lookup-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segment-category-sharing-api
+  name: FreeWheel Media Segment Category Sharing API
+  description: >-
+    The Segment Category Sharing API from FreeWheel Media — 1 operation(s) for segment category sharing.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segment Category Sharing
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segment-category-sharing-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segment-lookup-api
+  name: FreeWheel Media Segment Lookup API
+  description: The Segment Lookup API from FreeWheel Media — 1 operation(s) for segment lookup.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segment Lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segment-lookup-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segment-sharing-api
+  name: FreeWheel Media Segment Sharing API
+  description: The Segment Sharing API from FreeWheel Media — 1 operation(s) for segment sharing.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segment Sharing
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segment-sharing-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segment-tag-api
+  name: FreeWheel Media Segment Tag API
+  description: The Segment Tag API from FreeWheel Media — 1 operation(s) for segment tag.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segment Tag
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segment-tag-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segment-update-api
+  name: FreeWheel Media Segment Update API
+  description: The Segment Update API from FreeWheel Media — 1 operation(s) for segment update.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segment Update
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segment-update-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segment-upload-api
+  name: FreeWheel Media Segment Upload API
+  description: The Segment Upload API from FreeWheel Media — 1 operation(s) for segment upload.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segment Upload
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segment-upload-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-segments-api
+  name: FreeWheel Media Segments API
+  description: The Segments API from FreeWheel Media — 2 operation(s) for segments.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-segments-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-services-api
+  name: FreeWheel Media Services API
+  description: The Services API from FreeWheel Media — 1 operation(s) for services.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Services
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-services-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-strategy-api
+  name: FreeWheel Media Strategy API
+  description: The Strategy API from FreeWheel Media — 1 operation(s) for strategy.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Strategy
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-strategy-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-targeting-template-api
+  name: FreeWheel Media Targeting Template API
+  description: The Targeting Template API from FreeWheel Media — 1 operation(s) for targeting template.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Targeting Template
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-targeting-template-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-user-api
+  name: FreeWheel Media User API
+  description: The User API from FreeWheel Media — 1 operation(s) for user.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-user-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-user-lookup-api
+  name: FreeWheel Media User Lookup API
+  description: The User Lookup API from FreeWheel Media — 1 operation(s) for user lookup.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - User Lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-user-lookup-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-vendor-api
+  name: FreeWheel Media Vendor API
+  description: The Vendor API from FreeWheel Media — 1 operation(s) for vendor.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Vendor
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-vendor-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-vendor-fee-api
+  name: FreeWheel Media Vendor Fee API
+  description: The Vendor Fee API from FreeWheel Media — 1 operation(s) for vendor fee.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Vendor Fee
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-vendor-fee-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-video-asset-api
+  name: FreeWheel Media Video Asset API
+  description: The Video Asset API from FreeWheel Media — 1 operation(s) for video asset.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - Video Asset
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-video-asset-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-view-api
+  name: FreeWheel Media View API
+  description: The View API from FreeWheel Media — 1 operation(s) for view.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - View
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-view-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
+- aid: freewheel-media:freewheel-media-view-list-api
+  name: FreeWheel Media View List API
+  description: The View List API from FreeWheel Media — 1 operation(s) for view list.
+  humanURL: https://api-docs.freewheel.tv/advertiser
+  baseURL: https://buzz-key.api.beeswax.com/rest/
+  tags:
+  - View List
+  properties:
+  - type: OpenAPI
+    url: openapi/freewheel-media-view-list-api-openapi.yml
+  - type: Documentation
+    url: https://api-docs.freewheel.tv/advertiser/docs
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/advertiser/reference
+  - type: GettingStarted
+    url: https://api-docs.freewheel.tv/advertiser/docs/getting-started
+  - type: Authentication
+    url: https://api-docs.freewheel.tv/advertiser/docs/authentication
+  - type: ChangeLog
+    url: https://api-docs.freewheel.tv/advertiser/changelog
+  - type: APIReference
+    url: https://api-docs.freewheel.tv/demand/reference
 common:
+- type: Overlay
+  url: overlays/freewheel-media-advertiser-buzz-overlay.yaml
+- type: Overlay
+  url: overlays/freewheel-media-demand-audience-management-overlay.yaml
+- type: Overlay
+  url: overlays/freewheel-media-demand-deal-sync-overlay.yaml
+- type: Overlay
+  url: overlays/freewheel-media-demand-creative-management-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/freewheel-media-agentic-access.yml
 - type: Authentication
