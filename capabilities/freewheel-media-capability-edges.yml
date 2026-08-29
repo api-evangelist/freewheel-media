@@ -1,0 +1,46 @@
+slug: freewheel-media
+provider: FreeWheel Media
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Campaign
+  spec_file: freewheel-media-campaign-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.75
+  evidence: POST /campaign  campaign-post; GET /campaign; vendor is 'an advertising technology platform
+    ... media buying'
+  reason: Campaign CRUD on an ad-tech media-buying platform is advertising campaign management, which
+    sits under digital/paid media marketing. Could arguably be demand generation, so L2 confidence is
+    tempered.
+- tag: Segments
+  spec_file: freewheel-media-segments-api-openapi.yml
+  capability_id: BC-420.20
+  capability_id_l1: BC-420
+  capability_name: Customer Segmentation Management
+  confidence: 0.75
+  evidence: audience-management-api; 'List Segments by Data Provider' and 'Filter Segment Searches'
+  reason: The spec is explicitly an audience-management API listing segments by data provider, i.e. management
+    of audience segments for targeting, which realises Customer Segmentation Management.
+- tag: Demand Creative Management API V1
+  spec_file: freewheel-media-demand-creative-management-api-v1-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: POST /accounts/{account_id}/ads CreateACreative 'Create a Creative'; POST /accounts/{account_id}/deal_assignments
+    'Assign a Creative to a Deal'
+  reason: Operations create, update and retrieve advertising creatives and assign them to media deals,
+    which is paid-media/digital advertising execution. Clear on substance; residual ambiguity is only
+    whether creative asset production (content marketing) is the better L2.

@@ -1532,6 +1532,9 @@ apis:
   - type: APIReference
     url: https://api-docs.freewheel.tv/demand/reference
 common:
+- type: CapabilityMap
+  url: capabilities/freewheel-media-capability-edges.yml
+  name: FreeWheel Media Business Capability Map
 - type: Overlay
   url: overlays/freewheel-media-advertiser-buzz-overlay.yaml
 - type: Overlay
