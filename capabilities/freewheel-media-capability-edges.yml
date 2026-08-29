@@ -3,7 +3,7 @@ provider: FreeWheel Media
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Software & Technology
+- Media, Entertainment & Telecom Content
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,36 +11,70 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 3
+edge_count: 7
 edges:
-- tag: Campaign
-  spec_file: freewheel-media-campaign-api-openapi.yml
-  capability_id: BC-400.60
-  capability_id_l1: BC-400
-  capability_name: Digital Marketing Management
-  confidence: 0.75
-  evidence: POST /campaign  campaign-post; GET /campaign; vendor is 'an advertising technology platform
-    ... media buying'
-  reason: Campaign CRUD on an ad-tech media-buying platform is advertising campaign management, which
-    sits under digital/paid media marketing. Could arguably be demand generation, so L2 confidence is
-    tempered.
-- tag: Segments
-  spec_file: freewheel-media-segments-api-openapi.yml
-  capability_id: BC-420.20
-  capability_id_l1: BC-420
-  capability_name: Customer Segmentation Management
-  confidence: 0.75
-  evidence: audience-management-api; 'List Segments by Data Provider' and 'Filter Segment Searches'
-  reason: The spec is explicitly an audience-management API listing segments by data provider, i.e. management
-    of audience segments for targeting, which realises Customer Segmentation Management.
 - tag: Demand Creative Management API V1
   spec_file: freewheel-media-demand-creative-management-api-v1-api-openapi.yml
-  capability_id: BC-400.60
-  capability_id_l1: BC-400
-  capability_name: Digital Marketing Management
-  confidence: 0.7
-  evidence: POST /accounts/{account_id}/ads CreateACreative 'Create a Creative'; POST /accounts/{account_id}/deal_assignments
-    'Assign a Creative to a Deal'
-  reason: Operations create, update and retrieve advertising creatives and assign them to media deals,
-    which is paid-media/digital advertising execution. Clear on substance; residual ambiguity is only
-    whether creative asset production (content marketing) is the better L2.
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.88
+  evidence: POST /accounts/{account_id}/deal_assignments  AssignACreativeToADeal; 'Retrieve All Creatives'
+  reason: Explicit creative lifecycle plus assignment of creatives to deals — creative onboarding and
+    ad decisioning setup, i.e. Ad Trafficking & Operations.
+- tag: Creative Asset
+  spec_file: freewheel-media-creative-asset-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.8
+  evidence: POST /creative_asset  creativeasset-post
+  reason: Creation and retrieval of advertising creative assets on an ad platform is creative onboarding
+    within Ad Trafficking & Operations, not general media asset management of programme content.
+- tag: Deal Sync API
+  spec_file: freewheel-media-deal-sync-api-api-openapi.yml
+  capability_id: BC-3760.30
+  capability_id_l1: BC-3760
+  capability_name: Programmatic Sales Management
+  confidence: 0.78
+  evidence: model.DemandDeal, model.DemandSeat, model.BuyerStatus; PATCH /deals/{id} 'Update Buyer Status
+    for Deals'
+  reason: Demand-side deals with seats, pacing, budgets and buyer status are programmatic marketplace
+    deal objects, matching Programmatic Sales Management.
+- tag: Creative Approval Queue
+  spec_file: freewheel-media-creative-approval-queue-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.75
+  evidence: GET /creative_approval_queue  creativeapprovalqueue-get
+  reason: On an ad-tech platform, a creative approval queue is the review/onboarding step for ad creatives
+    before trafficking, which sits in Ad Trafficking & Operations ('onboarding of creatives'). Only one
+    GET operation, so some thinness.
+- tag: Creative Line Item
+  spec_file: freewheel-media-creative-line-item-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.75
+  evidence: POST /creative_line_item, PUT /creative_line_item
+  reason: Associates creatives with campaign line items — the core assignment/trafficking step of ad operations.
+- tag: Creative
+  spec_file: freewheel-media-creative-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.72
+  evidence: POST /creative  creative-post  creative
+  reason: Management of ad creatives in the FreeWheel ad platform, matching "Onboarding of creatives,
+    ad decisioning and insertion" in Ad Trafficking & Operations. Confidence tempered because the spec
+    provides no schemas or descriptions.
+- tag: Creative Bulk Upload
+  spec_file: freewheel-media-creative-bulk-upload-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.72
+  evidence: POST /creative_bulk_upload  creativebulkupload-post
+  reason: Bulk ingest of ad creatives into the ad server; the business function is creative onboarding
+    for trafficking, though 'bulk upload' is partly plumbing.
