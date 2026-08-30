@@ -1,0 +1,420 @@
+openapi: 3.2.0
+info:
+  title: buzz Delivery Modifier API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Delivery Modifier
+paths:
+  /delivery_modifier:
+    post:
+      summary: delivery_modifier
+      description: ''
+      operationId: delivery-modifier-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - delivery_modifier_name
+              - default_delivery
+              properties:
+                advertiser_id:
+                  type: integer
+                  description: Optional. Allows a Delivery Modifier to be restricted to a single Advertiser
+                  format: int32
+                delivery_model_id:
+                  type: integer
+                  description: The ID of the Bid Model to be associated with this Delivery Modifier. Model must be of type `BUDGET_WEIGHT`
+                  format: int32
+                delivery_modifier_name:
+                  type: string
+                  description: Name of the Delivery Modifier, e.g. "Video complete modifier"
+                delivery_modifier_terms:
+                  type: object
+                  description: List of modification objects, see note.
+                  properties:
+                    <none>:
+                      type: object
+                      required:
+                      - targeting_module
+                      - targeting_key
+                      - value
+                      - modifier
+                      properties:
+                        targeting_module:
+                          type: string
+                          description: The targeting module, e.g. `geo`
+                        targeting_key:
+                          type: string
+                          description: The targeting key within the module, e.g. `country`
+                        value:
+                          type: string
+                          description: Value of the key to match, e.g. "USA" for the country key. Must always be a string, even if value is an integer or array.
+                        modifier_type:
+                          type: string
+                          description: The matching method for the modifier
+                          default: INCLUDE
+                        modifier:
+                          type: number
+                          description: Amount to apply to the modifier. For Bid Modifiers this will be the multiplier, for Delivery Models this will be the relative weight of delivery. Min=0 (don't bid) Max = 100
+                          format: double
+                        field_label:
+                          type: string
+                          description: Human readable label for the field. Automatically added to the Terms. Do not set on POST.
+                default_delivery:
+                  type: number
+                  description: The default delivery value to be used when no terms match. Set to zero to prevent delivery when terms do not match.
+                  format: double
+                alternative_id:
+                  type: string
+                  description: An alternative ID to lookup the Delivery Modifier, if desired
+                notes:
+                  type: string
+                  description: Notes, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"delivery_modifier created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: delivery_modifier created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/delivery_modifier" -b cookies.txt -d '{"delivery_modifier_name":"new DM", "advertiser_id":1, "delivery_modifier_terms":[{"targeting_module":"geo","targeting_key":"country","value":"USA","modifier":0.8,"modifier_type":"include"}], "active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Delivery Modifier
+    get:
+      summary: delivery_modifier
+      description: ''
+      operationId: delivery-modifier-get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - delivery_modifier_name
+              properties:
+                delivery_modifier_id:
+                  type: integer
+                  description: ID of the Delivery Modifier
+                  format: int32
+                advertiser_id:
+                  type: integer
+                  description: Advertiser ID associated with the Delivery Modifier
+                  format: int32
+                alternative_id:
+                  type: string
+                  description: An alternative ID to lookup the Delivery Modifier
+                delivery_model_id:
+                  type: integer
+                  description: The ID of the Bid Model to be associated with this Delivery Modifier.
+                  format: int32
+                delivery_modifier_name:
+                  type: string
+                  description: Name of the Delivery Modifier, e.g. "Video complete modifier"
+                active:
+                  type: boolean
+                  description: Is it active?
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"advertiser_id\": 123,\n            \"default_delivery\": 0,\n            \"delivery_model_id\": null,\n            \"account_id\": 1,\n            \"create_date\": \"2020-02-04 09:47:14\",\n            \"update_date\": \"2020-02-04 09:50:05\",\n            \"alternative_id\": null,\n            \"notes\": \"Notes about this DM\",\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\",\n            \"delivery_modifier_terms\": [\n                {\n                    \"targeting_module\": \"platform\",\n                    \"targeting_key\": \"os\",\n                    \"modifier_type\": \"include\",\n                    \"value\": \"Android\",\n                    \"modifier\": 0.5,\n                    \"field_label\": \"Android\"\n                },\n                {\n                    \"targeting_module\": \"platform\",\n                    \"targeting_key\": \"os\",\n                    \"modifier_type\": \"include\",\n                    \"value\": \"iOS\",\n                    \"modifier\": 2,\n                    \"field_label\": \"Apple iOS\"\n                }\n            ],\n            \"delivery_modifier_id\": 123,\n            \"delivery_modifier_name\": \"DM name\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        advertiser_id:
+                          type: integer
+                          example: 123
+                          default: 0
+                        default_delivery:
+                          type: integer
+                          example: 0
+                          default: 0
+                        delivery_model_id: {}
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2020-02-04 09:47:14'
+                        update_date:
+                          type: string
+                          example: '2020-02-04 09:50:05'
+                        alternative_id: {}
+                        notes:
+                          type: string
+                          example: Notes about this DM
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+                        delivery_modifier_terms:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              targeting_module:
+                                type: string
+                                example: platform
+                              targeting_key:
+                                type: string
+                                example: os
+                              modifier_type:
+                                type: string
+                                example: include
+                              value:
+                                type: string
+                                example: Android
+                              modifier:
+                                type: number
+                                example: 0.5
+                                default: 0
+                              field_label:
+                                type: string
+                                example: Android
+                        delivery_modifier_id:
+                          type: integer
+                          example: 123
+                          default: 0
+                        delivery_modifier_name:
+                          type: string
+                          example: DM name
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/delivery_modifier" -b cookies.txt -d '{"delivery_modifier_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Delivery Modifier
+    put:
+      summary: delivery_modifier
+      description: ''
+      operationId: delivery-modifier-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - delivery_modifier_id
+              - delivery_modifier_name
+              properties:
+                delivery_modifier_id:
+                  type: integer
+                  description: ID of the Delivery Modifier to update
+                  format: int32
+                advertiser_id:
+                  type: integer
+                  description: Optional. Allows a Delivery Modifier to be restricted to a single Advertiser
+                  format: int32
+                delivery_model_id:
+                  type: integer
+                  description: The ID of the Bid Model to be associated with this Delivery Modifier. Model must be of type `BUDGET_WEIGHT`
+                  format: int32
+                delivery_modifier_name:
+                  type: string
+                  description: Name of the Delivery Modifier, e.g. "Video complete modifier"
+                delivery_modifier_terms:
+                  type: object
+                  description: List of modification objects, see note.
+                  properties:
+                    <none>:
+                      type: object
+                      required:
+                      - targeting_module
+                      - targeting_key
+                      - value
+                      - modifier
+                      properties:
+                        targeting_module:
+                          type: string
+                          description: The targeting module, e.g. `geo`
+                        targeting_key:
+                          type: string
+                          description: The targeting key within the module, e.g. `country`
+                        value:
+                          type: string
+                          description: Value of the key to match, e.g. "USA" for the country key. Must always be a string, even if value is an integer or array.
+                        modifier_type:
+                          type: string
+                          description: The matching method for the modifier
+                          default: INCLUDE
+                        modifier:
+                          type: number
+                          description: Amount to apply to the modifier. For Bid Modifiers this will be the multiplier, for Delivery Models this will be the relative weight of delivery. Min=0 (don't bid) Max = 100
+                          format: double
+                        field_label:
+                          type: string
+                          description: Human readable label for the field. Automatically added to the Terms. Do not set on POST.
+                default_delivery:
+                  type: number
+                  description: The default delivery value to be used when no terms match. Set to zero to prevent delivery when terms do not match.
+                  format: double
+                alternative_id:
+                  type: string
+                  description: An alternative ID to lookup the Delivery Modifier, if desired
+                notes:
+                  type: string
+                  description: Notes, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"delivery_modifier updated with ID 1\"\n        }\n    ],\n    \"message\": \"delivery_modifier update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: delivery_modifier updated with ID 1
+                  message:
+                    type: string
+                    example: 'delivery_modifier update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/delivery_modifier" -b cookies.txt -d '{"delivery_modifier_id":1, "delivery_modifier_name":"new DM", "advertiser_id":1, "delivery_modifier_terms":[{"targeting_module":"geo","targeting_key":"country","value":"USA","modifier":0.8,"modifier_type":"include"}], "active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Delivery Modifier
+    delete:
+      summary: delivery_modifier
+      description: ''
+      operationId: delivery-modifier-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - delivery_modifier_id
+              properties:
+                delivery_modifier_id:
+                  type: integer
+                  description: ID of the Delivery Modifier to delete
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"delivery_modifier deleted with ID 1\"\n        }\n    ],\n    \"message\": \"delivery_modifier: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: delivery_modifier deleted with ID 1
+                  message:
+                    type: string
+                    example: 'delivery_modifier: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/delivery_modifier" -b cookies.txt -d '{"delivery_modifier_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Delivery Modifier
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

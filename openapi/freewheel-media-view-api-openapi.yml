@@ -1,0 +1,76 @@
+openapi: 3.2.0
+info:
+  title: buzz View API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: View
+paths:
+  /view:
+    get:
+      summary: view
+      description: ''
+      operationId: view-get
+      parameters:
+      - name: view_name
+        in: query
+        description: The view name.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"line_item_type_id\": 0,\n            \"line_item_type\": \"banner\",\n            \"sizeless\": false,\n            \"pixel_size\": 1\n        },\n        {\n            \"line_item_type_id\": 1,\n            \"line_item_type\": \"video\",\n            \"sizeless\": false,\n            \"pixel_size\": -1\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        line_item_type_id:
+                          type: integer
+                          example: 0
+                          default: 0
+                        line_item_type:
+                          type: string
+                          example: banner
+                        sizeless:
+                          type: boolean
+                          example: false
+                          default: true
+                        pixel_size:
+                          type: integer
+                          example: 1
+                          default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: 'curl -X GET "[host]/rest/view" -b cookies.txt -d ''{"view_name":"line_item_types"}''
+
+            # You can also query field values
+
+            curl -X GET "[host]/rest/view" -b cookies.txt -d  ''{"view_name":"cities","city_name":"Newark"}'''
+        samples-languages:
+        - curl
+      tags:
+      - View
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

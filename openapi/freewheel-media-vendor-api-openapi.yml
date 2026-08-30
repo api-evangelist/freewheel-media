@@ -1,0 +1,292 @@
+openapi: 3.2.0
+info:
+  title: buzz Vendor API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Vendor
+paths:
+  /vendor:
+    post:
+      summary: vendor
+      description: ''
+      operationId: vendor-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vendor_name
+              properties:
+                vendor_name:
+                  type: string
+                  description: Name of the vendor, <100 characters
+                fee_type:
+                  type: string
+                  description: Type of fee, either `cpm` or `percent`
+                fee_amount:
+                  type: number
+                  description: Default charge for this vendor. If the `fee_type` is set, the fee_amount must be set as well. Must be a positive number between 0 and 99.9.
+                  format: double
+                currency:
+                  type: string
+                  description: Currency in which this vendor charges the fees.
+                  default: USD
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"vendor created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: vendor created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/vendor" -b cookies.txt -d '{"vendor_name":"Beeswax", "fee_type":"cpm", "fee_amount":1.23, "global":false, "currency":"CAD"}'
+        samples-languages:
+        - curl
+      tags:
+      - Vendor
+    get:
+      summary: vendor
+      description: ''
+      operationId: vendor-get
+      parameters:
+      - name: vendor_id
+        in: query
+        description: Unique ID for the vendor
+        schema:
+          type: integer
+          format: int32
+      - name: vendor_name
+        in: query
+        description: Name of the vendors
+        schema:
+          type: string
+      - name: global
+        in: query
+        description: Is the Vendor global, meaning it is available to all Accounts on the system.
+        schema:
+          type: boolean
+          default: false
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"vendor_id\": 1,\n            \"vendor_name\": \"test vendor\",\n            \"fee_type\": null,\n            \"fee_amount\": null,\n            \"currency\": \"CAD\",\n            \"global\": false,\n            \"account_id\": 1,\n            \"create_date\": \"2015-11-16 18:57:32\",\n            \"update_date\": \"2015-11-16 18:57:32\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        vendor_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        vendor_name:
+                          type: string
+                          example: test vendor
+                        fee_type: {}
+                        fee_amount: {}
+                        currency:
+                          type: string
+                          example: CAD
+                        global:
+                          type: boolean
+                          example: false
+                          default: true
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2015-11-16 18:57:32'
+                        update_date:
+                          type: string
+                          example: '2015-11-16 18:57:32'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/vendor" -b cookies.txt -d '{"vendor_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Vendor
+    put:
+      summary: vendor
+      description: ''
+      operationId: vendor-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vendor_id
+              properties:
+                vendor_id:
+                  type: integer
+                  description: Unique ID for the vendor
+                  format: int32
+                vendor_name:
+                  type: string
+                  description: Name of the vendor, <100 characters
+                fee_type:
+                  type: string
+                  description: Type of fee, either `cpm` or `percent`
+                fee_amount:
+                  type: number
+                  description: Default charge for this vendor. If the `fee_type` is set, the fee_amount must be set as well. Must be a positive number between 0 and 99.9.
+                  format: double
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"event updated with ID 1\"\n        }\n    ],\n    \"message\": \"event update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: event updated with ID 1
+                  message:
+                    type: string
+                    example: 'event update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/vendor" -b cookies.txt -d '{"vendor_id":1,"vendor_name":"Beeswax", "fee_type":"cpm", "fee_amount":1.23, "global":false}'
+        samples-languages:
+        - curl
+      tags:
+      - Vendor
+    delete:
+      summary: vendor
+      description: ''
+      operationId: vendor-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vendor_id
+              properties:
+                vendor_id:
+                  type: integer
+                  description: Unique ID of the Vendor
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"vendor deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: vendor deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/vendor" -b cookies.txt -d '{"vendor_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Vendor
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

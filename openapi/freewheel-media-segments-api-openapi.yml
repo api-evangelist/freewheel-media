@@ -1,0 +1,209 @@
+openapi: 3.2.0
+info:
+  title: audience-management-api Segments API
+  version: '1.0'
+servers:
+- url: https://api.freewheel.tv/demand
+security:
+- sec0: []
+tags:
+- name: Segments
+paths:
+  /v1/segments:
+    get:
+      summary: List Segments by Data Provider
+      description: ''
+      operationId: retrieve-segments-by-data-provider
+      parameters:
+      - name: keywords
+        in: query
+        schema:
+          type: string
+      - name: X-Freewheel-Ad-Industry
+        in: header
+        description: Industry category ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Sample Response:
+                  value: "{\n  \"page\": 1,\n  \"per_page\": 4,\n  \"total_page\": 1,\n  \"total_count\": 4,\n  \"items\": [\n    {\n      \"id\": \"9fe904831f\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Buying:By Internet \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 4682435.99,\n      \"provider_segment_id\": \"7209\"\n    },\n    {\n      \"id\": \"9f2354c276\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Cat \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 589627.27,\n      \"provider_segment_id\": \"7200\"\n    },\n    {\n      \"id\": \"9f118921ef\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Dog \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 843059.81,\n      \"provider_segment_id\": \"7203\"\n    },\n    {\n      \"id\": \"9fbd48f59a\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Pet \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 480629.14,\n      \"provider_segment_id\": \"7206\"\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: integer
+                    example: 1
+                    default: 0
+                  per_page:
+                    type: integer
+                    example: 4
+                    default: 0
+                  total_page:
+                    type: integer
+                    example: 1
+                    default: 0
+                  total_count:
+                    type: integer
+                    example: 4
+                    default: 0
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 9fe904831f
+                        name:
+                          type: string
+                          example: Experian > Lifestyle > SRVY:HH Lifestyl:Buying:By Internet > Y
+                        audience_partner:
+                          type: string
+                          example: experian
+                        data_provider_id:
+                          type: string
+                          example: Experian
+                        data_source_id:
+                          type: string
+                          example: Experian
+                        client_id:
+                          type: string
+                          example: '-1'
+                        level:
+                          type: integer
+                          example: 0
+                          default: 0
+                        parent_id:
+                          type: string
+                          example: '0'
+                        cpm:
+                          type: number
+                          example: 0.6
+                          default: 0
+                        count:
+                          type: number
+                          example: 4682435.99
+                          default: 0
+                        provider_segment_id:
+                          type: string
+                          example: '7209'
+      deprecated: false
+      security: []
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n --url 'https://api.freewheel.tv/demand/v1/segments?keywords=123'\n --header \"Authorization: Bearer $auth_token\" \\\n --header \"X-Freewheel-Ad-Industry: 1\" \\"
+          name: Sample Request
+        samples-languages:
+        - curl
+      tags:
+      - Segments
+  /v1/segments?:
+    get:
+      summary: Filter Segment Searches
+      description: ''
+      operationId: filter-segment-searches
+      parameters:
+      - name: keywords
+        in: query
+        schema:
+          type: string
+      - name: providers
+        in: query
+        schema:
+          type: string
+          default: $providers
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Sample Response:
+                  value: "{\n  \"page\": 1,\n  \"per_page\": 13,\n  \"total_page\": 1,\n  \"total_count\": 13,\n  \"items\": [\n    {\n      \"id\": \"c84e174f9f\",\n      \"name\": \"InfoScout  \\u003e  Pet Food \\u0026 Treats  \\u003e  Cat Food \\u0026 Treats  \\u003e  Purina Cat Chow\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Numerator\",\n      \"data_source_id\": \"Numerator\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.25,\n      \"count\": 4701159.12,\n      \"provider_segment_id\": \"1001160499\"\n    },\n    {\n      \"id\": \"c89eb332ac\",\n      \"name\": \"InfoScout  \\u003e  Pet Supplies  \\u003e  Cat Supplies  \\u003e  Purina Tidy Cats\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Numerator\",\n      \"data_source_id\": \"Numerator\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.25,\n      \"count\": 5091676.75,\n      \"provider_segment_id\": \"1001160509\"\n    },\n    {\n      \"id\": \"9fb17446af\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Buying:By Catalog \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 4703315.12,\n      \"provider_segment_id\": \"7215\"\n    },\n    {\n      \"id\": \"9f2354c276\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e SRVY:HH Lifestyl:Pets:Own A Cat \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 589627.27,\n      \"provider_segment_id\": \"7200\"\n    },\n    {\n      \"id\": \"823d7497cb\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Social \\u003e Entertainment\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 5387421.42,\n      \"provider_segment_id\": \"1001385839\"\n    },\n    {\n      \"id\": \"828c83d14d\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Transportation \\u003e Transport Hubs\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 834616.19,\n      \"provider_segment_id\": \"1001386739\"\n    },\n    {\n      \"id\": \"9f30a1388a\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e BehaviorBank: Cat Enthusiasts \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 613624.79,\n      \"provider_segment_id\": \"8154468\"\n    },\n    {\n      \"id\": \"8286bd6e29\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Social \\u003e Food and Dining \\u003e Restaurants\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 13775862.56,\n      \"provider_segment_id\": \"1001386159\"\n    },\n    {\n      \"id\": \"c87ad80fa4\",\n      \"name\": \"InfoScout  \\u003e  All Departments  \\u003e  Non-Beer Categories  \\u003e  All Brands\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Numerator\",\n      \"data_source_id\": \"Numerator\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.25,\n      \"count\": 11938639.5,\n      \"provider_segment_id\": \"1004155179\"\n    },\n    {\n      \"id\": \"82c96b4399\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Retail \\u003e Tobacco\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 6930145.5,\n      \"provider_segment_id\": \"1001385939\"\n    },\n    {\n      \"id\": \"9fec5decca\",\n      \"name\": \"Experian \\u003e Lifestyle \\u003e Act/Int: Cat Owners \\u003e Y\",\n      \"audience_partner\": \"experian\",\n      \"data_provider_id\": \"Experian\",\n      \"data_source_id\": \"Experian\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 0.6,\n      \"count\": 4431723.79,\n      \"provider_segment_id\": \"127\"\n    },\n    {\n      \"id\": \"827f6b8e08\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Social \\u003e Food and Dining\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 6263618.79,\n      \"provider_segment_id\": \"1001386059\"\n    },\n    {\n      \"id\": \"82870850c9\",\n      \"name\": \"Factual \\u003e Place Category Visitors \\u003e Retail \\u003e Food and Beverage\",\n      \"audience_partner\": \"liveramp\",\n      \"data_provider_id\": \"Factual\",\n      \"data_source_id\": \"Factual\",\n      \"client_id\": \"-1\",\n      \"level\": 0,\n      \"parent_id\": \"0\",\n      \"cpm\": 1.5,\n      \"count\": 7540409,\n      \"provider_segment_id\": \"1001385549\"\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: integer
+                    example: 1
+                    default: 0
+                  per_page:
+                    type: integer
+                    example: 13
+                    default: 0
+                  total_page:
+                    type: integer
+                    example: 1
+                    default: 0
+                  total_count:
+                    type: integer
+                    example: 13
+                    default: 0
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: c84e174f9f
+                        name:
+                          type: string
+                          example: InfoScout  >  Pet Food & Treats  >  Cat Food & Treats  >  Purina Cat Chow
+                        audience_partner:
+                          type: string
+                          example: liveramp
+                        data_provider_id:
+                          type: string
+                          example: Numerator
+                        data_source_id:
+                          type: string
+                          example: Numerator
+                        client_id:
+                          type: string
+                          example: '-1'
+                        level:
+                          type: integer
+                          example: 0
+                          default: 0
+                        parent_id:
+                          type: string
+                          example: '0'
+                        cpm:
+                          type: number
+                          example: 1.25
+                          default: 0
+                        count:
+                          type: number
+                          example: 4701159.12
+                          default: 0
+                        provider_segment_id:
+                          type: string
+                          example: '1001160499'
+      deprecated: false
+      security: []
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "//Get a list of all providers\nproviders=$(curl \\\n  -H \"Authorization: Bearer $auth_token\" \\\n  -H \"X-Freewheel-Ad-Industry: 1\" \\\n\"$DS/v1/providers\" | jq -r '.items | map(.id) | @uri')\n \n// Pass it into the API request\ncurl -s -S \\\n -H \"Authorization: Bearer $auth_token\" \\\n -H \"X-Freewheel-Ad-Industry: 1\" \\\n --url 'https://api.freewheel.tv/demand/v1/segments?keywords=cat&providers=$providers'"
+          name: Sample Requests
+        samples-languages:
+        - curl
+      tags:
+      - Segments
+components:
+  securitySchemes:
+    sec0:
+      type: http
+      scheme: basic
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

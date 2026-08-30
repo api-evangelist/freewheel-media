@@ -1,0 +1,340 @@
+openapi: 3.2.0
+info:
+  title: buzz Bid Model Version API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Bid Model Version
+paths:
+  /bid_model_version:
+    post:
+      summary: bid_model_version
+      description: ''
+      operationId: bid-model-versions-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bid_model_id
+              - bid_model_version_name
+              - active
+              properties:
+                bid_model_id:
+                  type: integer
+                  description: Unique ID of the Bid Model this version is associated with.
+                  format: int32
+                bid_model_version_name:
+                  type: string
+                  description: Name of the Bid Model Version, e.g. "Model 17.x.3"
+                manifest_s3_path:
+                  type: string
+                  description: Path to the file on S3. Should be in the format `s3://beeswax-data-<region>/bid_models/<buzz_key>/customer_manifests/<file_name>`
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the  Line Item, if desired
+                notes:
+                  type: string
+                  description: Notes, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"bid_model_version created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: bid_model_version created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/bid_model_version" -b cookies.txt -d '{"bid_model_version_name":"CPI Model 2.3", "manifest_s3_path":"s3://beeswax-data-us-east-1/bid_models/stinger/customer_manifests/my_newest_model.txt"}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Model Version
+    get:
+      summary: bid_model_version
+      description: ''
+      operationId: bid-model-versions-get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bid_model_version_name
+              properties:
+                bid_model_version_id:
+                  type: integer
+                  description: Unique identifier of the Bid Model Version to be updated
+                  format: int32
+                bid_model_id:
+                  type: integer
+                  description: Unique ID of the Bid Model this version is associated with.
+                  format: int32
+                bid_model_version_name:
+                  type: string
+                  description: Name of the Bid Model Version, e.g. "Model 17.x.3"
+                manifest_s3_path:
+                  type: string
+                  description: Path to the file on S3
+                upload_status:
+                  type: string
+                  description: The current status of the version.
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the  Line Item, if desired
+                notes:
+                  type: string
+                  description: Notes, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"bid_model_version_id\": 1,\n            \"bid_model_id\": 2,\n            \"bid_model_version_name\": \"Version 1\",\n            \"manifest_s3_path\": \"s3://path/to/file/file.json\",\n            \"upload_status\": \"FAILED\",\n            \"account_id\": 1,\n            \"create_date\": \"2018-12-13 17:37:04\",\n            \"update_date\": \"2019-01-08 14:50:00\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stinger\", \n            \"errors\": [\n                {\n                    \"type\": \"Read Error\",\n                    \"error_message\": \"failed to read manifest file from S3\",\n                    \"file\": \"some_file_name\",\n                    \"first_row\": null,\n                    \"region\": \"eu-west-1\"          \n                }\n            ],\n            \"bid_model_version_key\": \"stinger-2-1\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        bid_model_version_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        bid_model_id:
+                          type: integer
+                          example: 2
+                          default: 0
+                        bid_model_version_name:
+                          type: string
+                          example: Version 1
+                        manifest_s3_path:
+                          type: string
+                          example: s3://path/to/file/file.json
+                        upload_status:
+                          type: string
+                          example: FAILED
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2018-12-13 17:37:04'
+                        update_date:
+                          type: string
+                          example: '2019-01-08 14:50:00'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stinger
+                        errors:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                                example: Read Error
+                              error_message:
+                                type: string
+                                example: failed to read manifest file from S3
+                              file:
+                                type: string
+                                example: some_file_name
+                              first_row: {}
+                              region:
+                                type: string
+                                example: eu-west-1
+                        bid_model_version_key:
+                          type: string
+                          example: stinger-2-1
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/bid_model_version" -b cookies.txt -d '{"bid_model_version_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Model Version
+    put:
+      summary: bid_model_version
+      description: ''
+      operationId: bid-model-versions-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bid_model_version_id
+              - bid_model_version_name
+              properties:
+                bid_model_version_id:
+                  type: integer
+                  description: Unique identifier of the Bid Model Version to be updated
+                  format: int32
+                bid_model_id:
+                  type: integer
+                  description: Unique ID of the Bid Model this version is associated with.
+                  format: int32
+                bid_model_version_name:
+                  type: string
+                  description: Name of the Bid Model Version, e.g. "Model 17.x.3"
+                manifest_s3_path:
+                  type: string
+                  description: Path to the file on S3. Should be in the format `s3://beeswax-data-<region>/bid_models/<buzz_key>/customer_manifests/<file_name>`
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the  Line Item, if desired
+                notes:
+                  type: string
+                  description: Notes, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"bid_model_version updated with ID 1\"\n        }\n    ],\n    \"message\": \"bid_model_version update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: bid_model_version updated with ID 1
+                  message:
+                    type: string
+                    example: 'bid_model_version update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/bid_model_version" -b cookies.txt -d '{"bid_model_version_id":1 "bid_model_version_name":"CPI Model 2.3"}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Model Version
+    delete:
+      summary: bid_model_version
+      description: ''
+      operationId: bid-model-versions-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bid_model_version_id
+              properties:
+                bid_model_version_id:
+                  type: integer
+                  description: Unique ID of the Bid Model Version
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"bid_model_version deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: bid_model_version deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/bid_model_version" -b cookies.txt -d '{"bid_model_version_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Model Version
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

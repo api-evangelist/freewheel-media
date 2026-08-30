@@ -1,0 +1,288 @@
+openapi: 3.2.0
+info:
+  title: buzz Creative Line Item API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Creative Line Item
+paths:
+  /creative_line_item:
+    post:
+      summary: creative_line_item
+      description: ''
+      operationId: creativelineitem-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - creative_id
+              - line_item_id
+              - active
+              properties:
+                creative_id:
+                  type: integer
+                  description: Unique ID of the Creative to be associated. Must bethe same type as the Line Item.
+                  format: int32
+                line_item_id:
+                  type: integer
+                  description: Unique D of the Line Item to be associated. Must be the same type as the Creative.
+                  format: int32
+                weighting:
+                  type: integer
+                  description: When the Line Item has `creative_weighting_method` set to `WEIGHTED`, this field represents the desired ratio of delivery against all other associated Creatives of the same size and type. Should be an integer between 1 and 100.
+                  format: int32
+                start_date:
+                  type: string
+                  description: Start date for the Creative to serve within this Line Item, optional. If either `start_date` or `end_date` is set, both values will override the Creative level dates, otherwise Creative level will be used.
+                  format: date
+                end_date:
+                  type: string
+                  description: End date for the Creative to serve within this Line Item, optional. If either `start_date` or `end_date` is set, both values will override the Creative level dates, otherwise Creative level will be used.
+                  format: date
+                active:
+                  type: boolean
+                  description: Must be true for the creative to serve.
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"creative_line_item created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: creative_line_item created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/creative_line_item" -b cookies.txt -d '{"creative_id":1, "line_item_id":1, "weighting":50, "active":1, "start_date":"2020-01-01", "end_date":"2021-01-01"}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative Line Item
+    get:
+      summary: creative_line_item
+      description: ''
+      operationId: creativelineitem-get
+      parameters:
+      - name: cli_id
+        in: query
+        description: Unique ID of the Creative Line Item association
+        schema:
+          type: integer
+          format: int32
+      - name: creative_id
+        in: query
+        description: Unique ID of the Creative.
+        schema:
+          type: integer
+          format: int32
+      - name: line_item_id
+        in: query
+        description: Unique D of the Line Item.
+        schema:
+          type: integer
+          format: int32
+      - name: start_date
+        in: query
+        description: Start date for the Creative to serve within this Line Item. If either `start_date` or `end_date` is set, both values will override the Creative level dates, otherwise Creative level will be used.
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        description: End date for the Creative to serve within this Line Item. If either `start_date` or `end_date` is set, both values will override the Creative level dates, otherwise Creative level will be used.
+        schema:
+          type: string
+          format: date
+      - name: active
+        in: query
+        description: Is it active?
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"cli_id\": 1,\n            \"creative_id\": 1,\n            \"line_item_id\": 1,\n            \"start_date\": \"2020-01-01 12:00:00\",\n            \"end_date\": \"2021-01-01 12:00:00\",\n            \"account_id\": 1,\n            \"weighting\": 50,\n            \"active\": true,\n            \"create_date\": \"2015-08-01 19:25:14\",\n            \"update_date\": \"2015-08-01 19:25:14\",\n            \"push_status\": 0,\n            \"push_update\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        cli_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        creative_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        line_item_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        start_date:
+                          type: string
+                          example: '2020-01-01 12:00:00'
+                        end_date:
+                          type: string
+                          example: '2021-01-01 12:00:00'
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        weighting:
+                          type: integer
+                          example: 50
+                          default: 0
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        create_date:
+                          type: string
+                          example: '2015-08-01 19:25:14'
+                        update_date:
+                          type: string
+                          example: '2015-08-01 19:25:14'
+                        push_status:
+                          type: integer
+                          example: 0
+                          default: 0
+                        push_update:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/creative_line_item" -b cookies.txt -d '{"cli_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative Line Item
+    put:
+      summary: creative_line_item
+      description: ''
+      operationId: creativelineitem-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - cli_id
+              properties:
+                cli_id:
+                  type: integer
+                  description: Unique ID of the Creative Line Item association.
+                  format: int32
+                weighting:
+                  type: integer
+                  description: When the Line Item has `creative_weighting_method` set to `WEIGHTED`, this field represents the desired ratio of delivery against all other associated Creatives of the same size and type. Should be an integer between 1 and 100.
+                  format: int32
+                start_date:
+                  type: string
+                  description: Start date for the Creative to serve within this Line Item, optional. If either `start_date` or `end_date` is set, both values will override the Creative level dates, otherwise Creative level will be used.
+                  format: date
+                end_date:
+                  type: string
+                  description: End date for the Creative to serve within this Line Item, optional. If either `start_date` or `end_date` is set, both values will override the Creative level dates, otherwise Creative level will be used.
+                  format: date
+                active:
+                  type: boolean
+                  description: Must be true for the creative to serve.
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"creative_line_item updated with ID 1\"\n        }\n    ],\n    \"message\": \"creative_line_item update: 1 updated successfully\",\n}"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/creative_line_item" -b cookies.txt -d '{"cli_id":1, "active":1, "weighting":50}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative Line Item
+    delete:
+      summary: creative_line_item
+      description: ''
+      operationId: creative_line_item-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - cli_id
+              properties:
+                cli_id:
+                  type: integer
+                  description: Unique ID of the Creative Line Item association.
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"creative_line_item deleted with ID 1\"\n        }\n    ],\n    \"message\": \"creative_line_item update: 1 deleted successfully\",\n}"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/creative_line_item" -b cookies.txt -d '{"cli_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative Line Item
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

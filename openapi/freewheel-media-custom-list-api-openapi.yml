@@ -1,0 +1,324 @@
+openapi: 3.2.0
+info:
+  title: buzz Custom List API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Custom List
+paths:
+  /custom_list:
+    post:
+      summary: custom_list
+      description: ''
+      operationId: customlist-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - list_name
+              - list_type
+              properties:
+                list_name:
+                  type: string
+                  description: Name of the Custom List
+                list_type:
+                  type: string
+                  description: Must be a valid list type.
+                delimiter:
+                  type: string
+                  description: If desired, you can set a custom delimiter to use when uploading a file to the `custom_list_item` method. This field only takes a single character.
+                list_attributes:
+                  type: array
+                  description: Only used for `lat_long` lists. Allows setting of a default_radius is form `{"default_radius_km":1.0}`
+                alternative_id:
+                  type: string
+                  description: Up to 191 characters
+                notes:
+                  type: string
+                  description: Up to 255 characters of notes
+                active:
+                  type: boolean
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"custom_list created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: custom_list created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/custom_list" -b cookies.txt -d '{"list_name":"my domain list","list_type":"domain","delimiter":"|"}'
+        samples-languages:
+        - curl
+      tags:
+      - Custom List
+    get:
+      summary: custom_list
+      description: ''
+      operationId: customlist-get
+      parameters:
+      - name: list_id
+        in: query
+        description: Unique ID of the Custom List
+        schema:
+          type: integer
+          format: int32
+      - name: list_name
+        in: query
+        description: Name of the Custom List
+        schema:
+          type: string
+      - name: list_type
+        in: query
+        description: Type of list
+        schema:
+          type: string
+      - name: active
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"list_id\": 1,\n            \"list_type\": \"domain\",\n            \"list_name\": \"Domain List\",\n            \"list_attributes\": [],\n          \t\"list_upload_type\": \"DIRECT_UPLOAD\",\n            \"account_id\": 2,\n            \"create_date\": \"2015-07-24 15:09:31\",\n            \"update_date\": \"2015-12-14 16:56:16\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        list_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        list_type:
+                          type: string
+                          example: domain
+                        list_name:
+                          type: string
+                          example: Domain List
+                        list_attributes:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        list_upload_type:
+                          type: string
+                          example: DIRECT_UPLOAD
+                        account_id:
+                          type: integer
+                          example: 2
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2015-07-24 15:09:31'
+                        update_date:
+                          type: string
+                          example: '2015-12-14 16:56:16'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/custom_list" -b cookies.txt -d '{"list_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Custom List
+    put:
+      summary: custom_list
+      description: ''
+      operationId: customlist-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - list_id
+              properties:
+                list_id:
+                  type: integer
+                  description: Unique ID of the Custom List
+                  format: int32
+                list_name:
+                  type: string
+                  description: Name of the Custom List
+                delimiter:
+                  type: string
+                  description: If desired, you can set a custom delimiter to use when uploading a file to the `custom_list_item` method. This field only takes a single character.
+                list_attributes:
+                  type: array
+                  description: For future use
+                alternative_id:
+                  type: string
+                  description: Alternative ID
+                notes:
+                  type: string
+                  description: <255 chars
+                active:
+                  type: boolean
+                  description: Is the list active
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"custom_list updated with ID 1\"\n        }\n    ],\n    \"message\": \"custom_list update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: custom_list updated with ID 1
+                  message:
+                    type: string
+                    example: 'custom_list update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/custom_list" -b cookies.txt -d '{"list_id":1, "list_name":"new name"}'
+        samples-languages:
+        - curl
+      tags:
+      - Custom List
+    delete:
+      summary: custom_list
+      description: ''
+      operationId: customlist-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - list_id
+              properties:
+                list_id:
+                  type: integer
+                  description: Unique ID of the list
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"custom_list deleted with ID 1\"\n        }\n    ],\n    \"message\": \"custom_list deletion: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: custom_list deleted with ID 1
+                  message:
+                    type: string
+                    example: 'custom_list deletion: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/custom_list" -b cookies.txt -d '{"list_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Custom List
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

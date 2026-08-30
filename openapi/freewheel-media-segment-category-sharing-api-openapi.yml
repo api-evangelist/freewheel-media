@@ -1,0 +1,225 @@
+openapi: 3.2.0
+info:
+  title: buzz Segment Category Sharing API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Segment Category Sharing
+paths:
+  /segment_category_sharing:
+    post:
+      summary: segment_category_sharing
+      description: ''
+      operationId: segment_category_sharing-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - segment_category_key
+              - shared_account_id
+              properties:
+                segment_category_key:
+                  type: string
+                  description: The `segment_category_key` (not `segment_category_id`!) from the SegmentCategory to be shared. Must either belong to the Account of the user, or be shared with that user's Account.
+                shared_account_id:
+                  type: integer
+                  description: The Account the SegmentCategory should be shared with
+                  format: int32
+                active:
+                  type: boolean
+                  description: Is the sharing active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"segment_category_sharing created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: segment_category_sharing created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/segment_category_sharing" -b cookies.txt -d '{"segment_category_key":"stingersbx-1","shared_account_id":23, "active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category Sharing
+    get:
+      summary: segment_category_sharing
+      description: ''
+      operationId: segment_category_sharing-get
+      parameters:
+      - name: segment_category_sharing_id
+        in: query
+        description: Unique ID of the segment_category_sharing
+        schema:
+          type: integer
+          format: int32
+      - name: segment_category_key
+        in: query
+        description: The `segment_category_key` (not `segment_category_id`!) from the SegmentCategory to be shared
+        schema:
+          type: string
+      - name: shared_account_id
+        in: query
+        description: The Account the SegmentCategory should be shared with
+        schema:
+          type: integer
+          format: int32
+      - name: active
+        in: query
+        description: Is the sharing active?
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"segment_category_sharing_id\": 1,\n            \"shared_account_id\": 2,\n            \"segment_category_key\": \"stingertest-1\",\n            \"account_id\": 1,\n            \"create_date\": \"2016-03-30 13:58:39\",\n            \"update_date\": \"2016-03-30 13:58:39\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        segment_category_sharing_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        shared_account_id:
+                          type: integer
+                          example: 2
+                          default: 0
+                        segment_category_key:
+                          type: string
+                          example: stingertest-1
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2016-03-30 13:58:39'
+                        update_date:
+                          type: string
+                          example: '2016-03-30 13:58:39'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/segment_category_sharing" -b cookies.txt -d '{"segment_category_sharing_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category Sharing
+    put:
+      summary: segment_category_sharing
+      description: ''
+      operationId: segment_category_sharing-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - segment_category_sharing_id
+              properties:
+                segment_category_sharing_id:
+                  type: integer
+                  description: Unique ID of the segment_category_sharing object
+                  format: int32
+                active:
+                  type: boolean
+                  description: Is the sharing active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"segment_category_sharing updated with ID 1\"\n        }\n    ],\n    \"message\": \"segment_category_sharing update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: segment_category_sharing updated with ID 1
+                  message:
+                    type: string
+                    example: 'segment_category_sharing update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/segment_category_sharing" -b cookies.txt -d '{"segment_category_sharing_id":1, "active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category Sharing
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

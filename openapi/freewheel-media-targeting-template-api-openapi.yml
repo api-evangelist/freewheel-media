@@ -1,0 +1,346 @@
+openapi: 3.2.0
+info:
+  title: buzz Targeting Template API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Targeting Template
+paths:
+  /targeting_template:
+    post:
+      summary: targeting_template
+      description: ''
+      operationId: targeting_template-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                template_name:
+                  type: string
+                  description: Name of the template. <100 chars
+                strategy_id:
+                  type: integer
+                  description: Unique ID of the Strategy.
+                  format: int32
+                targeting:
+                  type: array
+                  description: JSON representation of the targeting keys and values. See guide for more details.
+                alternative_id:
+                  type: string
+                  description: Alternative ID
+                  default: '0'
+                active:
+                  type: boolean
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"targeting_template created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: targeting_template created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/targeting_template" -b cookies.txt -d '{"template_name":"new template","strategy_id":1,"active":1,"targeting":{"time":[{"exclude_range":{"time_of_week":[[100,200]]}}]}}'
+        samples-languages:
+        - curl
+      tags:
+      - Targeting Template
+    get:
+      summary: targeting_template
+      description: ''
+      operationId: targeting_template-get
+      parameters:
+      - name: targeting_template_id
+        in: query
+        description: Unique ID of the Targeting Template
+        schema:
+          type: integer
+          format: int32
+      - name: template_name
+        in: query
+        description: Name of the template. <100 chars
+        schema:
+          type: string
+      - name: alternative_id
+        in: query
+        description: The alternative_id
+        schema:
+          type: string
+          default: '0'
+      - name: strategy_id
+        in: query
+        description: Unique ID of the Strategy.
+        schema:
+          type: integer
+          format: int32
+      - name: active
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"targeting_template_id\": 1,\n            \"strategy_id\": 1,\n            \"template_name\": \"Line Item 1\",\n            \"targeting\": {\n                \"content\": [\n                    {\n                        \"include\": {\n                            \"content_category\": [\n                                \"IAB11\",\n                                \"IAB11_5\"\n                            ]\n                        }\n                    }\n                ]\n            },\n            \"alt_targeting\": {\n                \"content\": [\n                    {\n                        \"include\": {\n                            \"content_category\": [\n                                \"IAB11\",\n                                \"IAB11_5\"\n                            ]\n                        }\n                    }\n                ]\n            },\n            \"push_status\": 0,\n            \"push_update\": true,\n            \"account_id\": 1,\n            \"create_date\": \"2015-07-22 14:44:03\",\n            \"update_date\": \"2015-07-29 13:26:45\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        targeting_template_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        strategy_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        template_name:
+                          type: string
+                          example: Line Item 1
+                        targeting:
+                          type: object
+                          properties:
+                            content:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  include:
+                                    type: object
+                                    properties:
+                                      content_category:
+                                        type: array
+                                        items:
+                                          type: string
+                                          example: IAB11
+                        alt_targeting:
+                          type: object
+                          properties:
+                            content:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  include:
+                                    type: object
+                                    properties:
+                                      content_category:
+                                        type: array
+                                        items:
+                                          type: string
+                                          example: IAB11
+                        push_status:
+                          type: integer
+                          example: 0
+                          default: 0
+                        push_update:
+                          type: boolean
+                          example: true
+                          default: true
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2015-07-22 14:44:03'
+                        update_date:
+                          type: string
+                          example: '2015-07-29 13:26:45'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/targeting_template" -b cookies.txt -d '{"targeting_template_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Targeting Template
+    put:
+      summary: targeting_template
+      description: ''
+      operationId: targeting_template-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - targeting_template_id
+              properties:
+                targeting_template_id:
+                  type: integer
+                  description: Unique ID of the Targeting Template
+                  format: int32
+                template_name:
+                  type: string
+                  description: Name of the template. <100 chars
+                strategy_id:
+                  type: integer
+                  description: Unique ID of the Strategy.
+                  format: int32
+                targeting:
+                  type: array
+                  description: JSON representation of the targeting keys and values. See documentation for more details.
+                alternative_id:
+                  type: string
+                  description: The alternative_id
+                  default: '0'
+                active:
+                  type: boolean
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"targeting_template updated with ID 1\"\n        }\n    ],\n    \"message\": \"targeting_template update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: targeting_template updated with ID 1
+                  message:
+                    type: string
+                    example: 'targeting_template update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/targeting_template" -b cookies.txt -d '{"targeting_template_id":1, "template_name":"new template","strategy_id":1,"active":1,"targeting":{"time":[{"exclude_range":{"time_of_week":[[100,200]]}}]}}'
+        samples-languages:
+        - curl
+      tags:
+      - Targeting Template
+    delete:
+      summary: targeting_template
+      description: ''
+      operationId: targeting_template-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - targeting_template_id
+              properties:
+                targeting_template_id:
+                  type: integer
+                  description: Unique ID of the targeting_template
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"targeting_template deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: targeting_template deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/targeting_template" -b cookies.txt -d '{"targeting_template_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Targeting Template
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

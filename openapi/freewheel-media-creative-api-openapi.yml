@@ -1,0 +1,712 @@
+openapi: 3.2.0
+info:
+  title: buzz Creative API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Creative
+paths:
+  /creative:
+    post:
+      summary: creative
+      description: ''
+      operationId: creative-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - advertiser_id
+              - creative_name
+              - creative_type
+              - secure
+              - creative_template_id
+              properties:
+                advertiser_id:
+                  type: integer
+                  description: Must belong to the same account as the Advertiser and be active
+                  format: int32
+                creative_name:
+                  type: string
+                  description: Name of the Creative, e.g. "Blue Banner Ad"
+                creative_type:
+                  type: integer
+                  description: The type of creative. `0`=banner, `1`=video, `2`=native
+                  default: 0
+                  format: int32
+                width:
+                  type: integer
+                  description: Width in pixels. Use the `creative_sizes` view to see all acceptable width and height combinations.
+                  format: int32
+                height:
+                  type: integer
+                  description: Height in pixels. Use the `creative_sizes` view to see all acceptable width and height combinations.
+                  format: int32
+                sizeless:
+                  type: boolean
+                  description: Is the creative sizeless, meaning it can match any size placement that is an interstitial. Native creatives should also be marked as sizeless.
+                  default: false
+                secure:
+                  type: boolean
+                  description: Is the creative intended to serve in a secure (HTTPS) environment.
+                  default: false
+                click_url:
+                  type: string
+                  description: URL the ad should click or tap to, must be a valid URL. This field is required when using a Creative Template that is not a tag (e.g. an image or video)
+                  default: '0'
+                creative_assets:
+                  type: array
+                  description: DEPRECATED, use `primary_asset` and `secondary_asset` fields instead.
+                  items:
+                    type: integer
+                    format: int32
+                primary_asset:
+                  type: integer
+                  description: ID of the `creative_asset` to use in the Creative, for example the ID of an Image or Video.
+                  format: int32
+                secondary_asset:
+                  type: integer
+                  description: ID of a secondary `creative_asset` to use in the Creative. Most commonly used for the companion asset within a Video Creative
+                  format: int32
+                native_offer:
+                  type: integer
+                  description: For Native creatives, the NativeOffer to be used for the Creative content
+                  format: int32
+                creative_content:
+                  type: object
+                  description: A JSON representation of the fields required by the Creative Template, validated against the Creative Template. Schema of json varies.
+                  properties: {}
+                creative_content_tag:
+                  type: string
+                  description: For tag creatives the tag can be placed in this field and on save the `creative_rule_key` will be applied to insert relevant macros. This is recommended vs completing the `creative_content` field directly.
+                creative_template_id:
+                  type: integer
+                  description: The ID of the Creative Template to use for this creative. Must be a valid and active Creative Template that either belongs to this Account, OR is marked as "global".
+                  format: int32
+                creative_rule_id:
+                  type: integer
+                  description: DEPRECATED
+                  format: int32
+                creative_rule_key:
+                  type: string
+                  description: The key corresponding to the `creative_rule` to apply to the `creative_content_tag` field. The rule will insert click and timestamp macros. You can use `auto_detect` for easiest implementation.
+                  default: none
+                creative_attributes:
+                  type: object
+                  description: Creative Attributes JSON.
+                  properties:
+                    <module_name>:
+                      type: object
+                      description: The overall statement can include any number of modules, but each module may only appear once. Example of a module is `advertiser`
+                      properties:
+                        <key>:
+                          type: array
+                          description: Key must belong to the module selected, the value must be a list of one or more values corresponding to the key. Values may be integers or strings depending on the key.
+                          items:
+                            type: string
+                scripts:
+                  type: array
+                  description: List of URLs to be added to the Creative as scripts
+                  items:
+                    type: string
+                pixels:
+                  type: array
+                  description: List of URLs to be added to the Creative as pixels
+                  items:
+                    type: string
+                events:
+                  type: object
+                  description: List of VAST tracking events and associated URLs to allow third party tracking of video events
+                  properties:
+                    <none>:
+                      type: object
+                      description: List of video event objects
+                      required:
+                      - <video_event>
+                      properties:
+                        <video_event>:
+                          type: string
+                          description: Key should be a standard VAST video event, value should be the URL to request when the video player calls that event.
+                progress_events:
+                  type: object
+                  description: List of objects to track VAST video progress
+                  properties:
+                    <none>:
+                      type: object
+                      description: List of key-value pairs representing duration and URLs
+                      required:
+                      - <HH:MM:SS>
+                      properties:
+                        <HH:MM:SS>:
+                          type: string
+                          description: Key should be the number of elapsed seconds in form `HH:MM:SS`, value should be the URL to request when the video player plays for that duration..
+                creative_addons:
+                  type: array
+                  description: List of CreativeAddOn IDs to add to the Creative
+                  items:
+                    type: integer
+                    format: int32
+                creative_thumbnail_url:
+                  type: string
+                  description: URL to an image thumbnail for the creative. This field will be automatically set if you associate the creative with a Creative Asset that has a valid thumbnail but must be updated manually when using a tag-based Creative. Thumbnail is required by some exchanges to serve.
+                start_date:
+                  type: string
+                  description: Start date for the creative, optional
+                  format: date
+                end_date:
+                  type: string
+                  description: End date for the creative, optional
+                  format: date
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the Creative, if desired
+                notes:
+                  type: string
+                  description: Notes about the Creative, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is the Creative active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"creative created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: creative created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/creative" -b cookies.txt -d '{"advertiser_id":1,"creative_type":0,"width":468,"height":60,"creative_name":"test banner","creative_template_id":4,"creative_rule_key":"dfa","creative_content":{"TAG":"<SCRIPT language=\"JavaScript1.1\" SRC=\"https://ad.doubleclick.net/ddm/trackimpj/N9999.88888.SITE/B9058599.122522097;dc_trk_aid=295586985;dc_trk_cid=65391418;click=;ord=[timestamp]?\"></SCRIPT>"},"creative_attributes":{"advertiser":{"advertiser_category":["IAB1"],"advertiser_index_id":[1143]}},"pixels":["https://www.mysite.com/pixel?foo"],"scripts":["https://www.mysite.com/pixel?bar"],"events":[],"active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative
+    get:
+      summary: creative
+      description: ''
+      operationId: creative-get
+      parameters:
+      - name: creative_id
+        in: query
+        description: Unique ID of the Creative
+        schema:
+          type: integer
+          format: int32
+      - name: advertiser_id
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: creative_name
+        in: query
+        description: Name of the Creative, e.g. "Blue Banner Ad"
+        schema:
+          type: string
+      - name: creative_type
+        in: query
+        description: ID for the type of creative. 0=banner, 1=video, 2=native, etc.
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: creative_template_id
+        in: query
+        description: The ID of the Creative Template to use for this creative. Must be a valid and active Creative Template that either belongs to this Account, OR is marked as "global".
+        schema:
+          type: integer
+          format: int32
+      - name: alternative_id
+        in: query
+        description: An alternative id to lookup the creative, if desired
+        schema:
+          type: string
+      - name: active
+        in: query
+        description: Is the Creative active?
+        schema:
+          type: boolean
+          default: false
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"creative_id\": 1,\n            \"advertiser_id\": 1,\n            \"creative_type\": 0,\n            \"creative_template_id\": 4,\n            \"creative_status_id\": 1,\n            \"creative_rule_id\": null,\n            \"creative_rule_key\": \"dfa\",\n            \"width\": 468,\n            \"height\": 60,\n            \"sizeless\": false,\n            \"secure\": false,\n            \"click_url\": null,\n            \"creative_name\": \"test banner\",\n            \"creative_attributes\": {\n                \"advertiser\": {\n                    \"advertiser_category\": [\n                        \"IAB1\"\n                    ],\n                    \"advertiser_index_id\": [\n                        1143\n                    ]\n                },\n                \"approval\": {\n                    \"vendor_id\": [\n                        3\n                    ]\n                },\n                \"technical\": {\n                    \"tag_type\": [\n                        3\n                    ]\n                }\n            },\n            \"creative_assets\": [],\n            \"primary_asset\": null,\n            \"secondary_asset\": null,\n            \"creative_content\": {\n                \"TAG\": \"<SCRIPT language=\\\"JavaScript1.1\\\" SRC=\\\"https://ad.doubleclick.net/ddm/trackimpj/N3093.888888.SITE/B9058599.122522097;dc_trk_aid=295586985;dc_trk_cid=65391418;click={{CLICK_URL}};ord={{CACHEBUSTER}}?\\\"></SCRIPT>\"\n            },\n            \"creative_content_munge\": \"<img src={{IMPRESSION_URL}} width='0' height='0'><SCRIPT language=\\\"JavaScript1.1\\\" SRC=\\\"https://ad.doubleclick.net/ddm/trackimpj/N3093.888888.SITE/B9058599.122522097;dc_trk_aid=295586985;dc_trk_cid=65391418;click={{CLICK_URL}};ord={{CACHEBUSTER}}?\\\"></SCRIPT>\",\n            \"creative_content_tag\": null,\n            \"preview_token\": \"aALCTJGkf9iv7r6Q5wtEvffFoQNZCt8M4UpXE6iU\",\n            \"creative_thumbnail_url\": null,\n            \"start_date\": \"2020-01-01 12:00:00\",\n            \"end_date\": null,\n            \"frequency_cap\": [],\n            \"scripts\": [],\n            \"pixels\": [],\n            \"events\": [],\n            \"progress_events\": [],\n          \t\"push_status\": 0,\n            \"push_update\": true,\n            \"account_id\": 1,\n            \"create_date\": \"2016-02-03 17:42:20\",\n            \"update_date\": \"2016-02-23 14:56:24\",\n            \"alternative_id\": null,\n            \"notes\": \"test1\",\n            \"active\": false,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        creative_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        advertiser_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        creative_type:
+                          type: integer
+                          example: 0
+                          default: 0
+                        creative_template_id:
+                          type: integer
+                          example: 4
+                          default: 0
+                        creative_status_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        creative_rule_id: {}
+                        creative_rule_key:
+                          type: string
+                          example: dfa
+                        width:
+                          type: integer
+                          example: 468
+                          default: 0
+                        height:
+                          type: integer
+                          example: 60
+                          default: 0
+                        sizeless:
+                          type: boolean
+                          example: false
+                          default: true
+                        secure:
+                          type: boolean
+                          example: false
+                          default: true
+                        click_url: {}
+                        creative_name:
+                          type: string
+                          example: test banner
+                        creative_attributes:
+                          type: object
+                          properties:
+                            advertiser:
+                              type: object
+                              properties:
+                                advertiser_category:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: IAB1
+                                advertiser_index_id:
+                                  type: array
+                                  items:
+                                    type: integer
+                                    example: 1143
+                                    default: 0
+                            approval:
+                              type: object
+                              properties:
+                                vendor_id:
+                                  type: array
+                                  items:
+                                    type: integer
+                                    example: 3
+                                    default: 0
+                            technical:
+                              type: object
+                              properties:
+                                tag_type:
+                                  type: array
+                                  items:
+                                    type: integer
+                                    example: 3
+                                    default: 0
+                        creative_assets:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        primary_asset: {}
+                        secondary_asset: {}
+                        creative_content:
+                          type: object
+                          properties:
+                            TAG:
+                              type: string
+                              example: <SCRIPT language="JavaScript1.1" SRC="https://ad.doubleclick.net/ddm/trackimpj/N3093.888888.SITE/B9058599.122522097;dc_trk_aid=295586985;dc_trk_cid=65391418;click={{CLICK_URL}};ord={{CACHEBUSTER}}?"></SCRIPT>
+                        creative_content_munge:
+                          type: string
+                          example: <img src={{IMPRESSION_URL}} width='0' height='0'><SCRIPT language="JavaScript1.1" SRC="https://ad.doubleclick.net/ddm/trackimpj/N3093.888888.SITE/B9058599.122522097;dc_trk_aid=295586985;dc_trk_cid=65391418;click={{CLICK_URL}};ord={{CACHEBUSTER}}?"></SCRIPT>
+                        creative_content_tag: {}
+                        preview_token:
+                          type: string
+                          example: aALCTJGkf9iv7r6Q5wtEvffFoQNZCt8M4UpXE6iU
+                        creative_thumbnail_url: {}
+                        start_date:
+                          type: string
+                          example: '2020-01-01 12:00:00'
+                        end_date: {}
+                        frequency_cap:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        scripts:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        pixels:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        events:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        progress_events:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        push_status:
+                          type: integer
+                          example: 0
+                          default: 0
+                        push_update:
+                          type: boolean
+                          example: true
+                          default: true
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2016-02-03 17:42:20'
+                        update_date:
+                          type: string
+                          example: '2016-02-23 14:56:24'
+                        alternative_id: {}
+                        notes:
+                          type: string
+                          example: test1
+                        active:
+                          type: boolean
+                          example: false
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/creative" -b cookies.txt -d '{"creative_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative
+    put:
+      summary: creative
+      description: ''
+      operationId: creative-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - creative_id
+              properties:
+                creative_id:
+                  type: integer
+                  description: Unique ID of the Creative
+                  format: int32
+                advertiser_id:
+                  type: integer
+                  description: Must belong to the same account as the Advertiser and be active
+                  format: int32
+                creative_name:
+                  type: string
+                  description: Name of the Creative, e.g. "Blue Banner Ad"
+                width:
+                  type: integer
+                  description: Width in pixels. Use the `creative_sizes` view to see all acceptable width and height combinations.
+                  format: int32
+                height:
+                  type: integer
+                  description: Height in pixels. Use the `creative_sizes` view to see all acceptable width and height combinations.
+                  format: int32
+                sizeless:
+                  type: boolean
+                  description: Is the creative sizeless, meaning it can match any size placement that is an interstitial.
+                  default: false
+                secure:
+                  type: boolean
+                  description: Is the creative intended to serve in a secure (HTTPS) environment.
+                  default: false
+                click_url:
+                  type: string
+                  description: URL the ad should click or tap to, must be a valid URL. This field is required when using a Creative Template that is not a tag (e.g. an image or video)
+                  default: '0'
+                creative_assets:
+                  type: array
+                  description: DEPRECATED, use `primary_asset` and `secondary_asset` fields instead.
+                  items:
+                    type: integer
+                    format: int32
+                primary_asset:
+                  type: integer
+                  description: ID of the `creative_asset` to use in the Creative, for example the ID of an Image or Video.
+                  format: int32
+                secondary_asset:
+                  type: integer
+                  description: ID of a secondary `creative_asset` to use in the Creative. Most commonly used for the companion asset within a Video Creative.
+                  format: int32
+                native_offer:
+                  type: integer
+                  description: For Native creatives, the NativeOffer to be used for the Creative content
+                  format: int32
+                creative_content:
+                  type: object
+                  description: A JSON representation of the fields required by the Creative Template, validated against the Creative Template
+                  properties: {}
+                creative_content_tag:
+                  type: string
+                  description: For tag creatives the tag can be placed in this field and on save the `creative_rule_key` will be applied to insert relevant macros. This is recommended vs completing the `creative_content` field directly.
+                creative_template_id:
+                  type: integer
+                  description: The ID of the Creative Template to use for this creative. Must be a valid and active Creative Template that either belongs to this Account, OR is marked as "global".
+                  format: int32
+                creative_rule_id:
+                  type: integer
+                  description: DEPRECATED
+                  format: int32
+                creative_rule_key:
+                  type: string
+                  description: Thy key corresponding to the creative_rule to apply to the `creative_content_tag` field. The rule will insert click and timestamp macros. You can use `auto_detect` for easiest implementation.
+                  default: none
+                attributes:
+                  type: object
+                  description: Creative Attributes JSON.
+                  properties:
+                    <module_name>:
+                      type: object
+                      description: The overall statement can include any number of modules, but each module may only appear once. Example of a module is `advertiser`
+                      properties:
+                        <key>:
+                          type: array
+                          description: Key must belong to the module selected, the value must be a list of one or more values corresponding to the key. Values may be integers or strings depending on the key.
+                          items:
+                            type: string
+                pixels:
+                  type: array
+                  description: List of URLs to be added to the Creative as pixels
+                  items:
+                    type: string
+                scripts:
+                  type: array
+                  description: List of URLs to be added to the Creative as scripts
+                  items:
+                    type: string
+                events:
+                  type: object
+                  description: List of video event objects
+                  properties:
+                    <none>:
+                      type: object
+                      description: List of video event objects
+                      required:
+                      - <video_event>
+                      properties:
+                        <video_event>:
+                          type: string
+                          description: Key should be a standard VAST video event, value should be the URL to request when the video player calls that event.
+                progess_events:
+                  type: object
+                  description: List of objects to track VAST video progress
+                  properties:
+                    <none>:
+                      type: object
+                      description: List of key-value pairs representing duration and URLs
+                      required:
+                      - <HH:MM:SS>
+                      properties:
+                        <HH:MM:SS>:
+                          type: string
+                          description: Key should be the number of elapsed seconds in form `HH:MM:SS`, value should be the URL to request when the video player plays for that duration..
+                creative_addons:
+                  type: array
+                  description: List of CreativeAddOn IDs to add to the Creativ
+                  items:
+                    type: integer
+                    format: int32
+                creative_thumbnail_url:
+                  type: string
+                  description: URL to an image thumbnail for the creative. This field will be automatically set if you associate the creative with a Creative Asset that has a valid thumbnail but must be updated manually when using a tag-based Creative. Thumbnail is required by some exchanges to serve.
+                start_date:
+                  type: string
+                  description: Start date of the creative, optional
+                  format: date
+                end_date:
+                  type: string
+                  description: End date of the creative, optional
+                  format: date
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the creative, if desired
+                notes:
+                  type: string
+                  description: Notes about the Creative, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is the Creative active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"creative updated with ID 1\"\n        }\n    ],\n    \"message\": \"creative update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: creative updated with ID 1
+                  message:
+                    type: string
+                    example: 'creative update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/creative" -b cookies.txt -d '{"creative_id":1, "creative_name":"new banner"}
+        samples-languages:
+        - curl
+      tags:
+      - Creative
+    delete:
+      summary: creative
+      description: ''
+      operationId: creative-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - creative_id
+              properties:
+                creative_id:
+                  type: integer
+                  description: Unique ID of the creative
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"creative deleted with ID 1\"\n        }\n    ],\n    \"message\": \"creative deletion: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: creative deleted with ID 1
+                  message:
+                    type: string
+                    example: 'creative deletion: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/creative" -b cookies.txt -d '{"creative_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,388 @@
+openapi: 3.2.0
+info:
+  title: buzz Bid Modifier API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Bid Modifier
+paths:
+  /bid_modifier:
+    post:
+      summary: bid_modifier
+      description: ''
+      operationId: bid_modifier-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bid_modifier_name
+              properties:
+                advertiser_id:
+                  type: integer
+                  description: Optional. Allows a Bid Modifier to be restricted to a single Advertiser
+                  format: int32
+                bid_model_id:
+                  type: integer
+                  description: The ID of the Bid Model to be associated with this Bid Modifier. Model must be of type `BID` or `MULTIPLIER`
+                  format: int32
+                bid_modifier_name:
+                  type: string
+                  description: Name of the Bid Modifier, e.g. "Video complete modifier"
+                bid_modifier_terms:
+                  type: object
+                  description: List of modification objects.
+                  properties:
+                    <none>:
+                      type: object
+                      required:
+                      - targeting_module
+                      - targeting_key
+                      - value
+                      - modifier
+                      properties:
+                        targeting_module:
+                          type: string
+                          description: The targeting module, e.g. `geo`
+                        targeting_key:
+                          type: string
+                          description: The targeting key within the module, e.g. `country`
+                        value:
+                          type: string
+                          description: Value of the key to match, e.g. "USA" for the country key. Must always be a string, even if value is an integer or array.
+                        modifier_type:
+                          type: string
+                          description: The matching method for the modifier
+                          default: INCLUDE
+                        modifier:
+                          type: number
+                          description: Amount to apply to the modifier. For Bid Modifiers this will be the multiplier, for Delivery Models this will be the relative weight of delivery. Min=0 (don't bid) Max = 100
+                          format: double
+                        field_label:
+                          type: string
+                          description: Human readable label for the field. Automatically added to the Terms. Do not set on POST.
+                alternative_id:
+                  type: string
+                  description: An alternative ID to lookup the Bid Modifier, if desired
+                notes:
+                  type: string
+                  description: Notes, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"bid_modifier created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: bid_modifier created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/bid_modifier" -b cookies.txt -d '{"bid_modifier_name":"new BM", "advertiser_id":1, "bid_modifier_terms":[{"targeting_module":"geo","targeting_key":"country","value":"USA","modifier":0.8,"modifier_type":"include"}], "active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Modifier
+    get:
+      summary: bid_modifier
+      description: ''
+      operationId: bid_modifier-get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bid_modifier_id:
+                  type: integer
+                  description: The ID of the Bid Modifier to GET
+                  format: int32
+                advertiser_id:
+                  type: integer
+                  description: The ID of the Advertiser, if set
+                  format: int32
+                bid_model_id:
+                  type: integer
+                  description: The ID of the Bid Model associated with this Bid Modifier
+                  format: int32
+                bid_modifier_name:
+                  type: string
+                  description: Name of the Bid Modifier, e.g. "Video complete modifier"
+                alternative_id:
+                  type: string
+                  description: An alternative ID to lookup the Bid Modifier, if desired
+                active:
+                  type: boolean
+                  description: Is it active?
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"bid_modifier_id\": 1,\n            \"advertiser_id\": null,\n            \"bid_modifier_id\": null,\n            \"bid_modifier_name\": \"new BM\",\n            \"account_id\": 1,\n            \"create_date\": \"2018-02-20 17:24:40\",\n            \"update_date\": \"2018-02-20 17:24:40\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\",\n            \"bid_modifier_terms\": [\n                {\n                    \"targeting_module\": \"geo\",\n                    \"targeting_key\": \"country\",\n                    \"modifier_type\": \"include\",\n                    \"value\": \"USA\",\n                    \"modifier\": 0.8\n                }\n            ]\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        bid_modifier_id: {}
+                        advertiser_id: {}
+                        bid_modifier_name:
+                          type: string
+                          example: new BM
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2018-02-20 17:24:40'
+                        update_date:
+                          type: string
+                          example: '2018-02-20 17:24:40'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+                        bid_modifier_terms:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              targeting_module:
+                                type: string
+                                example: geo
+                              targeting_key:
+                                type: string
+                                example: country
+                              modifier_type:
+                                type: string
+                                example: include
+                              value:
+                                type: string
+                                example: USA
+                              modifier:
+                                type: number
+                                example: 0.8
+                                default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/bid_modifier" -b cookies.txt -d '{"bid_modifier_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Modifier
+    put:
+      summary: bid_modifier
+      description: ''
+      operationId: bid_modifier-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bid_modifier_id
+              properties:
+                bid_modifier_id:
+                  type: integer
+                  description: ID of the Bid Modifier to update
+                  format: int32
+                bid_model_id:
+                  type: integer
+                  description: The ID of the Bid Model to be associated with this Bid Modifier. The Model must be of type `BID` or `MULTIPLIER`.
+                  format: int32
+                bid_modifier_name:
+                  type: string
+                  description: Name of the Bid Modifier, e.g. "Video complete modifier"
+                bid_modifier_terms:
+                  type: object
+                  description: List of modification objects, see note.
+                  properties:
+                    <none>:
+                      type: object
+                      required:
+                      - targeting_module
+                      - targeting_key
+                      - value
+                      - modifier
+                      properties:
+                        targeting_module:
+                          type: string
+                          description: The targeting module, e.g. `geo`
+                        targeting_key:
+                          type: string
+                          description: The targeting key within the module, e.g. `country`
+                        value:
+                          type: string
+                          description: Value of the key to match, e.g. "USA" for the country key. Must always be a string, even if value is an integer or array.
+                        modifier_type:
+                          type: string
+                          description: The matching method for the modifier
+                          default: INCLUDE
+                        modifier:
+                          type: number
+                          description: Amount to apply to the modifier. For Bid Modifiers this will be the multiplier, for Delivery Models this will be the relative weight of delivery. Min=0 (don't bid) Max = 100
+                          format: double
+                        field_label:
+                          type: string
+                          description: Human readable label for the field. Automatically added to the Terms. Do not set on POST.
+                alternative_id:
+                  type: string
+                  description: An alternative ID to lookup the Bid Modifier, if desired
+                notes:
+                  type: string
+                  description: Notes, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"bid_modifier updated with ID 1\"\n        }\n    ],\n    \"message\": \"bid_modifier: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: bid_modifier updated with ID 1
+                  message:
+                    type: string
+                    example: 'bid_modifier: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/bid_modifier" -b cookies.txt -d '{"bid_modifier_id":1, "bid_modifier_name":"new BM", "bid_modifier_terms":[{"targeting_module":"geo","targeting_key":"country","value":"USA","modifier":0.8,"modifier_type":"include"}], "active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Modifier
+    delete:
+      summary: bid_modifier
+      description: ''
+      operationId: bid_modifier-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bid_modifier_id
+              properties:
+                bid_modifier_id:
+                  type: integer
+                  description: ID of the Bid Modifier to delete
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"bid_modifier deleted with ID 1\"\n        }\n    ],\n    \"message\": \"bid_modifier: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: bid_modifier deleted with ID 1
+                  message:
+                    type: string
+                    example: 'bid_modifier: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/bid_modifier" -b cookies.txt -d '{"bid_modifier_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Modifier
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

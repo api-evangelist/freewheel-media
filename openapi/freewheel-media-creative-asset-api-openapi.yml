@@ -1,0 +1,210 @@
+openapi: 3.2.0
+info:
+  title: buzz Creative Asset API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Creative Asset
+paths:
+  /creative_asset:
+    post:
+      summary: creative_asset
+      description: ''
+      operationId: creativeasset-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - creative_asset_name
+              - size_in_bytes
+              - active
+              properties:
+                advertiser_id:
+                  type: integer
+                  description: Advertiser that owns the asset. Highly recommended that this be present since most assets are specific to a single Advertiser.
+                  format: int32
+                creative_asset_name:
+                  type: string
+                  description: Name of the Creative Asset, e.g. "Blue Banner Ad"
+                size_in_bytes:
+                  type: integer
+                  description: Number of bytes
+                  default: 0
+                  format: int32
+                notes:
+                  type: string
+                  description: Notes about the Creative Asset, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"creative_asset created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: creative_asset created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "#Step 1, create the asset using POST\ncurl -X POST \"[host]/rest/creative_asset\" -b cookies.txt -d '{\"creative_asset_name\":\"test.jpg\", \"size_in_bytes\":11500, \"advertiser_id\":1}'\n\n#Step 2, upload the file using the /upload/ID method \ncurl -X POST -F \"creative_content=@test.jpg\" \"[host]/rest/creative_asset/upload/5\" -b cookies.txt"
+        samples-languages:
+        - curl
+      tags:
+      - Creative Asset
+    get:
+      summary: creative_asset
+      description: ''
+      operationId: creativeasset-get
+      parameters:
+      - name: creative_asset_id
+        in: query
+        description: Unique ID of the creative_asset
+        schema:
+          type: integer
+          format: int32
+      - name: advertiser_id
+        in: query
+        description: Advertiser ID
+        schema:
+          type: integer
+          format: int32
+      - name: creative_asset_name
+        in: query
+        description: Name of the Creative Asset, e.g. "Blue Banner Ad"
+        schema:
+          type: string
+      - name: asset_type
+        in: query
+        description: '`SOURCE_VIDEO`, `IMAGE`, or `DESTINATION_VIDEO`'
+        schema:
+          type: string
+      - name: mime_type
+        in: query
+        description: Auto-detected mime-type
+        schema:
+          type: string
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: active
+        in: query
+        description: Is it active?
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"creative_asset_id\": 1,\n            \"advertiser_id\": 1,\n            \"creative_asset_name\": \"4_small.mp4\",\n            \"creative_thumbnail_name\": null,\n            \"asset_type\": \"SOURCE_VIDEO\",\n            \"mime_type\": \"application/octet-stream\",\n            \"path_to_asset\": \"stingertest/1/1/4_small.mp4\",\n            \"size_in_bytes\": 383631,\n            \"metadata\": [],\n            \"account_id\": 1,\n            \"create_date\": \"2016-02-26 12:30:59\",\n            \"update_date\": \"2016-02-26 12:31:12\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        creative_asset_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        advertiser_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        creative_asset_name:
+                          type: string
+                          example: 4_small.mp4
+                        creative_thumbnail_name: {}
+                        asset_type:
+                          type: string
+                          example: SOURCE_VIDEO
+                        mime_type:
+                          type: string
+                          example: application/octet-stream
+                        path_to_asset:
+                          type: string
+                          example: stingertest/1/1/4_small.mp4
+                        size_in_bytes:
+                          type: integer
+                          example: 383631
+                          default: 0
+                        metadata:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2016-02-26 12:30:59'
+                        update_date:
+                          type: string
+                          example: '2016-02-26 12:31:12'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/creative_asset" -b cookies.txt -d '{"creative_asset_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative Asset
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

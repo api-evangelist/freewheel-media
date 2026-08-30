@@ -1,0 +1,309 @@
+openapi: 3.2.0
+info:
+  title: buzz Segment Category API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Segment Category
+paths:
+  /segment_category:
+    post:
+      summary: segment_category
+      description: ''
+      operationId: segment-4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - segment_category_name
+              properties:
+                segment_category_name:
+                  type: string
+                  description: Name of the Segment Category. <191 chars
+                parent_category_key:
+                  type: string
+                  description: Must be an active Segment Category. If omitted or set to NULL, this category will live at the top of the hierarchy.
+                advertiser_id:
+                  type: integer
+                  description: Segment Categories may belong to the overall Account or to a single Advertiser.
+                  format: int32
+                alternative_id:
+                  type: string
+                  description: Any text up to 200 characters to identify the category
+                notes:
+                  type: string
+                  description: Up to 255 characters
+                active:
+                  type: boolean
+                  description: Is the category active
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"segment_category created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: segment_category created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/segment_category" -b cookies.txt -d '{"advertiser_id":1, "parent_category_key":"stingersbx-1", "segment_category_name":"My lists"}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category
+    get:
+      summary: segment_category
+      description: ''
+      operationId: segment_category-get
+      parameters:
+      - name: segment_category_id
+        in: query
+        description: Unique ID of the Segment Category
+        schema:
+          type: integer
+          format: int32
+      - name: alternative_id
+        in: query
+        description: Any text up to 80 characters
+        schema:
+          type: string
+      - name: segment_category_key
+        in: query
+        description: An auto-generated key in the format `<BUZZ_KEY>-<segment_category_id>`
+        schema:
+          type: string
+      - name: segment_category_name
+        in: query
+        description: Name of the Segment Category. <191 chars
+        schema:
+          type: string
+      - name: parent_category_key
+        in: query
+        description: Must be an active Segment Category. If omitted or set to NULL, this category will live at the top of the hierarchy.
+        schema:
+          type: string
+      - name: advertiser_id
+        in: query
+        description: Segment Categories may belong to the overall Account or to a single Advertiser.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"segment_category_id\": 3,\n            \"segment_category_key\": \"stingersbx-1\",\n            \"advertiser_id\": 1,\n            \"parent_category_key\": null,\n            \"segment_category_name\": \"My lists\",\n            \"account_id\": 1,\n            \"create_date\": \"2016-03-30 13:23:59\",\n            \"update_date\": \"2016-03-30 13:23:59\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        segment_category_id:
+                          type: integer
+                          example: 3
+                          default: 0
+                        segment_category_key:
+                          type: string
+                          example: stingersbx-1
+                        advertiser_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        parent_category_key: {}
+                        segment_category_name:
+                          type: string
+                          example: My lists
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2016-03-30 13:23:59'
+                        update_date:
+                          type: string
+                          example: '2016-03-30 13:23:59'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/segment_category" -b cookies.txt -d '{"segment_category_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category
+    put:
+      summary: segment_category
+      description: ''
+      operationId: segment_category-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - segment_category_id
+              properties:
+                segment_category_id:
+                  type: integer
+                  description: Unique ID of the Segment Category
+                  format: int32
+                segment_category_name:
+                  type: string
+                  description: Name of the Segment Category. <191 chars
+                parent_category_key:
+                  type: string
+                  description: Must be an active Segment Category. If omitted or set to NULL, this category will live at the top of the hierarchy.
+                advertiser_id:
+                  type: integer
+                  description: Segment Categories may belong to the overall Account or to a single Advertiser.
+                  format: int32
+                alternative_id:
+                  type: string
+                  description: Any text up to 200 characters
+                notes:
+                  type: string
+                  description: Up to 255 characters
+                active:
+                  type: boolean
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"segment_category updated with ID 1\"\n        }\n    ],\n    \"message\": \"segment_category update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: segment_category updated with ID 1
+                  message:
+                    type: string
+                    example: 'segment_category update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/segment_category" -b cookies.txt -d '{"segment_category_id":1, "advertiser_id":1, "parent_category_key":"stingersbx-1", "segment_category_name":"My lists"}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category
+    delete:
+      summary: segment_category
+      description: ''
+      operationId: segment_category-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - segment_category_id
+              properties:
+                segment_category_id:
+                  type: integer
+                  description: Unique ID of the segment_category
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"segment_category deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: segment_category deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/segment_category" -b cookies.txt -d '{"segment_category_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

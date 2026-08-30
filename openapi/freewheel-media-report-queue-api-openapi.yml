@@ -1,0 +1,130 @@
+openapi: 3.2.0
+info:
+  title: buzz Report Queue API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Report Queue
+paths:
+  /report_queue:
+    post:
+      summary: report_queue
+      description: ''
+      operationId: report_queue-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - report_id
+              - request_details
+              properties:
+                report_name:
+                  type: string
+                  description: Name for the report. <255 characters. Name is required if the `report_format` field is any value other than `none`
+                report_id:
+                  type: integer
+                  description: ID for the report type to be used to generate the report. Each report includes a definition of available fields, metrics, and filters. A list of valid reports can be retrieved by make a request to `/view` with `"view_name":"reports"`
+                  format: int32
+                request_details:
+                  type: object
+                  description: JSON description of reporting request.
+                  required:
+                  - field
+                  properties:
+                    field:
+                      type: array
+                      description: Fields (sometimes called "dimensions") to include in the report.
+                      items:
+                        type: string
+                    filter:
+                      type: array
+                      description: 'Fields and values to filter the results by (e.g. WHERE clause). Only fields associated with the report may be used for filtering. Example: `{"advertiser_id":1}`'
+                    metric:
+                      type: array
+                      description: Metrics to included and summed in the report. Metrics may not be used for filtering or sorting. Only metrics associated with the report may be included.
+                      items:
+                        type: string
+                    offset:
+                      type: integer
+                      description: Number of rows to offset results from the first results (e.g. for pagination through results)
+                      default: 0
+                      format: int32
+                    rows:
+                      type: integer
+                      description: Number of rows to include in the report. If sending report results directly back from a GET request (i.e. `"report_format":"none"`) a 1,500 record limit is imposed. If the report results is saved in a file, (e.g. `"report_format":"xls"`) the limit is 30,000 records.
+                      default: 50
+                      format: int32
+                    sort_by:
+                      type: array
+                      description: A field to sort the results by, along with the order (0=ascending). For example `"advertiser_name":0`
+                report_format:
+                  type: string
+                  description: 'Format to return the report. Valid values include: `none`,`json`,`csv`,`xls`,`xlsx`. If not specified or set to `none` the report results will be returned by the API in the json response and the report will be limited to 1500 rows. If any format is specified other than `none` the report row limit is 15,000, and the resulting report will be saved for retrieval in a separate GET request.'
+                  default: none
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"report_queue created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: report_queue created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/report_queue" -b cookies.txt -d '{"report_id":1, "report_name":"Daily report", "request_details":{"field":["advertiser_id"],"metric":["impression","CPM"],"sort_by":[{"advertiser_id":1}],"rows":100},"report_format":"xls"}'
+        samples-languages:
+        - curl
+      tags:
+      - Report Queue
+    get:
+      summary: report_queue
+      description: ''
+      operationId: report_queue-get
+      parameters:
+      - name: report_queue_id
+        in: query
+        description: ID for the report
+        required: true
+        schema:
+          type: integer
+          format: int32
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: '#Save the report into a local file
+
+            curl -X GET "[host]/rest/report_queue" -b cookies.txt -d ''{"report_queue_id":1}'' > report.xls'
+        samples-languages:
+        - curl
+      tags:
+      - Report Queue
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

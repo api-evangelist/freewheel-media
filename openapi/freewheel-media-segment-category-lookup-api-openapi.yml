@@ -1,0 +1,52 @@
+openapi: 3.2.0
+info:
+  title: buzz Segment Category Lookup API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Segment Category Lookup
+paths:
+  /segment_category_lookup:
+    get:
+      summary: segment_category_lookup
+      description: The Segment Category Lookup object allows you to get Segment Categories that are shared with your Account. For example Bluekai or Integral Ad Science segment Categories. This object only accepts GET requests.
+      operationId: segment_category_lookup
+      parameters:
+      - name: segment_category_id
+        in: query
+        description: Unique ID for the segment category
+        schema:
+          type: integer
+          format: int32
+      - name: segment_category_key
+        in: query
+        description: Unique compound ID for the segment category, including both the Buzz Key and the ID
+        schema:
+          type: string
+      - name: segment_category_name
+        in: query
+        description: Name for the segment category
+        schema:
+          type: string
+      - name: source
+        in: query
+        description: Either `third-party` or `local`
+        schema:
+          type: string
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/segment_category_lookup" -b cookies.txt -d '{"source":"third-party"}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category Lookup
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

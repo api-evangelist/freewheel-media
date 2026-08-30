@@ -1,0 +1,174 @@
+openapi: 3.2.0
+info:
+  title: buzz Activity Log API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Activity Log
+paths:
+  /activity_log:
+    get:
+      summary: activity_log
+      description: ''
+      operationId: activitylog-get
+      parameters:
+      - name: log_id
+        in: query
+        description: Unique id of the log entry
+        schema:
+          type: integer
+          format: int32
+      - name: user_id
+        in: query
+        description: ID of the user that took the action that was logged
+        schema:
+          type: integer
+          format: int32
+      - name: object_id
+        in: query
+        description: The unique ID of the object that was affected. For example, if a User object was created, this ID will be the user_id of that User
+        schema:
+          type: integer
+          format: int32
+      - name: object_type
+        in: query
+        description: The type of object affected. e.g. `user` or `line_item`
+        schema:
+          type: string
+      - name: activity_date
+        in: query
+        description: The date the activity took place
+        schema:
+          type: string
+          format: date
+      - name: action
+        in: query
+        description: '`CREATE`, `UPDATE`, or `DELETE`'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"log_id\": 131,\n            \"user_id\": 1,\n            \"account_id\": 1,\n            \"object_id\": 6,\n            \"object_type\": \"advertiser\",\n            \"action\": \"CREATE\",\n            \"details\": {\n                \"advertiser_id\": 6,\n                \"advertiser_name\": \"foo2\",\n                \"attributes\": {\n                    \"advertiser\": {\n                        \"advertiser_category\": [\n                            \"IAB1\"\n                        ]\n                    }\n                },\n          \t    \"default_targeting\": [],\n                \"conversion_method_id\": 1,\n                \"default_click_url\": \"http://www.yahoo.com\",\n                \"active\": 1,\n                \"alternative_id\": null,\n                \"notes\": null,\n                \"original_object_id\": 6,\n                \"account_id\": 1,\n                \"view_name\": null,\n                \"fields\": null,\n                \"create_date\": \"2016-02-25 14:51:08\",\n                \"push_status\": 0,\n                \"push_update\": 1,\n                \"payload\": null\n            },\n            \"activity_date\": \"2016-02-25 14:51:08\",\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        log_id:
+                          type: integer
+                          example: 131
+                          default: 0
+                        user_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        object_id:
+                          type: integer
+                          example: 6
+                          default: 0
+                        object_type:
+                          type: string
+                          example: advertiser
+                        action:
+                          type: string
+                          example: CREATE
+                        details:
+                          type: object
+                          properties:
+                            advertiser_id:
+                              type: integer
+                              example: 6
+                              default: 0
+                            advertiser_name:
+                              type: string
+                              example: foo2
+                            attributes:
+                              type: object
+                              properties:
+                                advertiser:
+                                  type: object
+                                  properties:
+                                    advertiser_category:
+                                      type: array
+                                      items:
+                                        type: string
+                                        example: IAB1
+                            default_targeting:
+                              type: array
+                              items:
+                                type: object
+                                properties: {}
+                            conversion_method_id:
+                              type: integer
+                              example: 1
+                              default: 0
+                            default_click_url:
+                              type: string
+                              example: http://www.yahoo.com
+                            active:
+                              type: integer
+                              example: 1
+                              default: 0
+                            alternative_id: {}
+                            notes: {}
+                            original_object_id:
+                              type: integer
+                              example: 6
+                              default: 0
+                            account_id:
+                              type: integer
+                              example: 1
+                              default: 0
+                            view_name: {}
+                            fields: {}
+                            create_date:
+                              type: string
+                              example: '2016-02-25 14:51:08'
+                            push_status:
+                              type: integer
+                              example: 0
+                              default: 0
+                            push_update:
+                              type: integer
+                              example: 1
+                              default: 0
+                            payload: {}
+                        activity_date:
+                          type: string
+                          example: '2016-02-25 14:51:08'
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/activity_log" -b cookies.txt -d '{"object_type":"advertiser","object_id":6}'
+        samples-languages:
+        - curl
+      tags:
+      - Activity Log
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,309 @@
+openapi: 3.2.0
+info:
+  title: buzz Account API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Account
+paths:
+  /account:
+    post:
+      summary: account
+      description: ''
+      operationId: account-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - account_name
+              - active
+              properties:
+                customer_id:
+                  type: string
+                  description: An ID to identify the Account in an external customer system. For Beeswax use only!
+                account_name:
+                  type: string
+                  description: Name of the account
+                primary_account:
+                  type: boolean
+                  description: Not currently used
+                locale:
+                  type: string
+                  description: Locale to use for the account, currently only en_US is supported
+                  default: en_US
+                timezone:
+                  type: string
+                  description: Timezone to use for the Account. Once set all API dates and reporting will use this timezone.
+                  default: America/New_York
+                currency_id:
+                  type: string
+                  description: Currency to use for the Account. Currently the API assumes all currencies are dollars.
+                  default: USD
+                date_format_string:
+                  type: string
+                  description: Format of dates for both inputs and outputs to the API.
+                  default: Y-m-d H:i:s
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the account, if desired
+                notes:
+                  type: string
+                  description: Notes about the Account, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is the Account active?
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"account created with ID = 3\",\n    \"payload\": {\n        \"id\": 3\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: account created with ID = 3
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/account" -b cookies.txt -d '{"account_name":"new account", "active":true}'
+        samples-languages:
+        - curl
+      tags:
+      - Account
+    get:
+      summary: account
+      description: ''
+      operationId: account-get
+      parameters:
+      - name: account_id
+        in: query
+        description: Unique ID of the account
+        schema:
+          type: integer
+          format: int32
+      - name: customer_id
+        in: query
+        description: Beeswax use only
+        schema:
+          type: string
+      - name: account_name
+        in: query
+        schema:
+          type: string
+      - name: primary_account
+        in: query
+        description: Not currently used
+        schema:
+          type: boolean
+      - name: alternative_id
+        in: query
+        description: An alternative id to lookup the account, if desired
+        schema:
+          type: string
+      - name: active
+        in: query
+        description: Is the Account active?
+        schema:
+          type: boolean
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"customer_id\": \"1\",\n            \"account_name\": \"Primary account\",\n            \"primary_account\": true,\n            \"locale\": \"en_US\",\n            \"currency_id\": \"USD\",\n            \"timezone\": \"America/New_York\",\n            \"date_format_string\": \"Y-m-d H:i:s\",\n            \"account_id\": 1,\n            \"create_date\": \"2016-02-03 17:40:31\",\n            \"update_date\": \"2016-02-03 17:40:31\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        customer_id:
+                          type: string
+                          example: '1'
+                        account_name:
+                          type: string
+                          example: Primary account
+                        primary_account:
+                          type: boolean
+                          example: true
+                          default: true
+                        locale:
+                          type: string
+                          example: en_US
+                        currency_id:
+                          type: string
+                          example: USD
+                        timezone:
+                          type: string
+                          example: America/New_York
+                        date_format_string:
+                          type: string
+                          example: Y-m-d H:i:s
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2016-02-03 17:40:31'
+                        update_date:
+                          type: string
+                          example: '2016-02-03 17:40:31'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/account" -b cookies.txt -d '{"account_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Account
+    put:
+      summary: account
+      description: ''
+      operationId: account-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - account_id
+              properties:
+                account_id:
+                  type: integer
+                  description: Unique ID of the account to update
+                  format: int32
+                customer_id:
+                  type: string
+                  description: An ID to identify the Account in an external customer system. For Beeswax use only!
+                  default: A default value can be set as an environment variable using the DEFAULT_CUSTOMER_ID variable
+                account_name:
+                  type: string
+                  description: Name of the account
+                primary_account:
+                  type: boolean
+                  description: Not currently used
+                locale:
+                  type: string
+                  description: Locale to use for the account, currently only en-US is supported
+                  default: en_US
+                timezone:
+                  type: string
+                  description: Timezone to use for the Account.
+                  default: America/New_York
+                currency_id:
+                  type: string
+                  description: Currency to use for the Account. Currently the API assumes all currencies are dollars.
+                  default: USD
+                date_format_string:
+                  type: string
+                  description: Format for date fields on both input and output from the API. Not currently used.
+                  default: Y-m-d H:i:s
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the account, if desired
+                notes:
+                  type: string
+                  description: Notes about the Account, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is the Account active?
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"account updated with ID 1\"\n        }\n    ],\n    \"message\": \"account update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: account updated with ID 1
+                  message:
+                    type: string
+                    example: 'account update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/account/1" -b cookies.txt -d '{"account_name":"new account", "active":true}'
+        samples-languages:
+        - curl
+      tags:
+      - Account
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

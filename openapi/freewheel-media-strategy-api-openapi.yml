@@ -1,0 +1,282 @@
+openapi: 3.2.0
+info:
+  title: buzz Strategy API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Strategy
+paths:
+  /strategy:
+    get:
+      summary: strategy
+      description: ''
+      operationId: strategy-get
+      parameters:
+      - name: strategy_id
+        in: query
+        description: Unique id of the Strategy
+        schema:
+          type: integer
+          format: int32
+      - name: line_item_type_id
+        in: query
+        description: Type of Line Item that uses this Strategy. (`0`=banner, `1`=video, `2`=native)
+        schema:
+          type: integer
+          format: int32
+      - name: strategy_name
+        in: query
+        description: Name of the Strategy
+        schema:
+          type: string
+      - name: active
+        in: query
+        description: Is the Strategy active?
+        schema:
+          type: boolean
+      - name: default_strategy
+        in: query
+        description: Is this the default Strategy to use for all new Targeting Templates for this Line Item Type?
+        schema:
+          type: boolean
+          default: false
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"strategy_id\": 1,\n            \"line_item_type_id\": 0,\n            \"strategy_name\": \"System\",\n            \"strategy_description\": \"Banner stategy\",\n            \"default_strategy\": false,\n            \"active\": true,\n            \"create_date\": \"2018-02-07 13:43:37\",\n            \"update_date\": \"2018-02-07 13:43:37\",\n            \"targeting_modules\": {\n                \"content\": {\n                    \"targeting_name\": \"Content\",\n                    \"targeting_description\": \"Allows targeting by IAB category\",\n                    \"viewable\": true,\n                    \"targeting_verbs\": [\n                        \"include\",\n                        \"exclude\"\n                    ]\n                },\n                \"domain\": {\n                    \"targeting_name\": \"Domain\",\n                    \"targeting_description\": \"Allows targeting by a List of Domains or URLS associated with this Account\",\n                    \"viewable\": true,\n                    \"targeting_verbs\": [\n                        \"include\",\n                        \"exclude\"\n                    ]\n                },\n                \"geo\": {\n                    \"targeting_name\": \"Geo\",\n                    \"targeting_description\": \"Allows targeting by country, state, zip, postal code, DMA, and bandiwidth\",\n                    \"viewable\": true,\n                    \"targeting_verbs\": [\n                        \"include\",\n                        \"exclude\"\n                    ]\n                },\n                \"inventory\": {\n                    \"targeting_name\": \"Inventory\",\n                    \"targeting_description\": \"Allows targeting by source, site, publisher, etc\",\n                    \"viewable\": true,\n                    \"targeting_verbs\": [\n                        \"include\",\n                        \"exclude\"\n                    ]\n                },\n                \"ip_address\": {\n                    \"targeting_name\": \"IP Address\",\n                    \"targeting_description\": \"Allows targeting by individual IP address and ranges of IP addresses\",\n                    \"viewable\": true,\n                    \"targeting_verbs\": [\n                        \"include\",\n                        \"exclude\",\n                        \"include_range\",\n                        \"exclude_range\",\n                        \"boolean\"\n                    ]\n                },\n                \"mobile_app\": {\n                    \"targeting_name\": \"Mobile App\",\n                    \"targeting_description\": \"Targeting by mobile app, app category\",\n                    \"viewable\": true,\n                    \"targeting_verbs\": [\n                        \"include\",\n                        \"exclude\"\n                    ]\n                },\n                \"platform\": {\n                    \"targeting_name\": \"Platform\",\n                    \"targeting_description\": \"Allows targeting by browser, OS, etc\",\n                    \"viewable\": true,\n                    \"targeting_verbs\": [\n                        \"include\",\n                        \"exclude\"\n                    ]\n                },\n                \"segment\": {\n                    \"targeting_name\": \"Segment\",\n                    \"targeting_description\": \"Allows targeting by segments associated with this Account\",\n                    \"viewable\": true,\n                    \"targeting_verbs\": [\n                        \"include\",\n                        \"exclude\",\n                        \"boolean\",\n                        \"require\"\n                    ]\n                },\n                \"time\": {\n                    \"targeting_name\": \"Time\",\n                    \"targeting_description\": \"Allows targeting by day of week and time of day\",\n                    \"viewable\": true,\n                    \"targeting_verbs\": [\n                        \"include_range\",\n                        \"exclude_range\",\n                        \"boolean\"\n                    ]\n                }\n            }\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        strategy_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        line_item_type_id:
+                          type: integer
+                          example: 0
+                          default: 0
+                        strategy_name:
+                          type: string
+                          example: System
+                        strategy_description:
+                          type: string
+                          example: Banner stategy
+                        default_strategy:
+                          type: boolean
+                          example: false
+                          default: true
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        create_date:
+                          type: string
+                          example: '2018-02-07 13:43:37'
+                        update_date:
+                          type: string
+                          example: '2018-02-07 13:43:37'
+                        targeting_modules:
+                          type: object
+                          properties:
+                            content:
+                              type: object
+                              properties:
+                                targeting_name:
+                                  type: string
+                                  example: Content
+                                targeting_description:
+                                  type: string
+                                  example: Allows targeting by IAB category
+                                viewable:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                targeting_verbs:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: include
+                            domain:
+                              type: object
+                              properties:
+                                targeting_name:
+                                  type: string
+                                  example: Domain
+                                targeting_description:
+                                  type: string
+                                  example: Allows targeting by a List of Domains or URLS associated with this Account
+                                viewable:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                targeting_verbs:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: include
+                            geo:
+                              type: object
+                              properties:
+                                targeting_name:
+                                  type: string
+                                  example: Geo
+                                targeting_description:
+                                  type: string
+                                  example: Allows targeting by country, state, zip, postal code, DMA, and bandiwidth
+                                viewable:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                targeting_verbs:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: include
+                            inventory:
+                              type: object
+                              properties:
+                                targeting_name:
+                                  type: string
+                                  example: Inventory
+                                targeting_description:
+                                  type: string
+                                  example: Allows targeting by source, site, publisher, etc
+                                viewable:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                targeting_verbs:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: include
+                            ip_address:
+                              type: object
+                              properties:
+                                targeting_name:
+                                  type: string
+                                  example: IP Address
+                                targeting_description:
+                                  type: string
+                                  example: Allows targeting by individual IP address and ranges of IP addresses
+                                viewable:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                targeting_verbs:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: include
+                            mobile_app:
+                              type: object
+                              properties:
+                                targeting_name:
+                                  type: string
+                                  example: Mobile App
+                                targeting_description:
+                                  type: string
+                                  example: Targeting by mobile app, app category
+                                viewable:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                targeting_verbs:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: include
+                            platform:
+                              type: object
+                              properties:
+                                targeting_name:
+                                  type: string
+                                  example: Platform
+                                targeting_description:
+                                  type: string
+                                  example: Allows targeting by browser, OS, etc
+                                viewable:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                targeting_verbs:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: include
+                            segment:
+                              type: object
+                              properties:
+                                targeting_name:
+                                  type: string
+                                  example: Segment
+                                targeting_description:
+                                  type: string
+                                  example: Allows targeting by segments associated with this Account
+                                viewable:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                targeting_verbs:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: include
+                            time:
+                              type: object
+                              properties:
+                                targeting_name:
+                                  type: string
+                                  example: Time
+                                targeting_description:
+                                  type: string
+                                  example: Allows targeting by day of week and time of day
+                                viewable:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                targeting_verbs:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: include_range
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/strategy" -b cookies.txt -d '{"strategy_id":1,"active":0}'
+        samples-languages:
+        - curl
+      tags:
+      - Strategy
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

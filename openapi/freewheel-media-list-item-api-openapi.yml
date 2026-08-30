@@ -1,0 +1,278 @@
+openapi: 3.2.0
+info:
+  title: buzz List Item API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: List Item
+paths:
+  /list_item:
+    post:
+      summary: list_item
+      description: ''
+      operationId: list_item-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - list_id
+              - list_item
+              properties:
+                list_id:
+                  type: integer
+                  description: The unique ID of the list. List must be active.
+                  format: int32
+                list_item:
+                  type: string
+                  description: The item, passed as a string for most list times, or a json object for lat/long custom_lists.
+                value:
+                  type: number
+                  description: A numeric value assigned to the list item that can be used by a Bid Modifier
+                  format: double
+                list_item_name:
+                  type: string
+                  description: Optional name for the list item
+                active:
+                  type: boolean
+                  description: Whether the item is active
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": {\n        \"id\": 1\n    },\n    \"message\": \"list_item created with ID = 1\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+                  message:
+                    type: string
+                    example: list_item created with ID = 1
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "#list_item format for custom_list types other than precise geo \ncurl -X POST \"[host]/rest/list_item\" -b cookies.txt -d '{\"list_id\":1, \"list_item\":\"foo.bar.iphone.app\",\"value\":0.5}'\n\n#list_item format for precise geo (lat/long) list\ncurl -X POST \"[host]/rest/list_item\" -b cookies.txt -d '{\"list_id\":1, \"list_item\":{\"lat\":-89.0122,\"long\":78.92,\"radius_km\":0.5},\"list_item_name\":\"Starbucks on Main St\",\"value\":0.9}'"
+        samples-languages:
+        - curl
+      tags:
+      - List Item
+    put:
+      summary: list_item
+      description: ''
+      operationId: list_item-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - list_item_id
+              properties:
+                list_item_id:
+                  type: integer
+                  description: Unique ID of the list_item
+                  format: int32
+                value:
+                  type: number
+                  description: A numeric value assigned to the list item that can be used by a Bid Modifier
+                  format: double
+                list_item_name:
+                  type: string
+                  description: Optional name for the list item
+                active:
+                  type: boolean
+                  description: Whether the item is active
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"list_item update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: 'list_item update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/list_item" -b cookies.txt -d '{"list_item_id":1, "value":0.5}'
+        samples-languages:
+        - curl
+      tags:
+      - List Item
+    get:
+      summary: list_item
+      description: ''
+      operationId: list_item-get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                list_item_id:
+                  type: integer
+                  description: The unique ID of the list_item
+                  format: int32
+                list_id:
+                  type: integer
+                  description: The unique ID of the list.
+                  format: int32
+                list_item:
+                  type: string
+                  description: The item, passed as a string
+                list_item_name:
+                  type: string
+                  description: Optional name for the list item
+                active:
+                  type: boolean
+                  description: Whether the item is active
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"list_item_id\": 1,\n            \"list_id\": 1,\n            \"list_item\": \"www.foo.net\",\n            \"list_item_name\": null,\n            \"create_date\": \"2018-04-23 17:00:42\",\n            \"update_date\": \"2018-04-24 16:25:50\",\n            \"active\": true,\n            \"value\": 1,\n            \"pushed_to_server\": null,\n            \"account_id\": 1,\n            \"buzz_key\": \"stinger\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        list_item_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        list_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        list_item:
+                          type: string
+                          example: www.foo.net
+                        list_item_name: {}
+                        create_date:
+                          type: string
+                          example: '2018-04-23 17:00:42'
+                        update_date:
+                          type: string
+                          example: '2018-04-24 16:25:50'
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        value:
+                          type: integer
+                          example: 1
+                          default: 0
+                        pushed_to_server: {}
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        buzz_key:
+                          type: string
+                          example: stinger
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/list_item" -b cookies.txt -d '{"list_item_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - List Item
+    delete:
+      summary: list_item
+      description: ''
+      operationId: list_item-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                list_item_id:
+                  type: string
+                  description: Unique ID of the list item to delete, or the special case `all` sent as a string
+                list_id:
+                  type: integer
+                  description: The `list_id` to delete from coupled with `"list_item_id":"all"`
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"list_item deletion: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: 'list_item deletion: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: '#Delete a single list_item
+
+            curl -X DELETE "[host]/rest/list_item" -b cookies.txt -d ''{"list_item_id":1}''
+
+
+            #Delete al list_items within a single list
+
+            curl -X DELETE "[host]/rest/list_item" -b cookies.txt -d ''{"list_item_id":"all","list_id":1}'''
+        samples-languages:
+        - curl
+      tags:
+      - List Item
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

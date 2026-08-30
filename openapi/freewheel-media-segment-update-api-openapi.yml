@@ -1,0 +1,93 @@
+openapi: 3.2.0
+info:
+  title: buzz Segment Update API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Segment Update
+paths:
+  /segment_update:
+    post:
+      summary: segment_update
+      description: ''
+      operationId: segment_update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_data
+              properties:
+                user_data:
+                  type: array
+                  description: JSON of the user-segment information to be added. See below for more details.
+                  items:
+                    properties:
+                      user_id:
+                        type: string
+                        description: User ID in format set by `segment_key_type` field
+                      segments:
+                        type: array
+                        description: List of segments (using `segment_key`) for this user to be added to. Segment keys may include an optional value, in format `<segment_key>:<value>`
+                        default: []
+                        items:
+                          type: string
+                    type: object
+                continent:
+                  type: string
+                  description: The destination continent data centers to upload the data. Only one continent may be specified per upload. If a segment is required across continents it must be uploaded twice. Options are `NAM`, `EMEA`, or `APAC`.
+                  default: NAM
+                segment_key_type:
+                  type: string
+                  description: Indicates whether the user IDs in the uploaded file should be put into a segment defined by the segment_key or the alternative_id from the segment. Must be set to either `DEFAULT` or `ALTERNATIVE`.
+                  default: DEFAULT
+                user_id_type:
+                  type: string
+                  description: Indicates the type of IDs being imported, as defined in the "segment_user_type" view. Valid types include `BEESWAX`, `CUSTOMER`, `IDFA`, `IDFA_MD5`, `IDFA_SHA1 `, `AD_ID`, `AD_ID_MD5`, `AD_ID_SHA1 `, `IP_ADDRESS`
+                operation_type:
+                  type: string
+                  description: What action should be taken on these users. Commonly set to `ADD_SEGMENTS` or `REPLACE_ALL_SEGMENTS`
+                  default: ADD_SEGMENTS
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"The segment update has been submitted for processing\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: The segment update has been submitted for processing
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/segment_update" -b cookies.txt -d '{"segment_key_type":"DEFAULT","user_data":[{"user_id":1234,"segments":["stinger-1","stinger-2:BAR","stinger-3"]},{"user_id":12344,"segments":["stinger-1","stinger-2:BAR","stinger-3"]}],"user_id_type":"IDFA"}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Update
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

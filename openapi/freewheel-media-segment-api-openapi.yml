@@ -1,0 +1,299 @@
+openapi: 3.2.0
+info:
+  title: buzz Segment API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Segment
+paths:
+  /segment:
+    post:
+      summary: segment
+      description: ''
+      operationId: segment-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - segment_name
+              properties:
+                segment_name:
+                  type: string
+                  description: Name of the Segment. <191 chars
+                alternative_id:
+                  type: string
+                  description: Unlike other objects, the `alternative_id` for segments must be unique per account. This enables the use of the `alternative_id` as a segment identifier when using the `segment_upload` method by setting the `segment_key_type` field.
+                  default: '0'
+                advertiser_id:
+                  type: integer
+                  description: Segments may belong to the overall Account or to a single Advertiser.
+                  format: int32
+                segment_description:
+                  type: string
+                  description: Longer description of the segment
+                cpm_cost:
+                  type: number
+                  description: Cost to track for the segment
+                  format: double
+                ttl_days:
+                  type: integer
+                  description: Number of days to keep users in the segment. Max 90. Cannot be changed once set.
+                  default: 30
+                  format: int32
+                aggregate_excludes:
+                  type: boolean
+                  description: Should reporting include this segment when it is used as a negative target ("NOT")
+                  default: false
+                active:
+                  type: boolean
+                  description: Indicates a segment’s archival status — when set to `true`, the segment remains active and is available for selection in targeting, whereas when set to `false`, it is archived and hidden from the options.
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"segment created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: segment created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/segment" -b cookies.txt -d '{"advertiser_id":1, "segment_name":"My users", "segment_description":"This is a great segment because it converts!", "cpm_cost":1.23, "ttl_days":45,"aggregate_excludes":true}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment
+    get:
+      summary: segment
+      description: ''
+      operationId: segment-get
+      parameters:
+      - name: segment_id
+        in: query
+        description: Unique ID of the Segment
+        schema:
+          type: integer
+          format: int32
+      - name: segment_key
+        in: query
+        description: An auto-generated key in the format `<BUZZ_KEY>-<segment_id>`. This key is used for sharing and targeting.
+        schema:
+          type: string
+      - name: segment_name
+        in: query
+        description: Name of the Segment. <191 chars
+        schema:
+          type: string
+      - name: alternative_id
+        in: query
+        description: Alternative ID
+        schema:
+          type: string
+          default: '0'
+      - name: advertiser_id
+        in: query
+        description: Segments may belong to the overall Account or to a single Advertiser.
+        schema:
+          type: integer
+          format: int32
+      - name: segment_description
+        in: query
+        description: Longer description of the segment
+        schema:
+          type: string
+      - name: active
+        in: query
+        description: Indicates a segment’s archival status — when set to `true`, the segment remains active and is available for selection in targeting, whereas when set to `false`, it is archived and hidden from the options.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"segment_id\": 1,\n            \"segment_key\": \"stingersbx-1\",\n            \"advertiser_id\": 1,\n            \"segment_name\": \"My users\",\n            \"cpm_cost\": 1.23,\n            \"segment_description\": \"This is a great segment because it converts!\",\n            \"ttl_days\": 45,\n            \"aggregate_excludes\": false,\n            \"account_id\": 1,          \n            \"create_date\": \"2015-07-27 11:50:32\",\n            \"update_date\": \"2016-03-30 13:18:26\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        segment_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        segment_key:
+                          type: string
+                          example: stingersbx-1
+                        advertiser_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        segment_name:
+                          type: string
+                          example: My users
+                        cpm_cost:
+                          type: number
+                          example: 1.23
+                          default: 0
+                        segment_description:
+                          type: string
+                          example: This is a great segment because it converts!
+                        ttl_days:
+                          type: integer
+                          example: 45
+                          default: 0
+                        aggregate_excludes:
+                          type: boolean
+                          example: false
+                          default: true
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2015-07-27 11:50:32'
+                        update_date:
+                          type: string
+                          example: '2016-03-30 13:18:26'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/segment" -b cookies.txt -d '{"segment_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment
+    put:
+      summary: segment
+      description: ''
+      operationId: segment-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - segment_id
+              properties:
+                segment_id:
+                  type: integer
+                  description: Unique ID of the Segment
+                  format: int32
+                segment_name:
+                  type: string
+                  description: Name of the Segment. <191 chars
+                alternative_id:
+                  type: string
+                  description: Unlike other objects, the `alternative_id` for segments must be unique per account. This enables the use of the `alternative_id` as a segment identifier when using the `segment_upload` method by setting the `segment_key_type` field.
+                  default: '0'
+                advertiser_id:
+                  type: integer
+                  description: Segments may belong to the overall Account or to a single Advertiser.
+                  format: int32
+                segment_description:
+                  type: string
+                  description: Longer description of the segment
+                cpm_cost:
+                  type: number
+                  description: Cost to use the segment
+                  format: double
+                aggregate_excludes:
+                  type: boolean
+                  description: Should reporting include this segment when it is used as a negative target ("NOT")
+                  default: false
+                active:
+                  type: boolean
+                  description: Indicates a segment’s archival status — when set to `true`, the segment remains active and is available for selection in targeting, whereas when set to `false`, it is archived and hidden from the options.
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"segment updated with ID 1\"\n        }\n    ],\n    \"message\": \"segment update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: segment updated with ID 1
+                  message:
+                    type: string
+                    example: 'segment update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/segment" -b cookies.txt -d '{"segment_id":1, "advertiser_id":1, "segment_name":"My users", "segment_description":"This is a great segment because it converts!","cpm_cost":1.23}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

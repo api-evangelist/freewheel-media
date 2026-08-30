@@ -1,0 +1,66 @@
+openapi: 3.2.0
+info:
+  title: buzz Event Tag API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Event Tag
+paths:
+  /event_tag:
+    get:
+      summary: event_tag
+      description: The Event Tag object allows you to get rendered code for one or more Events to use on your website or application. This object only accepts GET requests.
+      operationId: event-tag
+      parameters:
+      - name: event_id
+        in: query
+        description: Unique ID for the event
+        schema:
+          type: integer
+          format: int32
+      - name: event_name
+        in: query
+        description: Name for the event
+        schema:
+          type: string
+      - name: advertiser_id
+        in: query
+        description: Unique ID for the advertiser
+        schema:
+          type: integer
+          format: int32
+      - name: event_type_id
+        in: query
+        description: Type of event, used for organizational purposes
+        schema:
+          type: integer
+          format: int32
+      - name: tag_type
+        in: query
+        description: The tag type to render, default is `js` for javascript tags.
+        schema:
+          type: string
+          default: js
+      - name: format
+        in: query
+        description: The format to return the tags, default is `none`. Optional values can include `csv`, `xml`, `xls`, `xlsx` and `json` If not set or set to "none" the tags will be returned in the standard API response. If set, a file with the content will be streamed to the output.
+        schema:
+          type: string
+          default: none
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/event_tag" -b cookies.txt -d '{"event_id":1, "tag_type":"js", "format":"none"}'
+        samples-languages:
+        - curl
+      tags:
+      - Event Tag
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

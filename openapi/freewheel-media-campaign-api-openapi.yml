@@ -1,0 +1,595 @@
+openapi: 3.2.0
+info:
+  title: buzz Campaign API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Campaign
+paths:
+  /campaign:
+    post:
+      summary: campaign
+      description: ''
+      operationId: campaign-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - advertiser_id
+              - campaign_name
+              - campaign_budget
+              - start_date
+              - active
+              properties:
+                advertiser_id:
+                  type: integer
+                  description: Must belong to the same account as the Campaign and be active
+                  format: int32
+                campaign_name:
+                  type: string
+                  description: Name of the Campaign, e.g. "Winter lead generation"
+                campaign_budget:
+                  type: number
+                  description: Maximum amount to spend on this Campaign
+                  format: double
+                daily_budget:
+                  type: number
+                  description: Maximum amount to spend or deliver in a day, Cannot exceed `campaign_budget` or be so low as to prevent `campaign_budget` from being reached over the length of the campaign. Cannot be lower than the `daily_budget` for any Line Items associated with this campaign.
+                  format: double
+                budget_type:
+                  type: integer
+                  description: Type of budget, `0`=spend, `1`=impressions, `2`=spend with vendor fees
+                  default: 0
+                  format: int32
+                revenue_type:
+                  type: string
+                  description: 'Supported revenue types:  `CPM`, `CPC`, `CPCV`, `CPI`, `CPA`'
+                revenue_amount:
+                  type: number
+                  description: If a revenue_type is set, this is field is the basis of calculation. For example, if revenue_type is `CPM` and revenue_amount is `5.12`, revenue will be calculated as a $5.12 CPM.
+                  format: double
+                pacing:
+                  type: integer
+                  description: This field is deprecated. Pacing is available at the Line Item level.
+                  default: 0
+                  format: int32
+                bid_modifier_id:
+                  type: integer
+                  description: ID of a Bid Modifier object to associate with the Campaign. If set, `max_bid` must also be set.
+                  format: int32
+                delivery_modifier_id:
+                  type: integer
+                  description: ID of the Delivery Modifier to associate with Line Items under this Campaign
+                  format: int32
+                max_bid:
+                  type: number
+                  description: Maximum bid after taking into consideration any Bid Modifiers.
+                  format: double
+                start_date:
+                  type: string
+                  description: Start date of the Campaign. No Line Items associated with the Campaign can have start dates prior to this date.
+                  format: date
+                end_date:
+                  type: string
+                  description: End date of the Campaign. No Line Items associated with the Campaign can have end dates after this date. End date must be provided in order to pace.
+                  format: date
+                frequency_cap:
+                  type: object
+                  description: Frequency cap JSON.
+                  required:
+                  - duration
+                  - impressions
+                  properties:
+                    duration:
+                      type: integer
+                      description: Duration of time in which to cap impressions, in seconds. 30-day (2592000) max.
+                      format: int32
+                    impressions:
+                      type: integer
+                      description: Number of impressions to allow within the duration set
+                      format: int32
+                frequency_cap_type:
+                  type: integer
+                  description: The method of frequency capping. All Line Items must match Campaign-level if set. For definitions, see the Frequency Cap guide.
+                  default: 0
+                  format: int32
+                frequency_cap_vendor:
+                  type: string
+                  description: Extends frequency cap using a device graph (fees may apply). Valid values may be `TAPAD` or `LIVERAMP` depending on what has been enabled
+                continents:
+                  type: array
+                  description: Continents in which the Campaign is eligible to serve. Inherited from the Advertiser object if left blank.
+                  items:
+                    type: string
+                currency:
+                  type: string
+                  description: Currency in which all Line Items under this Campaign will bid. Cannot be changed once set. If a default is set at the Advertiser level, it will be inherited here.
+                  default: USD
+                segment_extension_default:
+                  type: string
+                  description: Determines the type of audience extension to use at the Line Item level. Valid values are `none`,`person`,`household`,`person_extend_only`, and `household_extend_only`.
+                  default: none
+                segment_extension_type_default:
+                  type: string
+                  description: Determines the type of audience extension to be used at the Line Item level. Valid options include `none`,`1P`,`3P`, and `ALL`.
+                  default: none
+                segment_extension_vendors_default:
+                  type: array
+                  description: Lists of vendors to use at the Line Item level for audience extension. Valid values are `TAPAD` and `LIVERAMP`.
+                  default:
+                  - '''["TAPAD"]`'
+                  items:
+                    type: string
+                enable_skad_tracking:
+                  type: boolean
+                  description: Should Apple's SKAdNetwork tracking be enabled for this Campaign. Must be enabled at the Advertiser level to be enabled here.
+                  default: false
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the Campaign, if desired
+                notes:
+                  type: string
+                  description: Notes, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"campaign created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: campaign created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/campaign" -b cookies.txt -d '{"advertiser_id":1, "budget_type":0,"campaign_name":"foo", "campaign_budget":1000, "start_date":"1/1/2015", "frequency_cap":[{"duration":500,"impressions":1}, "frequency_cap_type":1, {"duration":1000,"impressions":2}], "frequency_cap_vendor":"TAPAD","continents":["NAM","EMEA"],"currency":"CAD","segment_extension_default":"person","segment_extension_type_default":"1P","segment_extension_vendors_default":["TAPAD"],"enable_skad_tracking":false}'
+        samples-languages:
+        - curl
+      tags:
+      - Campaign
+    get:
+      summary: campaign
+      description: ''
+      operationId: campaign-get
+      parameters:
+      - name: campaign_id
+        in: query
+        description: Unique ID of the campaign
+        schema:
+          type: integer
+          format: int32
+      - name: advertiser_id
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: campaign_name
+        in: query
+        description: Name of the campaign, e.g. "Winter lead generation"
+        schema:
+          type: string
+      - name: bid_modifier_id
+        in: query
+        description: ID of the Bid Modifier associated with this Campaign
+        schema:
+          type: integer
+          format: int32
+      - name: delivery_modifier_id
+        in: query
+        description: ID of the Delivery Modifier associated with this Campaign
+        schema:
+          type: integer
+          format: int32
+      - name: alternative_id
+        in: query
+        description: An alternative id to lookup the campaign, if desired
+        schema:
+          type: string
+      - name: active
+        in: query
+        description: Is it active?
+        schema:
+          type: boolean
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"campaign_id\": 1,\n            \"advertiser_id\": 1,\n            \"campaign_name\": \"Campaign Name\",\n            \"campaign_budget\": 1000,\n            \"campaign_spend\": 0,\n            \"daily_budget\": null,\n            \"budget_type\": 0,\n            \"start_date\": \"2015-01-01 00:00:00\",\n            \"end_date\": null,\n            \"pacing\": 0,\n            \"bid_modifier_id\": null,\n            \"delivery_modifier_id\": null,\n          \t\"max_bid\": null,\n            \"test_plan_id\": null,\n            \"revenue_type\": null,\n            \"revenue_amount\": null,\n            \"frequency_cap\": [\n                {\n                    \"duration\": 500,\n                    \"impressions\": 1\n                },\n                {\n                    \"duration\": 1000,\n                    \"impressions\": 2\n                }\n            ],\n            \"frequency_cap_type\": 1,\n            \"frequency_cap_vendor\": \"TAPAD\",\n            \"default_targeting\": [],\n            \"continents\": [\"NAM\",\"EMEA\"],\n            \"currency\": \"CAD\",\n            \"segment_extension_default\": \"person\",\n            \"segment_extension_type_default\": \"1P\",\n            \"segment_extension_vendors_default\": [\"TAPAD\"],\n            \"enable_skad_tracking\":false,          \n            \"push_status\": 0,\n            \"push_update\": 1,\n            \"account_id\": 1,\n            \"create_date\": \"2016-02-19 13:31:12\",\n            \"update_date\": \"2016-02-25 16:43:36\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        campaign_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        advertiser_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        campaign_name:
+                          type: string
+                          example: Campaign Name
+                        campaign_budget:
+                          type: integer
+                          example: 1000
+                          default: 0
+                        campaign_spend:
+                          type: integer
+                          example: 0
+                          default: 0
+                        daily_budget: {}
+                        budget_type:
+                          type: integer
+                          example: 0
+                          default: 0
+                        start_date:
+                          type: string
+                          example: '2015-01-01 00:00:00'
+                        end_date: {}
+                        pacing:
+                          type: integer
+                          example: 0
+                          default: 0
+                        bid_modifier_id: {}
+                        delivery_modifier_id: {}
+                        max_bid: {}
+                        test_plan_id: {}
+                        revenue_type: {}
+                        revenue_amount: {}
+                        frequency_cap:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              duration:
+                                type: integer
+                                example: 500
+                                default: 0
+                              impressions:
+                                type: integer
+                                example: 1
+                                default: 0
+                        frequency_cap_type:
+                          type: integer
+                          example: 1
+                          default: 0
+                        frequency_cap_vendor:
+                          type: string
+                          example: TAPAD
+                        default_targeting:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        continents:
+                          type: array
+                          items:
+                            type: string
+                            example: NAM
+                        currency:
+                          type: string
+                          example: CAD
+                        segment_extension_default:
+                          type: string
+                          example: person
+                        segment_extension_type_default:
+                          type: string
+                          example: 1P
+                        segment_extension_vendors_default:
+                          type: array
+                          items:
+                            type: string
+                            example: TAPAD
+                        enable_skad_tracking:
+                          type: boolean
+                          example: false
+                          default: true
+                        push_status:
+                          type: integer
+                          example: 0
+                          default: 0
+                        push_update:
+                          type: integer
+                          example: 1
+                          default: 0
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2016-02-19 13:31:12'
+                        update_date:
+                          type: string
+                          example: '2016-02-25 16:43:36'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/campaign" -b cookies.txt -d '{"campaign_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Campaign
+    put:
+      summary: campaign
+      description: ''
+      operationId: campaign-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - campaign_Id
+              properties:
+                campaign_Id:
+                  type: integer
+                  description: Unique ID of the campaign
+                  format: int32
+                campaign_name:
+                  type: string
+                  description: Name of the campaign, e.g. "Winter lead generation"
+                campaign_budget:
+                  type: number
+                  description: Maximum amount to spend on this Campaign
+                  format: double
+                daily_budget:
+                  type: number
+                  description: Maximum amount to spend or deliver in a day, Cannot exceed `campaign_budget` or be so low as to prevent `campaign_budget` from being reached over the length of the campaign. Cannot be lower than the `daily_budget` for any Line Items associated with this Campaign.
+                  format: double
+                budget_type:
+                  type: integer
+                  description: Type of budget, `0`=spend, `1`=impressions, `2`=spend with vendor fees
+                  default: 0
+                  format: int32
+                revenue_type:
+                  type: string
+                  description: 'Supported revenue types:  `CPM`, `CPC`, `CPCV`, `CPI`, `CPA`'
+                revenue_amount:
+                  type: number
+                  description: If a `revenue_type` is set, this is field is the basis of calculation. For example, if `revenue_type` is `CPM` and `revenue_amount` is `5.12`, revenue will be calculated as a $5.12 CPM.
+                  format: double
+                pacing:
+                  type: integer
+                  description: This field is deprecated. Pacing is available at the Line Item level.
+                  default: 0
+                  format: int32
+                bid_modifier_id:
+                  type: integer
+                  description: ID of a Bid Modifier object to associate with the Campaign. If set, `max_bid` must also be set.
+                  format: int32
+                delivery_modifier_id:
+                  type: integer
+                  description: ID of the Delivery Modifier to associate with Line Items under this Campaign
+                  format: int32
+                max_bid:
+                  type: number
+                  description: Maximum bid after taking into consideration any Bid Modifiers.
+                  format: double
+                start_date:
+                  type: string
+                  description: Start date of the Campaign. No Line Items associated with the Campaign can have start dates prior to this date.
+                  format: date
+                end_date:
+                  type: string
+                  description: End date of the Campaign. No Line Items associated with the Campaign can have end dates after this date.
+                  format: date
+                frequency_cap:
+                  type: object
+                  description: Frequency cap JSON.
+                  required:
+                  - duration
+                  - impressions
+                  properties:
+                    duration:
+                      type: integer
+                      description: Duration of time in which to cap impressions, in seconds. 30-day (2592000) max.
+                      format: int32
+                    impressions:
+                      type: integer
+                      description: Number of impressions to allow within the duration set
+                      format: int32
+                frequency_cap_type:
+                  type: integer
+                  description: The method of frequency capping. All Line Items must match Campaign-level if set. For definitions, see the Frequency Cap guide.
+                  format: int32
+                frequency_cap_vendor:
+                  type: string
+                  description: Extends frequency cap using a device graph (fees may apply). Valid values may be `TAPAD` or `LIVERAMP` depending on what has been enabled
+                continents:
+                  type: array
+                  description: Continents in which the Campaign is eligible to serve. Inherited from the Advertiser object if left blank.
+                  items:
+                    type: string
+                segment_extension_default:
+                  type: string
+                  description: Determines the type of audience extension to use at the Line Item level. Valid values are `none`,`person`,`household`,`person_extend_only`, and `household_extend_only`.
+                  default: none
+                segment_extension_type_default:
+                  type: string
+                  description: Determines the type of audience extension to be used at the Line Item level. Valid options include `none`,`1P`,`3P`, and `ALL`.
+                  default: none
+                segment_extension_vendors_default:
+                  type: array
+                  description: Lists of vendors to use at the Line Item level for audience extension. Valid values are `TAPAD` and `LIVERAMP`.
+                  default:
+                  - '`["TAPAD"]`'
+                  items:
+                    type: string
+                enable_skad_tracking:
+                  type: boolean
+                  description: Should Apple's SKAdNetwork tracking be enabled for this Campaign. Must be enabled at the Advertiser level to be enabled here.
+                  default: false
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the campaign, if desired
+                notes:
+                  type: string
+                  description: Notes up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"campaign updated with ID 1\"\n        }\n    ],\n    \"message\": \"campaign update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: campaign updated with ID 1
+                  message:
+                    type: string
+                    example: 'campaign update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/campaign" -b cookies.txt -d '{"campaign_id":1, "start_date":"2/1/2015"}'
+        samples-languages:
+        - curl
+      tags:
+      - Campaign
+    delete:
+      summary: campaign
+      description: ''
+      operationId: campaign-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - campaign_id
+              properties:
+                campaign_id:
+                  type: integer
+                  description: Unique ID of the campaign
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"campaign deleted with ID 1\"\n        }\n    ],\n    \"message\": \"campaign deletion: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: campaign deleted with ID 1
+                  message:
+                    type: string
+                    example: 'campaign deletion: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/campaign" -b cookies.txt -d '{"campaign_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Campaign
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

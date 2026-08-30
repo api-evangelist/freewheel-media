@@ -1,0 +1,184 @@
+openapi: 3.2.0
+info:
+  title: buzz Segment Upload API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Segment Upload
+paths:
+  /segment_upload:
+    post:
+      summary: segment_upload
+      description: ''
+      operationId: segment_upload-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - file_name
+              - size_in_bytes
+              properties:
+                file_name:
+                  type: string
+                  description: The filename to be uploaded, including the extension. <255 chars, no spaces or special characters other than dashes and underscores.
+                path_to_file:
+                  type: string
+                  description: The location of the file on the server. If this field is populated, Buzz assumes the file was already uploaded and will not allow further uploads. If absent, Buzz will auto-fill this when the file is uploaded in a subsequent POST.
+                size_in_bytes:
+                  type: integer
+                  description: Size of the file to be uploaded, in bytes.
+                  format: int32
+                datacenter:
+                  type: string
+                  description: Not currently used.
+                file_format:
+                  type: string
+                  description: The type of file format expected. Valid formats are stored in the `segment_file_format` table.
+                  default: DELIMITED
+                segment_file_list:
+                  type: array
+                  description: When uploading multiple files of segment-user associations, a list of these files can be passed in a single POST. This will generally improve performance of the upload as well.
+                  items:
+                    type: string
+                segment_key_type:
+                  type: string
+                  description: Indicates whether the user IDs in the uploaded file should be put into a segment defined by the segment_key or the alternative_id from the segment. Must be set to either `DEFAULT` or `ALTERNATIVE`.
+                  default: DEFAULT
+                continent:
+                  type: string
+                  description: The destination continent data centers to upload the data. Only one continent may be specified per upload. If a segment is required across continents it must be uploaded twice. Options are `NAM`, `EMEA`, or `APAC`.
+                  default: NAM
+                user_id_type:
+                  type: string
+                  description: Indicates the type of IDs being imported, as defined in the "segment_user_type" view. Valid types include `BEESWAX`, `CUSTOMER`, `HEM`, `IDFA`, `IDFA_MD5`, `IDFA_SHA1 `, `AD_ID`, `AD_ID_MD5`, `AD_ID_SHA1 `, `IP_ADDRESS`, `OTHER_MOBILE_ID`
+                first_party_user_id_type:
+                  type: string
+                  description: Indicates the type of the first-party IDs being imported (up to 191 characters). This field cannot be set alongside `user_id_type` in the same request. A valid value can be any type ID that exists for the customer.
+                overwrite:
+                  type: boolean
+                  description: DEPRECATED. When set the segments associated with a user will overwrite all other user-segment associations for the given user. Use the `operation_type` field instead.
+                  default: false
+                operation_type:
+                  type: string
+                  description: What action should be taken on these users. Commonly set to `ADD_SEGMENTS` or `REPLACE_ALL_SEGMENTS`
+                  default: ADD_SEGMENTS
+                partner_handle:
+                  type: string
+                  description: This field should be left null unless otherwise instructed. After POST the value will be set to the `buzz_key` of the account.
+                  default: custom value
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"segment_upload created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: segment_upload created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: 'curl -X POST "[host]/rest/segment_upload" -b cookies.txt -d ''{"file_name":"user_data_sample.txt","size_in_bytes":412,"account_id":1,"file_format":"DELIMITED","segment_key_type":"ALTERNATIVE","continent":"NAM","user_id_type":"IDFA"}''
+
+            #
+
+            # After the first POST, get the ID and add /upload/ID to the URL:
+
+            #
+
+            curl -X POST "[host]/rest/segment_upload/upload/1" -b cookies.txt -F "segment_file=@../user_data_sample.txt"
+
+            '
+          name: cURL example with single file upload
+        - language: curl
+          code: curl -X POST "[host]/rest/segment_upload" -b cookies.txt -d '{"file_name":null,"size_in_bytes":null,"account_id":1,"file_format":"DELIMITED","segment_key_type":"ALTERNATIVE","continent":"NAM","user_id_type":"IDFA","segment_file_list":["s3://beeswax-data/user-list/customer_name/folder/part-00000","s3://beeswax-data/user-list/customer_name/folder/part-00001"]}'
+          name: cURL example with list of files
+        samples-languages:
+        - curl
+      tags:
+      - Segment Upload
+    get:
+      summary: segment_upload
+      description: ''
+      operationId: segment_upload-get
+      parameters:
+      - name: segment_upload_id
+        in: query
+        description: Unique ID for the segment_upload object
+        schema:
+          type: integer
+          format: int32
+      - name: file_name
+        in: query
+        description: The filename uploaded, including the extension.
+        schema:
+          type: string
+      - name: upload_status
+        in: query
+        description: Status of the file upload. 0=No file uploaded; 1=File uploaded, pending process, 2= Processed, 3=Error, 4=In-progress.
+        schema:
+          type: integer
+          format: int32
+      - name: upload_complete_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: partner_handle
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"segment_upload_id\": 1,\n            \"account_id\": 1,\n            \"file_name\": \"test_pollinator.dat\",\n            \"path_to_file\": \"buzz-user-lists/uploaded_files/stingertest/1/1_test_pollinator.dat\",\n            \"size_in_bytes\": 149,\n            \"segment_file_list\": null,\n            \"datacenter\": null,\n            \"file_format\": \"DELIMITED\",\n            \"segment_key_type\": \"ALTERNATIVE\",\n            \"continent\": \"NAM\",\n            \"overwrite\": false,\n            \"user_id_type\": \"BEESWAX\",\n            \"upload_message\": \"Success!\",\n            \"upload_status\": 2,\n\t\t\t\t\t\t\"partner_handle\": \"stingersbx\",\n            \"upload_complete_date\": \"2015-09-19 11:28:12\",\n            \"create_date\": \"2015-09-19 11:28:10\",\n            \"update_date\": \"2015-09-19 11:28:12\",\n            \"buzz_key\": \"stingersbx\"\n        }\n    ],\n}"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/segment_upload" -b cookies.txt -d '{"segment_upload_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Upload
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

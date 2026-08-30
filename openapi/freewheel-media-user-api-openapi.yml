@@ -1,0 +1,358 @@
+openapi: 3.2.0
+info:
+  title: buzz User API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: User
+paths:
+  /user:
+    post:
+      summary: user
+      description: ''
+      operationId: user-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - first_name
+              - last_name
+              - role_id
+              properties:
+                email:
+                  type: string
+                  description: Must be a valid email, and must be unique per Buzz instance
+                first_name:
+                  type: string
+                  description: <20 chars
+                last_name:
+                  type: string
+                  description: <20 chars
+                role_id:
+                  type: integer
+                  description: Role must be valid and Active.
+                  format: int32
+                notes:
+                  type: string
+                  description: Any notes about the user
+                active:
+                  type: boolean
+                  description: Is the User active? Cannot be set to 1 on POST unless you are a Super User.
+                  default: false
+                super_user:
+                  type: boolean
+                  description: Is the user a Super User. Only Super Users can create other Super Users.
+                  default: false
+                multi_account:
+                  type: boolean
+                  description: Is the user allowed to work across Accounts. Must be enabled on the Buzz instance. Only Super Users or other Multi Account users can set to true.
+                  default: false
+                send_product_comms:
+                  type: boolean
+                  description: Should this user get product updates from Beeswax
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"user created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: user created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/user" -b cookies.txt -d '{"email":"foo@bar.com", "role_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - User
+    get:
+      summary: user
+      description: ''
+      operationId: user-get
+      parameters:
+      - name: user_id
+        in: query
+        description: Unique ID for the User
+        schema:
+          type: integer
+          format: int32
+      - name: email
+        in: query
+        description: Must be a valid email, and must be unique per Buzz instance
+        schema:
+          type: string
+      - name: first_name
+        in: query
+        description: <20 chars
+        schema:
+          type: string
+      - name: last_name
+        in: query
+        description: <20 chars
+        schema:
+          type: string
+      - name: role_id
+        in: query
+        description: Role be valid and Active.
+        schema:
+          type: integer
+          format: int32
+      - name: active
+        in: query
+        description: Is the User active?
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"user_id\": 2,\n            \"super_user\": true,\n            \"multi_account\": false,\n            \"email\": \"foo@info.com\",\n            \"login_token\": null,\n            \"first_name\": \"beeswax\",\n            \"last_name\": \"drone\",\n            \"role_id\": 6,\n            \"send_product_comms\": true,\n            \"password\": \"sha256:1000:QfUvhXIfZtOEnTsdssdsdsdCwZbgw:CAkCxTcgEGMQbnasaaasaWV7ABV1VS\",\n            \"account_id\": 1,\n            \"create_date\": null,\n            \"update_date\": \"2015-08-31 14:54:42\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        user_id:
+                          type: integer
+                          example: 2
+                          default: 0
+                        super_user:
+                          type: boolean
+                          example: true
+                          default: true
+                        multi_account:
+                          type: boolean
+                          example: false
+                          default: true
+                        email:
+                          type: string
+                          example: foo@info.com
+                        login_token: {}
+                        first_name:
+                          type: string
+                          example: beeswax
+                        last_name:
+                          type: string
+                          example: drone
+                        role_id:
+                          type: integer
+                          example: 6
+                          default: 0
+                        send_product_comms:
+                          type: boolean
+                          example: true
+                          default: true
+                        password:
+                          type: string
+                          example: sha256:1000:QfUvhXIfZtOEnTsdssdsdsdCwZbgw:CAkCxTcgEGMQbnasaaasaWV7ABV1VS
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date: {}
+                        update_date:
+                          type: string
+                          example: '2015-08-31 14:54:42'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/user" -b cookies.txt -d '{"user_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - User
+    put:
+      summary: user
+      description: ''
+      operationId: user-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_id
+              - first_name
+              - last_name
+              properties:
+                user_id:
+                  type: integer
+                  description: Unique ID for the User
+                  format: int32
+                email:
+                  type: string
+                  description: Must be a valid email, and must be unique per Buzz instance
+                first_name:
+                  type: string
+                  description: <20 chars
+                last_name:
+                  type: string
+                  description: <20 chars
+                role_id:
+                  type: integer
+                  description: Role be valid and Active.
+                  format: int32
+                notes:
+                  type: string
+                  description: Any notes about the user
+                active:
+                  type: boolean
+                  description: Is the User active?
+                  default: false
+                super_user:
+                  type: boolean
+                  description: Is the user a Super User. Only Super Users can create other Super Users.
+                  default: false
+                multi_account:
+                  type: boolean
+                  description: Is the user allowed to work across Accounts. Must be enabled on the Buzz instance. Only other Super Users or Multi-Account Users may set.
+                  default: false
+                send_product_comms:
+                  type: boolean
+                  description: Should this user get product updates from Beeswax
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"user updated with ID 1\"\n        }\n    ],\n    \"message\": \"user update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: user updated with ID 1
+                  message:
+                    type: string
+                    example: 'user update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/user" -b cookies.txt -d '{"user_id":1,"email":"foo@bar.com", "role_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - User
+    delete:
+      summary: user
+      description: ''
+      operationId: user-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_id
+              properties:
+                user_id:
+                  type: integer
+                  description: Unique ID of the User
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"user deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: user deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/user" -b cookies.txt -d '{"user_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - User
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,193 @@
+openapi: 3.2.0
+info:
+  title: buzz Segment Category Association API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Segment Category Association
+paths:
+  /segment_category_association:
+    post:
+      summary: segment_category_association
+      description: ''
+      operationId: segment_category_association-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - segment_category_key
+              - segment_key
+              properties:
+                segment_category_key:
+                  type: string
+                  description: The `segment_category_key` (not the `segment_category_id`!) from the Segment Category.
+                segment_key:
+                  type: string
+                  description: The `segment_key` (not `segment_id`!) from the Segment to be categorized. Must either belong to the Account of the user, or be shared with that user's Account.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"segment_category_association created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: segment_category_association created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: 'curl -X POST "[host]/rest/segment_category_association" -b cookies.txt -d ''{"segment_category_key": "stingersbx-3", "segment_key":"stingersbx-1"}'''
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category Association
+    get:
+      summary: segment_category_association
+      description: ''
+      operationId: segment_category_association-get
+      parameters:
+      - name: segment_category_association_id
+        in: query
+        description: Unique ID of the Segment Category association
+        schema:
+          type: integer
+          format: int32
+      - name: segment_category_key
+        in: query
+        description: The `segment_category_key` (not the `segment_category_id`!) from the Segment Category.
+        schema:
+          type: string
+      - name: segment_key
+        in: query
+        description: The `segment_key` (not the 1segment_id`!) from the Segment to be categorized. Must either belong to the Account of the user, or be shared with that user's Account.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"account_id\": 1,\n            \"segment_category_association_id\": 1,\n            \"segment_category_key\": \"stingersbx-3\",\n            \"segment_key\": \"stingersbx-1\",\n            \"create_date\": \"2016-03-30 13:50:56\",\n            \"update_date\": \"2016-03-30 13:50:56\",\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        segment_category_association_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        segment_category_key:
+                          type: string
+                          example: stingersbx-3
+                        segment_key:
+                          type: string
+                          example: stingersbx-1
+                        create_date:
+                          type: string
+                          example: '2016-03-30 13:50:56'
+                        update_date:
+                          type: string
+                          example: '2016-03-30 13:50:56'
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: 'curl -X GET "[host]/rest/segment_category_association" -b cookies.txt -d ''{"segment_category_association_id": 1}'''
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category Association
+    delete:
+      summary: segment_category_association
+      description: ''
+      operationId: segment_category_association-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - segment_category_association_id
+              properties:
+                segment_category_association_id:
+                  type: integer
+                  description: Unique ID of the segment_category_association
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"segment_category_association deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: segment_category_association deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/segment_category_association" -b cookies.txt -d '{"segment_category_association_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Segment Category Association
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

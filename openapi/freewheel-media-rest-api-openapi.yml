@@ -1,0 +1,204 @@
+openapi: 3.2.0
+info:
+  title: buzz Rest API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Rest
+paths:
+  /rest/push_queue:
+    get:
+      summary: push_queue
+      description: ''
+      operationId: push_queue
+      parameters:
+      - name: push_id
+        in: query
+        description: Unique id of the Push Queue entry
+        schema:
+          type: integer
+          format: int32
+      - name: object_id
+        in: query
+        description: The unique ID of the object that was affected. For example, if a User object was created, this ID will be the user_id of that User
+        schema:
+          type: integer
+          format: int32
+      - name: object_type
+        in: query
+        description: The type of object affected. e.g. "user" or "line_item"
+        schema:
+          type: string
+      - name: action
+        in: query
+        description: '`CREATE`, `UPDATE`, `DELETE`, `PAUSE`'
+        schema:
+          type: string
+      - name: push_request_date
+        in: query
+        description: The date the activity took place
+        schema:
+          type: string
+          format: date
+      - name: push_status
+        in: query
+        description: Whether the object has been pushed, `0`=not pushed, `1`=pushed. Note, not currently used by Buzz.
+        schema:
+          type: string
+      - name: push_complete_date
+        in: query
+        description: The date the push was completed. Not currently used by Buzz.
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        description: Date last updated
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"push_id\": 1,\n            \"object_id\": 1,\n            \"object_type\": \"campaign\",\n            \"action\": \"CREATE\",\n            \"details\": {\n                \"campaign_id\": 1,\n                \"advertiser_id\": 1,\n                \"campaign_name\": \"Campaign 1\",\n                \"campaign_budget\": 1000,\n                \"daily_budget\": null,\n                \"campaign_spend\": 0,\n                \"budget_type\": 0,\n                \"start_date\": \"2015-07-21 00:00:00\",\n                \"end_date\": null,\n                \"frequency_cap\": [\n\n                ],\n                \"default_targeting\": [\n\n                ],\n                \"active\": 1,\n                \"alternative_id\": \"\",\n                \"notes\": \"\",\n                \"original_object_id\": 1,\n                \"account_id\": 1,\n                \"view_name\": \"\",\n                \"create_date\": \"2015-07-21 13:28:57\",\n                \"push_status\": 0,\n                \"push_update\": 1,\n                \"payload\": null\n            },\n            \"push_request_date\": \"2015-07-21 13:28:57\",\n            \"push_status\": 1,\n            \"push_status_message\": null,\n            \"object_push_status\": 0,\n            \"object_push_update\": true,\n            \"push_complete_date\": null,\n            \"update_date\": \"2015-09-18 16:48:15\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        push_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        object_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        object_type:
+                          type: string
+                          example: campaign
+                        action:
+                          type: string
+                          example: CREATE
+                        details:
+                          type: object
+                          properties:
+                            campaign_id:
+                              type: integer
+                              example: 1
+                              default: 0
+                            advertiser_id:
+                              type: integer
+                              example: 1
+                              default: 0
+                            campaign_name:
+                              type: string
+                              example: Campaign 1
+                            campaign_budget:
+                              type: integer
+                              example: 1000
+                              default: 0
+                            daily_budget: {}
+                            campaign_spend:
+                              type: integer
+                              example: 0
+                              default: 0
+                            budget_type:
+                              type: integer
+                              example: 0
+                              default: 0
+                            start_date:
+                              type: string
+                              example: '2015-07-21 00:00:00'
+                            end_date: {}
+                            frequency_cap:
+                              type: array
+                              items:
+                                type: object
+                                properties: {}
+                            default_targeting:
+                              type: array
+                              items:
+                                type: object
+                                properties: {}
+                            active:
+                              type: integer
+                              example: 1
+                              default: 0
+                            alternative_id:
+                              type: string
+                              example: ''
+                            notes:
+                              type: string
+                              example: ''
+                            original_object_id:
+                              type: integer
+                              example: 1
+                              default: 0
+                            account_id:
+                              type: integer
+                              example: 1
+                              default: 0
+                            view_name:
+                              type: string
+                              example: ''
+                            create_date:
+                              type: string
+                              example: '2015-07-21 13:28:57'
+                            push_status:
+                              type: integer
+                              example: 0
+                              default: 0
+                            push_update:
+                              type: integer
+                              example: 1
+                              default: 0
+                            payload: {}
+                        push_request_date:
+                          type: string
+                          example: '2015-07-21 13:28:57'
+                        push_status:
+                          type: integer
+                          example: 1
+                          default: 0
+                        push_status_message: {}
+                        object_push_status:
+                          type: integer
+                          example: 0
+                          default: 0
+                        object_push_update:
+                          type: boolean
+                          example: true
+                          default: true
+                        push_complete_date: {}
+                        update_date:
+                          type: string
+                          example: '2015-09-18 16:48:15'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/push_queue" -b cookies.txt -d '{"push_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Rest
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

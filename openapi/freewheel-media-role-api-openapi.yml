@@ -1,0 +1,471 @@
+openapi: 3.2.0
+info:
+  title: buzz Role API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Role
+paths:
+  /role:
+    post:
+      summary: role
+      description: ''
+      operationId: role-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - role_name
+              - parent_role_id
+              - permissions
+              properties:
+                role_name:
+                  type: string
+                  description: Name of the Role (e.g. "Administrator"). <100 chars
+                global:
+                  type: boolean
+                  description: "Whether the Role is global, across Accounts. Only Super Users can create or edit a global Role\t."
+                  default: false
+                parent_role_id:
+                  type: integer
+                  description: This Role inherits permissions from another Role. New non-Global roles should inherit permissions from existing Global Roles. Only Global Roles should set this field to zero.
+                  format: int32
+                permissions:
+                  type: array
+                  description: Array of permissions in the format `"object_type":int`. Object_types must be supported and valid. Integer values must be between zero (no rights) and 15 (all rights).
+                notes:
+                  type: string
+                  description: Notes about the Role
+                active:
+                  type: boolean
+                  description: Whether Role is active. if a Role is set to inactive, Buzz will not alter permissions for existing Users associated with that Role, but will prevent new Users from having that Role assigned.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"role created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: role created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/role" -b cookies.txt -d '{"account_id":1,"role_name":"Manager","global":0, "parent_role_id":1, "permissions":{"user":15,"account":15,"creative":10}}'
+        samples-languages:
+        - curl
+      tags:
+      - Role
+    get:
+      summary: role
+      description: ''
+      operationId: role-get
+      parameters:
+      - name: role_id
+        in: query
+        description: Unique ID of the Role
+        schema:
+          type: integer
+          format: int32
+      - name: role_name
+        in: query
+        description: Name of the Role (e.g. "Administrator"). <100 chars
+        schema:
+          type: string
+      - name: global
+        in: query
+        description: Whether the Role is global, across Accounts.
+        schema:
+          type: boolean
+          default: false
+      - name: parent_role_id
+        in: query
+        description: This Role inherits permissions from another Role.
+        schema:
+          type: integer
+          format: int32
+      - name: active
+        in: query
+        description: Whether Role is active.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"role_id\": 1,\n            \"global\": true,\n            \"role_name\": \"Administrator\",\n            \"parent_role_id\": 0,\n            \"account_id\": 1,\n            \"create_date\": \"2015-07-21 12:42:22\",\n            \"update_date\": \"2015-07-21 12:42:22\",\n            \"alternative_id\": null,\n            \"notes\": \"Full rights to all objects\",\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\",\n            \"permissions\": {\n                \"account\": 15,\n                \"account_contract\": 15,\n                \"account_setting\": 15,\n                \"activity_log\": 15,\n                \"advertiser\": 15,\n                \"alert\": 15,\n                \"campaign\": 15,\n                \"creative\": 15,\n                \"creative_asset\": 15,\n                \"creative_attribute\": 15,\n                \"creative_line_item\": 15,\n                \"creative_rule\": 15,\n                \"creative_template\": 15,\n                \"event\": 15,\n                \"event_assignment\": 15,\n                \"fee_log\": 15,\n                \"grafana\": 1,\n                \"line_item\": 15,\n                \"list\": 15,\n                \"list_item\": 15,\n                \"push_queue\": 15,\n                \"report_queue\": 15,\n                \"role\": 15,\n                \"search\": 1,\n                \"segment\": 15,\n                \"segment_category\": 15,\n                \"segment_category_association\": 15,\n                \"segment_sharing\": 15,\n                \"segment_upload\": 15,\n                \"site\": 15,\n                \"site_list\": 15,\n                \"static\": 1,\n                \"strategy\": 15,\n                \"targeting_module\": 15,\n                \"targeting_template\": 15,\n                \"user\": 15,\n                \"user_field\": 15,\n                \"vendor\": 15,\n                \"vendor_fee\": 15\n            }\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        role_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        global:
+                          type: boolean
+                          example: true
+                          default: true
+                        role_name:
+                          type: string
+                          example: Administrator
+                        parent_role_id:
+                          type: integer
+                          example: 0
+                          default: 0
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2015-07-21 12:42:22'
+                        update_date:
+                          type: string
+                          example: '2015-07-21 12:42:22'
+                        alternative_id: {}
+                        notes:
+                          type: string
+                          example: Full rights to all objects
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+                        permissions:
+                          type: object
+                          properties:
+                            account:
+                              type: integer
+                              example: 15
+                              default: 0
+                            account_contract:
+                              type: integer
+                              example: 15
+                              default: 0
+                            account_setting:
+                              type: integer
+                              example: 15
+                              default: 0
+                            activity_log:
+                              type: integer
+                              example: 15
+                              default: 0
+                            advertiser:
+                              type: integer
+                              example: 15
+                              default: 0
+                            alert:
+                              type: integer
+                              example: 15
+                              default: 0
+                            campaign:
+                              type: integer
+                              example: 15
+                              default: 0
+                            creative:
+                              type: integer
+                              example: 15
+                              default: 0
+                            creative_asset:
+                              type: integer
+                              example: 15
+                              default: 0
+                            creative_attribute:
+                              type: integer
+                              example: 15
+                              default: 0
+                            creative_line_item:
+                              type: integer
+                              example: 15
+                              default: 0
+                            creative_rule:
+                              type: integer
+                              example: 15
+                              default: 0
+                            creative_template:
+                              type: integer
+                              example: 15
+                              default: 0
+                            event:
+                              type: integer
+                              example: 15
+                              default: 0
+                            event_assignment:
+                              type: integer
+                              example: 15
+                              default: 0
+                            fee_log:
+                              type: integer
+                              example: 15
+                              default: 0
+                            grafana:
+                              type: integer
+                              example: 1
+                              default: 0
+                            line_item:
+                              type: integer
+                              example: 15
+                              default: 0
+                            list:
+                              type: integer
+                              example: 15
+                              default: 0
+                            list_item:
+                              type: integer
+                              example: 15
+                              default: 0
+                            push_queue:
+                              type: integer
+                              example: 15
+                              default: 0
+                            report_queue:
+                              type: integer
+                              example: 15
+                              default: 0
+                            role:
+                              type: integer
+                              example: 15
+                              default: 0
+                            search:
+                              type: integer
+                              example: 1
+                              default: 0
+                            segment:
+                              type: integer
+                              example: 15
+                              default: 0
+                            segment_category:
+                              type: integer
+                              example: 15
+                              default: 0
+                            segment_category_association:
+                              type: integer
+                              example: 15
+                              default: 0
+                            segment_sharing:
+                              type: integer
+                              example: 15
+                              default: 0
+                            segment_upload:
+                              type: integer
+                              example: 15
+                              default: 0
+                            site:
+                              type: integer
+                              example: 15
+                              default: 0
+                            site_list:
+                              type: integer
+                              example: 15
+                              default: 0
+                            static:
+                              type: integer
+                              example: 1
+                              default: 0
+                            strategy:
+                              type: integer
+                              example: 15
+                              default: 0
+                            targeting_module:
+                              type: integer
+                              example: 15
+                              default: 0
+                            targeting_template:
+                              type: integer
+                              example: 15
+                              default: 0
+                            user:
+                              type: integer
+                              example: 15
+                              default: 0
+                            user_field:
+                              type: integer
+                              example: 15
+                              default: 0
+                            vendor:
+                              type: integer
+                              example: 15
+                              default: 0
+                            vendor_fee:
+                              type: integer
+                              example: 15
+                              default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/role" -b cookies.txt -d '{"role_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Role
+    put:
+      summary: role
+      description: ''
+      operationId: role-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - role_id
+              properties:
+                role_id:
+                  type: integer
+                  description: Unique ID of the Role
+                  format: int32
+                role_name:
+                  type: string
+                  description: Name of the Role (e.g. "Administrator"). <100 chars
+                global:
+                  type: boolean
+                  description: "Whether the Role is global, across Accounts. Only Super Users can create or edit a global Role\t."
+                  default: false
+                parent_role_id:
+                  type: integer
+                  description: This Role inherits permissions from another Role. New non-Global roles should inherit permissions from existing Global Roles. Only Global Roles should set this field to zero.
+                  format: int32
+                permissions:
+                  type: array
+                  description: Array of permissions in the format `"object_type":int`. Object_types must be supported and valid. Integer values must be between zero (no rights) and 15 (all rights).
+                notes:
+                  type: string
+                  description: Notes about the Role
+                active:
+                  type: boolean
+                  description: Whether Role is active. if a Role is set to inactive, Buzz will not alter permissions for existing Users associated with that Role, but will prevent new Users from having that Role assigned.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"role updated with ID 1\"\n        }\n    ],\n    \"message\": \"role update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: role updated with ID 1
+                  message:
+                    type: string
+                    example: 'role update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/role" -b cookies.txt -d '{"role_id":1,"role_name":"Manager","global":0, "parent_role_id":1, "permissions":{"user":15,"account":15,"creative":10}}'
+        samples-languages:
+        - curl
+      tags:
+      - Role
+    delete:
+      summary: role
+      description: ''
+      operationId: role-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - role_id
+              properties:
+                role_id:
+                  type: integer
+                  description: Unique ID of the role
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"role deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: role deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/role" -b cookies.txt -d '{"role_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Role
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

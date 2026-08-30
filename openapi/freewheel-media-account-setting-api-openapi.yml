@@ -1,0 +1,258 @@
+openapi: 3.2.0
+info:
+  title: buzz Account Setting API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Account Setting
+paths:
+  /account_setting:
+    post:
+      summary: account_setting
+      description: ''
+      operationId: accountsetting-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - account_setting
+              - value
+              properties:
+                account_setting:
+                  type: string
+                  description: The name of the setting, generally in ALL_CAPS. <40 chars, must be a valid setting as defined in the account_setting_fields view
+                value:
+                  type: string
+                  description: <200 chars. Each account_setting has a type, which is used for further validation. For example, the account_setting "BUDGET" might have a type of "NUMERIC." Note, this type validation is not strict as the values in the database are always stored as Strings so "1" has the same value as 1.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"account_setting created with ID = 3\",\n    \"payload\": {\n        \"id\": 3\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: account_setting created with ID = 3
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 3
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/account_setting" -b cookies.txt -d '{"account_setting":"CUSTOM_LOGO","value":"http://mysite.com/images/logo.jpg"}'
+        samples-languages:
+        - curl
+      tags:
+      - Account Setting
+    get:
+      summary: account_setting
+      description: ''
+      operationId: accountsetting-get
+      parameters:
+      - name: as_id
+        in: query
+        description: Unique ID of the AccountSetting
+        schema:
+          type: integer
+          format: int32
+      - name: account_setting
+        in: query
+        description: The name of the setting to search for.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"as_id\": 1,\n            \"account_id\": 1,\n            \"account_setting\": \"CUSTOM_LOGO\",\n            \"value\": \"http://mysite.com/images/logo.jpg\",\n            \"buzz_key\": \"stingertest\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        as_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        account_setting:
+                          type: string
+                          example: CUSTOM_LOGO
+                        value:
+                          type: string
+                          example: http://mysite.com/images/logo.jpg
+                        buzz_key:
+                          type: string
+                          example: stingertest
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/account_setting" -b cookies.txt -d '{"account_setting":"CUSTOM_LOGO"}'
+        samples-languages:
+        - curl
+      tags:
+      - Account Setting
+    put:
+      summary: account_setting
+      description: ''
+      operationId: accountsetting-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - as_id
+              - account_setting
+              - value
+              properties:
+                as_id:
+                  type: integer
+                  description: Unique ID of the account_setting
+                  format: int32
+                account_setting:
+                  type: string
+                  description: The name of the setting, generally in ALL_CAPS. <40 chars, must be a valid setting as defined in the account_setting_fields view
+                value:
+                  type: string
+                  description: <200 chars. Each account_setting has a type, which is used for further validation. For example, the account_setting "BUDGET" might have a type of "NUMERIC." Note, this type validation is not strict as the values in the database are always stored as Strings so "1" has the same value as 1.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"account_setting updated with ID 1\"\n        }\n    ],\n    \"message\": \"account_setting update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: account_setting updated with ID 1
+                  message:
+                    type: string
+                    example: 'account_setting update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/account_setting" -b cookies.txt -d '{"as_id":1, "account_setting":"CUSTOM_LOGO","value":"http://mysite.com/images/logo.jpg"}'
+        samples-languages:
+        - curl
+      tags:
+      - Account Setting
+    delete:
+      summary: account_setting
+      description: ''
+      operationId: accountsetting-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - as_id
+              properties:
+                as_id:
+                  type: integer
+                  description: Unique ID of the account_setting
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"account_setting deleted with ID 1\"\n        }\n    ],\n    \"message\": \"account_setting deletion: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: account_setting deleted with ID 1
+                  message:
+                    type: string
+                    example: 'account_setting deletion: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/account_setting" -b cookies.txt -d '{"as_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Account Setting
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

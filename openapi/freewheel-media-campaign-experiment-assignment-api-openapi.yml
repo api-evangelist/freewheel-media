@@ -1,0 +1,66 @@
+openapi: 3.2.0
+info:
+  title: buzz Campaign Experiment Assignment API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Campaign Experiment Assignment
+paths:
+  /campaign_experiment_assignment:
+    post:
+      summary: campaign_experiment_assignment
+      description: This method is used to assign a Campaign and all of its Line Items to an `Experiment` in one POST. Other methods (PUT, GET, DELETE) are not supported.
+      operationId: campaign_experiment_assignment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - campaign_id
+              - test_plan_id
+              - line_item_test_groups
+              properties:
+                campaign_id:
+                  type: integer
+                  description: ID of the Campaign
+                  format: int32
+                test_plan_id:
+                  type: integer
+                  description: The ID of the Test Plan at the Campaign level.
+                  format: int32
+                line_item_test_groups:
+                  type: object
+                  description: Array describing the assignment of Line Items under the Campaign to Test Groups under the Test Plan in the format  `line_item_id:test_group_id`. Note, ALL Line Items within the Campaign must be assigned.
+                  required:
+                  - <line_item_id>
+                  properties:
+                    <line_item_id>:
+                      type: integer
+                      description: Set the value to the <group_id> of the experiment
+                      format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n}"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/campaign_experiment_assignment" -b cookies.txt -d '{"campaign_id":1, "test_plan_id":1, "line_item_test_groups":{123:1,456:3,789:2}}'
+        samples-languages:
+        - curl
+      tags:
+      - Campaign Experiment Assignment
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

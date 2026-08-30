@@ -1,0 +1,30 @@
+openapi: 3.2.0
+info:
+  title: buzz User Lookup API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: User Lookup
+paths:
+  /user_lookup:
+    get:
+      summary: user_lookup
+      description: Allows you to GET key data about the current User (e.g. the User making the request).
+      operationId: user_lookup
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/user_lookup" -b cookies.txt -d '{}'
+        samples-languages:
+        - curl
+      tags:
+      - User Lookup
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,407 @@
+openapi: 3.2.0
+info:
+  title: buzz Report Save API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Report Save
+paths:
+  /report_save:
+    post:
+      summary: report_save
+      description: ''
+      operationId: report_save-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - report_name
+              - report_id
+              - request_details
+              properties:
+                report_name:
+                  type: string
+                  description: Name for the report. <255 characters.
+                report_id:
+                  type: integer
+                  description: ID for the report type to be used to generate the report. Each report includes a definition of available fields, metrics, and filters. A list of valid reports can be retrieved by make a request to /view with `"view_name":"reports"`
+                  format: int32
+                request_details:
+                  type: object
+                  description: JSON description of the requested report.
+                  required:
+                  - field
+                  properties:
+                    field:
+                      type: array
+                      description: Fields (sometimes called "dimensions") to include in the report.
+                      items:
+                        type: string
+                    filter:
+                      type: array
+                      description: 'Fields and values to filter the results by (e.g. WHERE clause). Only fields associated with the report may be used for filtering. Example: `{"advertiser_id":1}`'
+                    metric:
+                      type: array
+                      description: Metrics to included and summed in the report. Metrics may not be used for filtering or sorting. Only metrics associated with the report may be included.
+                      items:
+                        type: string
+                    offset:
+                      type: integer
+                      description: Number of rows to offset results from the first results (e.g. for pagination through results)
+                      default: 0
+                      format: int32
+                    rows:
+                      type: integer
+                      description: Number of rows to include in the report. If sending report results directly back from a GET request (i.e. `"report_format":"none"`) a 1,500 record limit is imposed. If the report results is saved in a file, (e.g. `"report_format":"xls"`) the limit is 30,000 records.
+                      default: 50
+                      format: int32
+                    sort_by:
+                      type: array
+                      description: A field to sort the results by, along with the order (0=ascending). For example `"advertiser_name":0`
+                report_format:
+                  type: string
+                  description: 'Format to return the report. Valid values include: `none`,`json`,`csv`,`xls`,`xlsx`. If not specified or set to `none` the report results will be returned by the API in the json response and the report will be limited to 1500 rows. If any format is specified other than `none` the report row limit is 15,000, and the resulting report will be saved for retrieval in a separate GET request.'
+                user_id:
+                  type: integer
+                  description: The User that created this report. By default the user ID of the requesting User will be used.
+                  default: null
+                  format: int32
+                frequency:
+                  type: string
+                  description: Frequency that reports should be scheduled. Valid values include `daily`, `weekly` and `monthly`.
+                email_to:
+                  type: string
+                  description: Email addresses, separated by commas, up to 255 characters. If the report's `frequency` is set and this field is not set, the requesting user's email address will be added.
+                email_cc:
+                  type: string
+                  description: Email addresses to cc on scheduled reports
+                active:
+                  type: boolean
+                  description: Whether saved report is still active. If a scheduled report is set to inactive it will no longer be sent.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"report_queue created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: report_queue created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/report_save" -b cookies.txt -d '{"report_id":1, "report_name":"Daily report", "frequency":"daily","email_to":"foo@bar.com,bar@foo.com", "request_details":{"field":["advertiser_id"],"metric":["impression","CPM"],"sort":[{"advertiser_id":1}],"rows":100},"report_format":"xls"}'
+        samples-languages:
+        - curl
+      tags:
+      - Report Save
+    get:
+      summary: report_save
+      description: ''
+      operationId: report_save-get
+      parameters:
+      - name: report_save_id
+        in: query
+        description: Unique ID for the saved report
+        schema:
+          type: integer
+          format: int32
+      - name: report_name
+        in: query
+        description: Name for the report.
+        schema:
+          type: string
+      - name: report_id
+        in: query
+        description: ID for the report type
+        schema:
+          type: integer
+          format: int32
+      - name: user_id
+        in: query
+        description: The User that created this report.
+        schema:
+          type: integer
+          format: int32
+          default: null
+      - name: frequency
+        in: query
+        description: Frequency that reports should be scheduled. Valid values include "daily", "weekly" and "monthly".
+        schema:
+          type: string
+      - name: active
+        in: query
+        description: Whether saved report is still active. If a scheduled report is set to inactive it will no longer be sent.
+        schema:
+          type: boolean
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"report_save_id\": 1,\n            \"account_id\": 1,\n            \"user_id\": 1,\n            \"report_name\": \"Test Inv report\",\n            \"report_id\": 2,\n            \"request_details\": {\n                \"field\": [\n                    \"campaign_id\"\n                ],\n                \"metric\": [\n                    \"impression\"\n                ],\n                \"filter\": [\n                    {\n                        \"campaign_id\": [\n                            1\n                        ]\n                    },\n                    {\n                        \"bid_date\": \"last_90_days\"\n                    }\n                ],\n                \"rows\": 1000\n            },\n            \"report_format\": \"none\",\n            \"frequency\": null,\n            \"email_to\": null,\n            \"email_cc\": null,\n            \"active\": 1,\n            \"create_date\": \"2015-10-22 17:40:11\",\n            \"update_date\": \"2015-10-22 17:40:52\",\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        report_save_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        user_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        report_name:
+                          type: string
+                          example: Test Inv report
+                        report_id:
+                          type: integer
+                          example: 2
+                          default: 0
+                        request_details:
+                          type: object
+                          properties:
+                            field:
+                              type: array
+                              items:
+                                type: string
+                                example: campaign_id
+                            metric:
+                              type: array
+                              items:
+                                type: string
+                                example: impression
+                            filter:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  campaign_id:
+                                    type: array
+                                    items:
+                                      type: integer
+                                      example: 1
+                                      default: 0
+                            rows:
+                              type: integer
+                              example: 1000
+                              default: 0
+                        report_format:
+                          type: string
+                          example: none
+                        frequency: {}
+                        email_to: {}
+                        email_cc: {}
+                        active:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2015-10-22 17:40:11'
+                        update_date:
+                          type: string
+                          example: '2015-10-22 17:40:52'
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/report_save" -b cookies.txt -d '{"report_save_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Report Save
+    put:
+      summary: report_save
+      description: ''
+      operationId: report_save-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - report_save_id
+              properties:
+                report_save_id:
+                  type: integer
+                  description: Unique ID for the saved report
+                  format: int32
+                report_name:
+                  type: string
+                  description: Name for the report. <255 characters.
+                report_id:
+                  type: integer
+                  description: ID for the report type to be used to generate the report. Each report includes a definition of available fields, metrics, and filters. A list of valid reports can be retrieved by make a request to /view with "view_name":"reports"
+                  format: int32
+                request_details:
+                  type: array
+                  description: JSON description of fields to retrieve. If omitted, the entire definition of the report will be returned when this report is executed.
+                report_format:
+                  type: string
+                  description: 'Format to return the report. Valid values include: `none`,`json`,`csv`,`xls`,`xlsx`. If not specified or set to `none` the report results will be returned by the API in the json response and the report will be limited to 1500 rows. If any format is specified other than `none` the report row limit is 15,000, and the resulting report will be saved for retrieval in a separate GET request.'
+                user_id:
+                  type: integer
+                  description: The User that created this report. By default the user ID of the requesting User will be used.
+                  default: null
+                  format: int32
+                frequency:
+                  type: string
+                  description: Frequency that reports should be scheduled. Valid values include `daily`, `weekly` and `monthly`.
+                email_to:
+                  type: string
+                  description: Email addresses, separated by commas, up to 255 characters. If the report's frequency is set and this field is not set, the requesting user's email address will be added.
+                email_cc:
+                  type: string
+                  description: Email addresses to cc on scheduled reports
+                active:
+                  type: boolean
+                  description: Whether saved report is still active. If a scheduled report is set to inactive it will no longer be sent.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"report_save updated with ID 1\"\n        }\n    ],\n    \"message\": \"report_save update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: report_save updated with ID 1
+                  message:
+                    type: string
+                    example: 'report_save update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/report_save" -b cookies.txt -d '{"report_save_id":1, "report_name":"Daily report", "frequency":"daily","email_to":"foo@bar.com,bar@foo.com", "request_details":{"field":["advertiser_id"],"metric":["impression","CPM"],"sort":[{"advertiser_id":1}],"rows":100},"report_format":"xls"}'
+        samples-languages:
+        - curl
+      tags:
+      - Report Save
+    delete:
+      summary: report_save
+      description: ''
+      operationId: report_save-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - report_save_id
+              properties:
+                report_save_id:
+                  type: integer
+                  description: Unique ID of the report_save
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"report_save deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: report_save deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/report_save" -b cookies.txt -d '{"report_save_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Report Save
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

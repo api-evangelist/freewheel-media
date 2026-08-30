@@ -1,0 +1,328 @@
+openapi: 3.2.0
+info:
+  title: buzz Line Item Flight API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Line Item Flight
+paths:
+  /line_item_flight:
+    get:
+      summary: line_item_flight
+      description: ''
+      operationId: line_item_flight-get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                flight_id:
+                  type: integer
+                  description: The unique ID of the flight to be updated
+                  format: int32
+                flight_name:
+                  type: string
+                  description: Name of the flight. This is an optional field but can be useful since it will appear in aggregated reports.
+                start_date:
+                  type: string
+                  description: Start date of the flight
+                  format: date
+                end_date:
+                  type: string
+                  description: End date of the flight. If not set the flight serve until the Line Item's end date or indefinitely if the Line Item does not have an end date.
+                  format: date
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the flight, if desired
+                active:
+                  type: boolean
+                  description: Is the flight active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"line_item_id\": 1,\n            \"active\": true,\n            \"account_id\": 1,\n            \"create_date\": \"2018-04-24 08:21:09\",\n            \"update_date\": \"2018-04-24 08:21:09\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"flight_id\": 1,\n            \"flight_name\": \"Flight 1\",\n            \"start_date\": \"2018-04-24 00:00:00\",\n            \"end_date\": \"2018-04-24 23:59:59\",\n            \"budget\": 500,\n            \"buzz_key\": \"stinger\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        line_item_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2018-04-24 08:21:09'
+                        update_date:
+                          type: string
+                          example: '2018-04-24 08:21:09'
+                        alternative_id: {}
+                        notes: {}
+                        flight_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        flight_name:
+                          type: string
+                          example: Flight 1
+                        start_date:
+                          type: string
+                          example: '2018-04-24 00:00:00'
+                        end_date:
+                          type: string
+                          example: '2018-04-24 23:59:59'
+                        budget:
+                          type: integer
+                          example: 500
+                          default: 0
+                        buzz_key:
+                          type: string
+                          example: stinger
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/line_item_flight" -b cookies.txt -d '{"flight_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Line Item Flight
+    post:
+      summary: line_item_flight
+      description: ''
+      operationId: line_item_flight-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - line_item_id
+              - start_date
+              properties:
+                line_item_id:
+                  type: integer
+                  description: Must be a valid Line Item
+                  format: int32
+                flight_name:
+                  type: string
+                  description: Name of the flight. This is an optional field but can be useful since it will appear in aggregated reports.
+                budget:
+                  type: number
+                  description: Budget of the flight. Note the budget type is inherited from the Line Item and cannot be set separately for different flights. If omitted, the budget for the Line Item will apply across multiple flights. If the Line Item's pacing is of type `flight` this field is required.
+                  format: double
+                start_date:
+                  type: string
+                  description: Start date of the flight
+                  format: date
+                end_date:
+                  type: string
+                  description: End date of the flight. If not set the flight serve until the Line Item's end date or indefinitely if the Line Item does not have an end date.
+                  format: date
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the flight, if desired
+                notes:
+                  type: string
+                  description: Notes about the flight, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is the flight active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"line_item_flight created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: line_item_flight created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/line_item_flight" -b cookies.txt -d '{"flight_name":"product launch", "line_item_id":1, "start_date":"12/31/2021", "end_date":"12/31/2022","budget":1000}'
+        samples-languages:
+        - curl
+      tags:
+      - Line Item Flight
+    put:
+      summary: line_item_flight
+      description: ''
+      operationId: line_item_flight-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - start_date
+              properties:
+                flight_id:
+                  type: integer
+                  description: The unique ID of the flight to be updated
+                  format: int32
+                flight_name:
+                  type: string
+                  description: Name of the flight. This is an optional field but can be useful since it will appear in aggregated reports.
+                budget:
+                  type: number
+                  description: Budget of the flight. Note the budget type is inherited from the Line Item and cannot be set separately for different flights. If omitted, the budget for the Line Item will apply across multiple flights. If the Line Item's pacing is of type `flight` this field is required.
+                  format: double
+                start_date:
+                  type: string
+                  description: Start date of the flight
+                  format: date
+                end_date:
+                  type: string
+                  description: End date of the flight. If not set the flight serve until the Line Item's end date or indefinitely if the Line Item does not have an end date.
+                  format: date
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the flight, if desired
+                notes:
+                  type: string
+                  description: Notes about the flight, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is the flight active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"line_item_flight updated with ID 1\"\n        }\n    ],\n    \"message\": \"line_item_flight update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: line_item_flight updated with ID 1
+                  message:
+                    type: string
+                    example: 'line_item_flight update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/line_item_flight" -b cookies.txt -d '{"flight_id":1, "flight_name":"product launch", "line_item_id":1, "start_date":"12/31/2021", "end_date":"12/31/2022","budget":1000}'
+        samples-languages:
+        - curl
+      tags:
+      - Line Item Flight
+    delete:
+      summary: line_item_flight
+      description: ''
+      operationId: line_item_flight-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - flight_id
+              properties:
+                flight_id:
+                  type: integer
+                  description: Unique ID of the flight
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"line_item_flight deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: line_item_flight deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/line_item_flight" -b cookies.txt -d '{"flight_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Line Item Flight
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

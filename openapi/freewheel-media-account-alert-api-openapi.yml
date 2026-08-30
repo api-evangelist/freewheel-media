@@ -1,0 +1,218 @@
+openapi: 3.2.0
+info:
+  title: buzz Account Alert API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Account Alert
+paths:
+  /account_alert:
+    post:
+      summary: account_alert
+      description: ''
+      operationId: account_alert-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - system_alert_key
+              properties:
+                system_alert_key:
+                  type: string
+                  description: key representing the type of alert. For example `bad_ad` alert will send when Buzz detects a bad ad.
+                email:
+                  type: string
+                  description: One or more emails to forward the alert to, separated by commas
+                slack_api:
+                  type: string
+                  description: Slack API key
+                slack_channel:
+                  type: string
+                  description: 'Slack channel such as #buzz-alerts'
+                slack_emoji:
+                  type: string
+                  description: 'Emoji to post next to alert in slack, such as :poop:'
+                active:
+                  type: boolean
+                  description: Is the Account Alert currently active
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"Account alerts created successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: Account alerts created successfully
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/account_alert" -b cookies.txt -d '{"system_alert_key":"bad_ad","email":"alerts@foo.com,emergency@bar.net","slack_api":"xoxo-23-345","slack_channel":"#bad-stuff","slack_emoji":":poop"}'
+        samples-languages:
+        - curl
+      tags:
+      - Account Alert
+    put:
+      summary: account_alert
+      description: ''
+      operationId: account_alert-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - account_alert_id
+              properties:
+                account_alert_id:
+                  type: integer
+                  description: Unique ID of the account_alert
+                  format: int32
+                system_alert_key:
+                  type: string
+                  description: key representing the type of alert. For example `bad_ad` alert will send when Buzz detects a bad ad.
+                email:
+                  type: string
+                  description: One or more emails to forward the alert to, separated by commas
+                slack_api:
+                  type: string
+                  description: Slack API key
+                slack_channel:
+                  type: string
+                  description: 'Slack channel such as #buzz-alerts'
+                slack_emoji:
+                  type: string
+                  description: 'Emoji to post next to alert in slack, such as :poop:'
+                active:
+                  type: boolean
+                  description: Is the Account Alert currently active
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"Account alerts updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: Account alerts updated successfully
+        '406':
+          description: '406'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": false,\n    \"message\": \"advertiser could not be created\",\n    \"errors\": [\n        \"ERROR: Advertiser name already in use\"\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                    default: true
+                  message:
+                    type: string
+                    example: advertiser could not be created
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                      example: 'ERROR: Advertiser name already in use'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/account_alert" -b cookies.txt -d '{"account_alert_id":123, "system_alert_key":"bad_ad","email":"alerts@foo.com,emergency@bar.net","slack_api":"xoxo-23-345","slack_channel":"#bad-stuff","slack_emoji":":poop"}'
+        samples-languages:
+        - curl
+      tags:
+      - Account Alert
+    delete:
+      summary: account_alert
+      description: ''
+      operationId: account_alert-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - account_alert_id
+              properties:
+                account_alert_id:
+                  type: integer
+                  description: Unique ID of the account_alert
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"account_alert deleted with ID 1\"\n        }\n    ],\n    \"message\": \"account_alert deletion: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: account_alert deleted with ID 1
+                  message:
+                    type: string
+                    example: 'account_alert deletion: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/account_alert" -b cookies.txt -d '{"account_alert_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Account Alert
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

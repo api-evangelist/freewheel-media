@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  title: audience-management-api Providers API
+  version: '1.0'
+servers:
+- url: https://api.freewheel.tv/demand
+security:
+- sec0: []
+tags:
+- name: Providers
+paths:
+  /v1/providers:
+    get:
+      summary: List Data Providers by Industry Category
+      description: ''
+      operationId: retrieve-data-providers-1
+      parameters:
+      - name: X-Freewheel-Ad-Industry
+        in: header
+        description: Industry category ID
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+          default: Bearer $auth_token
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Sample Response:
+                  value: "//The \"restrictions\" field indicates an industry category ID\n//that the data provider may have restricted from using its data.\n{\n  \"page\": 1,\n  \"per_page\": 5,\n  \"total_page\": 1,\n  \"total_count\": 5,\n  \"items\": [\n    {\n      \"id\": \"Experian\",\n      \"label\": \"Experian\",\n      \"restrictions\": [\n        2\n      ],\n      \"visibility\": []\n    },\n    {\n      \"id\": \"Factual\",\n      \"label\": \"Factual\",\n      \"restrictions\": [\n        2\n      ],\n      \"visibility\": []\n    },\n    {\n      \"id\": \"FreeWheel: Comcast \\u0026 Vizio\",\n      \"label\": \"FreeWheel: Comcast \\u0026 Vizio\",\n      \"restrictions\": [\n        2,\n        3,\n        4\n      ],\n      \"visibility\": []\n    },\n    {\n      \"id\": \"Numerator\",\n      \"label\": \"Numerator\",\n      \"restrictions\": [\n        2\n      ],\n      \"visibility\": []\n    },\n    {\n      \"id\": \"Polk Audience Solutions by IHS Markit\",\n      \"label\": \"Polk Audience Solutions by IHS Markit\",\n      \"restrictions\": [\n        2\n      ],\n      \"visibility\": []\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: integer
+                    example: 1
+                    default: 0
+                  per_page:
+                    type: integer
+                    example: 5
+                    default: 0
+                  total_page:
+                    type: integer
+                    example: 1
+                    default: 0
+                  total_count:
+                    type: integer
+                    example: 5
+                    default: 0
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: Experian
+                        label:
+                          type: string
+                          example: Experian
+                        restrictions:
+                          type: array
+                          items:
+                            type: integer
+                            example: 2
+                            default: 0
+                        visibility:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+      deprecated: false
+      security: []
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n --url 'https://api.freewheel.tv/demand/v1/providers' \\\n -H \"X-Freewheel-Ad-Industry: 1\" \\\n -H \"Authorization: Bearer $auth_token\""
+          name: Sample Request
+        samples-languages:
+        - curl
+      tags:
+      - Providers
+components:
+  securitySchemes:
+    sec0:
+      type: http
+      scheme: basic
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

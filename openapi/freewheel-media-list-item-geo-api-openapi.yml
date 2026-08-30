@@ -1,0 +1,84 @@
+openapi: 3.2.0
+info:
+  title: buzz List Item(geo) API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: List Item(geo)
+paths:
+  /list_item(geo):
+    post:
+      summary: list_item (precise geography)
+      description: ''
+      operationId: list_item-precise-geography
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - list_id
+              - list_item
+              properties:
+                list_id:
+                  type: integer
+                  description: The unique ID of the list. List must be active.
+                  format: int32
+                list_item:
+                  type: array
+                  description: The latitude, longitude, and radius passed as json (see example below)
+                  items:
+                    type: string
+                value:
+                  type: number
+                  description: A numeric value assigned to the list item that can be used by a Bid Modifier
+                  format: double
+                list_item_name:
+                  type: string
+                  description: Optional name for the list item
+                active:
+                  type: boolean
+                  description: Whether the item is active
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": {\n        \"id\": 1\n    },\n    \"message\": \"list_item created with ID = 1\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+                  message:
+                    type: string
+                    example: list_item created with ID = 1
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/list_item" -b cookies.txt -d '{"list_id":1, "list_item":{"lat":-89.0122,"long":78.92,"radius_km":0.5},"list_item_name":"Starbucks on Main St","value":0.9}'
+        samples-languages:
+        - curl
+      tags:
+      - List Item(geo)
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

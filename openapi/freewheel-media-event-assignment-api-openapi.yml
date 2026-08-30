@@ -1,0 +1,233 @@
+openapi: 3.2.0
+info:
+  title: buzz Event Assignment API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Event Assignment
+paths:
+  /event_assignment:
+    post:
+      summary: event_assignment
+      description: ''
+      operationId: event-assignments-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - event_id
+              - object_id
+              - object_type
+              properties:
+                event_id:
+                  type: integer
+                  description: Must be a valid Event in the same Account. Unlike many other objects, the Event does not need to be Active to be assigned.
+                  format: int32
+                object_id:
+                  type: integer
+                  description: Either the `line_item_id` or `campaign_id` assigned to this event.
+                  format: int32
+                object_type:
+                  type: string
+                  description: The type of object, as a string, must be either `campaign` or `line_item`.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"event_assignment created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: event_assignment created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/event_assignment" -b cookies.txt -d '{"event_id":1, "object_id":25, "object_type":"campaign"}'
+        samples-languages:
+        - curl
+      tags:
+      - Event Assignment
+    get:
+      summary: event_assignment
+      description: ''
+      operationId: event_assignments-get
+      parameters:
+      - name: ea_id
+        in: query
+        description: Unique ID of the event_assignment to be updated
+        schema:
+          type: integer
+          format: int32
+      - name: event_id
+        in: query
+        description: The event object
+        schema:
+          type: integer
+          format: int32
+      - name: object_id
+        in: query
+        description: The object the event is associated with
+        schema:
+          type: integer
+          format: int32
+      - name: object_type
+        in: query
+        description: The object type, either `line_item` or `campaign`
+        schema:
+          type: string
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"ea_id\": 2,\n            \"object_id\": 1,\n            \"event_id\": 19,\n            \"account_id\": 1,\n            \"object_type\": \"campaign\",\n            \"create_date\": \"2016-03-30 11:06:36\",\n            \"update_date\": \"2016-03-30 11:06:36\",\n            \"push_status\": 0,\n            \"push_update\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ea_id:
+                          type: integer
+                          example: 2
+                          default: 0
+                        object_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        event_id:
+                          type: integer
+                          example: 19
+                          default: 0
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        object_type:
+                          type: string
+                          example: campaign
+                        create_date:
+                          type: string
+                          example: '2016-03-30 11:06:36'
+                        update_date:
+                          type: string
+                          example: '2016-03-30 11:06:36'
+                        push_status:
+                          type: integer
+                          example: 0
+                          default: 0
+                        push_update:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/event_assignment" -b cookies.txt -d '{"ea_id":2}'
+        samples-languages:
+        - curl
+      tags:
+      - Event Assignment
+    delete:
+      summary: event_assignment
+      description: ''
+      operationId: event_assignments-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ead_id:
+                  type: integer
+                  description: Unique ID of the event
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"event_assignment deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: event_assignment deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/event_assignment" -b cookies.txt -d '{"ead_id":1}'
+        - language: curl
+          code: curl -X DELETE "[host]/rest/custom_list_item" -b cookies.txt -d '{"list_item_id":1,"list_item":"all"}'
+          name: cURL-ALL
+        - language: curl
+          code: curl -X DELETE "[host]/rest/custom_list_item" -b cookies.txt -d '{"list_item_id":1,"list_item":["foo.bar.iphone.app","foo.bar.watch.app"]}'
+          name: cURL-LIST
+        samples-languages:
+        - curl
+      tags:
+      - Event Assignment
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,444 @@
+openapi: 3.2.0
+info:
+  title: buzz Advertiser API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Advertiser
+paths:
+  /advertiser:
+    post:
+      summary: advertiser
+      description: ''
+      operationId: advertiser-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - advertiser_name
+              properties:
+                advertiser_name:
+                  type: string
+                  description: Unique name for the advertiser, must be unique per account.
+                attributes:
+                  type: object
+                  description: Creative attributes in JSON.
+                  properties:
+                    <module_name>:
+                      type: object
+                      description: The overall statement can include any number of modules, but each module may only appear once. Example of a module is `advertiser`
+                      properties:
+                        <key>:
+                          type: array
+                          description: Key must belong to the module selected, the value must be a list of one or more values corresponding to the key. Values may be integers or strings depending on the key.
+                          items:
+                            type: string
+                conversion_method_id:
+                  type: integer
+                  description: The conversion attribution to use for Events owned by this Advertiser. Must be a valid attribution method as found in the conversion_atrtibution_methods view. At this time only method 1 (last click) is supported. Once a conversion method is chosen, it cannot be changed.
+                  default: 1
+                  format: int32
+                default_click_url:
+                  type: string
+                  description: Click URL to use by default for objects created under this advertiser
+                default_continent:
+                  type: string
+                  description: Continent in which this Advertiser's Campaigns should be eligible to serve. Can be changed at the Campaign level.
+                  default: NAM
+                default_currency:
+                  type: string
+                  description: Currency to use as default for all Campaigns under this Advertiser
+                  default: USD
+                default_creative_thumbnail_url:
+                  type: string
+                  description: URL of a thumbnail image to use when a Creative does not have one. This is useful since some exchanges may not allow a Creative to run without a thumbnail.
+                  default: URL of a thumbnail image to use when a Creative does not have one. This is useful since some exchanges may not allow a Creative to run without a thumbnail.
+                default_campaign_preset_id:
+                  type: integer
+                  description: The preset to use by default for all campaigns created under this advertiser. Note, presets can only be created in the UI.
+                  format: int32
+                default_line_item_preset_id:
+                  type: integer
+                  description: The preset to use by default for all line items created under this advertiser. Note, presets can only be created in the UI.
+                  format: int32
+                enable_skad_tracking:
+                  type: boolean
+                  description: Should Apple's SKAdNetwork tracking be enabled for this advertiser. If set to true, the `advertiser_app_bundle` elements of the `attributes` must be set.
+                  default: false
+                alternative_id:
+                  type: string
+                  description: An alternative id to associate, if desired
+                notes:
+                  type: string
+                  description: Any notes desired, less than 255 chars
+                active:
+                  type: boolean
+                  description: Is the advertiser active
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"advertiser created with ID = 5\",\n    \"payload\": {\n        \"id\": 5\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: advertiser created with ID = 5
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 5
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/advertiser" -b cookies.txt -d '{"advertiser_name":"new advertiser", "conversion_method_id":1, "attributes":{"advertiser":{"advertiser_domain":["www.beeswax.com"]}}, "default_continent":"NAM", "default_currency":"CAD", "default_creative_thumbnail_url":"https://server.com/thumb.jpg","enable_skad_tracking":false}'
+        samples-languages:
+        - curl
+      tags:
+      - Advertiser
+    get:
+      summary: advertiser
+      description: ''
+      operationId: advertiser-get
+      parameters:
+      - name: advertiser_id
+        in: query
+        description: Unique ID of the advertiser
+        schema:
+          type: integer
+          format: int32
+      - name: alternative_id
+        in: query
+        description: An alternative id to lookup the object, if desired
+        schema:
+          type: string
+      - name: advertiser_name
+        in: query
+        description: Unique name for the advertiser. Supports `%LIKE%` syntax
+        schema:
+          type: string
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"advertiser_id\": 1,\n            \"advertiser_name\": \"new advertiser\",\n            \"default_click_url\": \"http://www.yahoo.com\",\n            \"default_continent\": \"NAM\",\n            \"default_currency\": \"USD\",\n            \"conversion_method_id\": 1,\n            \"attributes\": {\n                \"advertiser\": {\n                    \"advertiser_category\": [\n                        \"IAB1\"\n                    ]\n                }\n            },         \n          \t\"default_campaign_preset_id\": null,\n            \"default_line_item_preset_id\": null,\n            \"enable_skad_tracking\":false,\n            \"account_id\": 1,\n            \"create_date\": \"2016-02-25 14:27:02\",\n            \"update_date\": \"2016-02-25 14:27:02\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        advertiser_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        advertiser_name:
+                          type: string
+                          example: new advertiser
+                        default_click_url:
+                          type: string
+                          example: http://www.yahoo.com
+                        default_continent:
+                          type: string
+                          example: NAM
+                        default_currency:
+                          type: string
+                          example: USD
+                        conversion_method_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        attributes:
+                          type: object
+                          properties:
+                            advertiser:
+                              type: object
+                              properties:
+                                advertiser_category:
+                                  type: array
+                                  items:
+                                    type: string
+                                    example: IAB1
+                        default_campaign_preset_id: {}
+                        default_line_item_preset_id: {}
+                        enable_skad_tracking:
+                          type: boolean
+                          example: false
+                          default: true
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2016-02-25 14:27:02'
+                        update_date:
+                          type: string
+                          example: '2016-02-25 14:27:02'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/advertiser" -b cookies.txt -d '{"advertiser_name":"new advertiser"}'
+        samples-languages:
+        - curl
+      tags:
+      - Advertiser
+    put:
+      summary: advertiser
+      description: ''
+      operationId: advertiser-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - advertiser_id
+              properties:
+                advertiser_id:
+                  type: integer
+                  description: Unique ID of the advertiser
+                  format: int32
+                advertiser_name:
+                  type: string
+                  description: Unique name for the advertiser, must be unique per account
+                attributes:
+                  type: object
+                  description: Creative attributes in JSON
+                  properties:
+                    <module_name>:
+                      type: object
+                      description: The overall statement can include any number of modules, but each module may only appear once. Example of a module is `advertiser`
+                      properties:
+                        <key>:
+                          type: array
+                          description: Key must belong to the module selected, the value must be a list of one or more values corresponding to the key. Values may be integers or strings depending on the key.
+                          items:
+                            type: string
+                default_click_url:
+                  type: string
+                  description: Click URL to use by default for objects created under this advertiser
+                default_continent:
+                  type: string
+                  description: Continent in which this Advertiser's Campaigns should be eligible to serve. Can be changed at the Campaign level.
+                default_currency:
+                  type: string
+                  description: Default currency to use for all Campaigns created under this Advertiser
+                  default: NAM
+                default_creative_thumbnail_url:
+                  type: string
+                  description: URL of a thumbnail image to use when a Creative does not have one. This is useful since some exchanges may not allow a Creative to run without a thumbnail.
+                default_campaign_preset_id:
+                  type: integer
+                  description: The preset to use by default for all campaigns created under this advertiser. Note, presets can only be created in the UI.
+                  format: int32
+                default_line_item_preset_id:
+                  type: integer
+                  description: The preset to use by default for all line items created under this advertiser. Note, presets can only be created in the UI.
+                  format: int32
+                enable_skad_tracking:
+                  type: boolean
+                  description: Should Apple's SKAdNetwork tracking be enabled for this advertiser. If set to true, the `advertiser_app_bundle` elements of the `attributes` must be set.
+                  default: false
+                alternative_id:
+                  type: string
+                  description: An alternative id to associate, if desired
+                notes:
+                  type: string
+                active:
+                  type: boolean
+                  description: Is the advertiser active?
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"advertiser updated with ID 1\"\n        }\n    ],\n    \"message\": \"advertiser update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: advertiser updated with ID 1
+                  message:
+                    type: string
+                    example: 'advertiser update: 1 updated successfully'
+        '406':
+          description: '406'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": false,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": false,\n            \"error_code\": \"AD_BAD_VALIDATION\",\n            \"message\": [\n                \"ERROR: Error creating conversion_method_id, field improperly formatted int\"\n            ]\n        }\n    ],\n    \"errors\": [\n        \"ERROR: advertiser update: 0 updated successfully, 1 with errors\"\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: false
+                          default: true
+                        error_code:
+                          type: string
+                          example: AD_BAD_VALIDATION
+                        message:
+                          type: array
+                          items:
+                            type: string
+                            example: 'ERROR: Error creating conversion_method_id, field improperly formatted int'
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                      example: 'ERROR: advertiser update: 0 updated successfully, 1 with errors'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/advertiser" -b cookies.txt -d '{"advertiser_id":1, "advertiser_name":"new advertiser", "default_click_url":"http://www.foo.com", "default_continent":"EMEA"}'
+        samples-languages:
+        - curl
+      tags:
+      - Advertiser
+    delete:
+      summary: advertiser
+      description: ''
+      operationId: advertiser-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - advertiser_id
+              properties:
+                advertiser_id:
+                  type: integer
+                  description: Unique ID of the advertiser
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"advertiser deleted with ID 1\"\n        }\n    ],\n    \"message\": \"advertiser deletion: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: advertiser deleted with ID 1
+                  message:
+                    type: string
+                    example: 'advertiser deletion: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/advertiser" -b cookies.txt -d '{"advertiser_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Advertiser
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

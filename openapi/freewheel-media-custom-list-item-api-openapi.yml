@@ -1,0 +1,247 @@
+openapi: 3.2.0
+info:
+  title: buzz Custom List Item API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Custom List Item
+paths:
+  /custom_list_item:
+    post:
+      summary: custom_list_item
+      description: ''
+      operationId: customlistitem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - list_id
+              - list_item
+              properties:
+                list_id:
+                  type: integer
+                  description: The unique ID of the list. List must be active.
+                  format: int32
+                list_item:
+                  type: array
+                  description: An array of items. Items are validated based on the type of the corresponding Custom List
+                  items:
+                    type: string
+                active:
+                  type: boolean
+                  description: Whether the item is active
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"List items created successfully\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: List items created successfully
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: '#Array upload
+
+            curl -X POST "[host]/rest/custom_list_item" -b cookies.txt -d ''{"list_id":1, "list_item":["foo.bar.iphone.app","foo.bar.watch.app"]}''
+
+            #File upload using list ID in format /upload/LIST_ID
+
+            curl -X POST "[host]/rest/custom_list_item/upload/123" -b cookies.txt -F ''list_item=@/local/path/foo.csv'''
+        samples-languages:
+        - curl
+      tags:
+      - Custom List Item
+    get:
+      summary: custom_list_item
+      description: ''
+      operationId: customlistitem-1
+      parameters:
+      - name: list_item_id
+        in: query
+        description: Unique ID of the list and item combination
+        schema:
+          type: integer
+          format: int32
+      - name: list_id
+        in: query
+        description: The unique ID of the list. List must be active.
+        schema:
+          type: integer
+          format: int32
+      - name: active
+        in: query
+        schema:
+          type: boolean
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"list_item_id\": 1,\n            \"list_id\": 1,\n            \"list_item\": [\n                \"foo.bar.iphone.app\"\n            ],\n            \"create_date\": \"2016-02-26 15:49:12\",\n            \"update_date\": \"2016-02-26 15:49:12\",\n            \"pushed_to_server\": \"2016-02-26 17:00:00\",\n            \"active\": true,\n            \"account_id\": 1,\n            \"buzz_key\": \"stingersbx\"\n        },\n        {\n            \"list_item_id\": 2,\n            \"list_id\": 1,\n            \"list_item\": [\n                \"foo.bar.watch.app\"\n            ],\n            \"create_date\": \"2016-02-26 15:49:12\",\n            \"update_date\": \"2016-02-26 15:49:12\",\n            \"pushed_to_server\": null,\n            \"active\": true,\n            \"account_id\": 1,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/custom_list_item" -b cookies.txt -d '{"list_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Custom List Item
+    put:
+      summary: custom_list_item
+      description: ''
+      operationId: custom_list_item
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - list_id
+              - list_item
+              properties:
+                list_id:
+                  type: integer
+                  description: The unique ID of the list. List must be active.
+                  format: int32
+                list_item:
+                  type: array
+                  description: An array of items. Items are validated based on the type of the corresponding Custom List
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"List items created successfully: 2 added, 0 duplicate(s) ignored\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: 'List items created successfully: 2 added, 0 duplicate(s) ignored'
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/custom_list_item" -b cookies.txt -d '{"list_id":1, "list_item":["foo.bar.iphone.app","foo.bar.watch.app"]}'
+        samples-languages:
+        - curl
+      tags:
+      - Custom List Item
+    delete:
+      summary: custom_list_item
+      description: ''
+      operationId: customlistitem-2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                list_item_id:
+                  type: integer
+                  description: Unique ID of the list and item combination
+                  format: int32
+                list_item:
+                  type: string
+                  description: Either a list of items to delete or the string `all`
+                list_id:
+                  type: integer
+                  description: The `list_id` to delete from, typically coupled with `"list_item":"all"`
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"List items deleted: 2 deleted, 0 not found\",\n    \"payload\": {\n        \"id\": 2\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: 'List items deleted: 2 deleted, 0 not found'
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 2
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/custom_list_item" -b cookies.txt -d '{"list_item_id":1}'
+        - language: curl
+          code: curl -X DELETE "[host]/rest/custom_list_item" -b cookies.txt -d '{"list_item_id":1,"list_item":"all"}'
+          name: cURL-ALL
+        - language: curl
+          code: curl -X DELETE "[host]/rest/custom_list_item" -b cookies.txt -d '{"list_item_id":1,"list_item":["foo.bar.iphone.app","foo.bar.watch.app"]}'
+          name: cURL-LIST
+        samples-languages:
+        - curl
+      tags:
+      - Custom List Item
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

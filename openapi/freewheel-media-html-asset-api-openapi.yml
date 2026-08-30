@@ -1,0 +1,85 @@
+openapi: 3.2.0
+info:
+  title: buzz Html Asset API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Html Asset
+paths:
+  /html_asset:
+    post:
+      summary: html_asset
+      description: ''
+      operationId: html_asset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - advertiser_id
+              - creative_asset_name
+              - size_in_bytes
+              - active
+              properties:
+                advertiser_id:
+                  type: integer
+                  description: Advertiser that owns the asset
+                  format: int32
+                creative_asset_name:
+                  type: string
+                  description: Name of the Creative Asset, e.g. "Blue Banner Ad"
+                size_in_bytes:
+                  type: integer
+                  description: Number of bytes
+                  default: 0
+                  format: int32
+                notes:
+                  type: string
+                  description: Notes about the Creative Asset, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"html_asset created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: html_asset created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "#Step 1, create the asset using POST\ncurl -X POST \"[host]/rest/html_asset\" -b cookies.txt -d '{\"creative_asset_name\":\"creative.html\", \"size_in_bytes\":200500, \"advertiser_id\":1}'\n#Step 2, upload the file using the /upload/ID method \ncurl -X POST -F \"creative_content=@creative.html\" \"[host]/rest/html_asset/upload/5\" -b cookies.txt"
+        samples-languages:
+        - curl
+      tags:
+      - Html Asset
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

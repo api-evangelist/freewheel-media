@@ -1,0 +1,77 @@
+openapi: 3.2.0
+info:
+  title: audience-management-api Services API
+  version: '1.0'
+servers:
+- url: https://api.freewheel.tv/demand
+security:
+- sec0: []
+tags:
+- name: Services
+paths:
+  /v1/services/v4/ds/v1/permissions/ad-industries:
+    get:
+      summary: List Advertiser Industry Categories
+      description: "This method employs GET to retrieve a list of all advertiser Industries used in Data Suite to apply data usage/restrction rules to given categories in accordance with your business needs.  \n\nIt is the legal responsibility of each advertiser (or publisher/agency entity acting on behalf of an advertiser) to accurately identify their advertiser's industry, so that any applicable data usage restrictions can be applied. \n\nSelect the industry category (and associated numeric ID) that best matches your company. \n\nYou will need to pass this in subsequent calls using the X-Freewheel-Ad-Industry header."
+      operationId: list-industries-1
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Sample Response:
+                  value: "{\n  \"page\": 1,\n  \"per_page\": 287,\n  \"total_page\": 1,\n  \"total_count\": 287,\n  \"items\": [\n    {\n      \"id\": 1,\n      \"name\": \"Agriculture Crop Production\",\n      \"restrictions\": null\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Agriculture Livestock Production\",\n      \"restrictions\": null\n    },\n    // ...,\n    {\n      \"id\": 27,\n      \"name\": \"Tobacco Manufacture\",\n      \"restrictions\": [\n        2\n      ]\n    },\n    // ...,\n    {\n      \"id\": 193,\n      \"name\": \"Automobile Dealers - Luxury\",\n      \"restrictions\": [\n        3\n      ]\n    },\n    // ...,\n    {\n      \"id\": 389,\n      \"name\": \"Retail and General Merchandise\",\n      \"restrictions\": null\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: integer
+                    example: 1
+                    default: 0
+                  per_page:
+                    type: integer
+                    example: 287
+                    default: 0
+                  total_page:
+                    type: integer
+                    example: 1
+                    default: 0
+                  total_count:
+                    type: integer
+                    example: 287
+                    default: 0
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        name:
+                          type: string
+                          example: Agriculture Crop Production
+                        restrictions: {}
+      deprecated: false
+      security: []
+      x-readme:
+        code-samples:
+        - language: curl
+          code: 'curl -H "Authorization: Bearer $auth_token" \ $DS/v1/permissions/ad-industries'
+          name: Sample Request
+        samples-languages:
+        - curl
+      tags:
+      - Services
+components:
+  securitySchemes:
+    sec0:
+      type: http
+      scheme: basic
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

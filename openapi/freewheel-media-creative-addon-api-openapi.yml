@@ -1,0 +1,362 @@
+openapi: 3.2.0
+info:
+  title: buzz Creative Addon API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Creative Addon
+paths:
+  /creative_addon:
+    post:
+      summary: creative_addon
+      description: ''
+      operationId: creative_addon-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - creative_addon_name
+              - creative_addon_type
+              - creative_addon_content
+              - active
+              properties:
+                creative_addon_name:
+                  type: string
+                  description: Name of the Creative AddOn, e.g. "MOAT Viewabiity"
+                advertiser_id:
+                  type: integer
+                  description: Make the addon only available to a single Advertiser
+                  format: int32
+                include_by_default:
+                  type: boolean
+                  description: Should this addon always be included when creating a new Creative of the same creative_type
+                  default: false
+                creative_type:
+                  type: integer
+                  description: 0 = banner, 1=video
+                  default: 0
+                  format: int32
+                creative_addon_type:
+                  type: string
+                  description: Must be either `PIXEL` or `SCRIPT`
+                creative_addon_content:
+                  type: string
+                  description: Should always be a URL
+                secure:
+                  type: boolean
+                  description: Is the pixel secure (https)?
+                  default: false
+                cpm_cost:
+                  type: number
+                  description: Cost to be attributed to use of the pixel.
+                  format: double
+                notes:
+                  type: string
+                  description: <255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"creative_addon created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: creative_addon created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/creative_addon" -b cookies.txt -d '{"creative_addon_name":"new creative addon", "creative_addon_content":"http://foo.com/pixel.jpg", "creative_type":-1, "creative_addon_type":"PIXEL","active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative Addon
+    get:
+      summary: creative_addon
+      description: ''
+      operationId: creative_addon-get
+      parameters:
+      - name: creative_addon_id
+        in: query
+        description: Unique ID of the Creative AddOn
+        schema:
+          type: integer
+          format: int32
+      - name: creative_addon_name
+        in: query
+        description: Name of the Creative AddOn, e.g. "MOAT Viewabiity"
+        schema:
+          type: string
+      - name: advertiser_id
+        in: query
+        description: Advertiser the CreativeAddOn is associated with
+        schema:
+          type: integer
+          format: int32
+      - name: creative_type
+        in: query
+        description: 0 = banner, 1 = video, 2 = native
+        schema:
+          type: integer
+          format: int32
+      - name: creative_addon_type
+        in: query
+        description: Must be either `PIXEL` or `SCRIPT`
+        schema:
+          type: string
+      - name: secure
+        in: query
+        description: Is the pixel secure (https)?
+        schema:
+          type: boolean
+      - name: global
+        in: query
+        description: Is this a global addon, available to all Buzz accounts?
+        schema:
+          type: boolean
+      - name: active
+        in: query
+        description: Is it active?
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"creative_addon_id\": 1,\n            \"account_id\": 1,\n            \"creative_addon_name\": \"new creative addon\",\n            \"global\": false,\n            \"secure\": true,\n            \"creative_type\": 1,\n            \"creative_addon_type\": \"PIXEL\",\n\t          \"creative_addon_content\":\"http://foo.com/pixel.jpg\",\n          \t\"notes\": null,\n            \"buzz_key\": \"stingertest\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        creative_addon_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        creative_addon_name:
+                          type: string
+                          example: new creative addon
+                        global:
+                          type: boolean
+                          example: false
+                          default: true
+                        secure:
+                          type: boolean
+                          example: true
+                          default: true
+                        creative_type:
+                          type: integer
+                          example: 1
+                          default: 0
+                        creative_addon_type:
+                          type: string
+                          example: PIXEL
+                        creative_addon_content:
+                          type: string
+                          example: http://foo.com/pixel.jpg
+                        notes: {}
+                        buzz_key:
+                          type: string
+                          example: stingertest
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/creative_addon" -b cookies.txt -d '{"creative_addon_name":"new creative addon"}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative Addon
+    put:
+      summary: creative_addon
+      description: ''
+      operationId: creative_addon-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - creative_addon_id
+              - creative_addon_content
+              properties:
+                creative_addon_id:
+                  type: integer
+                  description: Unique ID of the Creative AddOn
+                  format: int32
+                creative_addon_name:
+                  type: string
+                  description: Name of the Creative AddOn, e.g. "MOAT Viewabiity"
+                advertiser_id:
+                  type: integer
+                  description: Make the addon only available to a single Advertiser
+                  format: int32
+                include_by_default:
+                  type: boolean
+                  description: Should this addon always be included when creating a new Creative of the same creative_type
+                  default: false
+                creative_addon_content:
+                  type: string
+                  description: Should always be a URL
+                secure:
+                  type: boolean
+                  description: Is the pixel secure (https)?
+                  default: false
+                cpm_cost:
+                  type: number
+                  description: Cost to be attributed to use of the pixel.
+                  format: double
+                notes:
+                  type: string
+                  description: <255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"creative_addon updated with ID 1\"\n        }\n    ],\n    \"message\": \"creative_addon update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: creative_addon updated with ID 1
+                  message:
+                    type: string
+                    example: 'creative_addon update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/creative_addon" -b cookies.txt -d '{"creative_addon_id":1, "creative_addon_name":"new creative addon", "creative_addon_content":"http://foo.com/pixel.jpg", "creative_addon_type":"PIXEL","active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative Addon
+    delete:
+      summary: creative_addon
+      description: ''
+      operationId: creative_addon-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - creative_addon_id
+              properties:
+                creative_addon_id:
+                  type: integer
+                  description: Unique ID of the Creative AddOn
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"creative_addon deleted with ID 1\"\n        }\n    ],\n    \"message\": \"creative_addon deletion: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: creative_addon deleted with ID 1
+                  message:
+                    type: string
+                    example: 'creative_addon deletion: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/creative_addon" -b cookies.txt -d '{"creative_addon_id":123}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative Addon
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,432 @@
+openapi: 3.2.0
+info:
+  title: buzz Native Offer API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Native Offer
+paths:
+  /native_offer:
+    post:
+      summary: native_offer
+      description: ''
+      operationId: native_offer-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - advertiser_id
+              - native_offer_name
+              properties:
+                advertiser_id:
+                  type: integer
+                  description: Must be active
+                  format: int32
+                creative_template_id:
+                  type: array
+                  description: A list of Creative Templates that should be used to validate the fields in this object
+                  items:
+                    type: integer
+                    format: int32
+                native_offer_name:
+                  type: string
+                  description: Name of the Native Offer
+                icon_asset_id:
+                  type: integer
+                  description: The ID of a CreativeAsset for the `icon` field to be shown in the Creative.
+                  format: int32
+                logo_asset_id:
+                  type: integer
+                  description: The ID of a CreativeAsset for the `logo` field to be shown in the Creative.
+                  format: int32
+                title_short:
+                  type: string
+                  description: A title for the ad under 25 chars
+                title_long:
+                  type: string
+                  description: A title for the ad under 50 chars long
+                description_short:
+                  type: string
+                  description: A description for the ad under 90 chars long
+                description_long:
+                  type: string
+                  description: A description for the ad under 200 chars long
+                call_to_action:
+                  type: string
+                  description: Call to action under 15 chars long (e.g. "click here")
+                sponsored:
+                  type: string
+                  description: The name of the advertiser for inclusion in the ad, under 50 chars long
+                store:
+                  type: string
+                  description: The name of the app store, under 15 chars long (e.g. "iTunes")
+                likes:
+                  type: integer
+                  description: Number of likes the product has on various social networks
+                  format: int32
+                downloads:
+                  type: integer
+                  description: The number of downloads the product has
+                  format: int32
+                phone:
+                  type: string
+                  description: A phone number, under 20 chars long
+                address:
+                  type: string
+                  description: A physical address, up to 100 chars long
+                display_url:
+                  type: string
+                  description: A URL to show in the ad. Will not be used as a click-through URL.
+                star_rating:
+                  type: integer
+                  description: A number between 0 and 5 reflecting the user rating of the product.
+                  format: int32
+                price:
+                  type: number
+                  description: The price of the product being advertised
+                  format: double
+                sale_price:
+                  type: number
+                  description: A discounted price of the product being advertised
+                  format: double
+                currency:
+                  type: string
+                  description: Currency in which the product is priced, for display in the ad, has no effect on bidding
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the  Line Item, if desired
+                notes:
+                  type: string
+                  description: Notes about the Line Item, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is the NativeOffer active
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"native_offer created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: native_offer created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/native_offer" -b cookies.txt -d '{"native_offer_name":"new Offer", "advertiser_id":1, creative_template_id":[14,15], "logo_asset_id":12 "title_short":"Great app from Beeswax", "description_short":"Using the great app will make you beautiful", "star_rating":3, "downloads":150, "price":1.99, "active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Native Offer
+    get:
+      summary: native_offer
+      description: ''
+      operationId: native_offer-get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - native_offer_id
+              - advertiser_id
+              - native_offer_name
+              properties:
+                native_offer_id:
+                  type: integer
+                  description: ID of the object to be updated
+                  format: int32
+                advertiser_id:
+                  type: integer
+                  description: Must be active
+                  format: int32
+                native_offer_name:
+                  type: string
+                  description: Name of the Native Offer
+                icon_asset_id:
+                  type: integer
+                  description: The ID of a CreativeAsset for the `icon` field to be shown in the Creative.
+                  format: int32
+                logo_asset_id:
+                  type: integer
+                  description: The ID of a CreativeAsset for the `logo` field to be shown in the Creative.
+                  format: int32
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the  Line Item, if desired
+                active:
+                  type: boolean
+                  description: Is the NativeOffer active
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"native_offer_id\": 1,\n            \"advertiser_id\": 13,\n            \"creative_template_id\": [\n                14,\n                15,\n                16,\n                17,\n                18,\n                19\n            ],\n            \"icon_asset_id\": 104,\n            \"logo_asset_id\": 105,\n            \"native_offer_name\": \"Native Test\",\n            \"title_short\": \"Beeswax Test\",\n            \"title_long\": null,\n            \"description_short\": \"Differentiate yourself from the pack with Beeswax\",\n            \"description_long\": null,\n            \"call_to_action\": \"Buy Now\",\n            \"sponsored\": \"Beeswax\",\n            \"store\": null,\n            \"likes\": null,\n            \"downloads\": null,\n            \"phone\": null,\n            \"address\": null,\n            \"display_url\": null,\n            \"star_rating\": 5,\n            \"price\": null,\n            \"sale_price\": null,\n            \"currency\": null,\n            \"account_id\": 1,\n            \"create_date\": \"2017-05-23 17:09:27\",\n            \"update_date\": \"2017-05-23 17:09:27\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stinger\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        native_offer_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        advertiser_id:
+                          type: integer
+                          example: 13
+                          default: 0
+                        creative_template_id:
+                          type: array
+                          items:
+                            type: integer
+                            example: 14
+                            default: 0
+                        icon_asset_id:
+                          type: integer
+                          example: 104
+                          default: 0
+                        logo_asset_id:
+                          type: integer
+                          example: 105
+                          default: 0
+                        native_offer_name:
+                          type: string
+                          example: Native Test
+                        title_short:
+                          type: string
+                          example: Beeswax Test
+                        title_long: {}
+                        description_short:
+                          type: string
+                          example: Differentiate yourself from the pack with Beeswax
+                        description_long: {}
+                        call_to_action:
+                          type: string
+                          example: Buy Now
+                        sponsored:
+                          type: string
+                          example: Beeswax
+                        store: {}
+                        likes: {}
+                        downloads: {}
+                        phone: {}
+                        address: {}
+                        display_url: {}
+                        star_rating:
+                          type: integer
+                          example: 5
+                          default: 0
+                        price: {}
+                        sale_price: {}
+                        currency: {}
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2017-05-23 17:09:27'
+                        update_date:
+                          type: string
+                          example: '2017-05-23 17:09:27'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stinger
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/native_offer" -b cookies.txt -d '{"native_offer_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Native Offer
+    put:
+      summary: native_offer
+      description: ''
+      operationId: native_offer-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - native_offer_id
+              - advertiser_id
+              - native_offer_name
+              properties:
+                native_offer_id:
+                  type: integer
+                  description: ID of the object to be updated
+                  format: int32
+                advertiser_id:
+                  type: integer
+                  description: Must be active
+                  format: int32
+                creative_template_id:
+                  type: array
+                  description: A list of Creative Templates that should be used to validate the fields in this object
+                  items:
+                    type: integer
+                    format: int32
+                native_offer_name:
+                  type: string
+                  description: Name of the Native Offer
+                icon_asset_id:
+                  type: integer
+                  description: The ID of a CreativeAsset for the `icon` field to be shown in the Creative.
+                  format: int32
+                logo_asset_id:
+                  type: integer
+                  description: The ID of a CreativeAsset for the `logo` field to be shown in the Creative.
+                  format: int32
+                title_short:
+                  type: string
+                  description: A title for the ad under 25 chars
+                title_long:
+                  type: string
+                  description: A title for the ad under 50 chars long
+                description_short:
+                  type: string
+                  description: A description for the ad under 90 chars long
+                description_long:
+                  type: string
+                  description: A description for the ad under 200 chars long
+                call_to_action:
+                  type: string
+                  description: Call to action under 15 chars long (e.g. "click here")
+                sponsored:
+                  type: string
+                  description: The name of the advertiser for inclusion in the ad, under 50 chars long
+                store:
+                  type: string
+                  description: The name of the app store, under 15 chars long (e.g. "iTunes")
+                likes:
+                  type: integer
+                  description: Number of likes the product has on various social networks
+                  format: int32
+                downloads:
+                  type: integer
+                  description: The number of downloads the product has
+                  format: int32
+                phone:
+                  type: string
+                  description: A phone number, under 20 chars long
+                address:
+                  type: string
+                  description: A physical address, up to 100 chars long
+                display_url:
+                  type: string
+                  description: A URL to show in the ad. Will not be used as a click-through URL.
+                star_rating:
+                  type: integer
+                  description: A number between 0 and 5 reflecting the user rating of the product.
+                  format: int32
+                price:
+                  type: number
+                  description: The price of the product being advertised
+                  format: double
+                sale_price:
+                  type: number
+                  description: A discounted price of the product being advertised
+                  format: double
+                currency:
+                  type: string
+                  description: Currency in which the product is priced, for display in the ad, has no effect on bidding
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the  Line Item, if desired
+                notes:
+                  type: string
+                  description: Notes about the Line Item, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is the NativeOffer active
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"native_offer updated with ID 1\"\n        }\n    ],\n    \"message\": \"native_offer update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: native_offer updated with ID 1
+                  message:
+                    type: string
+                    example: 'native_offer update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/native_offer" -b cookies.txt -d '{"native_offer_id":1, "native_offer_name":"new Offer", "advertiser_id":1, creative_template_id":[14,15], "logo_asset_id":12 "title_short":"Great app from Beeswax", "description_short":"Using the great app will make you beautiful", "star_rating":3, "downloads":150, "price":1.99, "active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Native Offer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

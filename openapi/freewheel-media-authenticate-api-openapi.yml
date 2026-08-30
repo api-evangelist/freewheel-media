@@ -1,0 +1,166 @@
+openapi: 3.2.0
+info:
+  title: buzz Authenticate API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Authenticate
+paths:
+  /authenticate:
+    post:
+      summary: authenticate
+      description: Login
+      operationId: authenticate-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - password
+              properties:
+                email:
+                  type: string
+                  description: User Email
+                password:
+                  type: string
+                  description: User Password
+                account_id:
+                  type: integer
+                  description: For Multi-Account Users only, allows the user to authenticate into a different account on the same Buzz instance
+                  format: int32
+                keep_logged_in:
+                  type: boolean
+                  description: When set to true, the user will be kept logged in for up to 30 days
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": \"true\",\n    \"payload\": \"Cookie set successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+                    example: 'true'
+                  payload:
+                    type: string
+                    example: Cookie set successfully
+      deprecated: false
+      security: []
+      x-readme:
+        code-samples:
+        - language: curl
+          code: 'curl -X POST "/rest/authenticate" -c cookies.txt -d ''{"email":"foo@bar.com", "password":"123456", "keep_logged_in":true}''
+
+
+            #Example of masquerading into account 123 for Buzz instances enabled with multi-account access
+
+            curl -X POST "/rest/authenticate" -c cookies.txt -d ''{"email":"foo@bar.com", "password":"123456", "keep_logged_in":true,"account_id":123}'''
+        samples-languages:
+        - curl
+      tags:
+      - Authenticate
+    put:
+      summary: authenticate
+      description: Allows the user to change their password
+      operationId: authenticate-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - password
+              - new_password
+              properties:
+                email:
+                  type: string
+                  description: User ID
+                password:
+                  type: string
+                  description: User Password
+                new_password:
+                  type: integer
+                  description: New Password
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"Password updated\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: Password updated
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      security: []
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "/rest/authenticate" -b cookies.txt -d '{"email":"foo@bar.com", "password":"123456", "new_password":"abcdef"}'
+        samples-languages:
+        - curl
+      tags:
+      - Authenticate
+    delete:
+      summary: authenticate
+      description: Logout
+      operationId: authenticate-delete
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"You have been successfully logged out\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: You have been successfully logged out
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "/rest/authenticate" -b cookies.txt
+        samples-languages:
+        - curl
+      tags:
+      - Authenticate
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

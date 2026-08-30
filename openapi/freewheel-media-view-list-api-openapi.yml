@@ -1,0 +1,99 @@
+openapi: 3.2.0
+info:
+  title: buzz View List API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: View List
+paths:
+  /view_list:
+    get:
+      summary: view_list
+      description: The View List API method allows you to GET metadata about how a View and the fields within that View should be displayed in a UI. There is no write API for this data, it must be manually populated in SQL by an administrator. The primary use case for this API call is to display the data from a view in a user interface. Only GET requests are supported.
+      operationId: view_list
+      parameters:
+      - name: view_name
+        in: query
+        description: The view's name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"view_name\": \"line_item_types\",\n            \"object_type\": \"static\",\n            \"table_name\": \"line_item_types\",\n            \"primary_view\": true,\n            \"allow_writes\": false,\n            \"fields\": [\n                {\n                    \"view_name\": \"line_item_types\",\n                    \"field\": \"line_item_type_id\",\n                    \"field_order\": 1,\n                    \"field_name\": \"Line Item Type ID\",\n                    \"field_hint\": null,\n                    \"format\": null,\n                    \"link\": null,\n                    \"search_type\": \"int\",\n                    \"field_width\": null\n                },\n                {\n                    \"view_name\": \"line_item_types\",\n                    \"field\": \"line_item_type\",\n                    \"field_order\": 2,\n                    \"field_name\": \"Line Item Type\",\n                    \"field_hint\": null,\n                    \"format\": null,\n                    \"link\": null,\n                    \"search_type\": \"string\",\n                    \"field_width\": null\n                },\n                {\n                    \"view_name\": \"line_item_types\",\n                    \"field\": \"sizeless\",\n                    \"field_order\": 3,\n                    \"field_name\": null,\n                    \"field_hint\": null,\n                    \"format\": null,\n                    \"link\": null,\n                    \"search_type\": \"boolean\",\n                    \"field_width\": null\n                },\n                {\n                    \"view_name\": \"line_item_types\",\n                    \"field\": \"pixel_size\",\n                    \"field_order\": 4,\n                    \"field_name\": null,\n                    \"field_hint\": null,\n                    \"format\": null,\n                    \"link\": null,\n                    \"search_type\": \"int\",\n                    \"field_width\": null\n                }\n            ]\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        view_name:
+                          type: string
+                          example: line_item_types
+                        object_type:
+                          type: string
+                          example: static
+                        table_name:
+                          type: string
+                          example: line_item_types
+                        primary_view:
+                          type: boolean
+                          example: true
+                          default: true
+                        allow_writes:
+                          type: boolean
+                          example: false
+                          default: true
+                        fields:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              view_name:
+                                type: string
+                                example: line_item_types
+                              field:
+                                type: string
+                                example: line_item_type_id
+                              field_order:
+                                type: integer
+                                example: 1
+                                default: 0
+                              field_name:
+                                type: string
+                                example: Line Item Type ID
+                              field_hint: {}
+                              format: {}
+                              link: {}
+                              search_type:
+                                type: string
+                                example: int
+                              field_width: {}
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/view_list" -b cookies.txt -d '{"view_name":"line_item_type"}'
+        samples-languages:
+        - curl
+      tags:
+      - View List
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,205 @@
+openapi: 3.2.0
+info:
+  title: buzz Bid Model API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Bid Model
+paths:
+  /bid_model:
+    post:
+      summary: bid_model
+      description: ''
+      operationId: bid-models-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bid_model_name
+              properties:
+                bid_model_name:
+                  type: string
+                  description: Name of the Bid Model, e.g. "CPI Model"
+                value_type:
+                  type: string
+                  description: Valid values are `BID`, `MULTIPLIER`, or `BUDGET_WEIGHT`. Determines whether the values in the Bid Model should be multiplied by the base bid at the Line Item level or used instead of that bid. `BUDGET_WEIGHT` should be used for Delivery Models.
+                  default: MULTIPLIER
+                alternative_id:
+                  type: string
+                  description: An alternative ID to lookup the Bid Model, if desired
+                notes:
+                  type: string
+                  description: Notes, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"bid_model created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: bid_model created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/bid_model" -b cookies.txt -d '{"bid_model_name":"CPI Model", "value_type":"BID", "active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Model
+    get:
+      summary: bid_model
+      description: ''
+      operationId: bid-models-get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bid_model_id:
+                  type: integer
+                  description: Unique identifier for the Bid Model
+                  format: int32
+                bid_model_name:
+                  type: string
+                  description: Name of the Bid Model, e.g. "CPI Model"
+                value_type:
+                  type: string
+                  description: Valid values are `BID`, `MULTIPLIER`,  or `BUDGET_WEIGHT`. Determines whether the values in the Bid Model should be multiplied by the base bid at the Line Item level or used instead of that bid. `BUDGET_WEIGHT` should be used for Delivery Models.
+                  default: MULTIPLIER
+                alternative_id:
+                  type: string
+                  description: An alternative ID to lookup the Bid Model, if desired
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"bid_model_id\": 1,\n            \"bid_model_name\": \"CPI Model\",\n            \"value_type\": \"BID\",\n            \"current_version\": null,\n            \"account_id\": 1,\n            \"create_date\": \"2018-02-20 17:24:40\",\n            \"update_date\": \"2018-02-20 17:24:40\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\",\n        }\n    ]\n}"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/bid_model" -b cookies.txt -d '{"bid_model_name":"CPI Model"}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Model
+    put:
+      summary: bid_model
+      description: ''
+      operationId: bid-models-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bid_model_id
+              properties:
+                bid_model_id:
+                  type: integer
+                  description: The unique ID of the Bid Model to be updated
+                  format: int32
+                bid_model_name:
+                  type: string
+                  description: Name of the Bid Model, e.g. "CPI Model"
+                value_type:
+                  type: string
+                  description: Valid values are `BID`, `MULTIPLIER`,  or `BUDGET_WEIGHT`. Determines whether the values in the Bid Model should be multiplied by the base bid at the Line Item level or used instead of that bid. `BUDGET_WEIGHT` should be used for Delivery Models.
+                  default: MULTIPLIER
+                current_version:
+                  type: integer
+                  description: The Bid Model Version to use.
+                  format: int32
+                alternative_id:
+                  type: string
+                  description: An alternative ID to lookup the Bid Model, if desired
+                notes:
+                  type: string
+                  description: Notes, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is it active?
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"bid_model updated with ID 1\"\n        }\n    ],\n    \"message\": \"bid_model update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: bid_model updated with ID 1
+                  message:
+                    type: string
+                    example: 'bid_model update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/bid_model" -b cookies.txt -d '{"bid_model_id":12, "bid_model_name":"CPI Model", "value_type":"BID", "active":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Bid Model
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

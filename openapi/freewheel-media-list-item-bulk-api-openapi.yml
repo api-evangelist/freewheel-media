@@ -1,0 +1,80 @@
+openapi: 3.2.0
+info:
+  title: buzz List Item Bulk API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: List Item Bulk
+paths:
+  /list_item_bulk:
+    post:
+      summary: list_item_bulk
+      description: ''
+      operationId: list_item_bulk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - list_id
+              - list_items
+              properties:
+                list_id:
+                  type: integer
+                  description: The unique ID of the list. List must be active.
+                  format: int32
+                list_items:
+                  type: array
+                  description: An array of items and optional values in format `{"list_item":"foo","value":1.2}`. Items are validated based on the type of the corresponding Custom List
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": {\n        \"id\": 60\n    },\n    \"message\": \"list_item creation: 2 created successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 60
+                        default: 0
+                  message:
+                    type: string
+                    example: 'list_item creation: 2 created successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: '#Bulk upload
+
+            curl -X POST "[host]/rest/list_item_bulk" -b cookies.txt -d ''{"list_id":1, "list_items":[{"list_item":"foo","value":1.2},{"list_item":"bar"}]}''
+
+
+            #File upload using list ID in format /upload/LIST_ID
+
+            curl -X POST "[host]/rest/list_item_bulk/upload/123" -b cookies.txt -F ''list_item=@/local/path/foo.csv'''
+        samples-languages:
+        - curl
+      tags:
+      - List Item Bulk
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,250 @@
+openapi: 3.2.0
+info:
+  title: buzz Creative Bulk Upload API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Creative Bulk Upload
+paths:
+  /creative_bulk_upload:
+    post:
+      summary: creative_bulk_upload
+      description: ''
+      operationId: creativebulkupload-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - advertiser_id
+              - size_in_bytes
+              - creative_template_id
+              - bulk_type
+              properties:
+                advertiser_id:
+                  type: integer
+                  description: Must be active
+                  format: int32
+                creative_name_prefix:
+                  type: string
+                  description: A string to be added at the beginning of each filename. e.g. `spring_`. Cannot contain spaces of special characters. Max length 100 characters.
+                size_in_bytes:
+                  type: integer
+                  description: Number of bytes of the file
+                  default: 0
+                  format: int32
+                secure:
+                  type: boolean
+                  description: Whether the creatives should be marked as secure
+                click_url:
+                  type: string
+                  description: URL the ad should click or tap to. Required for templates that require clicks (image templates)
+                creative_thumbnail_url:
+                  type: string
+                  description: Thumbnail to use for all creatives uploaded. Note, for image uploads this field will be ignored.
+                creative_content:
+                  type: array
+                  description: Content to be added to all of the uploaded Creatives. Not typically used.
+                creative_template_id:
+                  type: integer
+                  description: The ID of the Creative Template to use for this creative. Note, when bulk uploading tags, the template is automatically determined.
+                  format: int32
+                creative_rule_id:
+                  type: integer
+                  description: DEPRECATED
+                  format: int32
+                creative_rule_key:
+                  type: string
+                  description: The key corresponding to the `creative_rule` to apply to the tag based creatives. The rule will insert click and timestamp macros. You can use `auto_detect` for easiest implementation.
+                  default: none
+                bulk_type:
+                  type: string
+                  description: The type of creatives being uploaded. Currently `image`, `atlas_tag`, `sizmek_tag`, and `dfa_tag` are supported.
+                pixels:
+                  type: array
+                  description: List of pixel URLs to add to all uploaded Creatives
+                  items:
+                    type: string
+                scripts:
+                  type: array
+                  description: List of script URLs to add to all uploaded Creatives. Note, if your bulk upload includes VAST videos, including any scripts will cause an error.
+                  items:
+                    type: string
+                creative_addons:
+                  type: array
+                  description: List of Creative Addon IDs to add to all uploaded Creatives
+                  items:
+                    type: integer
+                    format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"creative_asset created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: creative_asset created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: 'curl -X POST "[host]/rest/creative_bulk_upload" -b cookies.txt -d ''{"creative_name_prefix":"spring_", "advertiser_id":1, "click_url":"http://www.foo.com", "creative_template_id":1, "size_in_bytes":10000, "bulk_type":"image", "pixels":["https://www.pixel.net/foo"]}''
+
+            # Get the ID from the first post and use the /upload/ID syntax to upload the file
+
+            curl -X POST "[host]/rest/creative_bulk_upload/upload/1" -b cookies.txt -F ''creative_content=@/local/path/foo.zip'''
+        samples-languages:
+        - curl
+      tags:
+      - Creative Bulk Upload
+    get:
+      summary: creative_bulk_upload
+      description: ''
+      operationId: creativebulkupload-get
+      parameters:
+      - name: cbu_id
+        in: query
+        description: Unique ID of the bulk upload
+        schema:
+          type: integer
+          format: int32
+      - name: advertiser_id
+        in: query
+        description: Advertiser ID
+        schema:
+          type: integer
+          format: int32
+      - name: creative_template_id
+        in: query
+        description: The ID of the Creative Template
+        schema:
+          type: integer
+          format: int32
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"cbu_id\": 1,\n            \"advertiser_id\": 1,\n            \"click_url\": \"http://www.yahoo.com\",\n            \"creative_template_id\": 1,\n            \"creative_rule_id\": null,\n            \"creative_rule_key\": \"none\",\n            \"secure\": false,\n            \"size_in_bytes\": 74211,\n            \"creative_name_prefix\": null,\n            \"bulk_type\": \"image\",\n            \"manifest\": [\n                {\n                    \"action\": \"creative\",\n                    \"creative_name\": \"adc_gwi_general_300x250.gif\",\n                    \"success\": true,\n                    \"id\": 20\n                },\n                {\n                    \"action\": \"creative\",\n                    \"creative_name\": \"adc_kab_jeans_300x250.png\",\n                    \"success\": true,\n                    \"id\": 21\n                },\n                {\n                    \"action\": \"creative\",\n                    \"creative_name\": \"adc_twe_brawl_160x600.jpg\",\n                    \"success\": true,\n                    \"id\": 22\n                },\n                {\n                    \"action\": \"creative\",\n                    \"creative_name\": \"adc_twe_brawl_728x90.jpg\",\n                    \"success\": true,\n                    \"id\": 23\n                }\n            ],\n            \"account_id\": 1,\n            \"create_date\": \"2016-02-26 13:58:10\",\n            \"update_date\": \"2016-02-26 13:58:27\",\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        cbu_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        advertiser_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        click_url:
+                          type: string
+                          example: http://www.yahoo.com
+                        creative_template_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        creative_rule_id: {}
+                        creative_rule_key:
+                          type: string
+                          example: none
+                        secure:
+                          type: boolean
+                          example: false
+                          default: true
+                        size_in_bytes:
+                          type: integer
+                          example: 74211
+                          default: 0
+                        creative_name_prefix: {}
+                        bulk_type:
+                          type: string
+                          example: image
+                        manifest:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              action:
+                                type: string
+                                example: creative
+                              creative_name:
+                                type: string
+                                example: adc_gwi_general_300x250.gif
+                              success:
+                                type: boolean
+                                example: true
+                                default: true
+                              id:
+                                type: integer
+                                example: 20
+                                default: 0
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2016-02-26 13:58:10'
+                        update_date:
+                          type: string
+                          example: '2016-02-26 13:58:27'
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/creative_bulk_upload" -b cookies.txt -d '{"cbu_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Creative Bulk Upload
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

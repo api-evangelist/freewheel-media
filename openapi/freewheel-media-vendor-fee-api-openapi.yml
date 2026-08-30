@@ -1,0 +1,268 @@
+openapi: 3.2.0
+info:
+  title: buzz Vendor Fee API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Vendor Fee
+paths:
+  /vendor_fee:
+    post:
+      summary: vendor_fee
+      description: ''
+      operationId: vendor_fee-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vendor_id
+              - object_id
+              - object_type
+              properties:
+                vendor_id:
+                  type: integer
+                  description: Unique ID of the Vendor
+                  format: int32
+                vendor_fee_name:
+                  type: string
+                  description: Name of the vendor fee, <100 characters
+                object_id:
+                  type: integer
+                  description: Unique ID for the object to be associated with this fee
+                  format: int32
+                object_type:
+                  type: string
+                  description: String representation of the object to be associated. For example, "campaign"
+                fee_type:
+                  type: string
+                  description: Type of fee, either `cpm` or `percent`
+                fee_amount:
+                  type: number
+                  description: If the `fee_type` is set, the `fee_amount` must be set as well. Must be a positive number between 0 and 99.9.
+                  format: double
+                currency:
+                  type: string
+                  description: Currency in which this fee should be charged. Can be different from Vendor, but will throw a WARNING.
+                  default: USD
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"vendor_fee created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: vendor_fee created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/vendor_fee" -b cookies.txt -d '{"vendor_id":1, "vendor_fee_name":"Beeswax Serving Fee", "fee_type":"cpm", "fee_amount":12.25, "object_id":1, "object_type":"campaign"}'
+        samples-languages:
+        - curl
+      tags:
+      - Vendor Fee
+    get:
+      summary: vendor_fee
+      description: ''
+      operationId: vendor_fee-get
+      parameters:
+      - name: vendor_fee_id
+        in: query
+        description: Unique ID of the Vendor Fee
+        schema:
+          type: integer
+          format: int32
+      - name: vendor_id
+        in: query
+        description: Unique ID of the Vendor
+        schema:
+          type: integer
+          format: int32
+      - name: vendor_fee_name
+        in: query
+        description: Name of the vendor fee, <100 characters
+        schema:
+          type: string
+      - name: object_id
+        in: query
+        description: Unique ID for the object to be associated with this fee
+        schema:
+          type: integer
+          format: int32
+      - name: object_type
+        in: query
+        description: String representation of the object to be associated. For example, "campaign"
+        schema:
+          type: string
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"vendor_fee_id\": 5,\n            \"vendor_id\": 1,\n            \"vendor_fee_name\": null,\n            \"object_id\": 1,\n            \"object_type\": \"campaign\",\n            \"fee_type\": \"cpm\",\n            \"fee_amount\": 1,\n            \"currency\": \"USD\",\n            \"account_id\": 1,\n            \"create_date\": \"2016-03-30 15:25:00\",\n            \"update_date\": \"2016-03-30 15:25:00\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ],\n}"
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/vendor_fee" -b cookies.txt -d '{"vendor_fee_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Vendor Fee
+    put:
+      summary: vendor_fee
+      description: ''
+      operationId: vendor_fee-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vendor_fee_Id
+              properties:
+                vendor_fee_Id:
+                  type: string
+                  description: Unique ID of the Vendor Fee
+                vendor_fee_name:
+                  type: string
+                  description: Name of the vendor fee, <100 characters
+                fee_type:
+                  type: string
+                  description: Type of fee, either `cpm` or `percent`
+                fee_amount:
+                  type: number
+                  description: If the `fee_type` is set, the `fee_amount` must be set as well. Must be a positive number between 0 and 99.9.
+                  format: double
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"vendor_fee updated with ID 1\"\n        }\n    ],\n    \"message\": \"vendor_fee update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: vendor_fee updated with ID 1
+                  message:
+                    type: string
+                    example: 'vendor_fee update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/vendor_fee" -b cookies.txt -d '{"vendor_fee_id":1, "vendor_fee_name":"Beeswax Serving Fee", "fee_type":"cpm", "fee_amount":12.25}'
+        samples-languages:
+        - curl
+      tags:
+      - Vendor Fee
+    delete:
+      summary: vendor_fee
+      description: ''
+      operationId: vendor_fee-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - vendor_fee_id
+              properties:
+                vendor_fee_id:
+                  type: integer
+                  description: Unique ID of the Vendor Fee
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"vendor_fee deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: vendor_fee deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/vendor_fee" -b cookies.txt -d '{"vendor_fee_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Vendor Fee
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

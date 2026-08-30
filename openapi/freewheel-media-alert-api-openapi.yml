@@ -1,0 +1,393 @@
+openapi: 3.2.0
+info:
+  title: buzz Alert API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Alert
+paths:
+  /alert:
+    post:
+      summary: alert
+      description: ''
+      operationId: alert-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - subject
+              - content
+              - from_address
+              properties:
+                user_id:
+                  type: integer
+                  description: ID of the user receiving the alert, must be an active user
+                  format: int32
+                account_id:
+                  type: integer
+                  description: When a super user sends a `global` alert the `account_id` can be specified or can be set to `all` to send the alert to all users in all accounts.
+                  default: null
+                  format: int32
+                subject:
+                  type: string
+                  description: Subject of the alert, <100 chars
+                content:
+                  type: string
+                  description: Content of the alert
+                object_type:
+                  type: string
+                  description: If the alert refers to an object, such as a Creative, you can specify the type and ID (below) to allow for deep linking into an application. Must be a valid object_type. A list of object_types can be found using the `"view_name":"object_type"`
+                object_id:
+                  type: integer
+                  description: The object_id to link to if the object_type is specified.
+                  format: int32
+                global:
+                  type: boolean
+                  description: When set, sends the alert to all users within the account
+                  default: false
+                icon:
+                  type: string
+                  description: A string representing an icon or emoji to associate with the alert. e.g. `:POOP:`
+                from_address:
+                  type: string
+                  description: Sender of the alert. Can be a name or an email address.
+                active:
+                  type: boolean
+                  description: Is the alert unread (1) or read (0)
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"Global alerts sent successfully to 2 users with 0 errors\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: Global alerts sent successfully to 2 users with 0 errors
+        '406':
+          description: '406'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": false,\n    \"message\": \"advertiser could not be created\",\n    \"errors\": [\n        \"ERROR: Advertiser name already in use\"\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                    default: true
+                  message:
+                    type: string
+                    example: advertiser could not be created
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                      example: 'ERROR: Advertiser name already in use'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/alert" -b cookies.txt -d '{"subject":"new alert","content":"Hey boys and girls here is an alert","global":1,"from_address":"your boss"}'
+        samples-languages:
+        - curl
+      tags:
+      - Alert
+    get:
+      summary: alert
+      description: ''
+      operationId: alert-get
+      parameters:
+      - name: alert_id
+        in: query
+        description: Unique ID of the alert
+        schema:
+          type: integer
+          format: int32
+      - name: user_id
+        in: query
+        description: ID of the user receiving the alert
+        schema:
+          type: integer
+          format: int32
+      - name: subject
+        in: query
+        description: Subject of the alert, supports `%LIKE%` syntax
+        schema:
+          type: string
+      - name: active
+        in: query
+        description: Is the alert unread (1) or read (0)
+        schema:
+          type: boolean
+          default: true
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"alert_id\": 1,\n            \"user_id\": 1,\n            \"account_id\": 1,\n            \"subject\": \"Creative Approval Updated\",\n            \"content\": \"Creative approval for Creative 4 was updated with message Suspicious\",\n            \"object_id\": 4,\n            \"object_type\": \"creative\",\n            \"icon\": \":cop:\",\n            \"system\": true,\n            \"from_address\": \"Buzz System\",\n            \"active\": false,\n            \"create_date\": \"2016-02-05 12:42:14\",\n            \"update_date\": \"2016-02-25 16:11:17\",\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        alert_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        user_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        subject:
+                          type: string
+                          example: Creative Approval Updated
+                        content:
+                          type: string
+                          example: Creative approval for Creative 4 was updated with message Suspicious
+                        object_id:
+                          type: integer
+                          example: 4
+                          default: 0
+                        object_type:
+                          type: string
+                          example: creative
+                        icon:
+                          type: string
+                          example: ':cop:'
+                        system:
+                          type: boolean
+                          example: true
+                          default: true
+                        from_address:
+                          type: string
+                          example: Buzz System
+                        active:
+                          type: boolean
+                          example: false
+                          default: true
+                        create_date:
+                          type: string
+                          example: '2016-02-05 12:42:14'
+                        update_date:
+                          type: string
+                          example: '2016-02-25 16:11:17'
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+        '406':
+          description: '406'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": false,\n    \"message\": \"advertiser could not be created\",\n    \"errors\": [\n        \"ERROR: Advertiser name already in use\"\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                    default: true
+                  message:
+                    type: string
+                    example: advertiser could not be created
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                      example: 'ERROR: Advertiser name already in use'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/alert" -b cookies.txt -d '{"alert_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Alert
+    put:
+      summary: alert
+      description: ''
+      operationId: alert-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                alert_id:
+                  type: integer
+                  description: Unique ID of the alert
+                  format: int32
+                user_id:
+                  type: integer
+                  description: ID of the user receiving the alert, defaults to current user
+                  format: int32
+                global:
+                  type: boolean
+                  description: Set to 1 to execute a "Mark all as read"
+                  default: false
+                active:
+                  type: boolean
+                  description: Mark an individual alert as read
+                  default: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"20 alerts marked as read\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: 20 alerts marked as read
+        '406':
+          description: '406'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": false,\n    \"message\": \"advertiser could not be created\",\n    \"errors\": [\n        \"ERROR: Advertiser name already in use\"\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                    default: true
+                  message:
+                    type: string
+                    example: advertiser could not be created
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                      example: 'ERROR: Advertiser name already in use'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: '#Set a single alert to read
+
+            curl -X PUT "[host]/rest/alert" -b cookies.txt -d ''{"alert_id":1,"active":0}''
+
+            #Set all alerts to read for the current user
+
+            curl -X PUT "[host]/rest/alert" -b cookies.txt -d ''{"global":1, "active":0}'''
+        samples-languages:
+        - curl
+      tags:
+      - Alert
+    delete:
+      summary: alert
+      description: ''
+      operationId: alert-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - alert_id
+              properties:
+                alert_id:
+                  type: integer
+                  description: Unique ID of the alert
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"alert deleted with ID 1\"\n        }\n    ],\n    \"message\": \"alert deletion: 1 deleted successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: alert deleted with ID 1
+                  message:
+                    type: string
+                    example: 'alert deletion: 1 deleted successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/alert" -b cookies.txt -d '{"alert_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Alert
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,389 @@
+openapi: 3.2.0
+info:
+  title: buzz Event API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Event
+paths:
+  /event:
+    post:
+      summary: event
+      description: ''
+      operationId: event-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - event_name
+              - advertiser_id
+              - value
+              properties:
+                event_name:
+                  type: string
+                  description: Name of the event, <100 characters
+                advertiser_id:
+                  type: integer
+                  description: Must be a valid and active Advertiser
+                  format: int32
+                event_type_id:
+                  type: integer
+                  description: Type of event, used for organizational purposes. Lookup against event_type table. Example `0`=Purchase, `1`=Landing Page, etc.
+                  format: int32
+                segment_id:
+                  type: integer
+                  description: If set, the user will be placed into this Segment when the Event is called. Segment must be valid and active and must belong to the same Account as the Event.
+                  format: int32
+                value:
+                  type: number
+                  description: Default value of the conversion
+                  format: double
+                count_unique:
+                  type: boolean
+                  description: Not currently used
+                  default: false
+                click_window:
+                  type: integer
+                  description: Amount, in seconds, to look back for clicks after an Event takes place. Positive number, no more than the system limit, which is generally set at `2592000` (30 days).
+                  default: 2592000
+                  format: int32
+                view_window:
+                  type: integer
+                  description: Amount, in seconds, to look back for impressions after an Event takes place. Positive number, no more than the system limit, which is generally set at `2592000` (30 days).
+                  default: 2592000
+                  format: int32
+                attribution:
+                  type: string
+                  description: Defines the line items that are eligible for this event. `ALL` = All Line Items for this Advertiser are eligible for this Event. `WHITELIST` = Only selected Campaigns or Line Items for this Advertiser are eligible for this Event
+                  default: ALL
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"event created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: event created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/event" -b cookies.txt -d '{"advertiser_id":1, "event_name":"new event", "value":100, "segment_id":1, "event_type_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Event
+    get:
+      summary: event
+      description: ''
+      operationId: event-get
+      parameters:
+      - name: event_id
+        in: query
+        description: Unique ID of the event
+        schema:
+          type: integer
+          format: int32
+      - name: event_name
+        in: query
+        description: Name of the event, <100 characters
+        schema:
+          type: string
+      - name: advertiser_id
+        in: query
+        description: Advertiser ID
+        schema:
+          type: integer
+          format: int32
+      - name: event_type_id
+        in: query
+        description: Type of event
+        schema:
+          type: integer
+          format: int32
+      - name: segment_id
+        in: query
+        description: Segment associated with the event
+        schema:
+          type: integer
+          format: int32
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: attribution
+        in: query
+        description: Defines the line items that are eligible for this event. Possible values are `ALL` or `WHITELIST`
+        schema:
+          type: string
+          default: ALL
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"event_id\": 1,\n            \"advertiser_id\": 1,\n            \"event_type_id\": 1,\n            \"segment_id\": null,\n            \"value\": 100,\n            \"count_unique\": false,\n            \"event_name\": \"new event\",\n            \"click_window\": 2592000,\n            \"view_window\": 2592000,\n            \"attribution\": \"ALL\",\n          \t\"push_status\": 0,\n            \"push_update\": true,\n            \"account_id\": 2,\n            \"create_date\": \"2016-03-30 10:53:09\",\n            \"update_date\": \"2016-03-30 10:53:09\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"active\": true,\n            \"buzz_key\": \"stinger\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        event_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        advertiser_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        event_type_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        segment_id: {}
+                        value:
+                          type: integer
+                          example: 100
+                          default: 0
+                        count_unique:
+                          type: boolean
+                          example: false
+                          default: true
+                        event_name:
+                          type: string
+                          example: new event
+                        click_window:
+                          type: integer
+                          example: 2592000
+                          default: 0
+                        view_window:
+                          type: integer
+                          example: 2592000
+                          default: 0
+                        attribution:
+                          type: string
+                          example: ALL
+                        push_status:
+                          type: integer
+                          example: 0
+                          default: 0
+                        push_update:
+                          type: boolean
+                          example: true
+                          default: true
+                        account_id:
+                          type: integer
+                          example: 2
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2016-03-30 10:53:09'
+                        update_date:
+                          type: string
+                          example: '2016-03-30 10:53:09'
+                        alternative_id: {}
+                        notes: {}
+                        active:
+                          type: boolean
+                          example: true
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stinger
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/event" -b cookies.txt -d '{"event_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Event
+    put:
+      summary: event
+      description: ''
+      operationId: event-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - event_id
+              properties:
+                event_id:
+                  type: integer
+                  description: Unique ID of the event to modify
+                  format: int32
+                event_name:
+                  type: string
+                  description: Name of the event, <100 characters
+                advertiser_id:
+                  type: integer
+                  description: Must be a valid and active Advertiser
+                  format: int32
+                event_type_id:
+                  type: integer
+                  description: Type of event, used for organizational purposes. Lookup against event_type table. Example `0`=Purchase, `1`=Landing Page, etc.
+                  format: int32
+                segment_id:
+                  type: integer
+                  description: If set, the user will be placed into this Segment when the Event is called. Segment must be valid and active and must belong to the same Account as the Event.
+                  format: int32
+                value:
+                  type: number
+                  description: Default value of the conversion
+                  format: double
+                count_unique:
+                  type: boolean
+                  description: Not currently used
+                  default: false
+                click_window:
+                  type: integer
+                  description: Amount, in seconds, to look back for clicks after an Event takes place. Positive number, no more than the system limit, which is generally set at `2592000` (30 days).
+                  default: 2592000
+                  format: int32
+                view_window:
+                  type: integer
+                  description: Amount, in seconds, to look back for impressions after an Event takes place. Positive number, no more than the system limit, which is generally set at `2592000` (30 days).
+                  default: 2592000
+                  format: int32
+                attribution:
+                  type: string
+                  description: Defines which Line Items that are eligible for this event. `ALL` = All Line Items for this Advertiser are eligible for this Event. `WHITELIST` = Only selected Campaigns or Line Items for this Advertiser are eligible for this Event
+                  default: ALL
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"event updated with ID 1\"\n        }\n    ],\n    \"message\": \"event update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: event updated with ID 1
+                  message:
+                    type: string
+                    example: 'event update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/event" -b cookies.txt -d '{"event_id":1, "event_name":"new event", "value":100, "segment_id":1, "event_type_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Event
+    delete:
+      summary: event
+      description: ''
+      operationId: event-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - event_id
+              properties:
+                event_id:
+                  type: integer
+                  description: Unique ID of the event
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"event deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: event deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/event" -b cookies.txt -d '{"event_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Event
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

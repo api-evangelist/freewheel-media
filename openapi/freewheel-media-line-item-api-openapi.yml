@@ -1,0 +1,798 @@
+openapi: 3.2.0
+info:
+  title: buzz Line Item API
+  version: '0.5'
+servers:
+- url: https://buzz-key.api.beeswax.com/rest/
+security:
+- {}
+tags:
+- name: Line Item
+paths:
+  /line_item:
+    post:
+      summary: line_item
+      description: ''
+      operationId: line_item-post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - campaign_id
+              - advertiser_id
+              - line_item_type_id
+              - line_item_name
+              - line_item_budget
+              - bidding
+              - start_date
+              - active
+              properties:
+                campaign_id:
+                  type: integer
+                  description: Must be a valid and active Campaign
+                  format: int32
+                advertiser_id:
+                  type: integer
+                  description: Must be active
+                  format: int32
+                line_item_type_id:
+                  type: integer
+                  description: The type of the Line Item. `0`=banner, `1`=video, `2`=native
+                  format: int32
+                targeting_template_id:
+                  type: integer
+                  description: The ID of the associated Targeting Template, must be a valid and active Targeting Template.
+                  format: int32
+                line_item_name:
+                  type: string
+                  description: Name of the Line Item, e.g. "Winter lead generation"
+                line_item_budget:
+                  type: number
+                  description: Maximum amount to spend on this Line Item
+                  format: double
+                daily_budget:
+                  type: number
+                  description: Maximum amount to spend or deliver in a day, cannot exceed `campaign_budget` or be so low as to prevent `campaign_budget` from being reached over the length of the campaign.
+                  format: double
+                budget_type:
+                  type: integer
+                  description: Type of budget, `0`=spend, `1`=impressions, `2`=spend with vendor fees
+                  default: 0
+                  format: int32
+                revenue_type:
+                  type: string
+                  description: 'Supported revenue types:  `CPM`, `CPC`, `CPCV`, `CPI`, `CPA`'
+                revenue_amount:
+                  type: number
+                  description: If a revenue_type is set, this is field is the basis of calculation. For example, if revenue_type is `CPM` and `revenue_amount` is 5.12, revenue will be calculated as a $5.12 CPM.
+                  format: double
+                bid_modifier_id:
+                  type: integer
+                  description: ID of a Bid Modifier object to associate with the Line Item. If set, `max_bid` must also be set.
+                  format: int32
+                delivery_modifier_id:
+                  type: integer
+                  description: ID of the Delivery Modifier to associate with this Line Item
+                  format: int32
+                max_bid:
+                  type: number
+                  description: Maximum bid after taking into consideration any Bid Modifiers.
+                  format: double
+                bidding:
+                  type: object
+                  description: Bidding Strategy JSON.
+                  required:
+                  - bidding_strategy
+                  properties:
+                    bidding_strategy:
+                      type: string
+                      description: The strategy to use, for example `CPM`. Must be all-caps.
+                    values:
+                      type: object
+                      description: Set of keys and values specific to the `bidding_strategy`
+                      required:
+                      - <key>
+                      properties:
+                        <key>:
+                          type: string
+                          description: Each `bidding_strategy` supports a set of up to five keys, each of which should be passed with a value in the correct format. Values may be ints or strings. Example `"cpm_bid":1.21`
+                    bid_shading:
+                      type: boolean
+                      description: Whether to automatically reduce the bid based on historical prices. Must be enabled on your account and for the given bidding_strategy. Fees may apply.
+                      default: false
+                    bid_shading_win_rate_control:
+                      type: string
+                      description: When `bid_shading` is set to `true`, this field determines how aggressive the Bid Shading algorithm should be. Valid values are `MORE_AGGRESSIVE`, `NORMAL`, and `LESS_AGGRESSIVE`.
+                      default: NORMAL
+                    custom:
+                      type: boolean
+                      description: Whether the `bidding_strategy` is a custom strategy to your account. These are set up by the administrator.
+                    pacing:
+                      type: string
+                      description: If a bidding strategy can be paced, the pacing value can be set to `daily`, `flight`, or `lifetime`. If it cannot be paced, then it should be set to `none`. The flight type may only be used if the Line Item has Line Item Flights enabled and every flight includes a budget.
+                      default: lifetime
+                creative_weighting_method:
+                  type: string
+                  description: Either `RANDOM` or `WEIGHTED`
+                  default: RANDOM
+                test_group_id:
+                  type: integer
+                  description: When using `Experiments` the group to use for segregating users. The `test_group_id` must belong to the `test_plan_id` assigned to the Campaign. If a `test_plan_id` is set at the Campaign level, the `test_group_id` may not be `null`.
+                  format: int32
+                start_date:
+                  type: string
+                  description: Start date of the Line Item.
+                  format: date
+                end_date:
+                  type: string
+                  description: End date of the Line Item.
+                  format: date
+                frequency_cap:
+                  type: object
+                  description: Frequency cap JSON.
+                  required:
+                  - duration
+                  - impressions
+                  properties:
+                    duration:
+                      type: integer
+                      description: Duration of time in which to cap impressions, in seconds. 30-day (2592000) max.
+                      format: int32
+                    impressions:
+                      type: integer
+                      description: Number of impressions to allow within the duration set
+                      format: int32
+                frequency_cap_type:
+                  type: integer
+                  description: The method of frequency capping. Must match Campaign-level if set. For definitions, see the Frequency Cap guide.
+                  default: 0
+                  format: int32
+                frequency_cap_vendor:
+                  type: string
+                  description: Extends frequency cap using a device graph (fees may apply). Valid values may be `TAPAD` or `LIVERAMP` depending on what has been enabled. If set at the Campaign level, must match that value.
+                user_timezones:
+                  type: array
+                  description: When targeting by `user_time_of_week`, this field should include a list of timezones you expect the ad to serve within. If not set properly, pacing will be uneven.
+                  default:
+                  - The account's timezone
+                  items:
+                    type: string
+                segment_extension_default:
+                  type: string
+                  description: Determines the type of audience extension to use. Valid values are `none`,`person`,`household`,`person_extend_only`, and `household_extend_only`.
+                  default: none
+                segment_extension_type_default:
+                  type: string
+                  description: Determines the type of audience extension to use. Valid options include `none`,`1P`,`3P`, and `ALL`.
+                  default: none
+                segment_extension_vendors_default:
+                  type: array
+                  description: List of vendors to use for audience extension. Valid values are `TAPAD` and `LIVERAMP`.
+                  default:
+                  - '''["TAPAD"]`'
+                  items:
+                    type: string
+                enable_skad_tracking:
+                  type: boolean
+                  description: Should Apple's SKAdNetwork tracking be enabled for this Line Item. Must be enabled at the Campaign level to be enabled here.
+                  default: false
+                skad_assignment_level:
+                  type: string
+                  description: Must be set if `enable_skad_tracking` is true. Valid options are `creative_line_item` and `line_item`. Cannot be changed once Line Item is active.
+                  default: creative_line_item
+                target_skad:
+                  type: boolean
+                  description: Should the Line Item only target Apple SKAd-enabled inventory
+                  default: false
+                guaranteed:
+                  type: boolean
+                  description: Indicates that the Line Item is Programmatic Guaranteed. When set to `true` the targeting, budgeting, pacing, and bidding parameters are restricted to ensure guaranteed delivery.
+                  default: false
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the  Line Item, if desired
+                notes:
+                  type: string
+                  description: Notes about the Line Item, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is the Line Item active? Must be set to 0 on POST since no Creatives are yet assigned.
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"line_item created with ID = 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: line_item created with ID = 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X POST "[host]/rest/line_item" -b cookies.txt -d '{"line_item_name":"new LI", "advertiser_id":1, "line_item_type_id":0, "campaign_id":1, "start_date":"12/31/2015", "line_item_budget":1000, "bidding":{"bidding_strategy":"cpm","bid_shading":false,"bid_shading_win_rate_control":"NORMAL","values":{"cpm_bid":1.12},"pacing":"none"}, "creative_weighting_method":"WEIGHTED", "frequency_cap":[{"duration":500,"impressions":1}], "frequency_cap_type":1, "user_timezones":["America/New_York"], "active":0, "segment_extension_default":"person", "segment_extension_type_default":"1P", "segment_extension_vendors_default":["TAPAD"],"enable_skad_tracking":false,"skad_assignment_level":"line_item"}'
+        samples-languages:
+        - curl
+      tags:
+      - Line Item
+    get:
+      summary: line_item
+      description: ''
+      operationId: line_item-get
+      parameters:
+      - name: line_item_id
+        in: query
+        description: Unique ID of the Line Item
+        schema:
+          type: integer
+          format: int32
+      - name: campaign_id
+        in: query
+        description: Must be a valid and active Campaign
+        schema:
+          type: integer
+          format: int32
+      - name: advertiser_id
+        in: query
+        description: Must belong to the same account as the Line Item and be active
+        schema:
+          type: integer
+          format: int32
+      - name: line_item_type_id
+        in: query
+        description: The type of the Line Item. 0=banner, 1=video.
+        schema:
+          type: integer
+          format: int32
+      - name: line_item_name
+        in: query
+        description: Name of the  Line Item, e.g. "Winter lead generation"
+        schema:
+          type: string
+      - name: bid_modifier_id
+        in: query
+        description: ID of the Bid Modifier associated with this Line Item
+        schema:
+          type: integer
+          format: int32
+      - name: delivery_modifier_id
+        in: query
+        description: ID of the Delivery Modifier associated with this Line Item
+        schema:
+          type: integer
+          format: int32
+      - name: start_date
+        in: query
+        description: Start date of the Line Item. No Line Items associated with the Campaign can have start dates prior to this date.
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        description: End date of the Line Item. No Line Items associated with the Campaign can have end dates after this date.
+        schema:
+          type: string
+          format: date
+      - name: guaranteed
+        in: query
+        description: Whether the Line Item is Programmatic Guaranteed.
+        schema:
+          type: boolean
+      - name: target_skad
+        in: query
+        description: Should the Line Item only target Apple SKAd-enabled inventory
+        schema:
+          type: boolean
+      - name: alternative_id
+        in: query
+        description: An alternative id to lookup the  Line Item, if desired
+        schema:
+          type: string
+      - name: active
+        in: query
+        schema:
+          type: boolean
+      - name: create_date
+        in: query
+        schema:
+          type: string
+          format: date
+      - name: update_date
+        in: query
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"line_item_id\": 1,\n            \"campaign_id\": 1,\n            \"advertiser_id\": 1,\n            \"line_item_type_id\": 0,\n            \"targeting_template_id\": null,\n            \"line_item_version\": 1,\n            \"line_item_name\": \"li name\",\n            \"line_item_budget\": 1000,\n            \"daily_budget\": null,\n            \"budget_type\": 0,\n            \"line_item_spend\": 0,\n            \"currency\": \"USD\",\n            \"frequency_cap\": [\n                {\n                    \"duration\": 500,\n                    \"impressions\": 1\n                }\n            ],\n            \"frequency_cap_type\": 1,\n            \"frequency_cap_vendor\": \"TAPAD\",\n            \"bidding\": {\n                \"bidding_strategy\": \"cpm\",\n                \"bid_shading\": false,\n                \"bid_shading_win_rate_control\":\"NORMAL\",\n                \"values\": {\n                    \"cpm_bid\": 1.12\n                },\n              \t\"custom\":false,\n              \t\"pacing\":\"none\"\n            },\n            \"creative_weighting_method\": \"RANDOM\",\n            \"pacing\": null,\n            \"bid_modifier_id\": 1,\n            \"delivery_modifier_id\": null,\n            \"max_bid\": 12.23,\n            \"test_plan_id\": null,\n            \"revenue_type\": null,\n            \"revenue_amount\": null,\n            \"start_date\": \"2015-01-01 00:00:00\",\n            \"end_date\": \"2016-01-01 00:00:00\",\n            \"segment_extension_default\": \"person\",\n            \"segment_extension_type_default\": \"1P\",\n            \"segment_extension_vendors_default\": [\"TAPAD\"],\n            \"enable_skad_tracking\": false,\n            \"skad_assignment_level\": \"creative_line_item\",\n            \"guaranteed\": false,          \n            \"target_skad\": false,          \n            \"push_status\": 0,\n            \"push_update\": true,\n            \"account_id\": 1,\n            \"create_date\": \"2016-03-30 11:45:33\",\n            \"update_date\": \"2016-03-30 11:45:33\",\n            \"alternative_id\": null,\n            \"notes\": null,\n            \"user_timezones\": [\"America/New_York\"],\n            \"active\": false,\n            \"buzz_key\": \"stingersbx\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        line_item_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        campaign_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        advertiser_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        line_item_type_id:
+                          type: integer
+                          example: 0
+                          default: 0
+                        targeting_template_id: {}
+                        line_item_version:
+                          type: integer
+                          example: 1
+                          default: 0
+                        line_item_name:
+                          type: string
+                          example: li name
+                        line_item_budget:
+                          type: integer
+                          example: 1000
+                          default: 0
+                        daily_budget: {}
+                        budget_type:
+                          type: integer
+                          example: 0
+                          default: 0
+                        line_item_spend:
+                          type: integer
+                          example: 0
+                          default: 0
+                        currency:
+                          type: string
+                          example: USD
+                        frequency_cap:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              duration:
+                                type: integer
+                                example: 500
+                                default: 0
+                              impressions:
+                                type: integer
+                                example: 1
+                                default: 0
+                        frequency_cap_type:
+                          type: integer
+                          example: 1
+                          default: 0
+                        frequency_cap_vendor:
+                          type: string
+                          example: TAPAD
+                        bidding:
+                          type: object
+                          properties:
+                            bidding_strategy:
+                              type: string
+                              example: cpm
+                            bid_shading:
+                              type: boolean
+                              example: false
+                              default: true
+                            bid_shading_win_rate_control:
+                              type: string
+                              example: NORMAL
+                            values:
+                              type: object
+                              properties:
+                                cpm_bid:
+                                  type: number
+                                  example: 1.12
+                                  default: 0
+                            custom:
+                              type: boolean
+                              example: false
+                              default: true
+                            pacing:
+                              type: string
+                              example: none
+                        creative_weighting_method:
+                          type: string
+                          example: RANDOM
+                        pacing: {}
+                        bid_modifier_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        delivery_modifier_id: {}
+                        max_bid:
+                          type: number
+                          example: 12.23
+                          default: 0
+                        test_plan_id: {}
+                        revenue_type: {}
+                        revenue_amount: {}
+                        start_date:
+                          type: string
+                          example: '2015-01-01 00:00:00'
+                        end_date:
+                          type: string
+                          example: '2016-01-01 00:00:00'
+                        segment_extension_default:
+                          type: string
+                          example: person
+                        segment_extension_type_default:
+                          type: string
+                          example: 1P
+                        segment_extension_vendors_default:
+                          type: array
+                          items:
+                            type: string
+                            example: TAPAD
+                        enable_skad_tracking:
+                          type: boolean
+                          example: false
+                          default: true
+                        skad_assignment_level:
+                          type: string
+                          example: creative_line_item
+                        guaranteed:
+                          type: boolean
+                          example: false
+                          default: true
+                        target_skad:
+                          type: boolean
+                          example: false
+                          default: true
+                        push_status:
+                          type: integer
+                          example: 0
+                          default: 0
+                        push_update:
+                          type: boolean
+                          example: true
+                          default: true
+                        account_id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        create_date:
+                          type: string
+                          example: '2016-03-30 11:45:33'
+                        update_date:
+                          type: string
+                          example: '2016-03-30 11:45:33'
+                        alternative_id: {}
+                        notes: {}
+                        user_timezones:
+                          type: array
+                          items:
+                            type: string
+                            example: America/New_York
+                        active:
+                          type: boolean
+                          example: false
+                          default: true
+                        buzz_key:
+                          type: string
+                          example: stingersbx
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X GET "[host]/rest/line_item" -b cookies.txt -d '{"line_item_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Line Item
+    put:
+      summary: line_item
+      description: ''
+      operationId: line_item-put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - line_item_id
+              properties:
+                line_item_id:
+                  type: integer
+                  description: Unique ID of the Line Item
+                  format: int32
+                campaign_id:
+                  type: integer
+                  description: Must be a valid and active Campaign
+                  format: int32
+                advertiser_id:
+                  type: integer
+                  description: Must belong to the same account as the Line Item and be active
+                  format: int32
+                alternative_id:
+                  type: string
+                  description: An alternative id to lookup the  Line Item, if desired
+                line_item_type_id:
+                  type: integer
+                  description: The type of the Line Item. `0`=banner, `1`=video, `2`=native
+                  format: int32
+                targeting_template_id:
+                  type: integer
+                  description: The ID of the associated Targeting Template, must be a valid and active Targeting Template.
+                  format: int32
+                line_item_name:
+                  type: string
+                  description: Name of the  Line Item, e.g. "Winter lead generation"
+                line_item_budget:
+                  type: number
+                  description: Maximum amount to spend on this Line Item
+                  format: double
+                daily_budget:
+                  type: number
+                  description: Maximum amount to spend or deliver in a day, cannot exceed `campaign_budget` or be so low as to prevent `campaign_budget` from being reached over the length of the campaign.
+                  format: double
+                budget_type:
+                  type: integer
+                  description: Type of budget, `0`=spend, `1`=impressions, `2`=spend with vendor fees
+                  default: 0
+                  format: int32
+                revenue_type:
+                  type: string
+                  description: 'Supported revenue types:  `CPM`, `CPC`, `CPCV`, `CPI`, `CPA`'
+                revenue_amount:
+                  type: number
+                  description: If a revenue_type is set, this field is the basis of calculation. For example, if revenue_type is `CPM` and `revenue_amount` is 5.12, revenue will be calculated as a $5.12 CPM.
+                  format: double
+                bid_modifier_id:
+                  type: integer
+                  description: ID of a Bid Modifier object to associate with the Line Item. If set, `max_bid` must also be set.
+                  format: int32
+                delivery_modifier_id:
+                  type: integer
+                  description: ID of the Delivery Modifier to associate with this Line Item
+                  format: int32
+                max_bid:
+                  type: number
+                  description: Maximum bid after taking into consideration any Bid Modifiers.
+                  format: double
+                test_plan_id:
+                  type: integer
+                  description: When using `Experiments` the group to use for segregating users. The `test_group_id` must belong to the `test_plan_id` assigned to the Campaign. If a `test_plan_id` is set at the Campaign level, the `test_group_id` may not be `null`.
+                  format: int32
+                bidding:
+                  type: object
+                  description: Bidding Strategy JSON.
+                  required:
+                  - bidding_strategy
+                  properties:
+                    bidding_strategy:
+                      type: string
+                      description: The strategy to use, for example `CPM`. Must be all-caps.
+                    values:
+                      type: object
+                      description: Set of keys and values specific to the `bidding_strategy`
+                      required:
+                      - <key>
+                      properties:
+                        <key>:
+                          type: string
+                          description: Each `bidding_strategy` supports a set of up to five keys, each of which should be passed with a value in the correct format. Values may be ints or strings. Example `"cpm_bid":1.21`
+                    bid_shading:
+                      type: boolean
+                      description: Whether to automatically reduce the bid based on historical prices. Must be enabled on your account and for the given bidding_strategy. Fees may apply.
+                      default: false
+                    bid_shading_win_rate_control:
+                      type: string
+                      description: When `bid_shading` is set to `true`, this field determines how aggressive the Bid Shading algorithm should be. Valid values are `MORE_AGGRESSIVE`, `NORMAL`, and `LESS_AGGRESSIVE`.
+                      default: NORMAL
+                    custom:
+                      type: boolean
+                      description: Whether the `bidding_strategy` is a custom strategy to your account. These are set up by the administrator.
+                    pacing:
+                      type: string
+                      description: If a bidding strategy can be paced, the pacing value can be set to `daily`, `flight`, or `lifetime`. If it cannot be paced, then it should be set to `none`. The flight type may only be used if the Line Item has Line Item Flights enabled and every flight includes a budget.
+                      default: lifetime
+                creative_weighting_method:
+                  type: string
+                  description: Either `RANDOM` or `WEIGHTED`
+                  default: RANDOM
+                start_date:
+                  type: string
+                  description: Start date of the Line Item.
+                  format: date
+                end_date:
+                  type: string
+                  description: End date of the Line Item.
+                  format: date
+                frequency_cap:
+                  type: object
+                  description: Frequency cap JSON.
+                  required:
+                  - duration
+                  - impressions
+                  properties:
+                    duration:
+                      type: integer
+                      description: Duration of time in which to cap impressions, in seconds. 30-day (2592000) max.
+                      format: int32
+                    impressions:
+                      type: integer
+                      description: Number of impressions to allow within the duration set
+                      format: int32
+                frequency_cap_type:
+                  type: integer
+                  description: The method of frequency capping. Must match Campaign-level if set. For definitions, see the Frequency Cap guide.
+                  format: int32
+                frequency_cap_vendor:
+                  type: string
+                  description: Extends frequency cap using a device graph (fees may apply). Valid values may be `TAPAD` or `LIVERAMP` depending on what has been enabled. If set at the Campaign level, must match that value.
+                user_timezones:
+                  type: array
+                  description: When targeting by `user_time_of_week`, this field should include a list of timezones you expect the ad to serve within. If not set properly, pacing will be uneven.
+                  default:
+                  - The account's timezone
+                  items:
+                    type: string
+                segment_extension_default:
+                  type: string
+                  description: Determines the type of audience extension to use. Valid values are `none`,`person`,`household`,`person_extend_only`, and `household_extend_only`.
+                  default: none
+                segment_extension_type_default:
+                  type: string
+                  description: Determines the type of audience extension to use. Valid options include `none`,`1P`,`3P`, and `ALL`.
+                  default: none
+                segment_extension_vendors_default:
+                  type: array
+                  description: List of vendors to use for audience extension. Valid values are `TAPAD` and `LIVERAMP`.
+                  default:
+                  - '''["TAPAD"]`'
+                  items:
+                    type: string
+                enable_skad_tracking:
+                  type: boolean
+                  description: Should Apple's SKAdNetwork tracking be enabled for this Line Item. Must be enabled at the Campaign level to be enabled here.
+                  default: false
+                skad_assignment_level:
+                  type: string
+                  description: Must be set if `enable_skad_tracking` is true. Valid options are `creative_line_item` and `line_item`. Cannot be changed once Line Item is active.
+                  default: creative_line_item
+                target_skad:
+                  type: boolean
+                  description: Should the Line Item only target Apple SKAd-enabled inventory
+                notes:
+                  type: string
+                  description: Notes about the Line Item, up to 255 chars
+                active:
+                  type: boolean
+                  description: Is the Line Item active? Can only be set to true if associated with one or more Creatives.
+                  default: false
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"payload\": [\n        {\n            \"id\": 1,\n            \"success\": true,\n            \"message\": \"line_item updated with ID 1\"\n        }\n    ],\n    \"message\": \"line_item update: 1 updated successfully\"\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          default: 0
+                        success:
+                          type: boolean
+                          example: true
+                          default: true
+                        message:
+                          type: string
+                          example: line_item updated with ID 1
+                  message:
+                    type: string
+                    example: 'line_item update: 1 updated successfully'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X PUT "[host]/rest/line_item" -b cookies.txt -d '{"line_item_id":1, "line_item_name":"new LI", "advertiser_id":1, "line_item_type_id":0, "campaign_id":1, "start_date":"1/1/2015", "line_item_budget":1000, "bidding":{"bidding_strategy":"cpm","bid_shading":false,"values":{"cpm_bid":1.12},"custom":false,"pacing":"none"}, "creative_weighting_method":"WEIGHTED","frequency_cap":[{"duration":500,"impressions":1}], "frequency_cap_type":1, "user_timezones":["America/New_York"], "active":0 "segment_extension_default":"person", "segment_extension_type_default":"1P", "segment_extension_vendors_default":["TAPAD"]}'
+        samples-languages:
+        - curl
+      tags:
+      - Line Item
+    delete:
+      summary: line_item
+      description: ''
+      operationId: line_item-delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - line_item_id
+              properties:
+                line_item_id:
+                  type: integer
+                  description: Unique ID of the line_item
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"success\": true,\n    \"message\": \"line_item deleted with ID 1\",\n    \"payload\": {\n        \"id\": 1\n    }\n}"
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: line_item deleted with ID 1
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                        default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: curl -X DELETE "[host]/rest/line_item" -b cookies.txt -d '{"line_item_id":1}'
+        samples-languages:
+        - curl
+      tags:
+      - Line Item
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true
