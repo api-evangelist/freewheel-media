@@ -1006,6 +1006,8 @@ apis:
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
+  - REST
+  tags_raw:
   - Rest
   properties:
   - type: OpenAPI
@@ -1493,6 +1495,8 @@ apis:
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
+  - Views
+  tags_raw:
   - View
   properties:
   - type: OpenAPI
