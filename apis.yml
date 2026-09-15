@@ -25,35 +25,27 @@ accessModel:
   - https://www.freewheel.com/legal/master-services-agreement
   generated: '2026-08-12'
   method: searched
-  note: >-
-    No pricing page (404), no plan tiers, no trial and no self-service signup;
-    credentials are issued by FreeWheel to contracted partners. See
-    plans/freewheel-media-plans-pricing.yml.
+  note: No pricing page (404), no plan tiers, no trial and no self-service signup; credentials are issued
+    by FreeWheel to contracted partners. See plans/freewheel-media-plans-pricing.yml.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/freewheel-media.png
 name: FreeWheel Media
-description: >-
-  FreeWheel, a Comcast company, is an advertising technology platform for the
-  streaming and premium video television marketplace. It gives advertisers,
-  agencies, and media buyers direct connections to premium streaming TV
-  inventory while helping publishers and programmers monetize their video
-  content across linear and digital channels. Its product suites include the
-  Advertiser Suite (media buying, planning, and campaign management via Strata),
-  the Publisher Suite (ad decisioning, forecasting, and yield optimization for
-  sellers), and a Marketplace connecting supply and demand. FreeWheel's platform
-  emphasizes AI-driven optimization, real-time insights, identity, and
-  cross-screen measurement for the converged TV ecosystem. Programmatic and
-  operational access is delivered to partners through gated Publisher (MRM) and
-  Marketer (SFX/Strata) platforms rather than a public self-service developer
-  portal.
+description: FreeWheel, a Comcast company, is an advertising technology platform for the streaming and
+  premium video television marketplace. It gives advertisers, agencies, and media buyers direct connections
+  to premium streaming TV inventory while helping publishers and programmers monetize their video content
+  across linear and digital channels. Its product suites include the Advertiser Suite (media buying, planning,
+  and campaign management via Strata), the Publisher Suite (ad decisioning, forecasting, and yield optimization
+  for sellers), and a Marketplace connecting supply and demand. FreeWheel's platform emphasizes AI-driven
+  optimization, real-time insights, identity, and cross-screen measurement for the converged TV ecosystem.
+  Programmatic and operational access is delivered to partners through gated Publisher (MRM) and Marketer
+  (SFX/Strata) platforms rather than a public self-service developer portal.
 url: https://raw.githubusercontent.com/api-evangelist/freewheel-media/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - battery-ventures
 x-tier: profiled
-x-tier-reason: >-
-  Four OpenAPI documents (171 operations) harvested from FreeWheel's own
-  developer portal; full artifact set derived.
+x-tier-reason: Four OpenAPI documents (171 operations) harvested from FreeWheel's own developer portal;
+  full artifact set derived.
 specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-08-12'
@@ -68,15 +60,14 @@ tags:
 - Publisher Monetization
 - Comcast
 apis:
-- aid: freewheel-media-publisher-api
+- aid: freewheel-media:freewheel-media-publisher-api
   name: FreeWheel Publisher (MRM) API
-  description: >-
-    FreeWheel's sell-side APIs for publishers and programmers running on MRM — advertiser and agency management,
-    insertion orders and campaigns, placement operations, forecasting, analytics and reporting. V3 resources
-    are XML, V4 resources are JSON with XML on select endpoints, and access is authenticated with OAuth
-    2.0 access tokens. No machine-readable specification is published at a public URL and the reference
-    documentation is disallowed in the docs host robots.txt, so no OpenAPI has been harvested for this
-    entry.
+  description: FreeWheel's sell-side APIs for publishers and programmers running on MRM — advertiser and
+    agency management, insertion orders and campaigns, placement operations, forecasting, analytics and
+    reporting. V3 resources are XML, V4 resources are JSON with XML on select endpoints, and access is
+    authenticated with OAuth 2.0 access tokens. No machine-readable specification is published at a public
+    URL and the reference documentation is disallowed in the docs host robots.txt, so no OpenAPI has been
+    harvested for this entry.
   humanURL: https://api-docs.freewheel.tv/publisher
   baseURL: https://api.freewheel.tv/services/v4/services
   tags:
@@ -356,9 +347,8 @@ apis:
     url: https://api-docs.freewheel.tv/demand/reference
 - aid: freewheel-media:freewheel-media-campaign-experiment-assignment-api
   name: FreeWheel Media Campaign Experiment Assignment API
-  description: >-
-    The Campaign Experiment Assignment API from FreeWheel Media — 1 operation(s) for campaign experiment
-    assignment.
+  description: The Campaign Experiment Assignment API from FreeWheel Media — 1 operation(s) for campaign
+    experiment assignment.
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
@@ -446,8 +436,8 @@ apis:
     url: https://api-docs.freewheel.tv/demand/reference
 - aid: freewheel-media:freewheel-media-creative-approval-queue-api
   name: FreeWheel Media Creative Approval Queue API
-  description: >-
-    The Creative Approval Queue API from FreeWheel Media — 1 operation(s) for creative approval queue.
+  description: The Creative Approval Queue API from FreeWheel Media — 1 operation(s) for creative approval
+    queue.
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
@@ -469,9 +459,8 @@ apis:
     url: https://api-docs.freewheel.tv/demand/reference
 - aid: freewheel-media:freewheel-media-creative-approval-queue-history-api
   name: FreeWheel Media Creative Approval Queue History API
-  description: >-
-    The Creative Approval Queue History API from FreeWheel Media — 1 operation(s) for creative approval
-    queue history.
+  description: The Creative Approval Queue History API from FreeWheel Media — 1 operation(s) for creative
+    approval queue history.
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
@@ -515,8 +504,7 @@ apis:
     url: https://api-docs.freewheel.tv/demand/reference
 - aid: freewheel-media:freewheel-media-creative-bulk-upload-api
   name: FreeWheel Media Creative Bulk Upload API
-  description: >-
-    The Creative Bulk Upload API from FreeWheel Media — 1 operation(s) for creative bulk upload.
+  description: The Creative Bulk Upload API from FreeWheel Media — 1 operation(s) for creative bulk upload.
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
@@ -670,9 +658,8 @@ apis:
     url: https://api-docs.freewheel.tv/demand/reference
 - aid: freewheel-media:freewheel-media-demand-creative-management-api-v1-api
   name: FreeWheel Media Demand Creative Management API V1 API
-  description: >-
-    The Demand Creative Management API V1 API from FreeWheel Media — 5 operation(s) for demand creative
-    management api v1.
+  description: The Demand Creative Management API V1 API from FreeWheel Media — 5 operation(s) for demand
+    creative management api v1.
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
@@ -1114,8 +1101,8 @@ apis:
     url: https://api-docs.freewheel.tv/demand/reference
 - aid: freewheel-media:freewheel-media-segment-category-association-api
   name: FreeWheel Media Segment Category Association API
-  description: >-
-    The Segment Category Association API from FreeWheel Media — 1 operation(s) for segment category association.
+  description: The Segment Category Association API from FreeWheel Media — 1 operation(s) for segment
+    category association.
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
@@ -1137,8 +1124,8 @@ apis:
     url: https://api-docs.freewheel.tv/demand/reference
 - aid: freewheel-media:freewheel-media-segment-category-lookup-api
   name: FreeWheel Media Segment Category Lookup API
-  description: >-
-    The Segment Category Lookup API from FreeWheel Media — 1 operation(s) for segment category lookup.
+  description: The Segment Category Lookup API from FreeWheel Media — 1 operation(s) for segment category
+    lookup.
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
@@ -1160,8 +1147,8 @@ apis:
     url: https://api-docs.freewheel.tv/demand/reference
 - aid: freewheel-media:freewheel-media-segment-category-sharing-api
   name: FreeWheel Media Segment Category Sharing API
-  description: >-
-    The Segment Category Sharing API from FreeWheel Media — 1 operation(s) for segment category sharing.
+  description: The Segment Category Sharing API from FreeWheel Media — 1 operation(s) for segment category
+    sharing.
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
@@ -1603,7 +1590,10 @@ common:
   url: well-known/freewheel-media-well-known.yml
 - type: X-MCPServerCandidate
   url: mcp/freewheel-media-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: ToolCrosswalk
   url: mcp/freewheel-media-tool-crosswalk.yml
 - type: AgentSkill
@@ -1618,19 +1608,15 @@ x-enrichment:
   status: enriched
   artifacts_added: 30
   pass: local-v1
-  note: >-
-    Contract discovery beat the docs host: FreeWheel's published "OpenAPI
-    Specifications" download links resolve to the ReadMe single-page-app shell,
-    but the real specifications are embedded verbatim in the server-rendered
-    props of the API reference pages. Four documents, 171 operations, harvested
-    and saved.
+  note: 'Contract discovery beat the docs host: FreeWheel''s published "OpenAPI Specifications" download
+    links resolve to the ReadMe single-page-app shell, but the real specifications are embedded verbatim
+    in the server-rendered props of the API reference pages. Four documents, 171 operations, harvested
+    and saved.'
 x-coverage:
   state: covered
-  detail: >-
-    Four OpenAPI documents harvested from FreeWheel's own developer portal.
-    Two doc projects — /publisher (416 reference pages) and /strata (75) — are
-    Disallowed in https://api-docs.freewheel.tv/robots.txt and were not crawled,
-    so the Publisher (MRM) and Strata API entries carry documented facts only and
+  detail: Four OpenAPI documents harvested from FreeWheel's own developer portal. Two doc projects — /publisher
+    (416 reference pages) and /strata (75) — are Disallowed in https://api-docs.freewheel.tv/robots.txt
+    and were not crawled, so the Publisher (MRM) and Strata API entries carry documented facts only and
     no harvested specification.
   evidence:
   - url: https://api-docs.freewheel.tv/robots.txt
