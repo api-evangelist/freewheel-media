@@ -175,6 +175,8 @@ apis:
   humanURL: https://api-docs.freewheel.tv/advertiser
   baseURL: https://buzz-key.api.beeswax.com/rest/
   tags:
+  - Advertisers
+  tags_raw:
   - Advertiser
   properties:
   - type: OpenAPI
