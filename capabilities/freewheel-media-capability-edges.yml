@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 7
+edge_count: 9
 edges:
 - tag: Demand Creative Management API V1
   spec_file: freewheel-media-demand-creative-management-api-v1-api-openapi.yml
@@ -41,6 +41,18 @@ edges:
     for Deals'
   reason: Demand-side deals with seats, pacing, budgets and buyer status are programmatic marketplace
     deal objects, matching Programmatic Sales Management.
+- tag: Campaign
+  spec_file: freewheel-media-campaign-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.75
+  evidence: POST /campaign  campaign-post; GET /campaign; vendor is 'an advertising technology platform
+    ... media buying'
+  reason: Campaign CRUD on an ad-tech media-buying platform is advertising campaign management, which
+    sits under digital/paid media marketing. Could arguably be demand generation, so L2 confidence is
+    tempered.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Creative Approval Queue
   spec_file: freewheel-media-creative-approval-queue-api-openapi.yml
   capability_id: BC-3760.40
@@ -59,6 +71,16 @@ edges:
   confidence: 0.75
   evidence: POST /creative_line_item, PUT /creative_line_item
   reason: Associates creatives with campaign line items — the core assignment/trafficking step of ad operations.
+- tag: Segments
+  spec_file: freewheel-media-segments-api-openapi.yml
+  capability_id: BC-420.20
+  capability_id_l1: BC-420
+  capability_name: Customer Segmentation Management
+  confidence: 0.75
+  evidence: audience-management-api; 'List Segments by Data Provider' and 'Filter Segment Searches'
+  reason: The spec is explicitly an audience-management API listing segments by data provider, i.e. management
+    of audience segments for targeting, which realises Customer Segmentation Management.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Creative
   spec_file: freewheel-media-creative-api-openapi.yml
   capability_id: BC-3760.40
