@@ -119,6 +119,72 @@ paths:
                 $ref: '#/components/schemas/model.DemandDeal'
 components:
   schemas:
+    model.DemandSeat:
+      type: object
+      properties:
+        seatid:
+          type: string
+    model.BuyerStatus:
+      type: object
+      properties:
+        comment:
+          description: A field within the **buyerstatus** object, it allows a seller to input their reasons for changing the buyer status. This can only be modified by a buyer.
+          type: string
+        status:
+          description: 'A field within the **buyerstatus** object, it provides the status of the deal on the buy side. This can only be modified by a buyer. Valid values:
+
+            * INACTIVE
+
+            * ACTIVE
+
+            * PAUSE
+
+            * COMPLETE'
+          type: string
+    model.DemandBudget:
+      type: object
+      properties:
+        currency:
+          $ref: '#/components/schemas/model.DemandCurrency'
+        impression:
+          type: integer
+        type:
+          description: 'A field within the **budget** object, it provides the type of the budget on the deal. Valid values:
+
+            * IMPRESSION
+
+            * CURRENCY'
+          type: string
+    model.DemandCustomPacing:
+      type: object
+      properties:
+        deliverpercentage:
+          type: number
+        deliverydate:
+          type: string
+    model.DemandCurrency:
+      type: object
+      properties:
+        code:
+          type: string
+        value:
+          type: number
+    model.DemandPacing:
+      type: object
+      properties:
+        custompacings:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandCustomPacing'
+        type:
+          description: 'A field within the **pacing** object, it provides the type of the pacing on the deal. Valid values:
+
+            * SMOOTH_AS
+
+            * FAST_AS
+
+            * CUSTOM'
+          type: string
     model.DemandDeal:
       type: object
       properties:
@@ -172,22 +238,6 @@ components:
           type: string
         volume:
           type: integer
-    model.DemandPacing:
-      type: object
-      properties:
-        custompacings:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandCustomPacing'
-        type:
-          description: 'A field within the **pacing** object, it provides the type of the pacing on the deal. Valid values:
-
-            * SMOOTH_AS
-
-            * FAST_AS
-
-            * CUSTOM'
-          type: string
     model.DemandDealList:
       type: object
       properties:
@@ -201,61 +251,11 @@ components:
           type: integer
         total:
           type: integer
-    model.DemandSeat:
-      type: object
-      properties:
-        seatid:
-          type: string
-    model.BuyerStatus:
-      type: object
-      properties:
-        comment:
-          description: A field within the **buyerstatus** object, it allows a seller to input their reasons for changing the buyer status. This can only be modified by a buyer.
-          type: string
-        status:
-          description: 'A field within the **buyerstatus** object, it provides the status of the deal on the buy side. This can only be modified by a buyer. Valid values:
-
-            * INACTIVE
-
-            * ACTIVE
-
-            * PAUSE
-
-            * COMPLETE'
-          type: string
-    model.DemandCurrency:
-      type: object
-      properties:
-        code:
-          type: string
-        value:
-          type: number
-    model.DemandBudget:
-      type: object
-      properties:
-        currency:
-          $ref: '#/components/schemas/model.DemandCurrency'
-        impression:
-          type: integer
-        type:
-          description: 'A field within the **budget** object, it provides the type of the budget on the deal. Valid values:
-
-            * IMPRESSION
-
-            * CURRENCY'
-          type: string
     model.PatchDeal:
       type: object
       properties:
         buyerstatus:
           $ref: '#/components/schemas/model.BuyerStatus'
-    model.DemandCustomPacing:
-      type: object
-      properties:
-        deliverpercentage:
-          type: number
-        deliverydate:
-          type: string
   securitySchemes:
     bearer:
       type: apiKey

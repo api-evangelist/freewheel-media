@@ -255,6 +255,22 @@ paths:
                 $ref: '#/components/schemas/model.GetDemandAdReply'
 components:
   schemas:
+    model.DemandAdAssignment:
+      type: object
+      properties:
+        adid:
+          type: string
+        dealid:
+          type: string
+    model.DemandAdResponse:
+      type: object
+      properties:
+        ads:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandAd'
+        count:
+          type: integer
     model.DemandAd:
       type: object
       properties:
@@ -278,26 +294,15 @@ components:
           type: array
           items:
             type: string
-    model.UnderlyingCreative:
+    model.DemandAdList:
       type: object
       properties:
-        audit:
+        ads:
           type: array
           items:
-            $ref: '#/components/schemas/model.DemandAdAudit'
-        externalcreativeid:
-          type: string
-        vastcontenturl:
-          type: string
-    model.DemandAdCreativeVideo:
-      type: object
-      properties:
-        ctype:
-          type: array
-          items:
-            type: integer
-        curl:
-          type: string
+            $ref: '#/components/schemas/model.DemandAd'
+        count:
+          type: integer
     model.DemandAdAudit:
       type: object
       properties:
@@ -313,35 +318,6 @@ components:
           type: integer
         statusispartial:
           type: integer
-    model.DemandAdAssignmentReply:
-      type: object
-      properties:
-        adid:
-          type: string
-        deal:
-          $ref: '#/components/schemas/model.AssignmentDeal'
-        dealid:
-          type: string
-        id:
-          type: integer
-    model.DemandAdList:
-      type: object
-      properties:
-        ads:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandAd'
-        count:
-          type: integer
-    model.DemandAdResponse:
-      type: object
-      properties:
-        ads:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandAd'
-        count:
-          type: integer
     model.GetDemandAdUnderlyingCreativeReply:
       type: object
       properties:
@@ -355,26 +331,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/model.UnderlyingCreative'
-    model.AssignmentDeal:
+    model.DemandAdCreativeVideo:
       type: object
       properties:
-        approvaltype:
-          type: integer
-        clearancelevel:
-          type: integer
-        dealid:
-          type: string
-        sellerid:
+        ctype:
           type: array
           items:
-            type: string
-    model.DemandAdAssignment:
+            type: integer
+        curl:
+          type: string
+    model.DemandAdAssignmentReply:
       type: object
       properties:
         adid:
           type: string
+        deal:
+          $ref: '#/components/schemas/model.AssignmentDeal'
         dealid:
           type: string
+        id:
+          type: integer
     model.GetDemandAdReply:
       type: object
       properties:
@@ -388,6 +364,30 @@ components:
           type: integer
         total:
           type: integer
+    model.AssignmentDeal:
+      type: object
+      properties:
+        approvaltype:
+          type: integer
+        clearancelevel:
+          type: integer
+        dealid:
+          type: string
+        sellerid:
+          type: array
+          items:
+            type: string
+    model.UnderlyingCreative:
+      type: object
+      properties:
+        audit:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandAdAudit'
+        externalcreativeid:
+          type: string
+        vastcontenturl:
+          type: string
   requestBodies:
     model.DemandAdList:
       content:

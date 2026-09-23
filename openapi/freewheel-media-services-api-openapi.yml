@@ -12,7 +12,16 @@ paths:
   /v1/services/v4/ds/v1/permissions/ad-industries:
     get:
       summary: List Advertiser Industry Categories
-      description: "This method employs GET to retrieve a list of all advertiser Industries used in Data Suite to apply data usage/restrction rules to given categories in accordance with your business needs.  \n\nIt is the legal responsibility of each advertiser (or publisher/agency entity acting on behalf of an advertiser) to accurately identify their advertiser's industry, so that any applicable data usage restrictions can be applied. \n\nSelect the industry category (and associated numeric ID) that best matches your company. \n\nYou will need to pass this in subsequent calls using the X-Freewheel-Ad-Industry header."
+      description: 'This method employs GET to retrieve a list of all advertiser Industries used in Data Suite to apply data usage/restrction rules to given categories in accordance with your business needs.
+
+
+        It is the legal responsibility of each advertiser (or publisher/agency entity acting on behalf of an advertiser) to accurately identify their advertiser''s industry, so that any applicable data usage restrictions can be applied.
+
+
+        Select the industry category (and associated numeric ID) that best matches your company.
+
+
+        You will need to pass this in subsequent calls using the X-Freewheel-Ad-Industry header.'
       operationId: list-industries-1
       responses:
         '200':
