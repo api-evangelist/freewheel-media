@@ -119,10 +119,39 @@ paths:
                 $ref: '#/components/schemas/model.DemandDeal'
 components:
   schemas:
-    model.DemandSeat:
+    model.DemandDealList:
       type: object
       properties:
-        seatid:
+        count:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandDeal'
+        offset:
+          type: integer
+        total:
+          type: integer
+    model.PatchDeal:
+      type: object
+      properties:
+        buyerstatus:
+          $ref: '#/components/schemas/model.BuyerStatus'
+    model.DemandPacing:
+      type: object
+      properties:
+        custompacings:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandCustomPacing'
+        type:
+          description: 'A field within the **pacing** object, it provides the type of the pacing on the deal. Valid values:
+
+            * SMOOTH_AS
+
+            * FAST_AS
+
+            * CUSTOM'
           type: string
     model.BuyerStatus:
       type: object
@@ -141,6 +170,18 @@ components:
 
             * COMPLETE'
           type: string
+    model.DemandCustomPacing:
+      type: object
+      properties:
+        deliverpercentage:
+          type: number
+        deliverydate:
+          type: string
+    model.DemandSeat:
+      type: object
+      properties:
+        seatid:
+          type: string
     model.DemandBudget:
       type: object
       properties:
@@ -155,13 +196,6 @@ components:
 
             * CURRENCY'
           type: string
-    model.DemandCustomPacing:
-      type: object
-      properties:
-        deliverpercentage:
-          type: number
-        deliverydate:
-          type: string
     model.DemandCurrency:
       type: object
       properties:
@@ -169,22 +203,6 @@ components:
           type: string
         value:
           type: number
-    model.DemandPacing:
-      type: object
-      properties:
-        custompacings:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandCustomPacing'
-        type:
-          description: 'A field within the **pacing** object, it provides the type of the pacing on the deal. Valid values:
-
-            * SMOOTH_AS
-
-            * FAST_AS
-
-            * CUSTOM'
-          type: string
     model.DemandDeal:
       type: object
       properties:
@@ -238,24 +256,6 @@ components:
           type: string
         volume:
           type: integer
-    model.DemandDealList:
-      type: object
-      properties:
-        count:
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandDeal'
-        offset:
-          type: integer
-        total:
-          type: integer
-    model.PatchDeal:
-      type: object
-      properties:
-        buyerstatus:
-          $ref: '#/components/schemas/model.BuyerStatus'
   securitySchemes:
     bearer:
       type: apiKey
