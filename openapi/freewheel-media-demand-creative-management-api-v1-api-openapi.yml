@@ -254,8 +254,48 @@ paths:
               schema:
                 $ref: '#/components/schemas/model.GetDemandAdReply'
 components:
-  schemas:
+  requestBodies:
     model.DemandAdList:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/model.DemandAdList'
+      description: Ad List
+      required: true
+  schemas:
+    model.DemandAdCreativeVideo:
+      type: object
+      properties:
+        ctype:
+          type: array
+          items:
+            type: integer
+        curl:
+          type: string
+    model.DemandAd:
+      type: object
+      properties:
+        accountid:
+          type: string
+        audit:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandAdAudit'
+        id:
+          type: string
+        init:
+          type: string
+        lastmod:
+          type: string
+        name:
+          type: string
+        video:
+          $ref: '#/components/schemas/model.DemandAdCreativeVideo'
+        warnings:
+          type: array
+          items:
+            type: string
+    model.GetDemandAdReply:
       type: object
       properties:
         ads:
@@ -264,6 +304,56 @@ components:
             $ref: '#/components/schemas/model.DemandAd'
         count:
           type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+    model.DemandAdAssignmentReply:
+      type: object
+      properties:
+        adid:
+          type: string
+        deal:
+          $ref: '#/components/schemas/model.AssignmentDeal'
+        dealid:
+          type: string
+        id:
+          type: integer
+    model.AssignmentDeal:
+      type: object
+      properties:
+        approvaltype:
+          type: integer
+        clearancelevel:
+          type: integer
+        dealid:
+          type: string
+        sellerid:
+          type: array
+          items:
+            type: string
+    model.DemandAdResponse:
+      type: object
+      properties:
+        ads:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandAd'
+        count:
+          type: integer
+    model.GetDemandAdUnderlyingCreativeReply:
+      type: object
+      properties:
+        count:
+          type: integer
+        offset:
+          type: integer
+        total:
+          type: integer
+        underlyingcreatives:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.UnderlyingCreative'
     model.UnderlyingCreative:
       type: object
       properties:
@@ -290,64 +380,6 @@ components:
           type: integer
         statusispartial:
           type: integer
-    model.GetDemandAdReply:
-      type: object
-      properties:
-        ads:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandAd'
-        count:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-    model.DemandAd:
-      type: object
-      properties:
-        accountid:
-          type: string
-        audit:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandAdAudit'
-        id:
-          type: string
-        init:
-          type: string
-        lastmod:
-          type: string
-        name:
-          type: string
-        video:
-          $ref: '#/components/schemas/model.DemandAdCreativeVideo'
-        warnings:
-          type: array
-          items:
-            type: string
-    model.DemandAdCreativeVideo:
-      type: object
-      properties:
-        ctype:
-          type: array
-          items:
-            type: integer
-        curl:
-          type: string
-    model.AssignmentDeal:
-      type: object
-      properties:
-        approvaltype:
-          type: integer
-        clearancelevel:
-          type: integer
-        dealid:
-          type: string
-        sellerid:
-          type: array
-          items:
-            type: string
     model.DemandAdAssignment:
       type: object
       properties:
@@ -355,31 +387,7 @@ components:
           type: string
         dealid:
           type: string
-    model.DemandAdAssignmentReply:
-      type: object
-      properties:
-        adid:
-          type: string
-        deal:
-          $ref: '#/components/schemas/model.AssignmentDeal'
-        dealid:
-          type: string
-        id:
-          type: integer
-    model.GetDemandAdUnderlyingCreativeReply:
-      type: object
-      properties:
-        count:
-          type: integer
-        offset:
-          type: integer
-        total:
-          type: integer
-        underlyingcreatives:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.UnderlyingCreative'
-    model.DemandAdResponse:
+    model.DemandAdList:
       type: object
       properties:
         ads:
@@ -388,14 +396,6 @@ components:
             $ref: '#/components/schemas/model.DemandAd'
         count:
           type: integer
-  requestBodies:
-    model.DemandAdList:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/model.DemandAdList'
-      description: Ad List
-      required: true
   securitySchemes:
     bearer:
       type: apiKey
