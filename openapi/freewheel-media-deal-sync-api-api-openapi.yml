@@ -119,28 +119,22 @@ paths:
                 $ref: '#/components/schemas/model.DemandDeal'
 components:
   schemas:
-    model.BuyerStatus:
+    model.DemandPacing:
       type: object
       properties:
-        comment:
-          description: A field within the **buyerstatus** object, it allows a seller to input their reasons for changing the buyer status. This can only be modified by a buyer.
+        custompacings:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandCustomPacing'
+        type:
+          description: 'A field within the **pacing** object, it provides the type of the pacing on the deal. Valid values:
+
+            * SMOOTH_AS
+
+            * FAST_AS
+
+            * CUSTOM'
           type: string
-        status:
-          description: 'A field within the **buyerstatus** object, it provides the status of the deal on the buy side. This can only be modified by a buyer. Valid values:
-
-            * INACTIVE
-
-            * ACTIVE
-
-            * PAUSE
-
-            * COMPLETE'
-          type: string
-    model.PatchDeal:
-      type: object
-      properties:
-        buyerstatus:
-          $ref: '#/components/schemas/model.BuyerStatus'
     model.DemandDeal:
       type: object
       properties:
@@ -194,6 +188,16 @@ components:
           type: string
         volume:
           type: integer
+    model.PatchDeal:
+      type: object
+      properties:
+        buyerstatus:
+          $ref: '#/components/schemas/model.BuyerStatus'
+    model.DemandSeat:
+      type: object
+      properties:
+        seatid:
+          type: string
     model.DemandCustomPacing:
       type: object
       properties:
@@ -222,6 +226,23 @@ components:
 
             * CURRENCY'
           type: string
+    model.BuyerStatus:
+      type: object
+      properties:
+        comment:
+          description: A field within the **buyerstatus** object, it allows a seller to input their reasons for changing the buyer status. This can only be modified by a buyer.
+          type: string
+        status:
+          description: 'A field within the **buyerstatus** object, it provides the status of the deal on the buy side. This can only be modified by a buyer. Valid values:
+
+            * INACTIVE
+
+            * ACTIVE
+
+            * PAUSE
+
+            * COMPLETE'
+          type: string
     model.DemandDealList:
       type: object
       properties:
@@ -235,27 +256,6 @@ components:
           type: integer
         total:
           type: integer
-    model.DemandSeat:
-      type: object
-      properties:
-        seatid:
-          type: string
-    model.DemandPacing:
-      type: object
-      properties:
-        custompacings:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandCustomPacing'
-        type:
-          description: 'A field within the **pacing** object, it provides the type of the pacing on the deal. Valid values:
-
-            * SMOOTH_AS
-
-            * FAST_AS
-
-            * CUSTOM'
-          type: string
   securitySchemes:
     bearer:
       type: apiKey

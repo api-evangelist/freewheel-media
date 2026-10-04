@@ -254,47 +254,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/model.GetDemandAdReply'
 components:
-  requestBodies:
-    model.DemandAdList:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/model.DemandAdList'
-      description: Ad List
-      required: true
   schemas:
-    model.DemandAdCreativeVideo:
+    model.DemandAdAudit:
       type: object
       properties:
-        ctype:
-          type: array
-          items:
-            type: integer
-        curl:
-          type: string
-    model.DemandAd:
-      type: object
-      properties:
-        accountid:
-          type: string
-        audit:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandAdAudit'
-        id:
+        feedback:
           type: string
         init:
           type: string
         lastmod:
           type: string
-        name:
+        sellerid:
           type: string
-        video:
-          $ref: '#/components/schemas/model.DemandAdCreativeVideo'
-        warnings:
-          type: array
-          items:
-            type: string
+        status:
+          type: integer
+        statusispartial:
+          type: integer
     model.GetDemandAdReply:
       type: object
       properties:
@@ -308,6 +283,42 @@ components:
           type: integer
         total:
           type: integer
+    model.DemandAdResponse:
+      type: object
+      properties:
+        ads:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandAd'
+        count:
+          type: integer
+    model.DemandAdAssignment:
+      type: object
+      properties:
+        adid:
+          type: string
+        dealid:
+          type: string
+    model.UnderlyingCreative:
+      type: object
+      properties:
+        audit:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandAdAudit'
+        externalcreativeid:
+          type: string
+        vastcontenturl:
+          type: string
+    model.DemandAdCreativeVideo:
+      type: object
+      properties:
+        ctype:
+          type: array
+          items:
+            type: integer
+        curl:
+          type: string
     model.DemandAdAssignmentReply:
       type: object
       properties:
@@ -332,7 +343,7 @@ components:
           type: array
           items:
             type: string
-    model.DemandAdResponse:
+    model.DemandAdList:
       type: object
       properties:
         ads:
@@ -341,6 +352,29 @@ components:
             $ref: '#/components/schemas/model.DemandAd'
         count:
           type: integer
+    model.DemandAd:
+      type: object
+      properties:
+        accountid:
+          type: string
+        audit:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandAdAudit'
+        id:
+          type: string
+        init:
+          type: string
+        lastmod:
+          type: string
+        name:
+          type: string
+        video:
+          $ref: '#/components/schemas/model.DemandAdCreativeVideo'
+        warnings:
+          type: array
+          items:
+            type: string
     model.GetDemandAdUnderlyingCreativeReply:
       type: object
       properties:
@@ -354,48 +388,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/model.UnderlyingCreative'
-    model.UnderlyingCreative:
-      type: object
-      properties:
-        audit:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandAdAudit'
-        externalcreativeid:
-          type: string
-        vastcontenturl:
-          type: string
-    model.DemandAdAudit:
-      type: object
-      properties:
-        feedback:
-          type: string
-        init:
-          type: string
-        lastmod:
-          type: string
-        sellerid:
-          type: string
-        status:
-          type: integer
-        statusispartial:
-          type: integer
-    model.DemandAdAssignment:
-      type: object
-      properties:
-        adid:
-          type: string
-        dealid:
-          type: string
+  requestBodies:
     model.DemandAdList:
-      type: object
-      properties:
-        ads:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandAd'
-        count:
-          type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/model.DemandAdList'
+      description: Ad List
+      required: true
   securitySchemes:
     bearer:
       type: apiKey
