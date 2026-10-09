@@ -1,79 +1,52 @@
-generated: '2026-08-12'
+generated: '2026-09-23'
 method: generated
-source: openapi/freewheel-media-advertiser-buzz-openapi-original.json, openapi/freewheel-media-demand-audience-management-openapi-original.json,
-  openapi/freewheel-media-demand-creative-management-openapi-original.json, openapi/freewheel-media-demand-deal-sync-openapi-original.json
+source: openapi/freewheel-media-account-alert-api-openapi.yml, openapi/freewheel-media-account-api-openapi.yml,
+  openapi/freewheel-media-account-setting-api-openapi.yml, openapi/freewheel-media-activity-log-api-openapi.yml,
+  openapi/freewheel-media-advertiser-api-openapi.yml, openapi/freewheel-media-alert-api-openapi.yml,
+  openapi/freewheel-media-audiences-api-openapi.yml, openapi/freewheel-media-authenticate-api-openapi.yml,
+  openapi/freewheel-media-bid-model-api-openapi.yml, openapi/freewheel-media-bid-model-version-api-openapi.yml,
+  openapi/freewheel-media-bid-modifier-api-openapi.yml, openapi/freewheel-media-campaign-api-openapi.yml,
+  openapi/freewheel-media-campaign-experiment-assignment-api-openapi.yml, openapi/freewheel-media-change-password-api-openapi.yml,
+  openapi/freewheel-media-creative-addon-api-openapi.yml, openapi/freewheel-media-creative-api-openapi.yml,
+  openapi/freewheel-media-creative-approval-queue-api-openapi.yml, openapi/freewheel-media-creative-approval-queue-history-api-openapi.yml,
+  openapi/freewheel-media-creative-asset-api-openapi.yml, openapi/freewheel-media-creative-bulk-upload-api-openapi.yml,
+  openapi/freewheel-media-creative-line-item-api-openapi.yml, openapi/freewheel-media-creative-template-api-openapi.yml,
+  openapi/freewheel-media-custom-list-api-openapi.yml, openapi/freewheel-media-custom-list-item-api-openapi.yml,
+  openapi/freewheel-media-deal-sync-api-api-openapi.yml, openapi/freewheel-media-delivery-modifier-api-openapi.yml,
+  openapi/freewheel-media-demand-creative-management-api-v1-api-openapi.yml, openapi/freewheel-media-event-api-openapi.yml,
+  openapi/freewheel-media-event-assignment-api-openapi.yml, openapi/freewheel-media-event-tag-api-openapi.yml,
+  openapi/freewheel-media-html-asset-api-openapi.yml, openapi/freewheel-media-line-item-api-openapi.yml,
+  openapi/freewheel-media-line-item-flight-api-openapi.yml, openapi/freewheel-media-list-item-api-openapi.yml,
+  openapi/freewheel-media-list-item-bulk-api-openapi.yml, openapi/freewheel-media-list-item-geo-api-openapi.yml,
+  openapi/freewheel-media-native-offer-api-openapi.yml, openapi/freewheel-media-providers-api-openapi.yml,
+  openapi/freewheel-media-report-queue-api-openapi.yml, openapi/freewheel-media-report-save-api-openapi.yml,
+  openapi/freewheel-media-resend-user-email-api-openapi.yml, openapi/freewheel-media-rest-api-openapi.yml,
+  openapi/freewheel-media-role-api-openapi.yml, openapi/freewheel-media-search-api-openapi.yml,
+  openapi/freewheel-media-segment-api-openapi.yml, openapi/freewheel-media-segment-category-api-openapi.yml,
+  openapi/freewheel-media-segment-category-association-api-openapi.yml, openapi/freewheel-media-segment-category-lookup-api-openapi.yml,
+  openapi/freewheel-media-segment-category-sharing-api-openapi.yml, openapi/freewheel-media-segment-lookup-api-openapi.yml,
+  openapi/freewheel-media-segment-sharing-api-openapi.yml, openapi/freewheel-media-segment-tag-api-openapi.yml,
+  openapi/freewheel-media-segment-update-api-openapi.yml, openapi/freewheel-media-segment-upload-api-openapi.yml,
+  openapi/freewheel-media-segments-api-openapi.yml, openapi/freewheel-media-services-api-openapi.yml,
+  openapi/freewheel-media-strategy-api-openapi.yml, openapi/freewheel-media-targeting-template-api-openapi.yml,
+  openapi/freewheel-media-user-api-openapi.yml, openapi/freewheel-media-user-lookup-api-openapi.yml,
+  openapi/freewheel-media-vendor-api-openapi.yml, openapi/freewheel-media-vendor-fee-api-openapi.yml,
+  openapi/freewheel-media-video-asset-api-openapi.yml, openapi/freewheel-media-view-api-openapi.yml,
+  openapi/freewheel-media-view-list-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 171
   by_action_class:
-    acting: 111
-    connected: 60
+    acting: 108
+    connected: 63
   by_consequence:
-    write: 110
-    read: 60
+    write: 107
+    read: 63
     physical: 1
   human_in_the_loop_required: 0
 operations:
-- path: /advertiser
-  method: post
-  operationId: advertiser-post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /advertiser
-  method: get
-  operationId: advertiser-get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /advertiser
-  method: put
-  operationId: advertiser-put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /advertiser
-  method: delete
-  operationId: advertiser-delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /account_alert
   method: post
   operationId: account_alert-post
@@ -232,6 +205,64 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /advertiser
+  method: post
+  operationId: advertiser-post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /advertiser
+  method: get
+  operationId: advertiser-get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /advertiser
+  method: put
+  operationId: advertiser-put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /advertiser
+  method: delete
+  operationId: advertiser-delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /alert
   method: post
   operationId: alert-post
@@ -277,6 +308,48 @@ operations:
 - path: /alert
   method: delete
   operationId: alert-delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/audiences
+  method: post
+  operationId: create-temporary-audience-definition
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/audiences
+  method: get
+  operationId: retrieve-audience-definitions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/audiences/{audience_id}
+  method: patch
+  operationId: modify-audience-definitions
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -496,64 +569,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /delivery_modifier
-  method: post
-  operationId: delivery-modifier-post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /delivery_modifier
-  method: get
-  operationId: delivery-modifier-get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /delivery_modifier
-  method: put
-  operationId: delivery-modifier-put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /delivery_modifier
-  method: delete
-  operationId: delivery-modifier-delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /campaign
   method: post
   operationId: campaign-post
@@ -660,64 +675,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /creative
-  method: post
-  operationId: creative-post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /creative
-  method: get
-  operationId: creative-get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /creative
-  method: put
-  operationId: creative-put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /creative
-  method: delete
-  operationId: creative-delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /creative_addon
   method: post
   operationId: creative_addon-post
@@ -763,6 +720,64 @@ operations:
 - path: /creative_addon
   method: delete
   operationId: creative_addon-delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /creative
+  method: post
+  operationId: creative-post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /creative
+  method: get
+  operationId: creative-get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /creative
+  method: put
+  operationId: creative-put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /creative
+  method: delete
+  operationId: creative-delete
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -822,38 +837,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /html_asset
-  method: post
-  operationId: html_asset
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /video_asset
-  method: post
-  operationId: video_asset
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /creative_bulk_upload
   method: post
   operationId: creativebulkupload-post
@@ -1064,6 +1047,204 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /deals
+  method: get
+  operationId: RetrieveDeals
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /deals/{id}
+  method: get
+  operationId: RetrieveSingleDeal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /deals/{id}
+  method: patch
+  operationId: UpdateBuyerStatusForDeals
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /delivery_modifier
+  method: post
+  operationId: delivery-modifier-post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /delivery_modifier
+  method: get
+  operationId: delivery-modifier-get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /delivery_modifier
+  method: put
+  operationId: delivery-modifier-put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /delivery_modifier
+  method: delete
+  operationId: delivery-modifier-delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /accounts/{account_id}/ads
+  method: get
+  operationId: RetrieveAllCreatives
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{account_id}/ads
+  method: post
+  operationId: CreateACreative
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /accounts/{account_id}/ads/{ad_id}/underlying_creatives
+  method: get
+  operationId: RetrieveUnderlyingCreatives
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{account_id}/ads/{id}
+  method: put
+  operationId: UpdateACreative
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /accounts/{account_id}/deal_assignments
+  method: get
+  operationId: RetrieveADealAssignmentForACreative
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/{account_id}/deal_assignments
+  method: post
+  operationId: AssignACreativeToADeal
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /accounts/{account_id}/deal_assignments
+  method: delete
+  operationId: DeleteACreativeDealAssignments
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ads
+  method: get
+  operationId: RetrieveAllCreativesWithoutAccountId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /event
   method: post
   operationId: event-post
@@ -1174,6 +1355,22 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /html_asset
+  method: post
+  operationId: html_asset
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /line_item
   method: post
   operationId: line_item-post
@@ -1294,18 +1491,12 @@ operations:
   method: post
   operationId: list_item-post
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /list_item
   method: put
   operationId: list_item-put
@@ -1348,38 +1539,26 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /list_item(geo)
-  method: post
-  operationId: list_item-precise-geography
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /list_item_bulk
   method: post
   operationId: list_item_bulk
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
+- path: /list_item(geo)
+  method: post
+  operationId: list_item-precise-geography
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /native_offer
   method: post
   operationId: native_offer-post
@@ -1422,9 +1601,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /rest/push_queue
+- path: /v1/providers
   method: get
-  operationId: push_queue
+  operationId: retrieve-data-providers-1
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1516,6 +1695,34 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /resend_user_email
+  method: post
+  operationId: resend_user_email
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/push_queue
+  method: get
+  operationId: push_queue
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /role
   method: post
   operationId: role-post
@@ -1626,16 +1833,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /segment_tag
-  method: get
-  operationId: segment_tag
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /segment_category
   method: post
   operationId: segment-4
@@ -1736,51 +1933,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /segment_sharing
-  method: post
-  operationId: segment_sharing-post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /segment_sharing
+- path: /segment_category_lookup
   method: get
-  operationId: segment_sharing-get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /segment_sharing
-  method: put
-  operationId: segment_sharing-put
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /segment_lookup
-  method: get
-  operationId: segment_lookup
+  operationId: segment_category_lookup
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1830,9 +1985,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /segment_category_lookup
+- path: /segment_lookup
   method: get
-  operationId: segment_category_lookup
+  operationId: segment_lookup
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1840,6 +1995,74 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /segment_sharing
+  method: post
+  operationId: segment_sharing-post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /segment_sharing
+  method: get
+  operationId: segment_sharing-get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /segment_sharing
+  method: put
+  operationId: segment_sharing-put
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /segment_tag
+  method: get
+  operationId: segment_tag
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /segment_update
+  method: post
+  operationId: segment_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /segment_upload
   method: post
   operationId: segment_upload-post
@@ -1866,22 +2089,36 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /segment_update
-  method: post
-  operationId: segment_update
+- path: /v1/segments
+  method: get
+  operationId: retrieve-segments-by-data-provider
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
+- path: /v1/segments?
+  method: get
+  operationId: filter-segment-searches
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/services/v4/ds/v1/permissions/ad-industries
+  method: get
+  operationId: list-industries-1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /strategy
   method: get
   operationId: strategy-get
@@ -2002,24 +2239,6 @@ operations:
     audience: null
     token:
       max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /resend_user_email
-  method: post
-  operationId: resend_user_email
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
@@ -2152,6 +2371,22 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /video_asset
+  method: post
+  operationId: video_asset
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /view
   method: get
   operationId: view-get
@@ -2172,225 +2407,3 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/services/v4/ds/v1/permissions/ad-industries
-  method: get
-  operationId: list-industries-1
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/providers
-  method: get
-  operationId: retrieve-data-providers-1
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/segments
-  method: get
-  operationId: retrieve-segments-by-data-provider
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/segments?
-  method: get
-  operationId: filter-segment-searches
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/audiences
-  method: post
-  operationId: create-temporary-audience-definition
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v2/audiences
-  method: get
-  operationId: retrieve-audience-definitions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v2/audiences/{audience_id}
-  method: patch
-  operationId: modify-audience-definitions
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/ads
-  method: get
-  operationId: RetrieveAllCreatives
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/ads
-  method: post
-  operationId: CreateACreative
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/ads/{ad_id}/underlying_creatives
-  method: get
-  operationId: RetrieveUnderlyingCreatives
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/ads/{id}
-  method: put
-  operationId: UpdateACreative
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/deal_assignments
-  method: get
-  operationId: RetrieveADealAssignmentForACreative
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/deal_assignments
-  method: post
-  operationId: AssignACreativeToADeal
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/deal_assignments
-  method: delete
-  operationId: DeleteACreativeDealAssignments
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /ads
-  method: get
-  operationId: RetrieveAllCreativesWithoutAccountId
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /deals
-  method: get
-  operationId: RetrieveDeals
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /deals/{id}
-  method: get
-  operationId: RetrieveSingleDeal
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /deals/{id}
-  method: patch
-  operationId: UpdateBuyerStatusForDeals
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
