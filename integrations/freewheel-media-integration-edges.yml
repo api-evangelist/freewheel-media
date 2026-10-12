@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/freewheel-media/integrations
+- https://n8n.io/integrations/freewheel-media/
+- https://composio.dev/toolkits/freewheel-media
+- https://monid.ai/tools/freewheel-media
+checked:
+- https://composio.dev/toolkits/freewheel-media
+- https://monid.ai/tools/freewheel-media
+- https://n8n.io/integrations/freewheel-media/
+- https://zapier.com/apps/freewheel-media/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
