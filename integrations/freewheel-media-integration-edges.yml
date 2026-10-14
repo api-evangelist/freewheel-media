@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/freewheel-media/integrations
 - https://n8n.io/integrations/freewheel-media/
@@ -9,8 +9,40 @@ checked:
 - https://composio.dev/toolkits/freewheel-media
 - https://monid.ai/tools/freewheel-media
 - https://n8n.io/integrations/freewheel-media/
+- https://vendor-list.consensu.org/v3/vendor-list.json
 - https://zapier.com/apps/freewheel-media/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: IAB Europe TCF Global Vendor List
+  partner: null
+  partner_match: domain
+  type: contract
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://vendor-list.consensu.org/v3/vendor-list.json
+  contract_reference:
+    register: IAB Europe TCF Global Vendor List
+    spec_file: null
+    role: tcf-vendor
+    registered_name: Comcast International France SAS/FreeWheel Media
+    register_id: '285'
+    products:
+    - Comcast International France SAS/FreeWheel Media
+    matched_domain: freewheel.com
+    api_families:
+    - feature-3
+    - purpose-1
+    - purpose-10
+    - purpose-2
+    - purpose-4
+    - purpose-7
+    - special-purpose-1
+    - special-purpose-2
+    api_families_basis: TCF purposes, special purposes, features and special features declared on the registration
+    detected_by: sweep-adtech.py
+    detected: '2026-10-14'
+  detected_by: sweep-adtech.py
+  detected: '2026-10-14'
 templates: []
