@@ -255,20 +255,16 @@ paths:
                 $ref: '#/components/schemas/model.GetDemandAdReply'
 components:
   schemas:
-    model.DemandAdAudit:
+    model.DemandAdAssignmentReply:
       type: object
       properties:
-        feedback:
+        adid:
           type: string
-        init:
+        deal:
+          $ref: '#/components/schemas/model.AssignmentDeal'
+        dealid:
           type: string
-        lastmod:
-          type: string
-        sellerid:
-          type: string
-        status:
-          type: integer
-        statusispartial:
+        id:
           type: integer
     model.GetDemandAdReply:
       type: object
@@ -292,12 +288,23 @@ components:
             $ref: '#/components/schemas/model.DemandAd'
         count:
           type: integer
-    model.DemandAdAssignment:
+    model.DemandAdList:
       type: object
       properties:
-        adid:
-          type: string
-        dealid:
+        ads:
+          type: array
+          items:
+            $ref: '#/components/schemas/model.DemandAd'
+        count:
+          type: integer
+    model.DemandAdCreativeVideo:
+      type: object
+      properties:
+        ctype:
+          type: array
+          items:
+            type: integer
+        curl:
           type: string
     model.UnderlyingCreative:
       type: object
@@ -310,25 +317,20 @@ components:
           type: string
         vastcontenturl:
           type: string
-    model.DemandAdCreativeVideo:
+    model.DemandAdAudit:
       type: object
       properties:
-        ctype:
-          type: array
-          items:
-            type: integer
-        curl:
+        feedback:
           type: string
-    model.DemandAdAssignmentReply:
-      type: object
-      properties:
-        adid:
+        init:
           type: string
-        deal:
-          $ref: '#/components/schemas/model.AssignmentDeal'
-        dealid:
+        lastmod:
           type: string
-        id:
+        sellerid:
+          type: string
+        status:
+          type: integer
+        statusispartial:
           type: integer
     model.AssignmentDeal:
       type: object
@@ -343,15 +345,13 @@ components:
           type: array
           items:
             type: string
-    model.DemandAdList:
+    model.DemandAdAssignment:
       type: object
       properties:
-        ads:
-          type: array
-          items:
-            $ref: '#/components/schemas/model.DemandAd'
-        count:
-          type: integer
+        adid:
+          type: string
+        dealid:
+          type: string
     model.DemandAd:
       type: object
       properties:
